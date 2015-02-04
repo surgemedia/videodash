@@ -1,0 +1,100 @@
+<? include("dbconnection_3evchey.php"); //connecting Database 
+	if($_POST['client_id']==''){
+		header("location: home_video.php");	
+	}
+	$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
+	$cca_num = mysql_num_rows($check_client_active);
+	$cca_row = mysql_fetch_array($check_client_active);
+	if($cca_num==0){
+		header("location: home_video.php");	
+	}
+	$message = "Add New Video Project";
+	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
+		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', ".$_POST['new_project_save'].")");
+		if(!$query){
+			$message = "Cannot Save this project to system.";
+			exit;	
+		}else{
+			$message = "Success to insert data to database.";
+		}
+	}
+?>
+<!DOCTYPE html>
+<html>
+			<? include('inc/head.php');?>
+            <body class="">
+				<? include('inc/header.php'); ?>
+                <main>
+                <section id="search" class="center">
+                    <h1 class="">All Project under Client</h1>  
+                    <form action="add_project.php" id="projectadd" method="post">
+                        <input type="hidden" name="client_id"  value="<?=$_POST['client_id'];?>">
+                    </form>
+                    <div class="controls">
+                    	<a class="blue btn" onclick="window.history.back();"><span>Back</span><i class="fa fa-reply"></i></a>
+
+                    	<a class="blue btn" onclick="document.getElementById('projectadd').submit();"><span>Add New Project</span><i class="fa fa-archive"></i></a>
+
+                     <!-- <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> Back</h1></a> -->
+                    
+                    </div>
+                    <input type="text" id="searchbox" class="search wow bounceIn">
+                    <ul id="list" class="list">
+                    <?
+						//enable or del client
+						if($_POST['delid']!=""){		
+							mysql_query("UPDATE video_project SET active_option = 0 WHERE id = ".$_POST['delid']);
+						}
+						if($_POST['enableid']!=""){
+							mysql_query("");
+							mysql_query("UPDATE video_project SET active_option = 1 WHERE id = ".$_POST['enableid']);
+						}
+						$listproject = mysql_query("SELECT * FROM video_project ORDER BY active_option DESC");
+						$project_num = mysql_num_rows($listproject);
+						for($i=0; $i<$project_num; $i++){
+							$project_row = mysql_fetch_array($listproject);
+							$add_del_class = "";
+							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Delete</span><i class="fa fa-bomb" ></i></a></li>';
+							if($project_row['active_option']==0){
+								$add_del_class = " bombed";
+								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Enable</span><i class="fa fa-history" ></i></a></li>';
+							}
+							echo '
+								<li class="client'.$add_del_class.'">
+									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">  '.$project_row['project_name'].'</a></h2>
+									<form action="#" id="del'.$i.'" method="post">
+										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
+										<input type="hidden" name="delid"  value="'.$project_row['id'].'">
+									</form>
+									<form action="#" id="enable'.$i.'" method="post">
+										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
+										<input type="hidden" name="enableid"  value="'.$project_row['id'].'">
+									</form>
+									<form action="edit_project.php" id="edit'.$i.'" method="post">
+										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
+										<input type="hidden" name="project_id"  value="'.$project_row['id'].'">
+									</form>
+									<form action="video_views/add_video.php" id="videoadd'.$i.'" method="post">
+										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
+										<input type="hidden" name="project_id"  value="'.$project_row['id'].'">
+									</form>
+									<div class="actions">
+										<ul>
+											<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>
+											'.$del_btn.'
+										</ul>
+									</div>
+								</li>
+							';
+						}
+					?>
+                    </ul>
+                   
+                   <!--  
+											<li><a class="btn grey edit" onclick="document.getElementById(\'edit'.$i.'\').submit();"><span>Edit</span><i class="fa fa-edit"></i></a></li>
+                    -->
+                </section>
+            </main>
+				<? include('inc/footer.php');?>
+        </body>
+    </html>

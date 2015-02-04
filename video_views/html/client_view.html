@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>My Dashboard</title>
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css">
+                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js">
+                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css">
+                <link rel="stylesheet" href="/css/layout.css">
+                <link rel="stylesheet" href="/css/skeleton.css">
+                <link rel="stylesheet" href="/css/style.css">
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script type="text/javascript" src="/js/jquery.backgroundvideo.min.js"></script>
+                <script type="text/javascript" src="/js/wow.min.js"></script>
+                <script type="text/javascript" src="/js/website.js"></script>
+            </head>
+            <body class="">
+                <header>
+                    <div class="center wow fadeInDown">
+                        <div class="logo"><img src="" alt=""></div>
+                        <nav>
+                            <ul class="nav">
+                                <li><a href="/home_video.html">Home</a></li>
+                                <li><a href="/home_video.html">Clients</a></li>
+                                <li><a href="/home_video.html">Contact</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                <main>
+                <section class="center">
+                    <h1 class="">My Dashboard</h1>
+                    <div id="preproduction">
+                        <h2>Preproduction</h2>
+                        <ul>
+                            <li class="section">
+                                <div>
+                                    <span>Script</span>
+                                    <ul>
+                                        <li><span>1</span><input type="checkbox"></li>
+                                        <li><span>2</span><input type="checkbox"></li>
+                                    </ul>
+
+                                </div>
+                                <div>
+                                    <span>Logos and Images</span>
+                                    <ul>
+                                        <li><span>1</span><input type="checkbox"></li>
+                                        <li><span>2</span><input type="checkbox"></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="section">
+
+                                <span>Voice Over Info</span>
+                                <div id="voice_choice"><select name="" id="">
+                                    <option value="">adam - male 1</option>
+                                    <option value="">joy - female 2</option>
+                                    <option value="">larry - male 1</option>
+                                </select>
+                                <span id="chosen">Adam</span>
+                            </div>
+                            <div id="voice_comment">
+                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                            </div>
+                        </li>
+                        <li class="section contact">
+
+                            <span>Contact Info</span>
+                            <input type="text">
+                            <input type="text">
+                            <input type="text">
+                            <input type="text">
+                        </li>
+                    </ul>
+                </div>
+                <!-- <input type="text" id="searchbox" class="search wow bounceIn"> -->
+                <ul id="videos" >
+                    <li class="video_obj featured">
+                        <h1 class="title">
+                        llama Farm - <span>Draft 3</span>
+                        </h1>
+                        <div class="video">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+
+                        <div id='action_box' class="actions">
+                            <label class="title" for="">Director's Notes</label>
+                            <textarea disabled="true" name="" id="" cols="30" rows="10"></textarea>
+
+                            <ul>
+                                <li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
+                                <li><a href="#" class="btn yellow"><span>Final Video</span><i class="fa fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <div id="changes_required">
+                            <label class="title" for="">Your Notes</label>
+                            <ul>
+                                <li>
+                                    <span class="timeline_picker">
+                                    <label for="start">Start</label>
+                                    <input type="text" value="0:00">
+                                    </span>
+                                    <span class="timeline_picker end">
+                                    <label for="start">End</label>
+                                    <input type="text" value="02:59">
+                                    </span>
+                                    <textarea placeholder="Please enter the change and the time it happen in the video"name="" id="" cols="30" rows="5"></textarea>
+                                </li>
+                                <li>
+                                    <span class="timeline_picker">
+                                    <label for="start">Start</label>
+                                    <input type="text" value="0:00">
+                                    </span>
+                                    <span class="timeline_picker end">
+                                    <label for="start">End</label>
+                                    <input type="text" value="02:59">
+                                    </span>
+                                    <textarea name="" id="" cols="30" rows="5"></textarea>
+                                </li>
+
+                            </ul>
+                            <a href="#" id="new_timestamp" class="btn blue"><span>Add Another Time</span> <i class="fa fa-clock-o"></i></a>
+                            <textarea name="" id="" cols="30" rows="5">Audio Comment:</textarea>
+                            <a id="new_timestamp" class="btn green"><span>Submit Notes</span> <i class="fa fa-send"></i></a>
+                        </div>
+                    </li>
+                    <li><h1>Previous Versions</h1></li>
+                    <li class="video_obj">
+                        <span class="ver_number">6</span>
+                        <h3 class="title">Llama Farm</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+                    <li class="video_obj">
+                        <span class="ver_number">5</span>
+                        <h3 class="title">LLarma Party</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+                    <li class="video_obj end_row">
+                        <span class="ver_number">4</span>
+                        <h3 class="title">LLarma Party</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+                    <li class="video_obj old">
+                        <span class="ver_number">3</span>
+                        <h3 class="title">Llama Farm</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+                    <li class="video_obj old">
+                        <span class="ver_number">2</span>
+                        <h3 class="title">LLarma Party</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+                    <li class="video_obj old end_row">
+                        <span class="ver_number">1</span>
+                        <h3 class="title">LLarma Party</h3>
+                        <div class="video draft">
+                            <!-- VIMEO EMBED -->
+                            <iframe src="http://player.vimeo.com/video/14795119" width="500" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <!-- VIMEO EMBED -->
+                        </div>
+                        <div class="feedback_wrapper">
+                            <h4>Your Feedback</h4>
+                            <ul class="pasttimestamps">
+                                <li><time>0:10/0:30</time><small>Llama looking away from camera</small></li>
+                                <li><time>0:60/1:20</time><small>dog in shot</small></li>
+
+                            </ul>
+                            <span class="audio_comment">
+                            Audio Comment: Add Canned Llama Sounds
+                            </span>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </section>
+            </main>
+            <footer>
+                <div class="logo"><img src="" alt=""></div>
+                <nav>
+                    <ul class="nav">
+                        <li>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </footer>
+        </body>
+    </html>

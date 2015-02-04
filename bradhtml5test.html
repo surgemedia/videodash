@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<style>
+.disappear{
+	display:none !important;
+}
+.appear{
+	display:block !important;
+}
+.palyerbtn{
+	position:absolute; top:50%; left:50%; background-image:url(http://integritypropertymanagement.com.au/Video/html5play.png); width:60px; height:60px; margin-left:-30px; margin-top:-30px;
+}
+.palyerstopbtn{
+	position:absolute; top:1%; left:3%; display:none; background-image:url(http://integritypropertymanagement.com.au/Video/html5stop.png); width:60px; height:60px;
+}
+
+</style>
+<body>
+<div style="position:relative; width:1024px;">
+<a class="palyerbtn" onclick="play(); return false;" id="btt"></a>
+<a class="palyerstopbtn" onclick="Pause(); return false;" id="btt2"></a>
+<video id="video1" width="1024">
+<source type="video/mp4" src="http://integritypropertymanagement.com.au/Video/IPM.mp4"></source>
+<source type="video/ogg" src="http://integritypropertymanagement.com.au/Video/IPM.ogg"></source>
+<source type="video/webm" src="http://integritypropertymanagement.com.au/Video/IPM.webm"></source>
+<a href="http://browsehappy.com/">Online. Worry-free. Upgrade your browser today!</a>
+</video>
+</div>
+<script> 
+var myVideo = document.getElementById("video1"); 
+var btns = document.getElementById("btt"); 
+var btns2 = document.getElementById("btt2"); 
+
+function play() { 
+    if (myVideo.paused) {
+        myVideo.play(),
+		//btns.css('font-family', 'aleee', 'important');
+		//btns.addclass('show');
+		btns.className = "disappear",
+		btns2.className += " appear";
+	}else{ 
+        myVideo.pause(); 
+		btns.className = "appear palyerbtn",
+		btns2.className = "disappear palyerstopbtn";
+	}
+} 
+
+function Pause() { 
+    if (myVideo.paused) {
+        myVideo.play();
+		//btns.css('font-family', 'aleee', 'important');
+		//btns.addclass('show');
+		btns.className = "disappear",
+		btns2.className += " appear";
+	}else{ 
+        myVideo.pause(),
+		btns.className = "appear palyerbtn",
+		btns2.className = "disappear palyerstopbtn";
+	}
+} 
+
+</script> 
+</body>
+</html>
