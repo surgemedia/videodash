@@ -127,20 +127,18 @@ ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; overflow: 
 #preproduction { width: 100%; float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #efefef; }
 /* ==========  Normal Video Draft  ========== */
 ul#videos { position: relative;}
-ul#videos li.video_obj:hover { top:-1em;
--webkit-transition: all 500ms cubic-bezier(0.680, 0, 0.265, 1); /* older webkit */
--webkit-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-   -moz-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-     -o-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+ul#videos li.video_obj:hover { /* older webkit */ 
+    
+      
+         /* easeInOutBack */
         }
 
-ul#videos li.video_obj { float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #efefef; display: block; width: 29%; border-bottom: 3px solid #979797; position: relative; margin: 2.4em 0.5em 1em 0;
--webkit-transition: all 500ms cubic-bezier(0.680, 0, 0.265, 1); /* older webkit */
--webkit-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-   -moz-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-     -o-transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); 
-        transition: all 500ms cubic-bezier(0.680, -0.550, 0.265, 1.550); /* easeInOutBack */
+ul#videos li.video_obj { float: left; border-radius: 0.4em; cursor: pointer; padding: 1em 1em; background-color: #efefef; display: block; width: 29%; border-bottom: 3px solid #979797; position: relative; margin: 2.4em 0.5em 1em 0;
+ /* older webkit */
+ 
+   
+     
+        /* easeInOutBack */
 
 }
 ul#videos li.video_obj.end_row { margin-right: 0px; }
@@ -167,6 +165,7 @@ ul#videos li.video_obj.open_card {
     width:90%;
     left:1em;
     z-index: 999;
+    
 }
 ul#videos li.video_obj.open_card  div.video.draft {
     width:50%;
@@ -212,7 +211,7 @@ ul#videos li.featured .actions.popup textarea { width: 97%; }
 ul#videos li.featured .actions textarea { float: left; width: 91%; height: 15em; margin: 0.5em 0 0.5em 0; }
 ul#videos li.featured .actions .textarea_rows5 { height: 6em !important;}
 ul#videos li.featured .actions ul { float: left; width: 100%; }
-ul#videos li.featured .actions ul li { float: left; margin: 0 0 0.5em 0; width: 100%; }
+ul#videos li.featured .actions ul li { float: left; margin: 0 0 0.5em 0; width: 50%; }
 ul#videos li.featured .actions ul li a { float: left; width: 85%; font-size: 1em; }
 ul#videos li.featured #changes_required { float: right; width: 100%; overflow: hidden; display: none; }
 ul#videos li.featured #changes_required textarea { margin: 0.5em 0 0.5em 0; padding: 0.2em; height: 3em; }
