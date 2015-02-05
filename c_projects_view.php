@@ -9,7 +9,7 @@
 	$cca_num = mysql_num_rows($check_client_active);
 	$cca_row = mysql_fetch_array($check_client_active);
 	if($cca_num==0){
-		header("location: index.php");	
+		header("location: index.js");	
 	}
 	$message = "Add New Video Project";
 	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
@@ -24,23 +24,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>My Dashboard</title>
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-          <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,400italic' rel='stylesheet' type='text/css'>
-                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css">
-                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js">
-                <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css">
-                <link rel="stylesheet" href="/css/layout.css">
-                <link rel="stylesheet" href="/css/skeleton.css">
-                <link rel="stylesheet" href="/css/style.css">
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                <script type="text/javascript" src="/js/jquery.backgroundvideo.min.js"></script>
-                <script type="text/javascript" src="/js/wow.min.js"></script>
-                <script type="text/javascript" src="/js/website.js"></script>
-            </head>
+<? include('inc/head.php');?>
             <body class="">
                 <main>
 
@@ -59,7 +43,7 @@
 							mysql_query("");
 							mysql_query("UPDATE video_project SET active_option = 1 WHERE id = ".$_POST['enableid']);
 						}
-						$listproject = mysql_query("SELECT * FROM video_project WHERE active_option != 0 ORDER BY active_option");
+						$listproject = mysql_query("SELECT * FROM video_project WHERE active_option != 0 AND Client_id = ".$cca_row['id']." ORDER BY active_option");
 						$project_num = mysql_num_rows($listproject);
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);
@@ -80,7 +64,7 @@
 										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
 										<input type="hidden" name="enableid"  value="'.$project_row['id'].'">
 									</form>
-									<form action="video_views/client_view.php" id="videoadd'.$i.'" method="post">
+									<form action="video_views/client_view.java" id="videoadd'.$i.'" method="post">
 										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
 										<input type="hidden" name="project_id"  value="'.$project_row['id'].'">
 									</form>

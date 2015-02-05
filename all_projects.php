@@ -2,6 +2,7 @@
 	if($_POST['client_id']==''){
 		header("location: home_video.php");	
 	}
+	echo $_POST['client_id'];
 	$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
 	$cca_num = mysql_num_rows($check_client_active);
 	$cca_row = mysql_fetch_array($check_client_active);
@@ -49,7 +50,7 @@
 							mysql_query("");
 							mysql_query("UPDATE video_project SET active_option = 1 WHERE id = ".$_POST['enableid']);
 						}
-						$listproject = mysql_query("SELECT * FROM video_project ORDER BY active_option DESC");
+						$listproject = mysql_query("SELECT * FROM video_project WHERE Client_id = ".$_POST['client_id']." ORDER BY active_option DESC");
 						$project_num = mysql_num_rows($listproject);
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);

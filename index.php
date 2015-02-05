@@ -15,7 +15,7 @@ $_SESSION['email'] = "";
         	<div id="credit"><small ><a href="https://www.surgemedia.com.au" target="_blank">by Surge Media</a><i class="surgelogo"></i></small> </div>
         </div>
         <div class="loginbox wow flipInX">
-        <form action="c_projects_view.php" method="get">
+        <form action="c_projects_view.java" method="get">
         	<label>User Name(Email):</label>
         	<input name="email" class="textfield">
             <input type="submit" value="LOGIN" class="button btn blue"></div>

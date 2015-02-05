@@ -3,8 +3,8 @@
                         <div class="logo"><img src="" alt=""></div>
                         <nav>
                             <ul class="nav">
-                                <li><a href="<? echo "http://".strtolower($_SERVER['SERVER_NAME'])."/c_projects_view.php";?>">HOME</a></li>
-                                <li><a href="<? echo "http://".strtolower($_SERVER['SERVER_NAME']);?>">logout</a></li>
+                                <li><a href="<? echo $global_data['siteurl']."c_projects_view.php";?>">HOME</a></li>
+                                <li><a href="<? echo $global_data['siteurl'];?>">logout</a></li>
                             </ul>
                         </nav>
                     </div>

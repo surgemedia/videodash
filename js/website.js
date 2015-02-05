@@ -70,9 +70,14 @@ function NewTimelineComment(){
   var i = comments.length;
   var li_open = ' <li id="notes_comment_'+i+'">';
   var start = '<input name="time_start_'+i+'" value="0:00">';
-  var end = '<input name="time_end_'+i+'" >';
+  var end = '<input name="time_end_'+i+'" value="'+$('#video_end_time').val()+'">';
+  var selectoption = '<select name="comment_option_'+i+'">';
+  selectoption += '<option>Visual Comment</option>';
+  selectoption += '<option>Audio Comment</option>';
+  selectoption += '<option>Other Comment</option>';
+  selectoption += '<select>';
   var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5"></textarea>';
-  output = li_open+'<span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+textarea+'</li>';
+  output = li_open+'<span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+selectoption+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
 

@@ -226,7 +226,7 @@ ul#videos li.featured #changes_required .submit-actions { float: right;}
 .logindiv { width: 960px; height: auto; float: none; overflow: visible; margin: 0 auto; text-align: center;}
 /*.logobox_loginpage { height: 130px; width: 480px; margin: 5px; background-color: #FFF;  line-height: 130px; }*/
 .logobox_loginpage span { font-size: 30px; color: #003d4a; padding-left: 280px; }
-.surgelogo { background-image: url(/img/surgeicon.svg); height: 1.3em; width: 1.7em; background-size: 100%; color: #fff; float: none; overflow: hidden; display: inline-block;}
+.surgelogo { background-image: url(../img/surgeicon.svg); height: 1.3em; width: 1.7em; background-size: 100%; color: #fff; float: none; overflow: hidden; display: inline-block;}
 .logobox_loginpage label { float: left; }
 .textfield { width: 88%; float: left;line-height: 2em;
 font-size: 1.1em;
