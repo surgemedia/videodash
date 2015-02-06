@@ -72,11 +72,8 @@ function NewTimelineComment(){
   var start = '<input name="time_start_'+i+'" value="0:00">';
   var end = '<input name="time_end_'+i+'" >';
   var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5"></textarea>';
-  output = li_open+'<span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+textarea+'</li>';
+  var select = '<select name="type_of_'+i+'" id="type_of_'+i+'"><option>Visual Comment</option><option>Audio Comment</option><option>Other</option></select>';
+  output = li_open+'<div class="timestamping"><span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+select+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
-
-
-
-
 
