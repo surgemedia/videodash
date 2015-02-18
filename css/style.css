@@ -150,7 +150,7 @@ ul#videos li.video_obj.old3 { opacity: 0.1 }
 ul#videos li.video_obj h3 { float: left; width: 100%; font-size: 1em; margin: 1em 0 1em 0; }
 ul#videos li.video_obj div.video.draft { float: left; width: 96%; height: auto; overflow: hidden; border: 5px solid #17A3C4; }
 ul#videos li.video_obj div.video.draft iframe { float: left; width: 100%; height: 12em; }
-ul#videos li.video_obj span.audio_comment { margin: 0.5em 0 0em 0; float: left; }
+ul#videos li.video_obj span.audio_comment { margin: 0.5em 0 0em 0; float: left; overflow:hidden; height:20px; }
 ul#videos li.video_obj .feedback_wrapper { float: left; overflow: hidden; }
 ul#videos li.video_obj .pasttimestamps { float: left; width: 107%; padding: 0em 0 0.5em 0; overflow-y: scroll; overflow-x: hidden; height: 7em; background: #fff; }
 ul#videos li.video_obj.open_card .pasttimestamps:hover {
@@ -186,6 +186,8 @@ ul#videos li.video_obj.open_card .feedback_wrapper {
 ul#videos li.video_obj.open_card .audio_comment {
     float:left; clear:both;
     width:100%;
+	overflow:auto;
+	height:auto;
 }
 ul#videos li.video_obj.open_card .pasttimestamps {
     height:auto;

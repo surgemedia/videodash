@@ -29,7 +29,7 @@ if($_POST['make_video_version_to_final']=="yes"){
 	$l_video_under_project_row = mysql_fetch_array($l_video_under_project);
 	$version_number_editer = $l_video_under_project_row['version_num'] + 1;
 	mysql_query("INSERT INTO video_under_project VALUES(NULL, ".$_POST['project_id'].", '".$l_video_under_project_row['video_link']."', 'Final', 'Final Version Confirmed', 1, ".$version_number_editer.", NULL);");
-	$mail_message = 'Client just confirmed the video can delivery. Company is:'.$cca_row['company_name']."<br/>
+	$mail_message = 'Client just confirmed the video as final version. Company is:'.$cca_row['company_name']."<br/>
 	their Video Project is: ".$projectname_row['project_name'];
 }
 
@@ -100,8 +100,15 @@ if($mail_message!=""){
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
 			
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
+
+			$mail_data = file_get_contents('../email_template/mail_template.html');
+			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+			$mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
+			$the_data_is = date("d M Y");
+			$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+
 			
-			mail($mailto, $mailsubject, $mail_message, $headers);										
+			mail($mailto, $mailsubject, $mail_data, $headers);										
 }
 
 ?>
@@ -295,7 +302,11 @@ if($mail_message!=""){
 							<!-- VIMEO EMBED -->
 						</div>
 						<div id='action_box' class="actions">
+                         <?php if($projectname_row['download_file']!=""){ ?>
 							<label class="title" for="">Congratulations your video is now ready for downlaod now.</label>
+						<?php }else{ ?>
+							<label class="title" for="">We are editing your video now.</label>
+                        <?php } ?>
 							<textarea disabled="true" name="" id="" cols="30" rows="5">Versions included:
 1 x MP4  - 1280 x 720 - h264 - suitable for youtube
 1 x MP4  - 640 x480 h264 idea for uploading to your website.
@@ -309,7 +320,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
                             </textarea>
 							<ul>
 								<li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
-                                <?php if($projectname_row['']!=""){ ?>
+                                <?php if($projectname_row['download_file']!=""){ ?>
                                     <li><a href="#" class="btn yellow" ><span>DOWNLOAD YOUR VIDEO</span><i class="fa fa-star"></i></a></li>
                                 <?php }else{ ?>
                                     <li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>

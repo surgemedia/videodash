@@ -1,4 +1,6 @@
-<? include("../dbconnection_3evchey.php"); //connecting Database ?>
+<? include("../dbconnection_3evchey.php");
+	include("login.php");
+ //connecting Database ?>
 <? include("../inc/login_logic.php"); // Admin Login?>
 <?
 //Upload Logo

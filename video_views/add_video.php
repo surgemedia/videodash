@@ -1,4 +1,6 @@
-<? include("../dbconnection_3evchey.php"); //connecting Database 
+<? include("../dbconnection_3evchey.php"); 
+	include("login.php");
+//connecting Database 
 	if($_POST['client_id']=='' && $_POST['project_id']==''){
 		header("location: ../home_video.php");	
 	}
@@ -14,7 +16,12 @@
 		$check_total_version_num = mysql_num_rows($check_total_version);
 		echo $check_total_version_num;
 		$videoversion_num = $check_total_version_num+1;
-		$query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.")");
+		if($_POST['video_input']!=""){
+			$add_video_to_db = $_POST['video_input'];
+		}else{
+			$add_video_to_db = $_POST['video_input_hide'];
+		}
+		$query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$add_video_to_db."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.", NULL)");
 		if(!$query){
 			$message = "Cannot Save this Video to Project.";
 			exit;	
@@ -24,18 +31,32 @@
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
 			$mailsubject = 'Your Video was completed!';
-			$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
-			<p>We are completely to edit your video. Please login to:<br/>
-			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>
-			<p>Kind Regards</p>
-			<p>Video Dash @ Surge Media</p>
-			';			
+			if($_POST['file_link']==""){
+				$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
+				<p>We are completely to edit your video. Please login to:<br/>
+				<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>
+				';
+			}else{
+				mysql_query("UPDATE video_project SET download_file = '".$_POST['file_link']."' WHERE id = ".$_POST['project_id']);
+				$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
+				<p>We are completely upload your video:<br/>
+				<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> or click 
+				<a href="'.$_POST['file_link'].'">download link</a> to download.</p>
+				';
+			}
+
+			$mail_data = file_get_contents('../email_template/mail_template.html');
+			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+			$mail_data = str_replace("[mail_content]",  $mailmessage, $mail_data);
+			$the_data_is = date("d M Y");
+			$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
 			
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 			
-			mail($mailto, $mailsubject, $mailmessage, $headers);										
+			mail($mailto, $mailsubject, $mail_data, $headers);										
 
 		}
 	}
@@ -76,7 +97,8 @@
 									$video_display_code = cleanYoutubeLink($check_video_Lastupdate_row['video_link']);
 								}
 							?>
-                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code.$check_video_Lastupdate_row['video_link'];?>" class="video_link">
+                        <input name="video_input_hide" type="hidden" value="http://www.youtube.com/?v=<?=$video_display_code;?>">
+                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link">
                         <div class="video">
                             <!-- VIMEO EMBED -->
                             <iframe width="560" height="315" src="//www.youtube.com/embed/<?=$video_display_code;?>" frameborder="0" allowfullscreen></iframe>
@@ -87,10 +109,12 @@
                         </div>
                         </div>
                         <div class="actions">
-                        <div id="draft_version" class="draft_check"><input type="checkbox" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Draft Verison</span></div>
-                        <div id="final_verison" class="draft_check"><input type="checkbox" name="version" value="Final" <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Verison</span></div>
+                        <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Draft Verison</span></div>
+                        <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft2"  <? if($check_video_Lastupdate_row['version']=="Draft2"){ echo "checked";}?> ><span>Draft 2 Verison</span></div>
+                        <div id="final_verison" class="draft_check"><input type="radio" name="version" value="Final" <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Verison</span></div>
                             <label class="title" for="">Director's Notes</label>
                             <textarea name="notes" id="" cols="30" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>"></textarea>
+	                        <input name="file_link" type="text" placeholder="File link to send to client for download the video." class="video_link">
                             <ul>
                                 <li>
                                  <a onClick="document.getElementById('add_video').submit();" class="btn green" ><span>Send to Client</span> <i class="fa fa-send"></i></a>
@@ -147,13 +171,14 @@
 						$video_num = mysql_num_rows($listvideos);
 						for($i=0; $i<$video_num; $i++){
 							$video_row = mysql_fetch_array($listvideos);
+							$list_vctest = "SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id'];
 							$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
 
 							$list_video_client_request_num = mysql_num_rows($list_video_client_request);
 							for($j=0; $j<$list_video_client_request_num; $j++){
 								$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
 								$list_video_feedback[$i] .="
-									<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."</small></li>
+									<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."[".$list_video_client_request_row['feedback_type']."]</small></li>
 								";
 							}
 							$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row ['id']." ORDER BY id LIMIT 0, 1");
@@ -175,7 +200,7 @@
 										
 									</div>
                                     <span class="audio_comment">
-                                        '.$list_video_client_addition_request_row['audio_comment'].'
+                                        Quick Comment: '.$list_video_client_addition_request_row['voice_comment'].'
                                     </span>
 								</li>
 							';

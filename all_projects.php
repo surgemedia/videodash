@@ -1,8 +1,6 @@
 <? include("dbconnection_3evchey.php"); //connecting Database 
-	if($_POST['client_id']==''){
-		header("location: home_video.php");	
-	}
-	echo $_POST['client_id'];
+	include("login.php");
+
 	$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
 	$cca_num = mysql_num_rows($check_client_active);
 	$cca_row = mysql_fetch_array($check_client_active);
@@ -11,7 +9,7 @@
 	}
 	$message = "Add New Video Project";
 	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
-		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', ".$_POST['new_project_save'].")");
+		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', 1, '')");
 		if(!$query){
 			$message = "Cannot Save this project to system.";
 			exit;	
@@ -80,9 +78,11 @@
 										<input type="hidden" name="project_id"  value="'.$project_row['id'].'">
 									</form>
 									<div class="actions">
-										<ul>
-											<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>
-											'.$del_btn.'
+										<ul>';
+							if($add_del_class != " bombed"){				
+								echo '<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>';
+							}
+							echo $del_btn.'
 										</ul>
 									</div>
 								</li>

@@ -1,4 +1,5 @@
 <? include("dbconnection_3evchey.php"); //connecting Database 
+	include("login.php");
 	if($_POST['client_id']==''){
 		header("location: home_video.php");	
 	}
