@@ -58,6 +58,15 @@ for($i=0; $i<$forloopcount; $i++){
 	//echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
 }
 
+if($_POST['old_loop_time']>0){
+	for($j=0; $j<$_POST['old_loop_time']; $j++){
+		if($_POST["addfeedback".$j]!=""){
+			mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
+			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$_POST["addcommentoption".$j].'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
+		}
+	}
+}
+
 if($_POST['voice_comment']!=""){
 	$update_video_client_addition_request = mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row["id"]."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
 	$general_comment = $_POST['voice_comment'];
@@ -287,7 +296,7 @@ if($mail_message!=""){
 					</li>
 				</form>
 <?php }else{ ?>            
-			<form id="charge_update" action="client_view.java" method="post">
+			<form id="charge_update" action="request_confirm.java" method="post">
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 					<input value="1" name="charge_change" type="hidden">
