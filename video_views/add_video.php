@@ -32,11 +32,13 @@
 			$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
 			$mailsubject = 'Your Video was completed!';
 			if($_POST['file_link']==""){
+                $mail_data = file_get_contents('../email_template/new_version_upload.html');
 				$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
 				<p>We are completely to edit your video. Please login to:<br/>
 				<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>
 				';
 			}else{
+                $mail_data = file_get_contents('../email_template/video_download.html');
 				mysql_query("UPDATE video_project SET download_file = '".$_POST['file_link']."' WHERE id = ".$_POST['project_id']);
 				$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
 				<p>We are completely upload your video:<br/>
@@ -45,7 +47,7 @@
 				';
 			}
 
-			$mail_data = file_get_contents('../email_template/mail_template.html');
+			
 			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 			$mail_data = str_replace("[mail_content]",  $mailmessage, $mail_data);
 			$the_data_is = date("d M Y");

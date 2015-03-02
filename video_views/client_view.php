@@ -110,7 +110,7 @@ if($mail_message!=""){
 			
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 
-			$mail_data = file_get_contents('../email_template/mail_template.html');
+			$mail_data = file_get_contents('../email_template/feedback.html');
 			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 			$mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
 			$the_data_is = date("d M Y");
