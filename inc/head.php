@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/css/layout.css">
 <link rel="stylesheet" href="/css/skeleton.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/fonts/stylesheet.css">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/wow.min.js"></script>
 <script type="text/javascript" src="/js/website.js"></script>
