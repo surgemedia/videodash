@@ -87,6 +87,7 @@
                     <li id="add_new_video" class="video_obj featured">
                     	<form action="add_video.php" method="post" id="add_video">
                         <h1 id="client_name_editable" class="title">
+                        <?php echo $check_project_name_row['project_name']; // display the project name?>
                     	<input name="client_id" value="<?=$cca_row['id'];?>" type="hidden"/>
                     	<input name="project_id" value="<?=$_POST['project_id'];?>" type="hidden"/>
                     	<input name="Add_videos" value="1" type="hidden"/>
@@ -180,7 +181,8 @@
 							for($j=0; $j<$list_video_client_request_num; $j++){
 								$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
 								$list_video_feedback[$i] .="
-									<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."[".$list_video_client_request_row['feedback_type']."]</small></li>
+									<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+                                    <small>[".$list_video_client_request_row['feedback_type']."]".$list_video_client_request_row['feedback']."</small></li>
 								";
 							}
 							$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row ['id']." ORDER BY id LIMIT 0, 1");

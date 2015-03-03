@@ -25,7 +25,7 @@
 				<? include('inc/header.php'); ?>
                 <main>
                 <section id="search" class="center">
-                    <h1 class="">All Project under Client</h1>  
+                    <h1 class=""><?php echo $cca_row['company_name']; //Display company name?> Projects</h1>  
                     <form action="add_project.php" id="projectadd" method="post">
                         <input type="hidden" name="client_id"  value="<?=$_POST['client_id'];?>">
                     </form>

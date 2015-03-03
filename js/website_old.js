@@ -68,21 +68,12 @@ function NewTimelineComment(){
   var output;
   var comments = $('li');
   var i = comments.length;
-  var li_open = ' <li id="notes_comment_'+i+'" class="container">';
+  var li_open = ' <li id="notes_comment_'+i+'">';
   var start = '<input name="time_start_'+i+'" value="0:00">';
-  var end = '<input name="time_end_'+i+'" value="'+$('#video_end_time').val()+'">';
-  var selectoption = '<select name="comment_option_'+i+'">';
-  selectoption += '<option>changes to video</option>';
-  selectoption += '<option>changes to audio</option>';
-  selectoption += '<option>Other</option>';
-  selectoption += '<select>';
-  var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5"></textarea>';
-  output = li_open+'<span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+selectoption+textarea+'</li>';
+  var end = '<input value="0:00" name="time_end_'+i+'" >';
+  var textarea = '<textarea placeholder="Please provide a details change for this section of time" name="feedback_'+i+'" cols="30" rows="5"></textarea>';
+  var select = '<select name="type_of_'+i+'" id="type_of_'+i+'"><option>changes to video</option><option>changes to audio</option><option>Other</option></select>';
+  output = li_open+'<div class="timestamping"><h2 class="timestamp_details">Timestamp of Change:</h2><span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span> <div class="small_spacer"></div><h2 class="change_type">Type of Change Required:</h2>'+select+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
-
-
-
-
-
 

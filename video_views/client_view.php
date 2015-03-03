@@ -129,10 +129,12 @@ if($mail_message!=""){
 		<main>
 		<section class="center">
 			<h1 class="">My Dashboard</h1>
-				<div id="preproduction">
+				<div id="preproduction" class="container">
+				<?php //Add container css class to make data display correctly?>
 					<h2>Video Project Details</h2>
 					<ul>
-						<li class="section contact">
+						<li class="section contact seven columns">
+						<?php //Make contact data field in left side?>
                             <input value="<?php echo $end_time;?>" id="video_end_time" type="hidden">
 							<span>Project name</span>
 							<input value="<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?>" disabled>
@@ -152,7 +154,8 @@ if($mail_message!=""){
                             <input class="btn green columns three"  type="submit" value="Change Contact Information"/>
                             </form>
 						</li>
-						<li class="section">
+						<li class="section seven columns">
+						<?php //Make introduction field in right side?>
                         <p><strong>How to review your project</strong></p>
 						<p>At Surge Media we like to make your video project experience as smooth as possible. but giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track the changes. 
                         </p>
@@ -373,8 +376,9 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					for($j=0; $j<$list_video_client_request_num; $j++){
 					$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
 					$list_video_feedback[$i] .="
-					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."</small></li>
-					";
+					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+					<small>[".$list_video_client_request_row['feedback_type']."]".$list_video_client_request_row['feedback']."</small></li>
+					";//list all request information display in page
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
