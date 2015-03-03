@@ -127,7 +127,7 @@ if($mail_message!=""){
 	<body class="">
 		<? include('client_header.php'); ?>
 		<main>
-		<section class="center">
+		<section class="container">
 			<h1 class="">My Dashboard</h1>
 				<div id="preproduction" class="container">
 				<?php //Add container css class to make data display correctly?>
@@ -151,7 +151,7 @@ if($mail_message!=""){
 							<input placeholder="Email" name="contact_person" value="<?php echo $cca_row['contact_person'];?>"/>
 							<input placeholder="Phone" name="mobile_number" value="<?php echo $cca_row['mobile_number'];?>"/>
 							<input placeholder="???" name="email" value="<?php echo $cca_row['email'];?>"/>
-                            <input class="btn green columns three"  type="submit" value="Change Contact Information"/>
+                            <input class="btn green columns three"  type="submit" value="Change Contact Details"/>
                             </form>
 						</li>
 						<li class="section seven columns">
@@ -242,7 +242,7 @@ if($mail_message!=""){
         <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
         <input value="yes" name="make_video_version_to_final" type="hidden">
 </form>
-				<ul id="videos" >
+				<ul class="container">
 <?php if($last_video_under_project_row['version']!="Final"){?>            
 			<form id="client_view_update" action="client_view.java" method="post">
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
@@ -262,12 +262,12 @@ if($mail_message!=""){
                         	Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.
                         <? } ?>
                         </h2>
-						<div class="video">
+						<div class="video  eight columns">
 							<!-- VIMEO EMBED -->
 							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions">
+						<div id='action_box' class="actions  eight columns">
 							<label class="title" for="">Director's Notes</label>
 							<textarea disabled="true" name="" id="" cols="30" rows="10"><?=$last_video_under_project_row['notes']?></textarea>
 							<ul>
@@ -280,7 +280,7 @@ if($mail_message!=""){
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="ten columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 							</li>
 							<li>
 								<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
@@ -291,7 +291,7 @@ if($mail_message!=""){
 							<ul id="time-comments">
 								
 							</ul>
-							<div class="submit-actions eight columns">
+							<div class="submit-actions sixteen columns">
 							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
 							<a class="btn green columns five" onClick="document.getElementById('client_view_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
 							</div>
@@ -308,18 +308,18 @@ if($mail_message!=""){
                         
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
-						<div class="video">
+						<div class="video eight columns">
 							<!-- VIMEO EMBED -->
-							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
+							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions">
+						<div id='action_box' class="actions  eight columns">
                          <?php if($projectname_row['download_file']!=""){ ?>
 							<label class="title" for="">Congratulations your video is now ready for downlaod now.</label>
 						<?php }else{ ?>
 							<label class="title" for="">We are editing your video now.</label>
                         <?php } ?>
-							<textarea disabled="true" name="" id="" cols="30" rows="5">Versions included:
+							<textarea disabled="true" name="" id="project_message" class="eight columns" cols="30" rows="5">Versions included:
 1 x MP4  - 1280 x 720 - h264 - suitable for youtube
 1 x MP4  - 640 x480 h264 idea for uploading to your website.
                             
@@ -333,7 +333,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							<ul>
 								<li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
                                 <?php if($projectname_row['download_file']!=""){ ?>
-                                    <li><a href="#" class="btn yellow" ><span>DOWNLOAD YOUR VIDEO</span><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#" class="btn yellow" ><span>DOWNLOAD VIDEO</span><i class="fa fa-star"></i></a></li>
                                 <?php }else{ ?>
                                     <li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>
                                 <?php } ?>
@@ -344,7 +344,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="ten columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 							</li>
 							<li>
 								<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
@@ -355,7 +355,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							<ul id="time-comments">
 								
 							</ul>
-							<div class="submit-actions eight columns">
+							<div class="submit-actions sixteen columns">
 							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
 							<a class="btn green columns five" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
 							</div>
@@ -383,7 +383,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					echo '
-					<li class="video_obj" onclick="expandCard($(this))">
+					<li class="video_obj five columns" onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
 						<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
 						<div class="video draft">

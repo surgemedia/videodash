@@ -17,14 +17,14 @@ body { background: rgba(255, 255, 255, 0.5); position: absolute; top: 0px; left:
 *:focus { outline: none; }
 ul, li { list-style: none; padding: 0px; margin: 0px; }
 a { color: inherit; text-decoration: none; }
-div { display: block; overflow: hidden; }
+div { display: block;}
 input { border: 1px solid #efefef; background-color: #fff; }
 h1 { font-size: 3em; margin: 0px; }
 h2 { font-size: 2em; }
 h3 { font-size: 3em; }
 textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; max-width: 100%; }
 .clearfix { float: none; }
-.btn { padding: 10px 15px; border-radius: 0.3em; line-height: 2em; border-bottom: 4px solid; cursor: pointer; display: inline-block;}
+.btn { padding: 10px 15px; border-radius: 0.3em; line-height: 2em; border-bottom: 4px solid; cursor: pointer; display: inline-block;  margin: 4px 0;}
 .btn span { margin: 0px 20px 0px 0px; }
 .btn i { }
 .float-left { float: left; }
@@ -172,7 +172,7 @@ ul#videos li.video_obj:hover { /* older webkit */
          /* easeInOutBack */
         }
 
-ul#videos li.video_obj { float: left; border-radius: 0.4em; cursor: pointer; display: inline-block; padding: 1em 1em; width: 29%; position: relative; margin: 2.4em 0.5em 1em 0;
+ul#videos li.video_obj { float: left; border-radius: 0.4em; cursor: pointer; display: inline-block; padding: 1em 1em; position: relative; margin: 2.4em 0.5em 1em 0;
  /* older webkit */
  
    
@@ -234,9 +234,9 @@ ul#videos li.video_obj.featured:hover {
 }
 /* ==========  Featured Video Post  ========== */
 #preproduction, ul#videos li.featured { display: inline-block; width: 100%; margin: 5em 0 10em 0; padding: 0px;}
-ul#videos li.featured .video { float: left; width: 50%; border: 0px solid #17A3C4; }
+ul#videos li.featured .video { float: left; border: 0px solid #17A3C4; }
 ul#videos li.featured h1 { float: left; width: 100%; clear: both; margin: 0; padding: 0 0 0.5em 0; font-size: 2em; color: #15A9CA; text-transform: uppercase; font-weight: bold;}
-ul#videos li.featured .actions { float: left; width: 45%; margin: 0 0em 0 0.5em; }
+ul#videos li.featured .actions { float: left; margin: 0 0em 0 0.5em; }
 ul#videos li.featured .actions.popup { }
 ul#videos li.featured .actions ul { width: 95%; float: right; }
 ul#videos li.featured .video iframe { float: left; width: 100%; height: auto; min-height: 374px; }
@@ -244,7 +244,7 @@ span.timeline_picker { float: left; width: 38%; border-radius: 0.3em; padding: 0
 span.timeline_picker input { border: 0; margin: 0; float: left; width: 54%; padding: 0.2em 0em; font-size: 1em; color: #17A3C4; }
 span.timeline_picker label { float: left; clear: none; padding: 0em 0.3em 0em 0em; line-height: 1.5em; }
 ul#videos li.featured label.title { float: left; font-weight: bold; width: 100%; color:#000;}
-ul#videos li.featured #changes_required li textarea { height: 4em; padding: 1em; margin: 0px; width: 60%;}
+ul#videos li.featured #changes_required li textarea { height: 4em; padding: 1em; margin: 0 0 5px; }
 ul#videos li.featured .actions.popup textarea { width: 97%; }
 ul#videos li.featured .actions textarea { float: left; width: 92%; height: 17.5em; margin: 0.5em 0 0.5em 0; padding: 1em;}
 ul#videos li.featured .actions .textarea_rows5 { height: 6em !important;}
@@ -254,7 +254,7 @@ ul#videos li.featured .actions ul li a { float: left; width: 85%; font-size: 0.9
 ul#videos li.featured #changes_required { width: 100%; display: none; padding: 1em 0;}
 ul#videos li.featured #changes_required textarea { margin: 0.5em 0 0.5em 0; padding: 0.2em; height: 3em; }
 ul#videos li.featured #changes_required.popup { display: inline-block; width: 100%;}
-ul#videos li.featured #changes_required ul { margin: 0.5em 0 0.5em 0; float: left; overflow-y: hidden; width: 100%; }
+ul#videos li.featured #changes_required ul { margin: 0.5em; float: left; overflow-y: hidden; }
 ul#videos li.featured #changes_required .btn { }
 ul#videos li.featured #changes_required .submit-actions { float: left;}
 h4 {
@@ -282,14 +282,13 @@ span.timeline_picker {
 ul#time-comments li textarea {
 }
 
-ul#time-comments li select {
-    height: 3em;
+ul#time-comments li select, ul#time-comment_first li select {
+    height: 4.1em;
     display: inline-block;
 }
 ul#videos li.featured #time-comments li textarea {
     height: 10em;
     margin: 0.5em 0.5em 0.5em;
-    width: 34%;
 }
 
 
@@ -478,3 +477,11 @@ div#surgebar { background-color: #17A3C4; border-bottom: 2px solid; border-color
 .project_name {overflow:visible !important;}
 .hidden_items{display:none;}
 
+#project_message{
+    height: 250px;
+    margin: 5px 0;
+}
+.video iframe{
+    width: 100%;
+    height: 403px;
+}

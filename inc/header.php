@@ -1,5 +1,5 @@
     <header>
-        <div class="center wow fadeInDown">
+        <div class="container wow fadeInDown">
             <div class="logo"><img src="" alt=""></div>
             <nav>
                 <ul class="nav">

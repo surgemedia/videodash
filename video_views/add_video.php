@@ -75,7 +75,7 @@
             <body class="">
                 <? include('../inc/header.php'); ?>
                 <main>
-                <section class="center">
+                <section class="container">
                     <h1 class="float-left"><?=$message;?></h1>
                     <form action="http://videodash.surgehost.com.au/all_projects.php" method="post" id="back_to_project">
                     	<input name="client_id" value="<?=$cca_row['id'];?>" type="hidden"/>
@@ -166,7 +166,7 @@
 
                 </ul>
             </section>
-                <section id="search" class="center">
+                <section id="search" class="container">
                     <li><h1>Previous Versions</h1></li>
                     <ul id="videos">
                     <?
@@ -188,7 +188,7 @@
 							$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row ['id']." ORDER BY id LIMIT 0, 1");
 							$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 							echo '
-								<li class="video_obj" onclick="expandCard($(this))">
+								<li class="video_obj five columns" onclick="expandCard($(this))">
 									<span class="ver_number">'.$video_row['version_num'].'</span>
 									<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
 									<div class="video draft">

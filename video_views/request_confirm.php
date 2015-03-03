@@ -98,15 +98,15 @@ for($j=0; $j<$forloopcount; $j++){
 	}
 	$addcommenttimes .= '
 		<li>
-		<span class="timeline_picker">
+		<span class="timeline_picker four columns">
 		<label for="start">Start</label>
 		<input value="'.$feedback_strat[$j].'" name="addtimestart'.$j.'">
 		</span>
-		<span class="timeline_picker end">
+		<span class="timeline_picker end four columns">
 		<label for="start">End</label>
 		<input value="'.$feedback_end[$j].'" name="addtimeend'.$j.'">
 		</span>
-		<select name="addcommentoption'.$j.'">
+		<select name="addcommentoption'.$j.'"  class="five columns">
 			<option';
 	if($feedback_type[$j]=='Visual Comment'){ echo 'selected';}
 	$addcommenttimes .= '>Visual Comment</option>
@@ -117,14 +117,14 @@ for($j=0; $j<$forloopcount; $j++){
 	if($feedback_type[$j]=='Other Comment'){ echo 'selected';}
 	$addcommenttimes .= '>Other Comment</option>
 		</select>
-		<textarea rows="5" cols="30" name="addfeedback'.$j.'">'.$feedback[$j].'</textarea>
+		<textarea rows="5" cols="30" name="addfeedback'.$j.'" class="fourteen columns">'.$feedback[$j].'</textarea>
 		</li>	
 	';
 }
 $addcommenttimes .= '</ul>';
 ?>							
 
-		<section class="center">
+		<section class="container">
 			<h1 class="">Please Double confirm Your Comments before submit</h1>
 				<ul id="videos" >
 <?php if($last_video_under_project_row['version']!="Final"){?>            
@@ -146,12 +146,12 @@ $addcommenttimes .= '</ul>';
                         	Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.
                         <? } ?>
                         </h2>
-						<div class="video">
+						<div class="video eight columns">
 							<!-- VIMEO EMBED -->
 							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions">
+						<div id='action_box' class="actions eight columns">
 							<label class="title" for="">Director's Notes</label>
 							<textarea disabled="true" name="" id="" cols="30" rows="10"><?=$last_video_under_project_row['notes']?></textarea>
 						</div>
@@ -184,12 +184,12 @@ $addcommenttimes .= '</ul>';
                         
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
-						<div class="video">
+						<div class="video eight columns">
 							<!-- VIMEO EMBED -->
 							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions">
+						<div id='action_box' class="actions eight columns">
                          <?php if($projectname_row['download_file']!=""){ ?>
 							<label class="title" for="">Congratulations your video is now ready for downlaod now.</label>
 						<?php }else{ ?>
