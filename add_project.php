@@ -1,29 +1,30 @@
 <? include("dbconnection_3evchey.php"); //connecting Database 
-	if($_POST['client_id']==''){
-		header("location: home_video.php");	
-	}
-	$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
-	$cca_num = mysql_num_rows($check_client_active);
-	$cca_row = mysql_fetch_array($check_client_active);
-	if($cca_num==0){
-		header("location: home_video.php");	
-	}
-	$message = "Add New Video Project";
-	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
-		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', ".$_POST['new_project_save'].")");
-		if(!$query){
-			$message = "Cannot Save this project to system.";
-			exit;	
-		}else{
-			$message = "Success to insert data to database.";
-		}
-	}
+    include("login.php");
+    if($_POST['client_id']==''){
+        header("location: home_video.php"); 
+    }
+    $check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
+    $cca_num = mysql_num_rows($check_client_active);
+    $cca_row = mysql_fetch_array($check_client_active);
+    if($cca_num==0){
+        header("location: home_video.php"); 
+    }
+    $message = "Add New Video Project";
+    if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
+        $query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', ".$_POST['new_project_save'].")");
+        if(!$query){
+            $message = "Cannot Save this project to system.";
+            exit;   
+        }else{
+            $message = "Success to insert data to database.";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
-			<? include('inc/head.php');?>
+            <? include('inc/head.php');?>
             <body class="">
-				<? include('inc/header.php'); ?>
+                <? include('inc/header.php'); ?>
                 <main>
                 <section class="center">
                     <h1 class="float-left"><?=$message;?></h1>
@@ -32,7 +33,7 @@
                     </form>
                      <a onclick="document.getElementById('allprojects').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> Client's Projects</h1></a>
                     
-              	<form action="all_projects.php" method="post" id="video_projects_add"> 
+                <form action="all_projects.php" method="post" id="video_projects_add"> 
                 <ul id="videos" >
                     <li id="add_new_video" class="video_obj featured autoHeight">
                        <!--  <h1 id="client_name_editable" class="title"> -->
@@ -58,6 +59,6 @@
                 </form>
             </section>
             </main>
-				<? include('inc/footer.php');?>
+                <? include('inc/footer.php');?>
         </body>
     </html>

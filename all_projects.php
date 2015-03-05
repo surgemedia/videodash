@@ -1,7 +1,6 @@
 <? include("dbconnection_3evchey.php"); //connecting Database 
-	if($_POST['client_id']==''){
-		header("location: home_video.php");	
-	}
+	include("login.php");
+
 	$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
 	$cca_num = mysql_num_rows($check_client_active);
 	$cca_row = mysql_fetch_array($check_client_active);
@@ -10,7 +9,7 @@
 	}
 	$message = "Add New Video Project";
 	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
-		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', ".$_POST['new_project_save'].")");
+		$query = mysql_query("INSERT INTO video_project VALUE(NULL, ".$_POST['client_id'].", '".$_POST['project_name']."', '".$_POST['client_request']."', 1, '')");
 		if(!$query){
 			$message = "Cannot Save this project to system.";
 			exit;	
@@ -26,7 +25,7 @@
 				<? include('inc/header.php'); ?>
                 <main>
                 <section id="search" class="center">
-                    <h1 class="">All Project under Client</h1>  
+                    <h1 class=""><?php echo $cca_row['company_name']; //Display company name?> Projects</h1>  
                     <form action="add_project.php" id="projectadd" method="post">
                         <input type="hidden" name="client_id"  value="<?=$_POST['client_id'];?>">
                     </form>
@@ -49,7 +48,7 @@
 							mysql_query("");
 							mysql_query("UPDATE video_project SET active_option = 1 WHERE id = ".$_POST['enableid']);
 						}
-						$listproject = mysql_query("SELECT * FROM video_project ORDER BY active_option DESC");
+						$listproject = mysql_query("SELECT * FROM video_project WHERE Client_id = ".$_POST['client_id']." ORDER BY active_option DESC");
 						$project_num = mysql_num_rows($listproject);
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);
@@ -79,9 +78,11 @@
 										<input type="hidden" name="project_id"  value="'.$project_row['id'].'">
 									</form>
 									<div class="actions">
-										<ul>
-											<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>
-											'.$del_btn.'
+										<ul>';
+							if($add_del_class != " bombed"){				
+								echo '<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>';
+							}
+							echo $del_btn.'
 										</ul>
 									</div>
 								</li>
