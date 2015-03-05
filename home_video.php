@@ -1,4 +1,7 @@
-<? include("dbconnection_3evchey.php"); //connecting Database ?>
+<? 
+	include("dbconnection_3evchey.php"); //connecting Database 
+	include("login.php");
+?>
 <?
 	//enable or del client
 	if($_POST['delid']!=""){		
@@ -19,6 +22,7 @@
                     <h1 class="">Our Clients</h1>  
                     <div class="controls">
                         <a href="video_views/add_client.php" class="blue btn">Add New Client  <i class="fa fa-plus"></i></a>
+                        <a href="all_Non_Comment_projects.php" class="blue btn">All Expired Video  <i class="fa fa-exclamation-triangle"></i></a>
                     </div>
                     <input type="text" id="searchbox" class="search wow pulse">
 
@@ -52,9 +56,14 @@
 									</form>
 									<div class="actions">
 										<ul>
-											<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View</span> <i class="fa fa-eye"></i></a></li>
-											<li><a class="btn yellow edit" onclick="document.getElementById(\'edit'.$i.'\').submit();"><span>Edit</span><i class="fa fa-edit"></i></a></li>
-											'.$del_btn.'
+											';
+							if($add_del_class != " bombed"){				
+								echo '
+									<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View</span> <i class="fa fa-eye"></i></a></li>
+									<li><a class="btn yellow edit" onclick="document.getElementById(\'edit'.$i.'\').submit();"><span>Edit</span><i class="fa fa-edit"></i></a></li>
+								';
+							}
+							echo $del_btn.'
 										</ul>
 									</div>
 								</li>
