@@ -6,18 +6,18 @@
 =    Buttons (Client View)        =
 ================================*/
 $(document).ready(function($) {
-	
+  
 
 $('#required_button').click(function() {
-	$('#videos div.actions').addClass('popup');
-	$('#videos #changes_required').addClass('popup');
+  $('#videos div.actions').addClass('popup');
+  $('#videos #changes_required').addClass('popup');
 });
 
 
 function get_video(input,iframe){
   $(input).focusout(function() {
    var val = $(input).val();
-	$(iframe).attr("src","http://player.vimeo.com/video/"+val);
+  $(iframe).attr("src","http://player.vimeo.com/video/"+val);
 });
 }
 
@@ -26,21 +26,21 @@ function get_video(input,iframe){
 =            Expand Video            =
 ====================================*/
 function expandCard(element){
-	
-		if(! element.hasClass('open_card')){
-			$('li').removeClass('open_card');
-			$(element).addClass('open_card');
-			$('#overlay_wrapper').addClass('show');
-			$('#videos').focus();
-		} else {
-			// $('li').removeClass('open_card');
-			// $('#overlay_wrapper').removeClass('show');
-		}
-	
+  
+    if(! element.hasClass('open_card')){
+      $('li').removeClass('open_card');
+      $(element).addClass('open_card');
+      $('#overlay_wrapper').addClass('show');
+      $('#videos').focus();
+    } else {
+      // $('li').removeClass('open_card');
+      // $('#overlay_wrapper').removeClass('show');
+    }
+  
 }
 function closeAllCards(){
-	$('li').removeClass('open_card');
-	$('#overlay_wrapper').removeClass('show');
+  $('li').removeClass('open_card');
+  $('#overlay_wrapper').removeClass('show');
 }
 function DisableScroll(id){
 $(id).hover(function() {
@@ -68,12 +68,15 @@ function NewTimelineComment(){
   var output;
   var comments = $('li');
   var i = comments.length;
-  var li_open = ' <li id="notes_comment_'+i+'">';
+  var li_open = ' <li id="notes_comment_'+i+'" class="container">';
   var start = '<input name="time_start_'+i+'" value="0:00">';
-  var end = '<input value="0:00" name="time_end_'+i+'" >';
-  var textarea = '<textarea placeholder="Please provide a details change for this section of time" name="feedback_'+i+'" cols="30" rows="5"></textarea>';
-  var select = '<select name="type_of_'+i+'" id="type_of_'+i+'"><option>Visual Comment</option><option>Audio Comment</option><option>Other</option></select>';
-  output = li_open+'<div class="timestamping"><span class="timeline_picker"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end"><label for="start">End</label>'+end+'</span>'+select+'</div>'+textarea+'</li>';
+  var end = '<input name="time_end_'+i+'" value="'+$('#video_end_time').val()+'">';
+  var selectoption = '<select name="comment_option_'+i+'" class="five columns">';
+  selectoption += '<option>changes to video</option>';
+  selectoption += '<option>changes to audio</option>';
+  selectoption += '<option>Other</option>';
+  selectoption += '<select>';
+  var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5" class="fourteen columns"></textarea>';
+  output = li_open+'<span class="timeline_picker four columns"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end four columns"><label for="start">End</label>'+end+'</span>'+selectoption+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
-
