@@ -1,4 +1,3 @@
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <? include("../dbconnection_3evchey.php"); //connecting Database
 session_start();
 if($_POST['client_id']=='' && $_POST['project_id']==''){
@@ -111,7 +110,7 @@ if($mail_message!=""){
 			
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 
-			$mail_data = file_get_contents('../email_template/mail_template.html');
+			$mail_data = file_get_contents('../email_template/feedback.html');
 			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 			$mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
 			$the_data_is = date("d M Y");
@@ -128,74 +127,47 @@ if($mail_message!=""){
 	<body class="">
 		<? include('client_header.php'); ?>
 		<main>
-		<section class="center">
+		<section class="container">
 			<h1 class="">My Dashboard</h1>
-				<div id="preproduction">
-					<!-- <h2>Video Project Details</h2> -->
-					<ul class="container">
-						
-						<li class="section  columns eight omega">
-                        <h4>How to review your project</h4>
-						<p>At Surge Media we like to make your video project experience as smooth as possible. but giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track the changes. 
-                        </p>
-                        <p>As part of your project you will receive 2 sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage. 
-                        </p>
-                        <h4>Draft 1 - (3 Weeks)</h4>
-                        <p>Provide us with a complete list of ALL requested changes. Use the timestamp in the video to make sure that our editors know where the change needs to ba applied.
-                        </p>
-                         <h4>Draft 2 - (3 Weeks)</h4> 
-                        <p>This stage is mostly used to finetune the video before we present you with the final version.
-                        </p>
-                        <h4>Final</h4> <p>The final version is there for you to download from the dashboard. Please note that if you still want to make additional changes you will be charged for the time involved.
-                        </p>
-							
-						</li>
-						
-                         <li class="section contact columns five alpha" >
-                         <h4>Contact Details</h4>
+				<div id="preproduction" class="container">
+				<?php //Add container css class to make data display correctly?>
+					<h2>Video Project Details</h2>
+					<ul>
+						<li class="section contact seven columns">
+						<?php //Make contact data field in left side?>
                             <input value="<?php echo $end_time;?>" id="video_end_time" type="hidden">
-
+							<span>Project name</span>
 							<input value="<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?>" disabled>
-
+<?
+							/*=======================================*/
+							/*       Change Content Details          */
+							/*=======================================*/							
+?>
+							<span>Contact Info</span>
                             <form action="#" method="post">
-
                             <input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
                             <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 							<input placeholder="Name" name="company_name" value="<?php echo $cca_row['company_name'];?>"/>
 							<input placeholder="Email" name="contact_person" value="<?php echo $cca_row['contact_person'];?>"/>
 							<input placeholder="Phone" name="mobile_number" value="<?php echo $cca_row['mobile_number'];?>"/>
 							<input placeholder="???" name="email" value="<?php echo $cca_row['email'];?>"/>
-							<a href="#" class="btn green columns three">
-                            <input class=""  type="submit" value="Change Contact Information"/>
-                            </a>
+                            <input class="btn green columns three"  type="submit" value="Change Contact Details"/>
                             </form>
 						</li>
-						<?php /* ?>
-						<li class="section">
-							
-							<span>Voice Over Info</span>
-							<div id="voice_choice">
-								<select name="voice_id" id="">
-									<option value="">Please select your audio talent</option>
-									<?
-									$list_vt = mysql_query("SELECT * FROM voice_talent WHERE avaliable = 1");
-									$list_vt_num = mysql_num_rows($list_vt);
-									for($i=0; $i<$list_vt_num; $i++){
-									$list_vt_row = mysql_fetch_array($list_vt);
-									$showselect = "";
-									if($list_vt_row['id'] == $last_video_a_request_row['voice_id']){ $showselect = 'selected="selected"';}
-									echo '<option value="'.$list_vt_row['id'].'" '.$showselect.'>'.$list_vt_row['voice_name'].'</option>';
-									}
-									?>
-								</select>
-								<span id="chosen">Adam</span>
-							</div>
-							<div id="voice_comment">
-								<textarea name="voice_comment" id="" cols="30" rows="10"><?=$last_video_a_request_row['voice_comment'];?></textarea>
-							</div>
-							
+						<li class="section seven columns">
+						<?php //Make introduction field in right side?>
+                        <p><strong>How to review your project</strong></p>
+						<p>At Surge Media we like to make your video project experience as smooth as possible. but giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track the changes. 
+                        </p>
+                        <p>As part of your project you will receive 2 sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage. 
+                        </p>
+                        <p><strong>DRAFT 1 - (3 WEEKS) </strong> - Provide us with a complete list of ALL requested changes. Use the timestamp in the video to make sure that our editors know where the change needs to ba applied.
+                        </p>
+                        <p><strong>DRAFT 2 - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version.
+                        </p>
+                        <p><strong>FINAL</strong> - The final version is there for you to download from the dashboard. Please note that if you still want to make additional changes you will be charged for the time involved.
+                        </p>
 						</li>
-						<?php */ ?>
 					</ul>
 				</div>
 				<!-- <input type="text" id="searchbox" class="search wow bounceIn"> -->
@@ -228,82 +200,50 @@ if($mail_message!=""){
         <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
         <input value="yes" name="make_video_version_to_final" type="hidden">
 </form>
-				<ul id="videos" >
-<?php if($last_video_under_project_row['version']!="Final"){?>            
-			<form id="client_view_update" action="client_view.java" method="post">
-					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
-					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
-					<input value="1" name="add_comments" type="hidden">
-					<li class="video_obj featured">
-						<h1 class="title">
-                        
-						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						</h1>
-                        <h2>
-                        <?php 
-						$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
-						if($list_day_counter>0){ ?>
-                            You have <? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline'); ?> days left to submit your feedback
-                        <? }else{ ?>
-                        	Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.
-                        <? } ?>
-                        </h2>
-						<div class="video">
-							<!-- VIMEO EMBED -->
-							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
-							<!-- VIMEO EMBED -->
-						</div>
-						<div id='action_box' class="actions">
-							<label class="title" for="">Director's Notes</label>
-							<textarea disabled="true" name="" id="" cols="30" rows="10"><?=$last_video_under_project_row['notes']?></textarea>
-							<ul>
-								<li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
-								<li><a href="#" class="btn yellow" onClick="document.getElementById('final_version_confrim').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>
-							</ul>
-						</div>
-						<div id="changes_required">
-						<label class="title" for="">Your Notes</label>
-						<ul id="comments-general" class="container">
-							
-							<li>
-							<textarea name="voice_comment" id="general-comment" class="ten columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
-							<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
-								<span>Submit Comments</span> <i class="fa fa-send"></i>
-                                </a>
-							</li>
-							</ul>
-							<ul id="time-comments">
-								
-							</ul>
-							<div class="submit-actions eight columns">
-							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
-							<a class="btn green columns five" onClick="document.getElementById('client_view_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
-							</div>
-						</div>
-					</li>
-				</form>
-<?php }else{ ?>            
+<?php if($last_video_under_project_row['version']!="Final"){
+		$downloadfilelink = '<li><a href="#" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
+		$downloadfile_message = '';
+		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
+		if($list_day_counter>0){
+			$overdeadline_message = '<h2>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback</h2>';
+		}else{
+			$overdeadline_message = '<h2>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.</h2>';
+		}
+               
+	  }else{
+	  	$overdeadline_message = '';
+	  	if($projectname_row['download_file']!=""){
+	  		$downloadfilelink = '<li><a href="#" class="btn yellow" ><span>DOWNLOAD VIDEO</span><i class="fa fa-star"></i></a></li>';
+	  	}else{
+	  		$downloadfilelink = '<li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
+	  	}
+	  	if($projectname_row['download_file']!=""){
+	  		$downloadfile_message = '<label class="title" for="">Congratulations your video is now ready for downlaod now.</label>';
+	  	}else{
+	  		$downloadfile_message = '<label class="title" for="">We are editing your video now.</label>';
+	  	}
+	  }
+?>            
+
+				<ul class="container">         
 			<form id="charge_update" action="request_confirm.java" method="post">
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 					<input value="1" name="charge_change" type="hidden">
 					<li class="video_obj featured">
 						<h1 class="title">
+                        
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
-						<?php if($projectname_row['download_file']!=""){ ?>
-							<label class="message green" for="">Congratulations your video is now ready for downlaod now.</label>
-						<?php }else{ ?>
-							<label class="message yellow" for="">We are editing your video now.</label>
-                        <?php } ?>
-						<div class="video">
+						<?php echo $overdeadline_message;?>
+						<div class="video eight columns">
 							<!-- VIMEO EMBED -->
-							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
+							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions">
-                         
-							<textarea disabled="true" name="" id="" cols="30" rows="5">Versions included:
+						<div id='action_box' class="actions  eight columns">
+                         <?php echo $downloadfile_message; ?>
+							<textarea disabled="true" name="" id="project_message" class="eight columns" cols="30" rows="5">Versions included:
 1 x MP4  - 1280 x 720 - h264 - suitable for youtube
 1 x MP4  - 640 x480 h264 idea for uploading to your website.
                             
@@ -316,11 +256,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
                             </textarea>
 							<ul>
 								<li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
-                                <?php if($projectname_row['download_file']!=""){ ?>
-                                    <li><a href="#" class="btn yellow" ><span>Download Video</span><i class="fa fa-download"></i></a></li>
-                                <?php }else{ ?>
-                                    <li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>
-                                <?php } ?>
+                                <?php echo $downloadfilelink; ?>
 							</ul>
 						</div>
 						<div id="changes_required">
@@ -328,17 +264,18 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="nine columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
-							<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
+							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+							</li>
+							<li>
+								<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
 								<span>Submit Comments</span> <i class="fa fa-send"></i>
                                 </a>
 							</li>
-							
 							</ul>
 							<ul id="time-comments">
 								
 							</ul>
-							<div class="submit-actions eight columns">
+							<div class="submit-actions sixteen columns">
 							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
 							<a class="btn green columns five" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
 							</div>
@@ -346,7 +283,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					</li>
                 </form>
 
-<?php } ?>            
+          
 				<li><h1>Previous Versions</h1></li>
 				<ul id="videos">
 					<?
@@ -359,13 +296,14 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					for($j=0; $j<$list_video_client_request_num; $j++){
 					$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
 					$list_video_feedback[$i] .="
-					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."</small></li>
-					";
+					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+					<small>[".$list_video_client_request_row['feedback_type']."]".$list_video_client_request_row['feedback']."</small></li>
+					";//list all request information display in page
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					echo '
-					<li class="video_obj" onclick="expandCard($(this))">
+					<li class="video_obj five columns" onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
 						<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
 						<div class="video draft">
