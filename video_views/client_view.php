@@ -225,7 +225,7 @@ if($mail_message!=""){
 	  }
 ?>            
 
-				<ul class="container">         
+				<ul class="sixteen columns">         
 			<form id="charge_update" action="request_confirm.java" method="post">
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
