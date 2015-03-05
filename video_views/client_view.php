@@ -241,9 +241,9 @@ if($mail_message!=""){
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions  eight columns">
+						<div id='action_box' class="actions  seven columns">
                          <?php echo $downloadfile_message; ?>
-							<textarea disabled="true" name="" id="project_message" class="eight columns" cols="30" rows="5">Versions included:
+							<textarea disabled="true" name="" id="project_message" class="seven columns" cols="30" rows="5">Versions included:
 1 x MP4  - 1280 x 720 - h264 - suitable for youtube
 1 x MP4  - 640 x480 h264 idea for uploading to your website.
                             
@@ -260,7 +260,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							</ul>
 						</div>
 						<div id="changes_required">
-						<label class="title" for="">Your Notes</label>
+						<label class="title label_stop_float" for="">Your Notes</label>
 						<ul id="comments-general" class="container">
 							
 							<li>

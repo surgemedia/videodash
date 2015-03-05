@@ -488,3 +488,6 @@ div#surgebar { background-color: #17A3C4; border-bottom: 2px solid; border-color
 .small_title{
     display: block;
 }
+.label_stop_float{
+    display: block; clear: both;
+}
