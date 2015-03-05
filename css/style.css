@@ -141,7 +141,7 @@ section.center ul.list .client.bombed .title { text-decoration: line-through; }
 /* ==========  Preproduction  ========== */
 
 div#preproduction h2 { margin: 0 0 0.5em 0; color: #474747;}
-div#preproduction ul { float: left; width: 100%; margin: 0; padding: 0; }
+div#preproduction ul { float: left; width: 100%; margin-bottom: 2em; padding-bottom: 2em; }
 ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height: 600px; }
 #preproduction { width: 100%; float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #E7F1F3; margin: 0em 0 1em 0 !important;}
 #preproduction p {
@@ -163,6 +163,7 @@ ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height
 div#preproduction .btn {
     float: left;
     margin: 1em 0;
+    width: 50%;
 }
 /* ==========  Normal Video Draft  ========== */
 ul#videos { position: relative;}
