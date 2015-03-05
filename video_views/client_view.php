@@ -136,14 +136,14 @@ if($mail_message!=""){
 						<li class="section contact seven columns">
 						<?php //Make contact data field in left side?>
                             <input value="<?php echo $end_time;?>" id="video_end_time" type="hidden">
-							<span>Project name</span>
+							<span class="small_title">Project name</span>
 							<input value="<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?>" disabled>
 <?
 							/*=======================================*/
 							/*       Change Content Details          */
 							/*=======================================*/							
 ?>
-							<span>Contact Info</span>
+							<span class="small_title">Contact Info</span>
                             <form action="#" method="post">
                             <input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
                             <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">

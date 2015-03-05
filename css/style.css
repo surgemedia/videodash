@@ -485,3 +485,6 @@ div#surgebar { background-color: #17A3C4; border-bottom: 2px solid; border-color
     width: 100%;
     height: 403px;
 }
+.small_title{
+    display: block;
+}
