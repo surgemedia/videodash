@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(.*)\.java $1\.php 
