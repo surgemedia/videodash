@@ -10,6 +10,24 @@
 			width:100%;
 			background-color:#ffffff;
 		}
+		.mail_box
+		{
+			margin-bottom:7em;
+			padding-bottom:5em;
+
+		}
+
+		.small_spacer
+		{
+			width: 60%;
+			height: 1px;
+			 	background: -webkit-linear-gradient(left, red , #e0dd44); /* For Safari 5.1 to 6.0 */
+  				background: -o-linear-gradient(right, red, #e0dd44); /* For Opera 11.1 to 12.0 */
+  				background: -moz-linear-gradient(right, red, #e0dd44); /* For Firefox 3.6 to 15 */
+  				background: linear-gradient(to right, red , #e0dd44); /* Standard syntax */
+  				margin-bottom: 6em;
+		}
+
 		.ExternalClass{
 			width:100%;
 			background-color:#ffffff;
@@ -17,14 +35,25 @@
 		body{
 			width:100%;
 			height:100%;
-			background-color:#ffffff;
+
 			margin:0;
 			padding:0;
 			-webkit-font-smoothing:antialiased;
 		}
 		html{
 			width:100%;
+			background-image: url("noise.png");
+			background-repeat: repeat;
 		}
+
+		.noise_bg
+		{
+
+			background-image: url("noise.png");
+			background-repeat: repeat;
+			opacity: 0.7;
+		}
+
 		p{
 			padding:0!important;
 			margin-top:0!important;
@@ -336,9 +365,7 @@
 			width:40px!important;
 		}
 
-}		body{
-			background:none !important;
-		}
+}		
 </style><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
@@ -362,7 +389,7 @@
 
 <div class="ui-sortable" id="sort_them">
 <!-- Wrapper 1 (Nav) -->
-<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff">
+<table class="full noise_bg" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff">
 	<tbody><tr mc:repeatable>
 		<td valign="top" width="100%">
 		<div mc:hideable>
@@ -460,7 +487,7 @@
 			</tbody></table><!-- End Space -->
 		
 			<!-- Start Video Image -->
-			<table style="border-radius: 6px; border-bottom-right-radius: 10px; 0px 1px 1px; -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); border: 1px solid #f1f1f1;" class="mobile" align="center" bgcolor="#f9f9f9" border="0" cellpadding="0" cellspacing="0" width="600">
+			<table style="border-radius: 6px; border-bottom-right-radius: 10px; 0px 1px 1px; -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); border: 1px solid #f1f1f1;" class="mobile mail_box" align="center" bgcolor="#f9f9f9" border="0" cellpadding="0" cellspacing="0" width="600">
 				<tbody><tr>
 					<td height="50" width="100%"></td>
 				</tr>
@@ -488,8 +515,11 @@
 								</td>
 							</tr>
 							<tr>
+								<td class = "small_spacer">									
+								</td>
+							<tr>
 								<td height="50" width="100%" style="font-size: 12px; color: rgb(119, 119, 119); text-align: left; font-family: 'proxima_nova_softregular',Helvetica,Arial,sans-serif; line-height: 24px; vertical-align: middle;"><p>Kind Regards</p>
-							    <p>Video Dash @ Surge Media</p>
+							    <p style = "color: #48bdd6; font-size: 16px; ">Video Dash @ Surge Media</p>
 							    <p>[mail_datandtime]</p></td>
 							</tr>
 						</tbody></table>
