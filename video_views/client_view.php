@@ -118,7 +118,7 @@ $video_lenght_result = $video_lenght.':000';
 					</ul>
 				</div>
 				<!-- <input type="text" id="searchbox" class="search wow bounceIn"> -->
-				<ul id="videos" >
+				<ul id="videos"  >
 					<li class="video_obj featured">
 						<h1 class="title">
 						<?=$projectname_row['project_name']?> - <span>Draft <?=$last_video_under_project_row["version_num"];?></span>
@@ -155,7 +155,7 @@ $video_lenght_result = $video_lenght.':000';
 					</li>
 				</form>
 				<li><h1>Previous Versions</h1></li>
-				<ul id="videos">
+				<ul id="videos" class = "container">
 					<?
 					$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
 					$video_num = mysql_num_rows($listvideos);
@@ -172,7 +172,7 @@ $video_lenght_result = $video_lenght.':000';
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					echo '
-					<li class="video_obj" onclick="expandCard($(this))">
+					<li class="video_obj five columns" onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
 						<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
 						<div class="video draft">
