@@ -1,0 +1,725 @@
+<style type="text/css">
+	@font-face {font-family: 'proxima_nova_softmedium';src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_medium-webfont.eot');src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_medium-webfont.eot?#iefix') format('embedded-opentype'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_medium-webfont.woff') format('woff'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_medium-webfont.ttf') format('truetype');font-weight: normal;font-style: normal;}
+	@font-face {font-family: 'proxima_nova_softregular';src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_regular-webfont.eot'); src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_regular-webfont.eot?#iefix') format('embedded-opentype'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_regular-webfont.woff') format('woff'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_regular-webfont.ttf') format('truetype');font-weight: normal;font-style: normal;}
+	@font-face {font-family: 'proxima_nova_softsemibold';src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_semibold-webfont.eot'); src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_semibold-webfont.eot?#iefix') format('embedded-opentype'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_semibold-webfont.woff') format('woff'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_semibold-webfont.ttf') format('truetype');font-weight: normal;font-style: normal;}
+	@font-face {font-family: 'proxima_nova_softbold';src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_bold-webfont.eot');src: url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_bold-webfont.eot?#iefix') format('embedded-opentype'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_bold-webfont.woff') format('woff'),url('http://rocketway.net/themebuilder/template/templates/pure/font/mark_simonson_-_proxima_nova_soft_bold-webfont.ttf') format('truetype');font-weight: normal;font-style: normal;}
+		div,p,a,li,td{
+			-webkit-text-size-adjust:none;
+		}
+		.ReadMsgBody{
+			width:100%;
+			background-color:#ffffff;
+		}
+		.mail_box
+		{
+			margin-bottom:7em;
+			padding-bottom:5em;
+
+		}
+
+		.small_spacer
+		{
+			width: 60%;
+			height: 1px;
+			 	background: -webkit-linear-gradient(left, red , #e0dd44); /* For Safari 5.1 to 6.0 */
+  				background: -o-linear-gradient(right, red, #e0dd44); /* For Opera 11.1 to 12.0 */
+  				background: -moz-linear-gradient(right, red, #e0dd44); /* For Firefox 3.6 to 15 */
+  				background: linear-gradient(to right, red , #e0dd44); /* Standard syntax */
+  				margin-bottom: 6em;
+		}
+
+		.ExternalClass{
+			width:100%;
+			background-color:#ffffff;
+		}
+		body{
+			width:100%;
+			height:100%;
+
+			margin:0;
+			padding:0;
+			-webkit-font-smoothing:antialiased;
+		}
+		html{
+			width:100%;
+			background-image: url("noise.png");
+			background-repeat: repeat;
+		}
+
+		.noise_bg
+		{
+
+			background-image: url("noise.png");
+			background-repeat: repeat;
+			opacity: 0.7;
+		}
+
+		p{
+			padding:0!important;
+			margin-top:0!important;
+			margin-right:0!important;
+			margin-bottom:0!important;
+			margin-left:0!important;
+		}
+		.hover:hover{
+			opacity:0.85;
+			filter:alpha(opacity=85);
+		}
+		.lwork{
+			border-radius:6px;
+		}
+		.jump{
+			border-radius:42px!important;
+		}
+		.jump:hover{
+			opacity:0.85;
+			filter:alpha(opacity=75);
+			padding-top:10px!important;
+		}
+		.headerScale img{
+			width:600px;
+			height:auto!important;
+		}
+		.icon img{
+			width:35px;
+			height:auto!important;
+		}
+		.image img{
+			width:185px;
+			height:auto!important;
+		}
+		.iconsImages img{
+			width:84px;
+			height:auto!important;
+		}
+		.screenLeft img{
+			width:139px;
+		}
+		.screenRight img{
+			width:139px;
+		}
+		.imageMobile img{
+			width:292px;
+		}
+		.vidScale img{
+			width:512px;
+		}
+	@media only screen and (max-width: 640px){
+		body{
+			width:auto!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=full]{
+			width:100%;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=mobile]{
+			width:100%;
+			padding-left:20px;
+			padding-right:20px;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=fullCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		td[class=fullCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		td[class=textCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=headerScale]{
+			width:100%!important;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.headerScale img{
+			width:100%!important;
+			height:auto;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=vidScale]{
+			width:100%!important;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.vidScale img{
+			width:100%!important;
+			height:auto;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.erase{
+			display:none;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=screenLeft]{
+			padding-right:6px;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=screenRight]{
+			padding-left:6px;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=w90]{
+			width:90%!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=icon]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		table[class=imageMobile]{
+			width:100%;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.imageMobile img{
+			width:292px!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.voucher1{
+			width:100%!important;
+			border-left:none!important;
+			text-align:center!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.fullOne{
+			background-color:#efefef;
+			height:1px!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.h25{
+			height:25px!important;
+		}
+
+}	@media only screen and (max-width: 640px){
+		.w40{
+			width:40px!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		body{
+			width:auto!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=full]{
+			width:100%;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=mobile]{
+			width:100%;
+			padding-left:20px;
+			padding-right:20px;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=fullCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		td[class=fullCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		td[class=textCenter]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=headerScale]{
+			width:100%!important;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.headerScale img{
+			width:100%!important;
+			height:auto;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=vidScale]{
+			width:100%!important;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.vidScale img{
+			width:100%!important;
+			height:auto;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.erase{
+			display:none;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=screenLeft]{
+			padding-right:6px;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=screenRight]{
+			padding-left:6px;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.font20{
+			font-size:20px!important;
+			line-height:30px!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=w90]{
+			width:90%!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=icon]{
+			width:100%;
+			text-align:center!important;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		table[class=imageMobile]{
+			width:100%;
+			clear:both;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.imageMobile img{
+			width:80%!important;
+			height:auto!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.voucher1{
+			width:100%!important;
+			border-left:none!important;
+			text-align:center!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.fullOne{
+			background-color:#efefef;
+			height:1px!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.h25{
+			height:25px!important;
+		}
+
+}	@media only screen and (max-width: 479px){
+		.w40{
+			width:40px!important;
+		}
+
+}		
+</style><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+<title>Pure</title>
+
+
+
+
+<!-- @media only screen and (max-width: 640px) 
+		   {*/
+		   -->
+
+<!--
+
+@media only screen and (max-width: 479px) 
+		   {
+		   -->
+
+
+<div class="ui-sortable" id="sort_them">
+<!-- Wrapper 1 (Nav) -->
+<table class="full noise_bg" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff">
+	<tbody><tr mc:repeatable>
+		<td valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Start Nav -->
+			<table class="mobile" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+				<tbody><tr>
+					<td height="20" width="100%"></td>
+				</tr>
+				<tr>
+					<td width="100%">
+						
+						<!-- Logo -->
+						<table class="fullCenter" align="center" border="0" cellpadding="0" cellspacing="0" width="240">
+							<tbody><tr>
+								<td style="text-align: center;" class="fullCenter" valign="middle" width="100%">
+									<a href="#" style="text-align: center;"><img cu-identify="element_06663183898326085" src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/b543bf70-9bea-444e-ba50-0185da8226d5.png" style="width: 100px; height: auto;" alt="" border="0" height="auto" width="100" mc:edit="m01"></a>
+								</td>
+							</tr>
+						</tbody></table>
+														
+					</td>
+				</tr>
+				<tr>
+					<td height="20" width="100%"></td>
+				</tr>
+			</tbody></table><!-- End Nav -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 1 -->
+
+<!-- Wrapper 2 (Header) --><!-- End Wrapper 2 -->
+
+<!-- Wrapper 2 (2 Buttons) -->
+<div style="display: none;" id="element_02262443307431622"></div><!-- End Wrapper 3 -->
+
+<!-- Wrapper 3 (Divider) -->
+<div style="display: none;" id="element_05722019961401773"></div><!-- End Wrapper 3 -->
+
+<!-- Wrapper 2 (3 Column Round Images) --><!-- Wrapper 2 -->
+
+<!-- Wrapper 3 (Divider) --><!-- End Wrapper 3 -->
+
+<!-- Wrapper 3 (2 Column - Image Left , Text Right) --><!-- Wrapper 4 -->
+
+<!-- Wrapper 3 (Divider) -->
+<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr mc:repeatable>
+		<td valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Divider --><!-- End Divider -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 3 -->
+
+<!-- Wrapper 2 (3 Column Round Images) -->
+<div style="display: none;" id="element_05109825289812464"></div><!-- Wrapper 2 -->
+
+<!-- Wrapper 2 (Long Image 1) -->
+<div style="display: none;" id="element_015368091132965722"></div><!-- End Wrapper 2 -->
+
+<!-- Wrapper 3 (2 Column - Image Left , Text Right) -->
+<div style="display: none;" id="element_010361659320063865"></div><!-- Wrapper 4 -->
+
+<!-- Wrapper 3 (Divider) -->
+<div style="display: none;" id="element_03853667374469181"></div><!-- End Wrapper 3 -->
+
+<!-- Wrapper 3 (2 Column - Image Left , Text Right) -->
+<div style="display: none;" id="element_09631252089624772"></div><!-- Wrapper 4 -->
+
+<!-- Wrapper 2 (Screenshots) --><!-- Wrapper 2 -->
+
+<!-- Wrapper 2 (Subscribe) -->
+<div style="display: none;" id="element_02269392842147665"></div><!-- End Wrapper 2 -->
+
+<!-- Wrapper 3 (2 Column - Image Left , Text Right) -->
+<div style="display: none;" id="element_09475719004470798"></div><!-- Wrapper 4 -->
+
+<!-- Wrapper 2 (Video Image) -->
+<table class="mobile" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr mc:repeatable>
+		<td valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Space -->
+			<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td height="25" width="100%"></td>
+				</tr>
+			</tbody></table><!-- End Space -->
+		
+			<!-- Start Video Image -->
+			<table style="border-radius: 6px; border-bottom-right-radius: 10px; 0px 1px 1px; -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.02); border: 1px solid #f1f1f1;" class="mobile mail_box" align="center" bgcolor="#f9f9f9" border="0" cellpadding="0" cellspacing="0" width="600">
+				<tbody><tr>
+					<td height="50" width="100%"></td>
+				</tr>
+				<tr>
+					<td width="100%">
+						
+						<!-- Video Image + Text -->
+						<table class="vidScale" align="center" border="0" cellpadding="0" cellspacing="0" width="512">
+							<tbody><tr>
+								<td style="text-align: center; color: rgb(51, 51, 51); font-family: 'proxima_nova_softregular',Myriad Pro,Helvetica,Arial,sans-serif; font-size: 21px; line-height: 26px;" class="fullCenter" valign="middle" width="100%" mc:edit="m49"><span>[mail_title]</span></td>
+							</tr>
+							<tr>
+								<td height="15" width="100%"></td>
+							</tr>
+							<tr>
+								<td height="10" width="100%"></td>
+							</tr>
+							<tr>
+								<td style="font-size: 14px; color: rgb(119, 119, 119); font-family: 'proxima_nova_softregular',Helvetica,Arial,sans-serif; line-height: 24px; vertical-align: top;" width="100%" mc:edit="m50">	
+									<span>[mail_content]</span>
+								</td>
+							</tr>
+							<tr>
+								<td height="35" width="100%">									
+								</td>
+							</tr>
+							<tr>
+								<td class = "small_spacer">									
+								</td>
+							<tr>
+								<td height="50" width="100%" style="font-size: 12px; color: rgb(119, 119, 119); text-align: left; font-family: 'proxima_nova_softregular',Helvetica,Arial,sans-serif; line-height: 24px; vertical-align: middle;"><p>Kind Regards</p>
+							    <p style = "color: #48bdd6; font-size: 16px; ">Video Dash @ Surge Media</p>
+							    <p>[mail_datandtime]</p></td>
+							</tr>
+						</tbody></table>
+														
+					</td>
+				</tr>
+			</tbody></table><!-- End Long Image -->
+			
+			<!-- Space --><!-- End Space -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 2 -->
+
+<!-- Wrapper 3 (Divider) -->
+<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr mc:repeatable>
+		<td valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Divider --><!-- End Divider -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 3 -->
+
+<!-- Wrapper 3 (Headline) -->
+<div style="display: none;" id="element_0028826471399427622"></div><!-- End Wrapper 3 -->
+
+<!-- Wrapper 2 (Pricing, 4 tables) -->
+<div style="display: none;" id="element_00895960723427135"></div><!-- Wrapper 2 -->
+
+<!-- Wrapper 2 (Pricing, 3 tables) -->
+<div style="display: none;" id="element_041093109594290356"></div><!-- Wrapper 2 -->
+
+<!-- Wrapper 2 (Pricing, 2 tables) -->
+<div style="display: none;" id="element_039527266153135576"></div><!-- Wrapper 2 -->
+
+<!-- Wrapper 3 (Divider) -->
+<div style="display: none;" id="element_08995536512736797"></div><!-- End Wrapper 3 -->
+
+
+<!-- Wrapper 2 (Voucher) -->
+<div style="display: none;" id="element_07601594338977102"></div><!-- End Wrapper 2 -->
+
+<!-- Wrapper 2 (Footer Logo) -->
+<table class="full" align="center" bgcolor="#f9f9f9" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr mc:repeatable>
+		<td bgcolor="#f9f9f9" valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Start Subscribe Wrapper --><!-- End Footer Logo + Text -->
+			
+			<!-- Divider -->
+			<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td style="font-size: 1px; line-height: 1px;" bgcolor="#ffffff" height="1" width="100%">									
+					</td>
+				</tr>
+			</tbody></table><!-- End Divider -->
+			
+			<!-- Start Social Icons -->
+			<table class="mobile" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+				<tbody><tr>
+					<td height="12" width="100%"></td>
+				</tr>
+				<tr>
+					<td width="100%">
+					
+						<!-- Space -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full" align="left" border="0" cellpadding="0" cellspacing="0" width="135">
+							<tbody><tr>
+								<td style="font-size: 1px; line-height: 1px;" height="1" width="100%">									
+								</td>
+							</tr>
+						</tbody></table><!-- End Space -->
+						
+						<!-- Social Icons Left -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="icon" align="left" border="0" cellpadding="0" cellspacing="0" width="174">
+							<tbody><tr>
+								<td style="text-align: center;" width="100%">
+									<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="174">
+										<tbody><tr>
+											<td class="w40" width="15"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/05c54273-9b19-48be-8620-e11c576c3668.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m121"></td>
+											<td class="erase" width="15"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/816e13ac-ab20-4428-b212-4a0a03d898b7.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m122"></td>
+											<td class="erase" width="15"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/d19d8123-2c56-4c95-9805-689ee038fdf8.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m123"></td>
+											<td class="w40" width="8"></td>
+										</tr>
+									</tbody></table>
+								</td>
+							</tr>
+						</tbody></table>
+						
+						<!-- Space -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full" align="left" border="0" cellpadding="0" cellspacing="0" width="1">
+							<tbody><tr>
+								<td height="10" width="100%">									
+								</td>
+							</tr>
+						</tbody></table><!-- End Space -->
+						
+						<!-- Social Icons Right -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="icon" align="left" border="0" cellpadding="0" cellspacing="0" width="174">
+							<tbody><tr>
+								<td style="text-align: center;" width="100%">
+									<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="174">
+										<tbody><tr>
+											<td class="w40" width="7"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/6b38b358-0f94-4e1a-9017-d77848827b25.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m124"></td>
+											<td class="erase" width="15"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/68aacb56-7de3-4593-a5d8-892af8fc9775.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m125"></td>
+											<td class="erase" width="15"></td>
+											<td style="text-align: center;" width="35"><img src="http://gallery.mailchimp.com/94a0270b3d0249306c5f9882b/images/e5d468b3-1b3c-45ad-9bbf-b52bf30bf3e1.png" alt="" class="hover" style="width: 35px; height: auto;" border="0" height="auto" width="35" mc:edit="m126"></td>
+											<td class="w40" width="15"></td>
+										</tr>
+									</tbody></table>
+								</td>
+							</tr>
+						</tbody></table>
+						
+						<!-- Space -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full" align="right" border="0" cellpadding="0" cellspacing="0" width="100">
+							<tbody><tr>
+								<td height="1" width="100%">									
+								</td>
+							</tr>
+						</tbody></table><!-- End Space -->
+														
+					</td>
+				</tr>
+			</tbody></table><!-- End Social Icons -->
+			
+			<!-- Space -->
+			<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td height="12" width="100%">									
+					</td>
+				</tr>
+			</tbody></table><!-- End Space -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 2 -->
+
+<!-- Wrapper 2 (Footer) -->
+<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr mc:repeatable>
+		<td valign="top" width="100%">
+		<div mc:hideable>
+		
+			<!-- Start Footer Wrapper -->
+			<table class="mobile" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+				<tbody><tr>
+					<td height="30" width="100%"></td>
+				</tr>
+				<tr>
+					<td width="100%">
+						
+						<!-- Copyright -->
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" align="left" border="0" cellpadding="0" cellspacing="0" width="250">
+							<tbody><tr>
+								<td style="font-size: 12px; color: rgb(119, 119, 119); text-align: left; font-family: 'proxima_nova_softregular',Helvetica,Arial,sans-serif; line-height: 24px; vertical-align: middle;" class="textCenter" height="60" width="100%" mc:edit="m127">	
+									<span cu-identify="element_08260713930829499">Copyright © 2014 Surge Media<br></span>
+								</td>
+							</tr>
+						</tbody></table>
+						
+						<!-- Nav --> 
+						<table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; text-align: right;" class="fullCenter" align="right" border="0" cellpadding="0" cellspacing="0" width="340">	
+							<tbody><tr>
+								<td width="33%" height="60" valign="middle" style="font-size: 12px; color: #da5453; text-align: center; font-family: 'proxima_nova_softregular', Helvetica, Arial, sans-serif; line-height: 24px; vertical-align: middle;" mc:edit="m130">
+									<a cu-identify="element_06127143533284669" href="mailto:info@surgemedia.com.au" style="text-decoration: none; color: rgb(156, 220, 237);">info@surgemedia.com.au</a>
+								</td>
+							</tr>
+						</tbody></table>
+														
+					</td>
+				</tr>
+			</tbody></table><!-- End Footer -->
+			
+			<!-- Divider -->
+			<table class="full" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td height="30" width="100%">									
+					</td>
+				</tr>
+				<tr>
+					<td height="1" width="100%">									
+					</td>
+				</tr>
+			</tbody></table><!-- End Divider -->
+		
+		</div>	
+		</td>
+	</tr>
+</tbody></table><!-- End Wrapper 2 -->
+</div>	

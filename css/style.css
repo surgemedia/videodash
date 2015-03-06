@@ -22,31 +22,28 @@ input { border: 1px solid #efefef; background-color: #fff; }
 h1 { font-size: 3em; margin: 0px; }
 h2 { font-size: 2em; }
 h3 { font-size: 3em; }
-textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; max-width: 100%; }
+textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; max-width: 100%; border-radius:4px;}
 .clearfix { float: none; }
-.btn { padding: 10px 15px; border-radius: 0.3em; line-height: 2em; border-bottom: 4px solid; cursor: pointer; display: inline-block;  margin: 4px 0;}
+.btn { padding: 10px 15px; line-height: 2em; border-radius: 6px; cursor: pointer; display: inline-block;  margin: 2px 0;}
 .btn span { margin: 0px 20px 0px 0px; }
 .btn i { }
 .float-left { float: left; }
-.btn.green { background-color: #27ae60; border-color: #219552; color: #fff; text-shadow: 0px 2px 0px #219552; display: inline-block;}
+.btn.green { background-color: #2ECC71; color: #fff; display: inline-block;}
 .btn.green:hover,
 .btn.green:active,
 .btn.green:focus { background-color: #32C570;}
 
-.btn.yellow { background-color: #f2ce41; border-color: #efc319; color: #FFF; text-shadow: 0px 2px 0px #efc319; box-shadow: inner }
+.btn.yellow { background-color: #E6DE3E; color: #FFF;  }
 .btn.yellow:hover,
 .btn.yellow:active,
-.btn.yellow:focus { border-top: 3px solid #f2ce41; border-bottom: 0px; border-color: #efc319; }
+.btn.yellow:focus { }
 
-.btn.red { background-color: #a52734; border-color: #8c212e; color: #fff; text-shadow: 0px 2px 0px #8c212e;  box-shadow: inner}
+.btn.red { background-color: #8c212e;  color: #fff; }
 .btn.red:hover,
 .btn.red:active,
-.btn.red:focus { border-top: 3px solid #a52734; border-bottom: 0px; border-color: #a52734; }
+.btn.red:focus { }
 
-.btn.blue { background-color: #17A3C4; border-color: #10839E; color: #fff; text-shadow: 0px 2px 0px #10839E; }
-.btn.blue:hover,
-.btn.blue:active,
-.btn.blue:focus { border-top: 3px solid #17A3C4; }
+.btn.blue { background-color: #48bdd6;  color: #fff;}
 .btn.three {
     font-size: 0.9em;
 }
@@ -70,8 +67,13 @@ main { float: left; width: 100%; }
 .grey_container { border-radius: 0.4em; padding: 1em; background-color: #efefef; }
 li.section { float: left; width: 100%; padding: 0 0.5em 0 0; }
 li.section input { float: left; width: auto; border: 1px solid #d1d1d1; }
-li.section.contact input { float: left; width: 100%; clear: both; margin: 0.5em 0; padding: 1em;}
+li.section.contact input { float: left; width: 50%; clear: both; margin: 0.5em 0; padding: 1em;}
 li.section textarea { width: 90%; }
+.contact_info
+{
+float: left;
+
+}
 /* ======================================
 =            Header and Nav            =
 ====================================== */
@@ -141,7 +143,7 @@ section.center ul.list .client.bombed .title { text-decoration: line-through; }
 /* ==========  Preproduction  ========== */
 
 div#preproduction h2 { margin: 0 0 0.5em 0; color: #474747;}
-div#preproduction ul { float: left; width: 100%; margin: 0; padding: 0; }
+div#preproduction ul { float: left; width: 100%; margin-bottom: 3em; padding-bottom: 2em; }
 ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height: 600px; }
 #preproduction { width: 100%; float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #E7F1F3; margin: 0em 0 1em 0 !important;}
 #preproduction p {
@@ -163,6 +165,7 @@ ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height
 div#preproduction .btn {
     float: left;
     margin: 1em 0;
+    width: 50%;
 }
 /* ==========  Normal Video Draft  ========== */
 ul#videos { position: relative;}
@@ -233,19 +236,19 @@ ul#videos li.video_obj.featured:hover {
     top: 0em;
 }
 /* ==========  Featured Video Post  ========== */
-#preproduction, ul#videos li.featured { display: inline-block; width: 100%; padding: 0px;}
-ul#videos li.featured .video { float: left; border: 0px solid #17A3C4; }
+#preproduction, ul#videos li.featured { display: inline-block; width: 100%; padding: 10px;}
+ul#videos li.featured .video { float: left; border: 0px solid #17A3C4; width: 80%;}
 ul#videos li.featured h1 { float: left; width: 100%; clear: both; margin: 0; padding: 0 0 0.5em 0; font-size: 2em; color: #15A9CA; text-transform: uppercase; font-weight: bold;}
 ul#videos li.featured .actions { float: left; margin: 0 0em 0 0.5em; }
 ul#videos li.featured .actions.popup { }
-ul#videos li.featured .actions ul { width: 95%; float: right; }
+ul#videos li.featured .actions ul { width: 95%; float: right; text-align:center;}
 ul#videos li.featured .video iframe { float: left; width: 100%; height: auto; min-height: 374px; }
 span.timeline_picker { float: left; width: 38%; border-radius: 0.3em; padding: 0.5em; background: #fff; margin: 0 0.5em 0 0; overflow: hidden; border: 1px solid #d1d1d1; }
 span.timeline_picker input { border: 0; margin: 0; float: left; width: 54%; padding: 0.2em 0em; font-size: 1em; color: #17A3C4; }
 span.timeline_picker label { float: left; clear: none; padding: 0em 0.3em 0em 0em; line-height: 1.5em; }
 ul#videos li.featured label.title { float: left; font-weight: bold; width: 100%; color:#000;}
-ul#videos li.featured #changes_required li textarea { height: 4em; padding: 1em; margin: 0 0 5px; }
-ul#videos li.featured .actions.popup textarea { width: 97%; }
+ul#videos li.featured #changes_required li textarea { padding: 1em; margin: 0 0 5px; padding-right:5em;}
+ul#videos li.featured .actions.popup textarea { width: 97%; height: 10%;}
 ul#videos li.featured .actions textarea { float: left; width: 92%; height: 17.5em; margin: 0.5em 0 0.5em 0; padding: 1em;}
 ul#videos li.featured .actions .textarea_rows5 { height: 6em !important;}
 ul#videos li.featured .actions ul { float: left; width: 100%; }
@@ -256,7 +259,7 @@ ul#videos li.featured #changes_required textarea { margin: 0.5em 0 0.5em 0; padd
 ul#videos li.featured #changes_required.popup { display: inline-block; width: 100%;}
 ul#videos li.featured #changes_required ul { margin: 0.5em; float: left; overflow-y: hidden; }
 ul#videos li.featured #changes_required .btn { }
-ul#videos li.featured #changes_required .submit-actions { float: left;}
+ul#videos li.featured #changes_required .submit-actions { float: left; padding-left:2em;}
 h4 {
     color: #305B71;
 }
@@ -283,8 +286,9 @@ ul#time-comments li textarea {
 }
 
 ul#time-comments li select, ul#time-comment_first li select {
-    height: 4.1em;
+    height: 2.1em;
     display: inline-block;
+    width: 15%;
 }
 ul#videos li.featured #time-comments li textarea {
     height: 10em;
