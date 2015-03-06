@@ -52,7 +52,7 @@ $video_lenght_result = $video_lenght.':000';
 					<input value="1" name="add_comments" type="hidden">
 					<ul>
 						<li class="section contact">
-							<span>Contact Info</span>
+							<span class= "contact_info">Contact Info</span>
 							<input placeholder="Project Name" value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 							<input placeholder="Name" name="contact_info1" value="<?=$last_video_a_request_row['contact_info1'];?>">
 							<input placeholder="Email" name="contact_info2" value="<?=$last_video_a_request_row['contact_info2'];?>">
@@ -145,7 +145,7 @@ $video_lenght_result = $video_lenght.':000';
 							</li>
 							</ul>
 							<ul id="time-comments">
-								<script>NewTimelineComment();</script>
+								<script>N4ewTimelineComment();</script>
 							</ul>
 							<div class="submit-actions eight columns">
 							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add Another Time</span> <i class="fa fa-clock-o"></i></a>
