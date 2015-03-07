@@ -6,9 +6,22 @@ $_SESSION['email'] = "";
 <html>
 <? include('inc/head.php');?>
 <? include('dbconnection_3evchey.php'); ?>
-<? include('Login_index_asw12d41527.php');// security file name.?> 
+<? include('Login_index_asw12d41527.php');// security file name.?>
+<link rel="stylesheet" type="text/css" href="css/bigvideo.css">
+<link rel="stylesheet" type="text/css" href="css/video-js.css"> 
+<script src="/js/video.js"></script>
+<script src="/js/bigvideo.js"></script>
 <body class="">
 <main>
+<script>
+$(function() {
+    var BV = new $.BigVideo();
+    BV.init();
+    BV.show('video/water.webm',{ambient:true});
+});
+</script>
+
+
 	<div class="logindiv">
     	<div class="logobox_loginpage wow bounceIn">
         	<h1>Video Dash</h1>

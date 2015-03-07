@@ -50,8 +50,8 @@ $video_lenght_result = $video_lenght.':000';
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 					<input value="1" name="add_comments" type="hidden">
-					<ul>
-						<li class="section contact">
+					<ul class="container">
+						<li class="section contact eight columns omega">
 							<span class= "contact_info">Contact Info</span>
 							<input placeholder="Project Name" value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 							<input placeholder="Name" name="contact_info1" value="<?=$last_video_a_request_row['contact_info1'];?>">
@@ -59,7 +59,7 @@ $video_lenght_result = $video_lenght.':000';
 							<input placeholder="Phone" name="contact_info3" value="<?=$last_video_a_request_row['contact_info3'];?>">
 							<input placeholder="???" name="contact_info4" value="<?=$last_video_a_request_row['contact_info4'];?>">
 						</li>
-						<li class="section">
+						<li class="section eight columns alpha">
 						<p>
 							At Surge Media we like to make your video project experience as smooth as possible. but giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track the changes. 
  </p>
