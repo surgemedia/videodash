@@ -77,6 +77,6 @@ function NewTimelineComment(){
   selectoption += '<option>Other</option>';
   selectoption += '<select>';
   var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5" class="fourteen columns"></textarea>';
-  output = li_open+'<span class="timeline_picker four columns"><label for="start">Start</label>'+start+'</span><span class="timeline_picker end four columns"><label for="start">End</label>'+end+'</span>'+selectoption+textarea+'</li>';
+  output = li_open+'<div class="controls"><span class="timeline_picker "><label for="start">Start</label>'+start+'</span><span class="timeline_picker end "><label for="start">End</label>'+end+'</span>'+selectoption+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }

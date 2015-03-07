@@ -19,10 +19,10 @@ ul, li { list-style: none; padding: 0px; margin: 0px; }
 a { color: inherit; text-decoration: none; }
 div { display: block;}
 input { border: 1px solid #efefef; background-color: #fff; }
-h1 { font-size: 3em; margin: 0px; }
+h1 { font-size: 3em; margin: 0px; color: rgb(72, 189, 214);}
 h2 { font-size: 2em; }
 h3 { font-size: 3em; }
-textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; max-width: 100%; border-radius:4px;}
+textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; max-width: 97%; border-radius: 0px; background: #fff; padding: 1em;}
 .clearfix { float: none; }
 .btn { padding: 10px 15px; line-height: 2em; border-radius: 6px; cursor: pointer; display: inline-block;  margin: 2px 0;}
 .btn span { margin: 0px 20px 0px 0px; }
@@ -51,7 +51,7 @@ textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; m
     display: inline-block;
     padding: 1em;
     background: #27AE60;
-    width: 95%;
+    width: 97%;
     border-radius: 0.2em;
     margin: 1em 0;
     color: #FCFCFC;
@@ -67,7 +67,7 @@ main { float: left; width: 100%; }
 .grey_container { border-radius: 0.4em; padding: 1em; background-color: #efefef; }
 li.section { float: left; width: 100%; padding: 0 0.5em 0 0; }
 li.section input { float: left; width: auto; border: 1px solid #d1d1d1; }
-li.section.contact input { float: left; width: 50%; clear: both; margin: 0.5em 0; padding: 1em;}
+li.section.contact input { float: left; width: 89%; clear: both; margin: 0.5em 0; padding: 1em 0em 1em 1em;}
 li.section textarea { width: 90%; }
 .contact_info
 {
@@ -142,10 +142,10 @@ section.center ul.list .client.bombed .title { text-decoration: line-through; }
 ======================================= */
 /* ==========  Preproduction  ========== */
 
-div#preproduction h2 { margin: 0 0 0.5em 0; color: #474747;}
+div#preproduction h2 { margin: 1em 0.5em; color: inherit; font-size: 1.5em;}
 div#preproduction ul { float: left; width: 100%; margin-bottom: 3em; padding-bottom: 2em; }
-ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height: 600px; }
-#preproduction { width: 100%; float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #E7F1F3; margin: 0em 0 1em 0 !important;}
+ul#videos { float: left; width: 100%; clear: both; margin: 10em 0 2em 0; min-height: 600px; }
+#preproduction { width: 100%; float: left; border-radius: 0.4em; padding: 1em 1em; background-color: #E7F1F3;}
 #preproduction p {
     color: #305B71;
     font-size: 0.9em;
@@ -165,7 +165,6 @@ ul#videos { float: left; width: 100%; clear: both; margin: 0 0 2em 0; min-height
 div#preproduction .btn {
     float: left;
     margin: 1em 0;
-    width: 50%;
 }
 /* ==========  Normal Video Draft  ========== */
 ul#videos { position: relative;}
@@ -236,14 +235,14 @@ ul#videos li.video_obj.featured:hover {
     top: 0em;
 }
 /* ==========  Featured Video Post  ========== */
-#preproduction, ul#videos li.featured { display: inline-block; width: 100%; padding: 10px;}
+#preproduction, ul#videos li.featured { display: inline-block; width: 100%; padding: 10px; color: #305B71; margin: 2em 0 3em 0;}
 ul#videos li.featured .video { float: left; border: 0px solid #17A3C4; width: 80%;}
 ul#videos li.featured h1 { float: left; width: 100%; clear: both; margin: 0; padding: 0 0 0.5em 0; font-size: 2em; color: #15A9CA; text-transform: uppercase; font-weight: bold;}
 ul#videos li.featured .actions { float: left; margin: 0 0em 0 0.5em; }
 ul#videos li.featured .actions.popup { }
 ul#videos li.featured .actions ul { width: 95%; float: right; text-align:center;}
 ul#videos li.featured .video iframe { float: left; width: 100%; height: auto; min-height: 374px; }
-span.timeline_picker { float: left; width: 38%; border-radius: 0.3em; padding: 0.5em; background: #fff; margin: 0 0.5em 0 0; overflow: hidden; border: 1px solid #d1d1d1; }
+span.timeline_picker { float: left; width: 42%; border-radius: 0.3em; padding: 0.5em; background: #fff; margin: 0 0.5em 0 0; overflow: hidden; border: 1px solid #d1d1d1; }
 span.timeline_picker input { border: 0; margin: 0; float: left; width: 54%; padding: 0.2em 0em; font-size: 1em; color: #17A3C4; }
 span.timeline_picker label { float: left; clear: none; padding: 0em 0.3em 0em 0em; line-height: 1.5em; }
 ul#videos li.featured label.title { float: left; font-weight: bold; width: 100%; color:#000;}
@@ -288,7 +287,9 @@ ul#time-comments li textarea {
 ul#time-comments li select, ul#time-comment_first li select {
     height: 2.1em;
     display: inline-block;
-    width: 15%;
+    width: 98%;
+    margin: 1em 0;
+    text-transform: capitalize;
 }
 ul#videos li.featured #time-comments li textarea {
     height: 10em;
@@ -483,7 +484,11 @@ div#surgebar { background-color: #17A3C4; border-bottom: 2px solid; border-color
 
 #project_message{
     height: 295px;
-    margin: 5px 0;
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 0px;
+    background: #fff;
+    width: 97%;
 }
 .video iframe{
     width: 100%;
@@ -491,7 +496,69 @@ div#surgebar { background-color: #17A3C4; border-bottom: 2px solid; border-color
 }
 .small_title{
     display: block;
+    clear: both;
+    float: left;
+    margin: 0.5em 0;
 }
 .label_stop_float{
     display: block; clear: both;
+}
+
+/*===================================
+=            Alexs Fixes            =
+===================================*/
+li.video_obj.featured .title {
+    display: block;
+    clear: both;
+    font-size: 1.8em;
+    line-height: 2em;
+}
+div#action_box ul {
+    float: left;
+    display: block;
+}
+
+div#action_box ul li {
+    display: inline-block;
+    margin: auto;
+}
+
+.video.sixteen.columns iframe    {
+    height: 606px;
+}
+
+ label.title {
+    clear: both;
+    display: inline-block;
+    float: left;
+    width: 97%;
+    margin: 0.5em;
+    font-family: inherit;
+}
+ul#time-comments li .controls {
+    float: left;
+    width: 30%;
+    margin: 0em 1em 0em 0em;
+}
+
+ul#time-comments li textarea {
+    float: none;
+    width: 63%;
+    display: inline-block;
+}
+
+span.timeline_picker.end {
+    margin: 0px;
+}
+
+ul#time-comments {
+    margin: 1em 0;
+}
+
+ul#time-comments li {
+    margin: 1em 0;
+}
+
+.submit-actions {
+    float: right !important;
 }

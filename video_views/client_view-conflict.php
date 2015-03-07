@@ -264,15 +264,15 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+							<textarea name="general_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 							</li>
 							<ul id="time-comments">
 								
 							</ul>
 							<div class="submit-actions sixteen columns">
-							<script> NewTimeLineComment() </script>
-							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
-							<a class="btn green columns five" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
+							<script> //NewTimeLineComment() </script>
+							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
+							<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
 							</div>
 						</div>
 					</li>
