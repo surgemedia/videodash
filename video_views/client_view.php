@@ -201,7 +201,7 @@ if($mail_message!=""){
         <input value="yes" name="make_video_version_to_final" type="hidden">
 </form>
 <?php if($last_video_under_project_row['version']!="Final"){
-		$downloadfilelink = '<li><a href="#" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
+		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
 		$downloadfile_message = '';
 		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
 		if($list_day_counter>0){
@@ -213,7 +213,7 @@ if($mail_message!=""){
 	  }else{
 	  	$overdeadline_message = '';
 	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink = '<li><a href="#" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
 	  	}else{
 	  		$downloadfilelink = '<li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
 	  	}
@@ -237,7 +237,7 @@ if($mail_message!=""){
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
 						<?php echo $overdeadline_message;?>
-						<div class="video sixteen columns">
+						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->

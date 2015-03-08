@@ -21,19 +21,22 @@ $(function() {
 });
 </script>
 
-
-	<div class="logindiv">
-    	<div class="logobox_loginpage wow bounceIn">
-        	<h1>Video Dash</h1>
-        	<div id="credit"><small ><a href="https://www.surgemedia.com.au" target="_blank">by Surge Media</a><i class="surgelogo"></i></small> </div>
+    <div class="wow fadeInDown">
+	<div class="logindiv container">
+    	<div class="logobox_loginpage ">
+        	<h1>Surge Media</h1>
+            <h2>Video Dash</h2>
+        	<div id="credit"><small ><a href="https://www.surgemedia.com.au" target="_blank">by Surge Media</a><i class="surgelogo"></i></small></div>
         </div>
-        <div class="loginbox wow flipInX">
+        <div class="loginbox ">
         <form action="c_projects_view.php" method="get">
         	<label>User Name(Email):</label>
         	<input name="email" class="textfield">
-            <input type="submit" value="LOGIN" class="button btn blue"></div>
-        </form>
+            <input type="submit" value="Login" class="button btn blue">
         </div>
+        </form>
+    </div>
+    </div>
     </div>
 </main>
 </body>

@@ -10,7 +10,7 @@ $(document).ready(function($) {
 
 $('#required_button').click(function() {
   $('#videos div.actions').addClass('popup');
-  $('#videos #changes_required').addClass('popup');
+  $('#changes_required').addClass('popup');
 });
 
 

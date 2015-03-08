@@ -60,7 +60,7 @@
                      <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a>
                     
                
-                <ul id="videos" >
+                <ul  >
                     <li id="add_new_video" class="video_obj featured">
                     	<form action="add_video.php" method="post" id="add_video">
                         <h1 id="client_name_editable" class="title">
@@ -70,23 +70,23 @@
                         <!-- <input type="text" value="Upload new video version"> -->
                         <!-- <i class="fa fa-edit"></i> -->
                         </h1>
-                        <div class="section eight columns">
+                        <div class="section sixteen columns omega alpha">
                             <? $video_display_code = 'KAYfuAROKV8';
 								if($check_video_Lastupdate_row['video_link']!=""){
 									$video_display_code = cleanYoutubeLink($check_video_Lastupdate_row['video_link']);
 								}
 							?>
                         <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code.$check_video_Lastupdate_row['video_link'];?>" class="video_link">
-                        <div class="video">
+                        <div class="video sixteen columns omega alpha">
                             <!-- VIMEO EMBED -->
-                            <iframe width="560" height="315" src="//www.youtube.com/embed/<?=$video_display_code;?>" frameborder="0" allowfullscreen></iframe>
+                            <iframe  src="//www.youtube.com/embed/<?=$video_display_code;?>" frameborder="0" allowfullscreen></iframe>
                             <!-- VIMEO EMBED -->
 <!--                        <script>
                         get_video('#video_input','#video_iframe');
                         </script>-->
                         </div>
                         </div>
-                        <div class="actions eight columns">
+                        <div class="actions sixteen columns omega alpha">
                         <div id="draft_version" class="draft_check"><input type="checkbox" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Draft Verison</span></div>
                         <div id="draft_version2" class="draft_check"><input type="checkbox" name="version" value="Draft2" <? if($check_video_Lastupdate_row['version']=="Draft2"){ echo "checked";}?> ><span>Draft 2 Verison</span></div>
                         <div id="final_version" class="draft_check"><input type="checkbox" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Final Verison</span></div>
@@ -139,10 +139,10 @@
 
 
                 </ul>
-            </section>
-                <section id="search" class="center container">
-                    <li><h1>Previous Versions</h1></li>
+        
+                   
                     <ul id="videos">
+                    <li><h1>Previous Versions</h1></li>
                     <?
 						$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
 						$video_num = mysql_num_rows($listvideos);
@@ -185,21 +185,7 @@
                     </ul>
                 </section>
             </main>
-            <footer>
-                <div class="logo"><img src="" alt=""></div>
-                <nav>
-                    <ul class="nav">
-                        <li>
-                            <a href="#"></a>
-                            <a href="#"></a>
-                            <a href="#"></a>
-                            <a href="#"></a>
-                            <a href="#"></a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </footer>
+            <? include('../footer.php');?>
             <div id="overlay_wrapper" onclick="closeAllCards()"></div>
         </body>
     </html>
