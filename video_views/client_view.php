@@ -215,7 +215,7 @@ if($mail_message!=""){
 	  	if($projectname_row['download_file']!=""){
 	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
 	  	}else{
-	  		$downloadfilelink = '<li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '<li><a class="message yellow" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
 	  	}
 	  	if($projectname_row['download_file']!=""){
 	  		$downloadfile_message = '<label class="message" for="">Congratulations your video is now ready for downlaod now.</label>';
