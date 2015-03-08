@@ -166,8 +166,8 @@ $addcommenttimes .= '</ul>';
 							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-						<div id='action_box' class="actions eight columns">
-                         <?php echo $downloadfile_message; ?>
+<!-- 						<div id='action_box' class="actions eight columns">
+                         <?php //echo $downloadfile_message; ?>
 							<textarea disabled="true" name="" id="" cols="30" rows="5">Versions included:
 1 x MP4  - 1280 x 720 - h264 - suitable for youtube
 1 x MP4  - 640 x480 h264 idea for uploading to your website.
@@ -179,7 +179,7 @@ Please contact our video production team if you request a different formats DVD'
 Extended storate
 Your Data will be stored for 6 months. Please contact if your request any copy.
                             </textarea>
-						</div>
+						</div> -->
 						<div class="comment_check">
 						<label class="title" for="">Your Notes</label>
 						<ul id="comments-general" class="container">
