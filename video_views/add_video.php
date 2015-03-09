@@ -9,14 +9,15 @@
 		header("location: home_video.php");	
 	}
 	$message = "Add New Video";
+
 	if($_POST['Add_videos']==1 && $_POST['project_id']!=""){//test data whether empty
 		$check_total_version = mysql_query("SELECT * FROM video_under_project WHERE video_project_id =".$_POST['project_id']);
 		$check_total_version_num = mysql_num_rows($check_total_version);
-		echo $check_total_version_num;
+		//echo $check_total_version_num;
 		$videoversion_num = $check_total_version_num+1;
-		$query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.")");
+		$query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.", NULL)");
 		if(!$query){
-			$message = "Cannot Save this Video to Project.";
+			echo  "Cannot Save this Video to Project.";
 			exit;	
 		}else{
 			$message = "Success to insert data to database.";
@@ -29,13 +30,37 @@
 			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>
 			<p>Kind Regards</p>
 			<p>Video Dash @ Surge Media</p>
-			';			
+			';
+            $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
+            //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
+            $checksamelinkrow = mysql_fetch_array($checksamelink);
+            //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
+            if($_POST['downloadlink']!=""){
+                if($_POST['downloadlink']!=$checksamelinkrow['download_file']){
+                    //echo "UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id'];
+                    mysql_query("UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id']);
+                    $mailsubject = 'You file was ready to download.';
+
+                    $mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
+                    <p>Your Video was ready, Please click below link to Download:<br/>
+                    <a href="'.$_POST['downloadlink'].'">'.$_POST['downloadlink'].'</a> to take a look and make comments.</p>
+                    <p>Kind Regards</p>
+                    <p>Video Dash @ Surge Media</p>
+                    ';
+                }
+            }			
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
 			
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 			
-			mail($mailto, $mailsubject, $mailmessage, $headers);										
+            $mail_data = file_get_contents('../email_template/video_download.html');
+            $mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+            $mail_data = str_replace("[mail_content]",  $mailmessage, $mail_data);
+            $the_data_is = date("d M Y");
+            $mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+
+			mail($mailto, $mailsubject, $mail_data, $headers);										
 
 		}
 	}
@@ -71,15 +96,16 @@
                         <!-- <i class="fa fa-edit"></i> -->
                         </h1>
                         <div class="section sixteen columns omega alpha">
-                            <? $video_display_code = 'KAYfuAROKV8';
+                            <? $video_display_code = '//www.youtube.com/embed/KAYfuAROKV8';
 								if($check_video_Lastupdate_row['video_link']!=""){
-									$video_display_code = cleanYoutubeLink($check_video_Lastupdate_row['video_link']);
+									$video_display_code = '//www.youtube.com/embed/'.cleanYoutubeLink($check_video_Lastupdate_row['video_link']);
+                                    $showvideovalue = 'value="http://www.youtube.com/?v='.cleanYoutubeLink($check_video_Lastupdate_row['video_link']).'"';
 								}
 							?>
-                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code.$check_video_Lastupdate_row['video_link'];?>" class="video_link">
+                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link" <?php echo $showvideovalue; ?> >
                         <div class="video sixteen columns omega alpha">
                             <!-- VIMEO EMBED -->
-                            <iframe  src="//www.youtube.com/embed/<?=$video_display_code;?>" frameborder="0" allowfullscreen></iframe>
+                            <iframe  src="<?php echo $video_display_code;?>" frameborder="0" allowfullscreen></iframe>
                             <!-- VIMEO EMBED -->
 <!--                        <script>
                         get_video('#video_input','#video_iframe');
@@ -87,9 +113,11 @@
                         </div>
                         </div>
                         <div class="actions sixteen columns omega alpha">
-                        <div id="draft_version" class="draft_check"><input type="checkbox" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Draft Verison</span></div>
-                        <div id="draft_version2" class="draft_check"><input type="checkbox" name="version" value="Draft2" <? if($check_video_Lastupdate_row['version']=="Draft2"){ echo "checked";}?> ><span>Draft 2 Verison</span></div>
-                        <div id="final_version" class="draft_check"><input type="checkbox" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Final Verison</span></div>
+                        <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Draft Verison</span></div>
+                        <div id="draft_version2" class="draft_check"><input type="radio" name="version" value="Draft2" <? if($check_video_Lastupdate_row['version']=="Draft2"){ echo "checked";}?> ><span>Draft 2 Verison</span></div>
+                        <div id="final_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']=="Draft"){ echo "checked";}?> ><span>Final Verison</span></div>
+                            <label class="title" for="">Download Video Link</label>
+                            <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link">
                             <label class="title" for="">Director's Notes</label>
                             <textarea name="notes" id="" cols="30" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>"></textarea>
                             <ul>
