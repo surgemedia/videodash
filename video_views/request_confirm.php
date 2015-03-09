@@ -94,29 +94,40 @@ for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
 }
 for($j=0; $j<$forloopcount; $j++){
 	if($j==0){
-		$addcommenttimes .= '<ul id="time-comment_first"><li><input value="'.$forloopcount.'" name="old_loop_time" type="hidden"/></li>';	
+		$addcommenttimes .= '<ul id="time-comment_first">
+		<li>
+		<input value="'.$forloopcount.'" name="old_loop_time" type="hidden"/>
+		</li>';	
+	}
+	$select_type1 = '';
+	$select_type2 = '';
+	$select_type3 = '';
+	if($feedback_type[$j]=='1'){
+		$select_type1 = 'selected="selected"';
+	}
+	if($feedback_type[$j]=='2'){
+		$select_type2 = 'selected="selected"';
+	}
+	if($feedback_type[$j]=='3'){
+		$select_type3 = 'selected="selected"';
 	}
 	$addcommenttimes .= '
-		<li>
-		<span class="timeline_picker four columns">
-		<label for="start">Start</label>
-		<input value="'.$feedback_strat[$j].'" name="addtimestart'.$j.'">
-		</span>
-		<span class="timeline_picker end four columns">
-		<label for="start">End</label>
-		<input value="'.$feedback_end[$j].'" name="addtimeend'.$j.'">
-		</span>
-		<select name="addcommentoption'.$j.'"  class="five columns">
-			<option';
-	if($feedback_type[$j]=='Visual Comment'){ echo 'selected';}
-	$addcommenttimes .= '>Visual Comment</option>
-			<option ';
-	if($feedback_type[$j]=='Audio Comment'){ echo 'selected';}
-	$addcommenttimes .= '>Audio Comment</option>
-			<option';
-	if($feedback_type[$j]=='Other Comment'){ echo 'selected';}
-	$addcommenttimes .= '>Other Comment</option>
-		</select>
+		<li  class="container">
+		<div class="controls">
+			<span class="timeline_picker">
+				<label for="start">Start</label>
+				<input value="'.$feedback_strat[$j].'" name="addtimestart'.$j.'">
+			</span>
+				<span class="timeline_picker end">
+				<label for="start">End</label>
+			<input value="'.$feedback_end[$j].'" name="addtimeend'.$j.'">
+			</span>
+			<select name="addcommentoption'.$j.'"  class="five columns">
+				<option value="1" '.$select_type1.'>Changes To Video</option>
+				<option value="2" '.$select_type2.'>Changes To Audio</option>
+				<option value="3" '.$select_type3.'>Other</option>
+			</select>
+		</div>
 		<textarea rows="5" cols="30" name="addfeedback'.$j.'" class="fourteen columns">'.$feedback[$j].'</textarea>
 		</li>	
 	';
@@ -125,7 +136,7 @@ $addcommenttimes .= '</ul>';
 ?>							
 
 		<section class="container">
-			<h1 class="">Please Double confirm Your Comments before submit</h1>
+			
 				<ul id="videos" >
 <?php if($last_video_under_project_row['version']!="Final"){
 		$downloadfilelink = '<li><a href="#" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
@@ -160,6 +171,8 @@ $addcommenttimes .= '</ul>';
                         
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
+
+						<h2 class="">Please Double confirm Your Comments before submit</h2>
 						<?php echo $overdeadline_message;?>
 						<div class="video eight columns">
 							<!-- VIMEO EMBED -->

@@ -54,15 +54,27 @@ for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
 }
 for($i=0; $i<$forloopcount; $i++){
 	$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
-	$list_comment .= '<tr><td>'.$feedback_strat[$i].'</td><td>'.$feedback_end[$i].'</td><td>'.$feedback_type[$i].'</td><td>'.$feedback[$i].'</td></tr>';
+	$mail_commect_typs = 'Change To Video';
+	if($feedback_type[$i]==2){
+		$mail_commect_typs = 'Change To Audio';
+	}else if($feedback_type[$i]==3){
+		$mail_commect_typs = 'Other';
+	}
+	$list_comment .= '<tr><td>'.$feedback_strat[$i].'</td><td>'.$feedback_end[$i].'</td><td>'.$mail_commect_typs.'</td><td>'.$feedback[$i].'</td></tr>';
 	//echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
 }
 
 if($_POST['old_loop_time']>0){
 	for($j=0; $j<$_POST['old_loop_time']; $j++){
 		if($_POST["addfeedback".$j]!=""){
+			$mail_commect_typs = 'Change To Video';
+			if($_POST["addcommentoption".$j]==2){
+				$mail_commect_typs = 'Change To Audio';
+			}else if($_POST["addcommentoption".$j]==3){
+				$mail_commect_typs = 'Other';
+			}
 			mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
-			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$_POST["addcommentoption".$j].'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
+			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
 		}
 	}
 }
@@ -267,11 +279,6 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							<li>
 							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 							</li>
-							<li>
-								<a class="btn green columns three" onClick="document.getElementById('charge_update').submit();">
-								<span>Submit Comments</span> <i class="fa fa-send"></i>
-                                </a>
-							</li>
 							</ul>
 							<ul id="time-comments">
 								
@@ -298,12 +305,20 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					$list_video_client_request_num = mysql_num_rows($list_video_client_request);
 					for($j=0; $j<$list_video_client_request_num; $j++){
 					$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
+					$show_feedback_type = $list_video_client_request_row['feedback_type'];
+					if($list_video_client_request_row['feedback_type']==1){
+						$show_feedback_type = 'Changes To Video';
+					}else if($list_video_client_request_row['feedback_type']==2){
+						$show_feedback_type = 'Changes To Audio';
+					}else if($list_video_client_request_row['feedback_type']==3){
+						$show_feedback_type = 'Other';
+					}
 					$list_video_feedback[$i] .="
 					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
-					<small>[".$list_video_client_request_row['feedback_type']."]".$list_video_client_request_row['feedback']."</small></li>
+					<small>[".$show_feedback_type."]".$list_video_client_request_row['feedback']."</small></li>
 					";//list all request information display in page
 					}
-					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id LIMIT 0, 1");
+					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					echo '
 					<li class="video_obj five columns" onclick="expandCard($(this))">
@@ -316,7 +331,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							<h4>Notes</h4>
 							<ul class="pasttimestamps">
 								<li>Notes<small>'.$video_row['notes'].'</small></li>
-								<li>Your feedback<small></small></li>
+								<li>Your feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
 								'.$list_video_feedback[$i].'
 							</ul>
 							

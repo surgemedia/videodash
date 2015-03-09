@@ -287,11 +287,10 @@ ul#time-comments li textarea {
 ul#time-comments li select, ul#time-comment_first li select {
     height: 2.1em;
     display: inline-block;
-    width: 98%;
     margin: 1em 0;
     text-transform: capitalize;
 }
-ul#videos li.featured #time-comments li textarea {
+ul#videos li.featured #time-comments li textarea, ul#videos li.featured #time-comment_first li textarea {
     height: 10em;
     margin: 0.5em 0.5em 0.5em;
 }
@@ -541,13 +540,13 @@ div#action_box ul li {
     margin: 0.5em;
     font-family: inherit;
 }
-ul#time-comments li .controls {
+ul#time-comments li .controls, ul#time-comment_first li .controls {
     float: left;
     width: 30%;
     margin: 0em 1em 0em 0em;
 }
 
-ul#time-comments li textarea {
+ul#time-comments li textarea, ul#time-comment_first li textarea {
     float: none;
     width: 63%;
     display: inline-block;
