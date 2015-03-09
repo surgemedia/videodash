@@ -244,10 +244,9 @@ if($mail_message!=""){
 					<input value="1" name="charge_change" type="hidden">
 					<ul>
 					<li class="video_obj featured">
-						<h1 class="title">
-                        
+						<h2>
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						</h1>
+						</h2>
 						<?php echo $overdeadline_message;?>
 						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
