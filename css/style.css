@@ -33,7 +33,7 @@ textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; m
 .btn.green:active,
 .btn.green:focus { background-color: #32C570;}
 
-.btn.yellow { background-color: #E6DE3E; color: #FFF;  }
+.btn.yellow { background-color: #F4D313; color: #FFF;  }
 .btn.yellow:hover,
 .btn.yellow:active,
 .btn.yellow:focus { }
@@ -96,9 +96,9 @@ padding: 0.5em 0.5em; background: transparent; border: 3px solid #17A3C4; color:
 =            Client List            =
 =================================== */
 section.center ul.list { float: left; width: 100%; display: block; margin: 2em 0px 0px 0px; }
-section.center ul.list .client { float: left; width: 100%; min-height: 3em; border-radius: 0.4em; padding: 1em 0em; background-color: #E7F1F3; overflow: hidden; border-bottom: 0px; margin: 5px 0px; border: 1px solid #D8ECF0;}
+section.center ul.list .client { float: left; width: 100%; min-height: 3em; border-radius: 0.4em; padding: 1em 0em; background-color: rgba(52, 134, 161, 0.48); overflow: hidden; border-bottom: 3px solid #979797; margin: 5px 0px; }
 section.center ul.list .client img { float: left; width: 10%; margin: 0em 0em 0em 1em; }
-section.center ul.list .client .title {  margin:0px 0em 0px 1em; float: left; font-size: 1.5em; line-height: 1.7em; color: #282828; font-weight: bold; text-transform: uppercase; }
+section.center ul.list .client .title {  margin:0px 0em 0px 1em; float: left; font-size: 1.5em; line-height: 1.7em; color: #FFF; font-weight: bold; text-transform: uppercase; }
 section.center ul.list .client .actions { float: right; overflow: hidden; display: inline-block; margin: 0px 10px 0 0px;}
 section.center ul.list .client .actions .fa { font-size: 1.5em; }
 ul.list .client .actions li { float: left; margin: 0 0.3em; }
@@ -181,7 +181,7 @@ ul#videos li.video_obj { float: left; border-radius: 0.4em; cursor: pointer; dis
      
         /* easeInOutBack */
 
- background: #E7F1F3;}
+ background: none repeat scroll 0% 0% rgba(52, 134, 161, 0.48);}
 ul#videos li.video_obj.end_row { margin-right: 0px; }
 ul#videos li.video_obj.old { opacity: 0.8 }
 ul#videos li.video_obj.old2 { opacity: 0.3 }
@@ -197,7 +197,7 @@ ul#videos li.video_obj.open_card .pasttimestamps:hover {
 ul#videos li.video_obj .pasttimestamps li { float: left; width: 97%; border-bottom: 1px solid #CADDE7; margin: 0em 0 0.2em 0; padding: 0.3em; }
 ul#videos li.video_obj .pasttimestamps li small { float: left; width: 100%; font-size: 0.9em; margin: 0.2em 0; }
 ul#videos li.video_obj h4 { float: left; width: 100%; margin: 0 0 0 0; padding: 0.5em 0; text-align: center; transition: 0.3s ease all;}
-ul#videos li.video_obj .pasttimestamps time { font-size: 1em; float: left; padding: 0.2em; clear: both; display: block; color: #CCCCCC; border-radius: 0.2em; }
+ul#videos li.video_obj .pasttimestamps time { font-size: 1em; float: left; padding: 0.2em; clear: both; display: block; color: #FFF4; border-radius: 0.2em; }
 ul#videos li.video_obj .ver_number { position: absolute; top: -1em; background: #27ae60; padding: 0.5em 1em; border-radius: 0.2em; left: 45%; color: #fff; border: 1px solid #efefef; }
 ul#videos li.video_obj.open_card {
     position: absolute;
@@ -319,7 +319,7 @@ font-size: 1.1em;
 /* border: none; */
 padding: 0.5em 0.5em;
 background: transparent;
-border: 3px solid #17A3C4;
+border: 1px solid #17A3C4;
  color: #17A3C4; margin: 0.15em 0 0; display: inline-block;}
  .loginbox label {
     font-family: 'lucida_sansregular';
@@ -330,6 +330,7 @@ border: 3px solid #17A3C4;
     width: 100%;
     float: left;
     line-height: 2em;
+    border-radius: 3px;
 }
 
 
@@ -362,7 +363,7 @@ label {}
     font-size: 2em;
     font-family: 'klavika_basic_regularregular',sans-serif;
     text-transform: capitalize;
-
+    font-weight: 100;
     display: inline-block;
     text-align: right;
     width: 49%;
@@ -393,7 +394,7 @@ div#credit {
     
     display: inline-block;
 }
-
+.loginbox{margin: 3px;}
 
 .confirm_comment
 {
