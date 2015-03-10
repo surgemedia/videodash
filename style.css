@@ -29,7 +29,7 @@ textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; m
 .btn.green:active,
 .btn.green:focus { background-color: #32C570;}
 
-.btn.yellow { background-color: #f2ce41; border-color: #efc319; color: #FFF; text-shadow: 0px 2px 0px #efc319; box-shadow: inner }
+.btn.yellow { background-color: #F4D313; border-color: #efc319; color: #FFF; text-shadow: 0px 2px 0px #efc319; box-shadow: inner }
 .btn.yellow:hover,
 .btn.yellow:active,
 .btn.yellow:focus { border-top: 3px solid #f2ce41; border-bottom: 0px; border-color: #efc319; }

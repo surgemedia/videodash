@@ -280,7 +280,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							</li>
 							</ul>
 							<ul id="time-comments">
-								
+								<script>NewTimelineComment();</script>
 							</ul>
 							<div class="submit-actions">
 							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
