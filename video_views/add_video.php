@@ -23,8 +23,8 @@
 			$message = "Success to insert data to database.";
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
-			$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
-			$mailsubject = 'Your Video was completed!';
+			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+			$mailsubject = 'Your Draft Video is alreadt to review!';
 			$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
 			<p>We are completely to edit your video. Please login to:<br/>
 			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>

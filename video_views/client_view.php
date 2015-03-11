@@ -52,6 +52,7 @@ for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
 		$forloopcount = $forloopcount + 1;
 	}
 }
+$comment_remind_mail = 0;
 for($i=0; $i<$forloopcount; $i++){
 	$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
 	$mail_commect_typs = 'Change To Video';
@@ -62,6 +63,7 @@ for($i=0; $i<$forloopcount; $i++){
 	}
 	$list_comment .= '<tr><td>'.$feedback_strat[$i].'</td><td>'.$feedback_end[$i].'</td><td>'.$mail_commect_typs.'</td><td>'.$feedback[$i].'</td></tr>';
 	//echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
+	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
 
 if($_POST['old_loop_time']>0){
@@ -77,11 +79,13 @@ if($_POST['old_loop_time']>0){
 			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
 		}
 	}
+	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
 
 if($_POST['voice_comment']!=""){
 	$update_video_client_addition_request = mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row["id"]."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
 	$general_comment = $_POST['voice_comment'];
+	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
 
 if($forloopcount>0){
@@ -111,11 +115,41 @@ $end_time = gmdate("i:s", (int)$video_lenght_result);
 /*=============================================================*/
 /*      Send Email to advise any update of video Project       */
 /*=============================================================*/
-
+$update_mail_subject = "";
+if($comment_remind_mail == 1){
+	if($last_video_a_request_row['comment_time']==0 && $last_video_under_project_row['version']=='Draft'){
+		//IF Client first time comment to video
+		$Client_mail_message ='
+			Dear '.$cca_row['contact_person'].'<br/><br/>
+			Thank you for submitting your first set of changes. <br/>
+			Just a friendly reminder that you have one set of changes remaining. <br/>
+			If we have any questions regarding your changes, we will contact you. <br/>
+			Thank you<br/>
+		';
+		$update_mail_subject = "1<sup>st</sup> SET OF CHANGES";
+		mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row);
+	}
+	if($last_video_under_project_row['version_num']==2 && $last_video_under_project_row['version']=='Draft'){
+		//IF version number already upload new video to client to review
+		if($last_video_a_request_row['comment_time2']==0){
+			$Client_mail_message ='
+				Dear '.$cca_row['contact_person'].'<br/><br/>
+				Thank you for submitting your second set of changes.  <br/>
+				Just a friendly reminder that these are your final changes.  <br/>
+				If you require more, please contact us as charges may apply.  <br/>
+				If we have any questions regarding your changes, we will contact you.  <br/>
+				Thank you.  <br/>
+			';
+			mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row);
+			$update_mail_subject = "2<sup>nd</sup> SET OF CHANGES";
+		}
+	}
+}
 if($mail_message!=""){
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
-			$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
+			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+			$mailtoclient = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
 			$mailsubject = 'New Update of Client request in Video Dash';
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
@@ -128,8 +162,17 @@ if($mail_message!=""){
 			$the_data_is = date("d M Y");
 			$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
 
+			$client_mail_data = file_get_contents('../email_template/feedback.html');
+			$client_mail_data = str_replace("[mail_title]",  $update_mail_subject, $mail_data);
+			$client_mail_data = str_replace("[mail_content]",  $Client_mail_message, $mail_data);
+			$client_mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+
+			if($_POST['make_video_version_to_final']=="yes"){
+				$mailsubject = 'Client confirmed the final version.';
+			}
 			
 			mail($mailto, $mailsubject, $mail_data, $headers);										
+			mail($mailtoclient, $update_mail_subject, $client_mail_data, $headers);										
 }
 
 ?>
