@@ -137,32 +137,8 @@ $addcommenttimes .= '</ul>';
 
 		<section class="container">
 			
-				<ul id="videos" >
-<?php if($last_video_under_project_row['version']!="Final"){
-		$downloadfilelink = '<li><a href="#" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
-		$downloadfile_message = '';
-		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
-		if($list_day_counter>0){
-			$overdeadline_message = '<h2>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback</h2>';
-		}else{
-			$overdeadline_message = '<h2>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.</h2>';
-		}
-               
-	  }else{
-	  	$overdeadline_message = '';
-	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink = '<li><a href="#" class="btn yellow" ><span>DOWNLOAD VIDEO</span><i class="fa fa-star"></i></a></li>';
-	  	}else{
-	  		$downloadfilelink = '<li><a class="btn grey" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
-	  	}
-	  	if($projectname_row['download_file']!=""){
-	  		$downloadfile_message = '<label class="title" for="">Congratulations your video is now ready for downlaod now.</label>';
-	  	}else{
-	  		$downloadfile_message = '<label class="title" for="">We are editing your video now.</label>';
-	  	}
-	  }
-?>            
-			<form id="charge_update" action="client_view.java" method="post">
+			<ul id="videos" >         
+				<form id="charge_update" action="client_view.java" method="post">
 					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 					<input value="1" name="charge_change" type="hidden">
@@ -172,7 +148,7 @@ $addcommenttimes .= '</ul>';
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
 
-						<h2 class="">Please Double confirm Your Comments before submit</h2>
+						<label class="message blue">Please Double confirm Your Comments before submit</label>
 						<?php echo $overdeadline_message;?>
 						<div class="video eight columns">
 							<!-- VIMEO EMBED -->
@@ -198,7 +174,7 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="ten columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $_POST['voice_comment']; ?></textarea>
+							<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $_POST['voice_comment']; ?></textarea>
 							</li>
 							</ul>
                             <?php echo $addcommenttimes; ?>

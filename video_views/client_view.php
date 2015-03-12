@@ -81,9 +81,11 @@ if($_POST['old_loop_time']>0){
 	}
 	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
+$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
+$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
 
 if($_POST['voice_comment']!=""){
-	$update_video_client_addition_request = mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row["id"]."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
+	$update_video_client_addition_request = mysql_query("UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."' WHERE id = ".$last_video_a_request_row['id']);
 	$general_comment = $_POST['voice_comment'];
 	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
@@ -101,8 +103,7 @@ if($forloopcount>0){
 }
 
 
-$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
-$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
+
 include('../inc/youtube_function.php');
 
 $contents_location = "http://gdata.youtube.com/feeds/api/videos?q={".cleanYoutubeLink($last_video_under_project_row['video_link'])."}&alt=json";
@@ -115,8 +116,8 @@ $end_time = gmdate("i:s", (int)$video_lenght_result);
 /*=============================================================*/
 /*      Send Email to advise any update of video Project       */
 /*=============================================================*/
-$update_mail_subject = "";
-if($comment_remind_mail == 1){
+$update_mail_subject = ""; //unset the mail subject in begining.
+if($comment_remind_mail == 1){// Update mailout to 1 and will stop to send mail while send one mailout in version 1
 	if($last_video_a_request_row['comment_time']==0 && $last_video_under_project_row['version']=='Draft'){
 		//IF Client first time comment to video
 		$Client_mail_message ='
@@ -126,8 +127,9 @@ if($comment_remind_mail == 1){
 			If we have any questions regarding your changes, we will contact you. <br/>
 			Thank you<br/>
 		';
-		$update_mail_subject = "1<sup>st</sup> SET OF CHANGES";
-		mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row);
+		$update_mail_subject = "1st SET OF CHANGES";
+		//mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row['id']);
+		//Update database to stop sendmail duplicate
 	}
 	if($last_video_under_project_row['version_num']==2 && $last_video_under_project_row['version']=='Draft'){
 		//IF version number already upload new video to client to review
@@ -140,41 +142,77 @@ if($comment_remind_mail == 1){
 				If we have any questions regarding your changes, we will contact you.  <br/>
 				Thank you.  <br/>
 			';
-			mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row);
-			$update_mail_subject = "2<sup>nd</sup> SET OF CHANGES";
+			mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row['id']);
+			//Update database to stop sendmail duplicate
+			$update_mail_subject = "2nd SET OF CHANGES";
 		}
 	}
 }
-if($mail_message!=""){
-			$name = "Surge Media - Video Dash";
-			$frommail = "cs@videodash.surgehost.com.au";
-			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-			$mailtoclient = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-			$mailsubject = 'New Update of Client request in Video Dash';
-			$headers = "MIME-Version: 1.0\r\n";
-			$headers .= "Content-type: text/html; charset=utf-8\r\n";
-			
-			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
-
-			$mail_data = file_get_contents('../email_template/feedback.html');
-			$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
-			$mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
-			$the_data_is = date("d M Y");
-			$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
-
-			$client_mail_data = file_get_contents('../email_template/feedback.html');
-			$client_mail_data = str_replace("[mail_title]",  $update_mail_subject, $mail_data);
-			$client_mail_data = str_replace("[mail_content]",  $Client_mail_message, $mail_data);
-			$client_mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
-
-			if($_POST['make_video_version_to_final']=="yes"){
-				$mailsubject = 'Client confirmed the final version.';
-			}
-			
-			mail($mailto, $mailsubject, $mail_data, $headers);										
-			mail($mailtoclient, $update_mail_subject, $client_mail_data, $headers);										
+$the_data_is = date("d M Y");
+$name = "Surge Media - Video Dash";
+$frommail = "cs@videodash.surgehost.com.au";
+$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+$mailtoclient = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+$mailsubject = 'New Update of Client request in Video Dash';
+$headers = "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=utf-8\r\n";
+$headers .="From: ". $name . " <" . $frommail . ">\r\n";
+if($mail_message!=""){ //Check whether have any email message need to send out
+	$mail_data = file_get_contents('../email_template/feedback.html');
+	$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+	$mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
+	$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+	//Mail content to Surge Media
+	if($_POST['make_video_version_to_final']=="yes"){
+		$mailsubject = 'Client confirmed the final version.';
+	}//If client confirm video as Final Version, send mail to Ben and Video Team about it.
+	mail($mailto, $mailsubject, $mail_data, $headers);
 }
+if($update_mail_subject!=""){
+	$client_mail_data = file_get_contents('../email_template/feedback.html');
+	$client_mail_data = str_replace("[mail_title]",  $update_mail_subject, $client_mail_data);
+	$client_mail_data = str_replace("[mail_content]",  $Client_mail_message, $client_mail_data);
+	$client_mail_data = str_replace("[mail_datandtime]",  $the_data_is, $client_mail_data);
+	//Mail Content to Client
+	mail($mailtoclient, $update_mail_subject, $client_mail_data, $headers);
+}//Stop mailout to keep system work fine if without any remind mail to client.
 
+/*===========================================
+  Verion Number to show changed Day counter
+============================================*/
+if($last_video_under_project_row['version']!="Final"){
+		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
+		$downloadfile_message = '';
+		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
+		if($list_day_counter>0){
+			$overdeadline_message = '<br/>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
+		}else{
+			$overdeadline_message = '<br/>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.';
+		}
+               
+	  }else{
+	  	$overdeadline_message = '';
+	  	if($projectname_row['download_file']!=""){
+	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  	}else{
+	  		$downloadfilelink = '<li><a class="message" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
+	  	}
+	  	$file_details_message = '
+			<p>Versions included:<br/>
+			1 x MP4  - 1280 x 720 - h264 - suitable for youtube<br/>
+			1 x MP4  - 640 x480 h264 idea for uploading to your website.</p>
+			<p>Other Formats<br/>
+			Please contact our video production team if you request a different formats DVD\'s etc <br/>
+			(video@surgemedia.com.au)</p>
+			<p>Extended storate<br/>
+			Your Data will be stored for 6 months. Please contact if your request any copy.</p>
+	  	';
+	  	if($projectname_row['download_file']!=""){
+	  		$downloadfile_message = '<br/>Congratulations your video is now ready for downlaod now.'.$file_details_message;
+	  	}else{
+	  		$downloadfile_message = '<br/>We are editing your video now.'.$file_details_message;
+	  	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -231,7 +269,7 @@ if($mail_message!=""){
 /*         Get Feedback Deadline         */
 /*=======================================*/							
 	function check_deadline($function_v_project_id, $version, $mode){
-		$check_deadline = mysql_query("SELECT upload_time FROM video_under_project WHERE video_project_id = ".$function_v_project_id." AND version LIKE '".$version."' AND enabling = 1 ORDER BY id LIMIT 0, 1");
+		$check_deadline = mysql_query("SELECT upload_time FROM video_under_project WHERE video_project_id = ".$function_v_project_id." AND version LIKE '".$version."' AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
 		$check_deadline_row = mysql_fetch_array($check_deadline);
 		 $now = time(); // or your date as well
 		 $data_format = substr($check_deadline_row['upload_time'], 0, 10);
@@ -255,30 +293,7 @@ if($mail_message!=""){
         <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
         <input value="yes" name="make_video_version_to_final" type="hidden">
 </form>
-<?php if($last_video_under_project_row['version']!="Final"){
-		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
-		$downloadfile_message = '';
-		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
-		if($list_day_counter>0){
-			$overdeadline_message = '<h2>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback</h2>';
-		}else{
-			$overdeadline_message = '<h2>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.</h2>';
-		}
-               
-	  }else{
-	  	$overdeadline_message = '';
-	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
-	  	}else{
-	  		$downloadfilelink = '<li><a class="message yellow" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
-	  	}
-	  	if($projectname_row['download_file']!=""){
-	  		$downloadfile_message = '<label class="message" for="">Congratulations your video is now ready for downlaod now.</label>';
-	  	}else{
-	  		$downloadfile_message = '<label class="message blue" for="">We are editing your video now.</label>';
-	  	}
-	  }
-?>            
+
 
 			     
 			<form id="charge_update" action="request_confirm.java" method="post" class="sixteen column">
@@ -287,47 +302,35 @@ if($mail_message!=""){
 					<input value="1" name="charge_change" type="hidden">
 					<ul>
 					<li class="video_obj featured">
-						<h2>
+						<label class="message blue" for="">
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						</h2>
 						<?php echo $overdeadline_message;?>
+						<?php echo $downloadfile_message; ?>
+						</label>
 						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
 						<div id='action_box' class="actions sixteen columns">
-                         <?php echo $downloadfile_message; ?>
-							<textarea disabled="true" name="" id="project_message" class="sixteen columns" cols="30" rows="5">Versions included:
-1 x MP4  - 1280 x 720 - h264 - suitable for youtube
-1 x MP4  - 640 x480 h264 idea for uploading to your website.
-                            
-Other Formats
-Please contact our video production team if you request a different formats DVD's etc 
-(video@surgemedia.com.au)
-
-Extended storate
-Your Data will be stored for 6 months. Please contact if your request any copy.
-                            </textarea>
 							<ul>
-								<li><a id="required_button" href="javascript:void(0)" class="btn red"><span>Changes Required</span> <i class="fa fa-refresh"></i></a></li>
                                 <?php echo $downloadfilelink; ?>
 							</ul>
 						</div>
 						<div id="changes_required">
-						<label class="title label_stop_float" for="">Your Notes</label>
+						<label class="title label_stop_float" for="">general notes</label>
 						<ul id="comments-general" class="container">
 							
 							<li>
-							<textarea name="voice_comment" id="general-comment" class="eleven columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+							<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 							</li>
 							</ul>
 							<ul id="time-comments">
 								<script>NewTimelineComment();</script>
 							</ul>
 							<div class="submit-actions">
-							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
-							<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
+							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
+							<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>submit all comments</span> <i class="fa fa-send"></i></a>
 							</div>
 						</div>
 					</li>
@@ -343,6 +346,11 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					$video_num = mysql_num_rows($listvideos);
 					for($i=0; $i<$video_num; $i++){
 					$video_row = mysql_fetch_array($listvideos);
+					$show_final_color = $show_final_msg = "";
+					if($video_row['version']=="Final"){
+						$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
+						$show_final_msg = "[Final]";
+					}
 					$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
 					$list_video_client_request_num = mysql_num_rows($list_video_client_request);
 					for($j=0; $j<$list_video_client_request_num; $j++){
@@ -363,14 +371,14 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					echo '
-					<li class="video_obj five columns" onclick="expandCard($(this))">
+					<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
 						<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
 						<div class="video draft">
 							<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'?rel=0" frameborder="0" allowfullscreen></iframe>
 						</div>
 						<div class="feedback_wrapper">
-							<h4>Notes</h4>
+							<h4>'.$show_final_msg.'Notes</h4>
 							<ul class="pasttimestamps">
 								<li>Notes<small>'.$video_row['notes'].'</small></li>
 								<li>Your feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>

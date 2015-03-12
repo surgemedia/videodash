@@ -12,6 +12,17 @@ $_SESSION['email'] = "";
 <script src="/js/video.js"></script>
 <script src="/js/bigvideo.js"></script>
 <body class="">
+<header>
+    <div class="center wow fadeInDown animated" style="visibility: visible;">
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="http://videodash.surgehost.com.au/home_video.java">admin login</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <main>
 <script>
 $(function() {
