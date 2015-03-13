@@ -91,7 +91,7 @@ if($_POST['voice_comment']!=""){
 }
 
 if($forloopcount>0){
-	$mail_message = 'We get the new feedback message for Client:'.$cca_row['company_name']."<br/>
+	$mail_message = 'There is new feedback message for Client:'.$cca_row['company_name']."<br/>
 	their Video Project is: ".$projectname_row['project_name']."
 	Comment: ".$general_comment."
 	<table>
@@ -181,13 +181,13 @@ if($update_mail_subject!=""){
   Verion Number to show changed Day counter
 ============================================*/
 if($last_video_under_project_row['version']!="Final"){
-		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
+		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span class="omega alpha">Approve as final</span><i class="fa fa-star"></i></a></li>';
 		$downloadfile_message = '';
 		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
 		if($list_day_counter>0){
-			$overdeadline_message = '<br/>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
+			$overdeadline_message = 'You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
 		}else{
-			$overdeadline_message = '<br/>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.';
+			$overdeadline_message = 'Sorry, We have not recieved any changes from you in last 3 weeks, If you need any changes of your video, we will charge for time involved.';
 		}
                
 	  }else{
@@ -195,7 +195,7 @@ if($last_video_under_project_row['version']!="Final"){
 	  	if($projectname_row['download_file']!=""){
 	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
 	  	}else{
-	  		$downloadfilelink = '<li><a class="message" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '<li><a class="message blue" ><span>Please be patiate we will notifiy you when you can download your new video</span><i class="fa fa-star"></i></a></li>';
 	  	}
 	  	$file_details_message = '
 			<p>Versions included:<br/>
@@ -302,11 +302,19 @@ if($last_video_under_project_row['version']!="Final"){
 					<input value="1" name="charge_change" type="hidden">
 					<ul>
 					<li class="video_obj featured">
-						<label class="message blue" for="">
-						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						<?php echo $overdeadline_message;?>
-						<?php echo $downloadfile_message; ?>
+						
+						<h1 class="title"><?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
+						</h1>
+						<?php if($overdeadline_message) : ?>
+						<label class="message red" for="">
+							<?php echo $overdeadline_message; ?>
 						</label>
+						<?php endif; ?>
+						<?php if($downloadfile_message) : ?>
+						<label class="message blue" for="">
+							<?php echo $downloadfile_message; ?>
+						</label>
+						<?php endif; ?>
 						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -318,7 +326,7 @@ if($last_video_under_project_row['version']!="Final"){
 							</ul>
 						</div>
 						<div id="changes_required">
-						<label class="title label_stop_float" for="">general notes</label>
+						<label class="title label_stop_float" for="">Your Feedback</label>
 						<ul id="comments-general" class="container">
 							
 							<li>
@@ -370,6 +378,9 @@ if($last_video_under_project_row['version']!="Final"){
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+					if($show_final_msg):
+					$new_final_message = '<label class="message">'.$show_final_msg.'</label>';
+					endif;
 					echo '
 					<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
@@ -377,11 +388,11 @@ if($last_video_under_project_row['version']!="Final"){
 						<div class="video draft">
 							<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'?rel=0" frameborder="0" allowfullscreen></iframe>
 						</div>
-						<div class="feedback_wrapper">
-							<h4>'.$show_final_msg.'Notes</h4>
+						<div class="feedback_wrapper">'.
+							$new_final_message.'
 							<ul class="pasttimestamps">
-								<li>Notes<small>'.$video_row['notes'].'</small></li>
-								<li>Your feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
+								<li class="director"><h3>Directors Notes</h3><small>'.$video_row['notes'].'</small></li>
+								<li><h3>Your feedback</h3><small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
 								'.$list_video_feedback[$i].'
 							</ul>
 							

@@ -148,27 +148,14 @@ $addcommenttimes .= '</ul>';
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
 
-						<label class="message blue">Please Double confirm Your Comments before submit</label>
+						<label class="message blue">Please double check your changes for this draft, you can't make anymore until next draft</label>
 						<?php echo $overdeadline_message;?>
-						<div class="video eight columns">
+						<div class="video sixteen columns">
 							<!-- VIMEO EMBED -->
-							<iframe width="500" height="400" src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
+							<iframe  src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
-<!-- 						<div id='action_box' class="actions eight columns">
-                         <?php //echo $downloadfile_message; ?>
-							<textarea disabled="true" name="" id="" cols="30" rows="5">Versions included:
-1 x MP4  - 1280 x 720 - h264 - suitable for youtube
-1 x MP4  - 640 x480 h264 idea for uploading to your website.
-                            
-Other Formats
-Please contact our video production team if you request a different formats DVD's etc 
-(video@surgemedia.com.au)
 
-Extended storate
-Your Data will be stored for 6 months. Please contact if your request any copy.
-                            </textarea>
-						</div> -->
 						<div class="comment_check">
 						<label class="title" for="">Your Notes</label>
 						<ul id="comments-general" class="container">
@@ -181,9 +168,9 @@ Your Data will be stored for 6 months. Please contact if your request any copy.
 							<ul id="time-comments">
 								
 							</ul>
-							<div class="submit-actions eight columns">
-							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five"><span>Add More Timeline Comments</span> <i class="fa fa-clock-o"></i></a>
-							<a class="btn green columns five" onClick="document.getElementById('charge_update').submit();"><span>Submit All Comments</span> <i class="fa fa-send"></i></a>
+							<div class="submit-actions">
+							<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
+							<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>submit all comments</span> <i class="fa fa-send"></i></a>
 							</div>
 						</div>
 					</li>

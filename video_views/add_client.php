@@ -33,7 +33,7 @@
                     <div id="client_info" class="container card_backing">
                         <div>
                             <ul class="contact">
-                                <li >
+                                <li>
 
                                     <span>Name</span><input name="contact_person">
                                     <span>Phone (Mobile)</span><input name="mobile_number">
@@ -42,7 +42,7 @@
                                      <span>E-mail</span><input name="email">
                                      <span>Logo</span><input type="file" name="company_icon">
                                 </li>
-                                <li >
+                                <li>
                                     <span>Address</span><input name="address_one">
                                     <span>Address 2</span><input name="address_two">
                                     <span>State</span><input name="state">
