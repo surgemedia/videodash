@@ -400,7 +400,10 @@ if($last_video_under_project_row['version']!="Final"){
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+<<<<<<< HEAD
 					$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
+=======
+>>>>>>> origin/master
 					if($show_final_msg):
 					$new_final_message = '<label class="message">'.$show_final_msg.'</label>';
 					endif;
