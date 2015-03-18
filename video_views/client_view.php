@@ -37,7 +37,8 @@ if($_POST['make_video_version_to_final']=="yes"){
 $last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = ".$_POST['project_id']." AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
 $last_video_under_project_row = mysql_fetch_array($last_video_under_project);
 $forloopcount = 0;
-
+$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
+$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
 
 /*=======================================*/
 /*          Time feedback of video       */
@@ -54,7 +55,9 @@ for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
 }
 $comment_remind_mail = 0;
 for($i=0; $i<$forloopcount; $i++){
-	$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
+	if($last_video_a_request_row['stop_resubmit']<1){
+		$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
+	}
 	$mail_commect_typs = 'Change To Video';
 	if($feedback_type[$i]==2){
 		$mail_commect_typs = 'Change To Audio';
@@ -75,14 +78,15 @@ if($_POST['old_loop_time']>0){
 			}else if($_POST["addcommentoption".$j]==3){
 				$mail_commect_typs = 'Other';
 			}
-			mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
+			if($last_video_a_request_row['stop_resubmit']<1){
+				mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
+			}
 			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
 		}
 	}
 	$comment_remind_mail = 1; //if have any comment, set it 1.
 }
-$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
-$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
+
 
 if($_POST['voice_comment']!=""){
 	$update_video_client_addition_request = mysql_query("UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."' WHERE id = ".$last_video_a_request_row['id']);
@@ -91,7 +95,7 @@ if($_POST['voice_comment']!=""){
 }
 
 if($forloopcount>0){
-	$mail_message = 'We get the new feedback message for Client:'.$cca_row['company_name']."<br/>
+	$mail_message = 'There is new feedback message for Client:'.$cca_row['company_name']."<br/>
 	their Video Project is: ".$projectname_row['project_name']."
 	Comment: ".$general_comment."
 	<table>
@@ -128,7 +132,7 @@ if($comment_remind_mail == 1){// Update mailout to 1 and will stop to send mail 
 			Thank you<br/>
 		';
 		$update_mail_subject = "1st SET OF CHANGES";
-		//mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row['id']);
+		mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row['id']);
 		//Update database to stop sendmail duplicate
 	}
 	if($last_video_under_project_row['version_num']==2 && $last_video_under_project_row['version']=='Draft'){
@@ -181,21 +185,21 @@ if($update_mail_subject!=""){
   Verion Number to show changed Day counter
 ============================================*/
 if($last_video_under_project_row['version']!="Final"){
-		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span>APPROVE AS FINAL</span><i class="fa fa-star"></i></a></li>';
+		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span class="omega alpha">Approve as final</span><i class="fa fa-star"></i></a></li>';
 		$downloadfile_message = '';
 		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
 		if($list_day_counter>0){
-			$overdeadline_message = '<br/>You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
+			$overdeadline_message = 'You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
 		}else{
-			$overdeadline_message = '<br/>Sorry, We have not got any change request in last 3 weeks, If you need any change of your video, we will charge for time involved.';
+			$overdeadline_message = 'Sorry, We have not recieved any changes from you in last 3 weeks, If you need any changes of your video, we will charge for time involved.';
 		}
                
 	  }else{
 	  	$overdeadline_message = '';
 	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '<li><a href="'.$projectname_row['download_file'].'" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
 	  	}else{
-	  		$downloadfilelink = '<li><a class="message" ><span>Video Delivery Now, Will Message you when completed.</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '<li><a class="message blue" ><span>Please be patiate we will notifiy you when you can download your new video</span><i class="fa fa-star"></i></a></li>';
 	  	}
 	  	$file_details_message = '
 			<p>Versions included:<br/>
@@ -302,11 +306,19 @@ if($last_video_under_project_row['version']!="Final"){
 					<input value="1" name="charge_change" type="hidden">
 					<ul>
 					<li class="video_obj featured">
-						<label class="message blue" for="">
-						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						<?php echo $overdeadline_message;?>
-						<?php echo $downloadfile_message; ?>
+						
+						<h1 class="title"><?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
+						</h1>
+						<?php if($overdeadline_message) : ?>
+						<label class="message red" for="">
+							<?php echo $overdeadline_message; ?>
 						</label>
+						<?php endif; ?>
+						<?php if($downloadfile_message) : ?>
+						<label class="message blue" for="">
+							<?php echo $downloadfile_message; ?>
+						</label>
+						<?php endif; ?>
 						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -317,8 +329,21 @@ if($last_video_under_project_row['version']!="Final"){
                                 <?php echo $downloadfilelink; ?>
 							</ul>
 						</div>
+                         <?php 
+						 $stop_comment = "";
+						 //echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
+						 if($last_video_under_project_row['version']!='Final'){
+								if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
+									$stop_comment_disable = 1;
+								}
+								if($last_video_under_project_row['version_num']==2 && $last_video_a_request_row['comment_time2']!=1){
+									$stop_comment_disable = 1;
+								}				
+							}
+							if($stop_comment_disable==1){
+						 ?>
 						<div id="changes_required">
-						<label class="title label_stop_float" for="">general notes</label>
+						<label class="title label_stop_float" for="">Your Feedback</label>
 						<ul id="comments-general" class="container">
 							
 							<li>
@@ -333,6 +358,7 @@ if($last_video_under_project_row['version']!="Final"){
 							<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>submit all comments</span> <i class="fa fa-send"></i></a>
 							</div>
 						</div>
+                        <?php }?>
 					</li>
 					</ul>
                 </form>
@@ -358,18 +384,26 @@ if($last_video_under_project_row['version']!="Final"){
 					$show_feedback_type = $list_video_client_request_row['feedback_type'];
 					if($list_video_client_request_row['feedback_type']==1){
 						$show_feedback_type = 'Changes To Video';
+						$show_feedback_type_class = 'changes-video';
+
 					}else if($list_video_client_request_row['feedback_type']==2){
 						$show_feedback_type = 'Changes To Audio';
+						$show_feedback_type_class = 'changes-audio';
 					}else if($list_video_client_request_row['feedback_type']==3){
 						$show_feedback_type = 'Other';
+						$show_feedback_type_class = 'changes-other';
 					}
 					$list_video_feedback[$i] .="
-					<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
-					<small>[".$show_feedback_type."]".$list_video_client_request_row['feedback']."</small></li>
+					<li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+					<small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
 					";//list all request information display in page
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+					$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
+					if($show_final_msg):
+					$new_final_message = '<label class="message">'.$show_final_msg.'</label>';
+					endif;
 					echo '
 					<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
 						<span class="ver_number">'.$video_row['version_num'].'</span>
@@ -377,18 +411,16 @@ if($last_video_under_project_row['version']!="Final"){
 						<div class="video draft">
 							<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'?rel=0" frameborder="0" allowfullscreen></iframe>
 						</div>
-						<div class="feedback_wrapper">
-							<h4>'.$show_final_msg.'Notes</h4>
+						<div class="feedback_wrapper">'.
+							$new_final_message.'
 							<ul class="pasttimestamps">
-								<li>Notes<small>'.$video_row['notes'].'</small></li>
-								<li>Your feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
+								<li class="director"><h3>Directors Notes</h3><small>'.$video_row['notes'].'</small></li>
+								<li><h3>Your feedback</h3><small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
 								'.$list_video_feedback[$i].'
 							</ul>
 							
 						</div>
-						<span class="audio_comment">
-						'.$list_video_client_addition_request_row['audio_comment'].'
-						</span>
+						
 					</li>
 					';
 					}
@@ -397,6 +429,6 @@ if($last_video_under_project_row['version']!="Final"){
 			</section>
 			</main>
 			<? include('../footer.php');?>
-			<div id="overlay_wrapper" onclick="closeAllCards()"></div>
+			<div id="overlay_wrapper" onClick="closeAllCards()"></div>
 		</body>
 	</html>

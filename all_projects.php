@@ -56,7 +56,7 @@
 							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Delete</span><i class="fa fa-bomb" ></i></a></li>';
 							if($project_row['active_option']==0){
 								$add_del_class = " bombed";
-								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Enable</span><i class="fa fa-history" ></i></a></li>';
+								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Reopen Project</span><i class="fa fa-history" ></i></a></li>';
 							}
 							echo '
 								<li class="client'.$add_del_class.'">
@@ -80,7 +80,7 @@
 									<div class="actions">
 										<ul>';
 							if($add_del_class != " bombed"){				
-								echo '<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>New Video</span> <i class="fa fa-video-camera"></i></a></li>';
+								echo '<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>Add New Video</span> <i class="fa fa-video-camera"></i></a></li>';
 							}
 							echo $del_btn.'
 										</ul>

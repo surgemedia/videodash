@@ -48,10 +48,10 @@
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);
 							$add_del_class = "";
-							$del_btn = '<li><a href="#" class="btn yellow edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Close</span><i class="fa fa-star" ></i></a></li>';
+							$del_btn = '<li><a href="#" class="btn blue " onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Close Project</span><i class="fa fa-check" ></i></a></li>';
 							if($project_row['active_option']==2	){
 								$add_del_class = " bombed";
-								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Enable</span><i class="fa fa-history" ></i></a></li>';
+								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Reopen Project</span><i class="fa fa-history" ></i></a></li>';
 							}
 							echo '
 								<li class="client'.$add_del_class.'">

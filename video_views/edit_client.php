@@ -68,9 +68,11 @@
                                     <span>Phone (TEL)</span><input name="tel_number" value="<?=$clientdatarow['tel_number'];?>"/>
                                     <span>FAX number</span><input name="fax_number" value="<?=$clientdatarow['fax_number'];?>"/>
                                      <span>E-mail</span><input name="email" value="<?=$clientdatarow['email'];?>"/>
+                                     <?php /* ?>
                                      <span>Logo</span><img src="<?=$clientdatarow['company_icon'];?>" height="50" width="50"/>
                                      <input type="hidden" name="hiddenlogo" value="<?=$clientdatarow['company_icon'];?>"/>
                                      <span>Upload New Logo</span><input type="file" name="company_icon"/>
+                                      <?php */ ?>
                                 </li>
                                 <li >
                                     <span>Address</span><input name="address_one" value="<?=$clientdatarow['address_one'];?>"/>

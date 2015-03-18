@@ -10,9 +10,9 @@
 	}
 	$message = "Add New Video";
     if($_POST['Add_videos']==1 && $_POST['video_input']==""){
-        $error_msg = '<label class="message" for="">Without upload any Youtube Link!</label>';
+        $error_msg = '<label class="message red" for="">Without upload any Youtube Link!</label>';
     }
-	if($_POST['Add_videos']==1 && $_POST['project_id']!="" && $_POST['video_input']!=""){//test data whether empty
+	if($_POST['Add_videos']==1 && $_POST['project_id']!="" && $_POST['video_input']!=""){
 		$check_total_version = mysql_query("SELECT * FROM video_under_project WHERE video_project_id =".$_POST['project_id']);
 		$check_total_version_num = mysql_num_rows($check_total_version);
 		//echo $check_total_version_num;
@@ -23,16 +23,16 @@
 			echo  "Cannot Save this Video to Project.";
 			exit;	
 		}else{
-			$message = "Success to insert data to database.";
+			$complete_msg = '<label class="message green columns omega alpha two" for="">Updated <i class="fa fa-thumbs-up"></i></label>';;
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-			$mailsubject = 'Your Draft Video is alreadt to review!';
-			$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
-			<p>We are completely to edit your video. Please login to:<br/>
-			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'</a> to take a look and make comments.</p>
+			$mailsubject = 'Your draft video is ready to review!';
+			$mailmessage = '<p>Hi '.$cca_row['contact_person'].',</p>
+			<p>We uploaded a new draft video for review.</p>
+			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">View on the Video Dash</a> make comments.</p>
 			<p>Kind Regards</p>
-			<p>Video Dash @ Surge Media</p>
+			<p>The Team at Surge Media</p>
 			';
             $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
             //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
@@ -45,8 +45,8 @@
                     $mailsubject = 'You file was ready to download.';
 
                     $mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
-                    <p>Your Video was ready, Please click below link to Download:<br/>
-                    <a href="'.$_POST['downloadlink'].'">'.$_POST['downloadlink'].'</a> to take a look and make comments.</p>
+                    <p>Your Video is ready, Please click below link to Download:<br/>
+                    <a class="button" href="'.$_POST['downloadlink'].'">Download</a> to take a look and make comments.</p>
                     <p>Kind Regards</p>
                     <p>Video Dash @ Surge Media</p>
                     ';
@@ -80,18 +80,24 @@
             <body class="">
                 <? include('../inc/header.php'); ?>
                 <main>
+                
                 <section class="container">
-                    <h1 class="float-left"><?=$message;?></h1>
+                    <h1 class="float-left container"><?=$message;?></h1>
+                    <?php if($complete_msg): ?>
+                        <?php echo $complete_msg; ?>
+                    <?php endif; ?>
                     <form action="http://videodash.surgehost.com.au/all_projects.php" method="post" id="back_to_project">
                     	<input name="client_id" value="<?=$cca_row['id'];?>" type="hidden"/>
                     </form>
-                     <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a>
                     
                
                 <ul  >
                     <li id="add_new_video" class="video_obj featured">
+                     <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a>
+
                     	<form action="add_video.php" method="post" id="add_video">
                         <h1 id="client_name_editable" class="title">
+
                     	<input name="client_id" value="<?=$cca_row['id'];?>" type="hidden"/>
                     	<input name="project_id" value="<?=$_POST['project_id'];?>" type="hidden"/>
                     	<input name="Add_videos" value="1" type="hidden"/>
@@ -106,7 +112,7 @@
                                     $showvideovalue = 'value="http://www.youtube.com/?v='.cleanYoutubeLink($check_video_Lastupdate_row['video_link']).'"';
 								}
 							?>
-                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link" <?php echo $showvideovalue; ?> >
+                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link columns sixteen" <?php echo $showvideovalue; ?> >
                         <div class="video sixteen columns omega alpha">
                             <!-- VIMEO EMBED -->
                             <?if($check_video_Lastupdate_row['video_link']!=""){?>
@@ -203,7 +209,7 @@
 
 							if($list_video_client_addition_request_row['audio_comment']!="" && $list_video_feedback[$i]!=""){
                                 if($video_num>0 && $i==0){
-                                    echo '<li><h1>Previous Versions</h1></li>';
+                                    echo '<li><h1>Current Drafts</h1></li>';
                                 }
                                 echo '
     								<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
@@ -213,7 +219,7 @@
     										<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'" frameborder="0" allowfullscreen></iframe>
     									</div>
     									<div class="feedback_wrapper">
-    										<h4>'.$show_final_msg.'Notes</h4>
+    										
     										<ul class="pasttimestamps">
     											<li>Your Notes<small>'.$video_row['notes'].'</small></li>
     											<li>Client feedback<small></small></li>
@@ -221,9 +227,7 @@
     										</ul>
     										
     									</div>
-                                        <span class="audio_comment">
-                                            '.$list_video_client_addition_request_row['audio_comment'].'
-                                        </span>
+                                        
     								</li>
     							';
                             }
