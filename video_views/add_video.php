@@ -23,22 +23,13 @@
 			echo  "Cannot Save this Video to Project.";
 			exit;	
 		}else{
-<<<<<<< HEAD
 			$complete_msg = '<label class="message green columns omega alpha two" for="">Updated <i class="fa fa-thumbs-up"></i></label>';;
-=======
-			$complete_msg = '<label class="message green" for="">Your Draft has been sent</label>';;
->>>>>>> origin/master
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
 			$mailsubject = 'Your draft video is ready to review!';
-<<<<<<< HEAD
 			$mailmessage = '<p>Hi '.$cca_row['contact_person'].',</p>
 			<p>We uploaded a new draft video for review.</p>
-=======
-			$mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
-			<p>We have made a new edit to your video. Please login to:<br/>
->>>>>>> origin/master
 			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">View on the Video Dash</a> make comments.</p>
 			<p>Kind Regards</p>
 			<p>The Team at Surge Media</p>
@@ -89,18 +80,9 @@
             <body class="">
                 <? include('../inc/header.php'); ?>
                 <main>
-<<<<<<< HEAD
                 
                 <section class="container">
                     <h1 class="float-left container"><?=$message;?></h1>
-=======
-                <header class="container">
-                     <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a>
-                    
-                </header>
-                <section class="container">
-                    <h1 class="float-left"><?=$message;?></h1>
->>>>>>> origin/master
                     <?php if($complete_msg): ?>
                         <?php echo $complete_msg; ?>
                     <?php endif; ?>
@@ -237,11 +219,7 @@
     										<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'" frameborder="0" allowfullscreen></iframe>
     									</div>
     									<div class="feedback_wrapper">
-<<<<<<< HEAD
     										
-=======
-    										<label class="message">'.$show_final_msg.'</label>
->>>>>>> origin/master
     										<ul class="pasttimestamps">
     											<li>Your Notes<small>'.$video_row['notes'].'</small></li>
     											<li>Client feedback<small></small></li>
