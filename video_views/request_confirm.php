@@ -18,6 +18,7 @@ $last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE
 $last_video_under_project_row = mysql_fetch_array($last_video_under_project);
 $forloopcount = 0;
 
+$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 0 WHERE video_id = ".$last_video_under_project_row['id']);
 
 /*=======================================*/
 /*          Time feedback of video       */

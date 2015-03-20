@@ -55,8 +55,9 @@ for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
 }
 $comment_remind_mail = 0;
 for($i=0; $i<$forloopcount; $i++){
-	if($last_video_a_request_row['stop_resubmit']<1){
+	if($last_video_a_request_row['stop_resubmit']!=1){
 		$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
+		//echo '1 done';
 	}
 	$mail_commect_typs = 'Change To Video';
 	if($feedback_type[$i]==2){
@@ -78,8 +79,9 @@ if($_POST['old_loop_time']>0){
 			}else if($_POST["addcommentoption".$j]==3){
 				$mail_commect_typs = 'Other';
 			}
-			if($last_video_a_request_row['stop_resubmit']<1){
+			if($last_video_a_request_row['stop_resubmit']!=1){
 				mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
+				//echo '2 done';
 			}
 			$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
 		}
@@ -186,6 +188,7 @@ if($update_mail_subject!=""){
 ============================================*/
 if($last_video_under_project_row['version']!="Final"){
 		$downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span class="omega alpha">Approve as final</span><i class="fa fa-star"></i></a></li>';
+		$downloadfilelink2 = '';
 		$downloadfile_message = '';
 		$list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
 		if($list_day_counter>0){
@@ -197,9 +200,11 @@ if($last_video_under_project_row['version']!="Final"){
 	  }else{
 	  	$overdeadline_message = '';
 	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink = '<li><a href="'.$projectname_row['download_file'].'" class="btn yellow" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink2 = '<li><a href="download_page.php?project='.$projectname_row['id'].'" class="btn yellow fifteen columns big_btn" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink = '';
 	  	}else{
 	  		$downloadfilelink = '<li><a class="message blue" ><span>Please be patiate we will notifiy you when you can download your new video</span><i class="fa fa-star"></i></a></li>';
+	  		$downloadfilelink2 = '';
 	  	}
 	  	$file_details_message = '
 			<p>Versions included:<br/>
@@ -254,15 +259,15 @@ if($last_video_under_project_row['version']!="Final"){
 						<li class="section ten columns omega alpha">
 						<?php //Make introduction field in right side?>
                         <p><strong>How to review your project</strong></p>
-						<p>At Surge Media we like to make your video project experience as smooth as possible. but giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track the changes. 
+						<p>At Surge Media we like to make your video project experience as smooth as possible by giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track changes. 
                         </p>
                         <p>As part of your project you will receive 2 sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage. 
                         </p>
-                        <p><strong>DRAFT 1 - (3 WEEKS) </strong> - Provide us with a complete list of ALL requested changes. Use the timestamp in the video to make sure that our editors know where the change needs to ba applied.
+                        <p><strong>DRAFT 1 - (3 WEEKS) </strong> Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied.
                         </p>
                         <p><strong>DRAFT 2 - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version.
                         </p>
-                        <p><strong>FINAL</strong> - The final version is there for you to download from the dashboard. Please note that if you still want to make additional changes you will be charged for the time involved.
+                        <p><strong>FINAL</strong> The final version will be there for you to download from the dashboard. Please note that if you still want to make additional changes, charges may apply.
                         </p>
 						</li>
 					</ul>
@@ -309,6 +314,11 @@ if($last_video_under_project_row['version']!="Final"){
 						
 						<h1 class="title"><?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
+						<div id='action_box' class="actions sixteen columns">
+							<ul>
+                                <?php echo $downloadfilelink2; ?>
+							</ul>
+						</div>
 						<?php if($overdeadline_message) : ?>
 						<label class="message red" for="">
 							<?php echo $overdeadline_message; ?>
@@ -318,12 +328,17 @@ if($last_video_under_project_row['version']!="Final"){
 						<label class="message blue" for="">
 							<?php echo $downloadfile_message; ?>
 						</label>
-						<?php endif; ?>
+						<?php endif; 
+
+						if($last_video_under_project_row['version']!="Final"){
+						?>
+
 						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
 						</div>
+						<?php } ?>
 						<div id='action_box' class="actions sixteen columns">
 							<ul>
                                 <?php echo $downloadfilelink; ?>
@@ -333,6 +348,8 @@ if($last_video_under_project_row['version']!="Final"){
 						 $stop_comment = "";
 						 //echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
 						 if($last_video_under_project_row['version']!='Final'){
+								$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
+								$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
 								if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
 									$stop_comment_disable = 1;
 								}
@@ -376,6 +393,8 @@ if($last_video_under_project_row['version']!="Final"){
 					if($video_row['version']=="Final"){
 						$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
 						$show_final_msg = "[Final]";
+					}else{
+						$show_final_msg = "[Draft]";
 					}
 					$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
 					$list_video_client_request_num = mysql_num_rows($list_video_client_request);

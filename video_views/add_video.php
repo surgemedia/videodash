@@ -15,9 +15,16 @@
 	if($_POST['Add_videos']==1 && $_POST['project_id']!="" && $_POST['video_input']!=""){
 		$check_total_version = mysql_query("SELECT * FROM video_under_project WHERE video_project_id =".$_POST['project_id']);
 		$check_total_version_num = mysql_num_rows($check_total_version);
-		//echo $check_total_version_num;
+        $check_video_Lastupdate = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
+        $check_video_Lastupdate_row = mysql_fetch_array($check_video_Lastupdate);		
+        //echo $check_total_version_num;
 		$videoversion_num = $check_total_version_num+1;
-		$query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.", NULL)");
+		if($check_video_Lastupdate_row['version']=="Final"){
+            $query = mysql_query("UPDATE video_under_project SET notes = '".$_POST['notes']."' WHERE id = ".$check_video_Lastupdate_row['id']);
+            //echo "UPDATE video_under_project SET notes = '".$_POST['notes']."' WHERE id = ".$check_video_Lastupdate_row['id'];
+        }else{
+            $query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.", NULL)");
+        }
 		mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".mysql_insert_id()."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
         if(!$query){
 			echo  "Cannot Save this Video to Project.";
@@ -39,9 +46,10 @@
             $checksamelinkrow = mysql_fetch_array($checksamelink);
             //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($_POST['downloadlink']!=""){
+                //echo $_POST['downloadlink'];
                 if($_POST['downloadlink']!=$checksamelinkrow['download_file']){
                     //echo "UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id'];
-                    mysql_query("UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id']);
+                    mysql_query("UPDATE video_project SET download_file = '".$_POST['downloadlink']."' WHERE id = ".$_POST['project_id']);
                     $mailsubject = 'You file was ready to download.';
 
                     $mailmessage = '<p>Dear '.$cca_row['contact_person'].'</p>
@@ -112,11 +120,14 @@
                                     $showvideovalue = 'value="http://www.youtube.com/?v='.cleanYoutubeLink($check_video_Lastupdate_row['video_link']).'"';
 								}
 							?>
-                        <input name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link columns sixteen" <?php echo $showvideovalue; ?> >
+
+                        <input id="realtime_link" name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?=$video_display_code;?>" class="video_link columns sixteen" <?php echo $showvideovalue; ?> >
+                        <div id="put_new_youtube"></div>
+
                         <div class="video sixteen columns omega alpha">
                             <!-- VIMEO EMBED -->
                             <?if($check_video_Lastupdate_row['video_link']!=""){?>
-                                <iframe  src="<?php echo $video_display_code;?>" frameborder="0" allowfullscreen></iframe>
+                                <iframe id="calendar" src="<?php echo $video_display_code;?>" frameborder="0" allowfullscreen></iframe>
                             <? }else{ ?>
                                 <i class="fa fa-video-camera blank_video"></i>
                             <? } ?>
@@ -131,7 +142,7 @@
                         <div id="final_version" class="draft_check"><input type="radio" name="version" value="Final"  <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Verison</span></div>
                             <? if($check_video_Lastupdate_row['version']=="Final"){ ?>
                                 <label class="title" for="">Download Video Link</label>
-                                <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link">
+                                <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link" value="<?php echo $check_project_name_row['download_file']?>">
                             <? } ?>
                             <label class="title" for="">Director's Notes</label>
                             <textarea name="notes" id="" cols="30" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>"></textarea>
@@ -207,8 +218,8 @@
 							$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row ['id']." ORDER BY id LIMIT 0, 1");
 							$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 
-							if($list_video_client_addition_request_row['audio_comment']!="" && $list_video_feedback[$i]!=""){
-                                if($video_num>0 && $i==0){
+							if($list_video_client_addition_request_row['voice_comment']!="" || $list_video_feedback[$i]!=""){
+                                if($i==0){
                                     echo '<li><h1>Current Drafts</h1></li>';
                                 }
                                 echo '
@@ -222,7 +233,7 @@
     										
     										<ul class="pasttimestamps">
     											<li>Your Notes<small>'.$video_row['notes'].'</small></li>
-    											<li>Client feedback<small></small></li>
+    											<li>Client feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
     											'.$list_video_feedback[$i].'
     										</ul>
     										
@@ -240,4 +251,13 @@
             <div id="overlay_wrapper" onclick="closeAllCards()"></div>
         </body>
     </html>
- 
+<script>
+    $(document).ready(function(){
+
+        $("#realtime_link").keyup(function(){
+            var query = $("#realtime_link").val();
+            query2 = query.split("?v=").pop();
+            document.getElementById('calendar').src = "//www.youtube.com/embed/"+query2;
+        });
+    });
+</script> 

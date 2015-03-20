@@ -574,3 +574,12 @@ ul#videos li.video_obj .pasttimestamps li.director {
 padding: 1em;
 color: #1E8AA3;
 }
+.big_btn{
+  padding: 50px 0;
+  font-size: 50px;
+  border-radius: 21px;
+  text-align: center;
+}
+.checkbox{
+	width: auto !important;
+}
