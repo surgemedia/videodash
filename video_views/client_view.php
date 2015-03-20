@@ -29,8 +29,9 @@ if($_POST['make_video_version_to_final']=="yes"){
 	$l_video_under_project_row = mysql_fetch_array($l_video_under_project);
 	$version_number_editer = $l_video_under_project_row['version_num'] + 1;
 	mysql_query("INSERT INTO video_under_project VALUES(NULL, ".$_POST['project_id'].", '".$l_video_under_project_row['video_link']."', 'Final', 'Final Version Confirmed', 1, ".$version_number_editer.", NULL);");
-	$mail_message = 'Client just confirmed the video as final version. Company is:'.$cca_row['company_name']."<br/>
-	their Video Project is: ".$projectname_row['project_name'];
+	$mail_message = '<b>A client has confirmed the final version of their video</b>
+	Client: '.$cca_row['company_name']."<br/>
+	Video Project: ".$projectname_row['project_name'];
 }
 
 
@@ -97,8 +98,9 @@ if($_POST['voice_comment']!=""){
 }
 
 if($forloopcount>0){
-	$mail_message = 'There is new feedback message for Client:'.$cca_row['company_name']."<br/>
-	their Video Project is: ".$projectname_row['project_name']."
+	$mail_message = 'A client has submitted their final set of changes.<br/>
+	Client: '.$cca_row['company_name']."<br/>
+	Video Project: ".$projectname_row['project_name']."
 	Comment: ".$general_comment."
 	<table>
 		<tr><th>Start</th><th>End</th><th>Type</th><th>comments</th><tr>
@@ -159,7 +161,7 @@ $name = "Surge Media - Video Dash";
 $frommail = "cs@videodash.surgehost.com.au";
 $mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
 $mailtoclient = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-$mailsubject = 'New Update of Client request in Video Dash';
+$mailsubject = 'CLIENT #'.$last_video_under_project_row['version_num'].'' CHANGES – TO SURGE';
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=utf-8\r\n";
 $headers .="From: ". $name . " <" . $frommail . ">\r\n";
@@ -200,21 +202,69 @@ if($last_video_under_project_row['version']!="Final"){
 	  }else{
 	  	$overdeadline_message = '';
 	  	if($projectname_row['download_file']!=""){
-	  		$downloadfilelink2 = '<li><a href="download_page.php?project='.$projectname_row['id'].'" class="btn yellow fifteen columns big_btn" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		//$downloadfilelink2 = '<li><a href="download_page.php?project='.$projectname_row['id'].'" class="btn yellow fifteen columns big_btn" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
+	  		/*For New option submit page*/
+	  		$downloadfilelink2 = '<li><a href="'.$projectname_row['download_file'].'" class="btn yellow fifteen columns big_btn" ><span>Download Video</span><i class="fa fa-star"></i></a></li>';
 	  		$downloadfilelink = '';
 	  	}else{
 	  		$downloadfilelink = '<li><a class="message blue" ><span>Please be patiate we will notifiy you when you can download your new video</span><i class="fa fa-star"></i></a></li>';
 	  		$downloadfilelink2 = '';
 	  	}
 	  	$file_details_message = '
-			<p>Versions included:<br/>
-			1 x MP4  - 1280 x 720 - h264 - suitable for youtube<br/>
-			1 x MP4  - 640 x480 h264 idea for uploading to your website.</p>
-			<p>Other Formats<br/>
-			Please contact our video production team if you request a different formats DVD\'s etc <br/>
-			(video@surgemedia.com.au)</p>
-			<p>Extended storate<br/>
-			Your Data will be stored for 6 months. Please contact if your request any copy.</p>
+	  		<h4>VIDEO DASH – SUPPLYING OPTIONS</h4>
+	  		<h5>FINAL VIDEO DOWNLOAD</h5>
+			<p>There are two versions of your final video. <br/>
+			1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites. <br/>
+			1 x MP4 640x360 pixel – This is ideal for uploading to the web<br/>
+			<br/>
+			If you require different formats, please contact our video production team – <br/>
+			<a href="video@surgemedia.com.au">video@surgemedia.com.au</a>
+			</p>
+			<p><b>Below are extra options for supplying your project file.</b></p>
+			<h5>USB</h5>
+			<p>Surge Media has a few options regarding USB storage and branding.
+				<ul>
+					<li>&bull;USB Logo branded – A USB branded with your logo printed on both sides. </li>
+					<li>&bull;USB Plain – A USB with no branding.</li>
+				</ul>
+			</p>
+			<h5>DVD AND DATA DISC</h5>
+			<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. 
+				<ul>
+					<li>&bull;DVD Printed Disc – A DVD disc with your logo and project name printed onto the disc. </li>
+					<li>&bull;DVD Plain – A DVD disc with no logo.</li>
+					<li>&bull;DVD COVER – A cover designed and printed for your DVD case. You can choose between two designs. </li>
+					<li>&bull;Data Disc Printed – A Data disc with your logo and project name printed onto the disc.</li>
+					<li>&bull;Data Disc Plain - A Data disc with no logo.</li>
+				</ul>
+			</p>
+			<h5>DATA AND PROJECT STORAGE</h5>
+			<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply. 
+				<ul>
+					<li>&bull;Surge Media allows you to collect your raw footage on a supplied hard drive  - $50.00</li>
+					<li>&bull;Surge Media will supply a hard drive with your raw footage for your collection - $20.00</li>
+					<li>&bull;Surge Media will store your raw footage and final project for a period of 5 years - $60.00</li>
+					<li>&bull;Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+				</ul>
+			</p>
+			<h5>MARKETING </h5>
+			<p>YOUTUBE is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.  
+				<ul>
+					<li>&bull;Surge Media will upload your project to your Youtube channel - $19.95</li>
+					<li>&bull;Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - $102.00</li>
+					<li>&bull;Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+				</ul>
+			</p>
+			<p>REMARKETING can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites. 
+				<ul>
+					<li>&bull;This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.</li>
+				</ul>
+			</p>
+			<p>TELEVISION is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience. 
+				<ul>
+					<li>&bull;Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+				</ul>
+			</p>
 	  	';
 	  	if($projectname_row['download_file']!=""){
 	  		$downloadfile_message = '<br/>Congratulations your video is now ready for downlaod now.'.$file_details_message;
