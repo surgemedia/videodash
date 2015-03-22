@@ -34,6 +34,10 @@
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+            $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
+            //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
+            $checksamelinkrow = mysql_fetch_array($checksamelink);
+            //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($videoversion_num==1){
     			$mailsubject = 'VIDEO DASH – 1ST DRAFT ('.$checksamelinkrow['project_name'].')';
     			$mailmessage = '
@@ -66,10 +70,6 @@
                 <p>The Team at Surge Media</p>
                 ';
             }
-            $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
-            //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
-            $checksamelinkrow = mysql_fetch_array($checksamelink);
-            //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($_POST['downloadlink']!=""){
                 //echo $_POST['downloadlink'];
                 if($_POST['downloadlink']!=$checksamelinkrow['download_file']){
@@ -277,7 +277,7 @@
                 </section>
             </main>
             <? include('../footer.php');?>
-            <div id="overlay_wrapper" onclick="closeAllCards()"></div>
+            <div id="overlay_wrapper" onClick="closeAllCards()"></div>
         </body>
     </html>
 <script>
