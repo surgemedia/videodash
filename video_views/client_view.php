@@ -135,7 +135,7 @@ if($comment_remind_mail == 1){// Update mailout to 1 and will stop to send mail 
 			If we have any questions regarding your changes, we will contact you. <br/>
 			Thank you<br/>
 		';
-		$update_mail_subject = "1st SET OF CHANGES";
+		$update_mail_subject = "Your First Set of Changes";
 		mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row['id']);
 		//Update database to stop sendmail duplicate
 	}
@@ -152,7 +152,7 @@ if($comment_remind_mail == 1){// Update mailout to 1 and will stop to send mail 
 			';
 			mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row['id']);
 			//Update database to stop sendmail duplicate
-			$update_mail_subject = "2nd SET OF CHANGES";
+			$update_mail_subject = "Your Second Set of Changes";
 		}
 	}
 }
@@ -267,7 +267,7 @@ if($last_video_under_project_row['version']!="Final"){
 			</p>
 	  	';
 	  	if($projectname_row['download_file']!=""){
-	  		$downloadfile_message = '<br/>Congratulations your video is now ready for downlaod now.'.$file_details_message;
+	  		$downloadfile_message = 1; //'<br/>Congratulations your video is now ready for downlaod now.'.$file_details_message;
 	  	}else{
 	  		$downloadfile_message = '<br/>We are editing your video now.'.$file_details_message;
 	  	}
@@ -375,8 +375,61 @@ if($last_video_under_project_row['version']!="Final"){
 						</label>
 						<?php endif; ?>
 						<?php if($downloadfile_message) : ?>
-						<label class="message blue" for="">
-							<?php echo $downloadfile_message; ?>
+						<div id="download_message" class="light_blue">
+							<h4>VIDEO DASH – SUPPLYING OPTIONS</h4>
+	  		<h5>FINAL VIDEO DOWNLOAD</h5>
+			<p>There are two versions of your final video. <br/>
+			1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites. <br/>
+			1 x MP4 640x360 pixel – This is ideal for uploading to the web<br/>
+			<br/>
+			If you require different formats, please contact our video production team – <br/>
+			<a href="video@surgemedia.com.au">video@surgemedia.com.au</a>
+			</p>
+			<p><b>Below are extra options for supplying your project file.</b></p>
+			<h5>USB</h5>
+			<p>Surge Media has a few options regarding USB storage and branding.
+				<ul>
+					<li>&bull;USB Logo branded – A USB branded with your logo printed on both sides. </li>
+					<li>&bull;USB Plain – A USB with no branding.</li>
+				</ul>
+			</p>
+			<h5>DVD AND DATA DISC</h5>
+			<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. 
+				<ul>
+					<li>&bull;DVD Printed Disc – A DVD disc with your logo and project name printed onto the disc. </li>
+					<li>&bull;DVD Plain – A DVD disc with no logo.</li>
+					<li>&bull;DVD COVER – A cover designed and printed for your DVD case. You can choose between two designs. </li>
+					<li>&bull;Data Disc Printed – A Data disc with your logo and project name printed onto the disc.</li>
+					<li>&bull;Data Disc Plain - A Data disc with no logo.</li>
+				</ul>
+			</p>
+			<h5>DATA AND PROJECT STORAGE</h5>
+			<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply. 
+				<ul>
+					<li>&bull;Surge Media allows you to collect your raw footage on a supplied hard drive  - $50.00</li>
+					<li>&bull;Surge Media will supply a hard drive with your raw footage for your collection - $20.00</li>
+					<li>&bull;Surge Media will store your raw footage and final project for a period of 5 years - $60.00</li>
+					<li>&bull;Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+				</ul>
+			</p>
+			<h5>MARKETING </h5>
+			<p>YOUTUBE is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.  
+				<ul>
+					<li>&bull;Surge Media will upload your project to your Youtube channel - $19.95</li>
+					<li>&bull;Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - $102.00</li>
+					<li>&bull;Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+				</ul>
+			</p>
+			<p>REMARKETING can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites. 
+				<ul>
+					<li>&bull;This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.</li>
+				</ul>
+			</p>
+			<p>TELEVISION is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience. 
+				<ul>
+					<li>&bull;Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+				</ul>
+			</p>
 						</label>
 						<?php endif; 
 
@@ -441,10 +494,10 @@ if($last_video_under_project_row['version']!="Final"){
 					$video_row = mysql_fetch_array($listvideos);
 					$show_final_color = $show_final_msg = "";
 					if($video_row['version']=="Final"){
-						$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
-						$show_final_msg = "[Final]";
+						//$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
+						$show_final_msg = "Final Video <i class='fa-star fa'></i>";
 					}else{
-						$show_final_msg = "[Draft]";
+						$show_final_msg = "Draft copy <i class='fa-pencil-square-o fa'></i>";
 					}
 					$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
 					$list_video_client_request_num = mysql_num_rows($list_video_client_request);
@@ -471,7 +524,7 @@ if($last_video_under_project_row['version']!="Final"){
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 					$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
 					if($show_final_msg):
-					$new_final_message = '<label class="message">'.$show_final_msg.'</label>';
+					$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
 					endif;
 					echo '
 					<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
