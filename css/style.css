@@ -40,6 +40,9 @@ textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; w
 .btn.red:active,
 .btn.red:focus { }
 .btn.blue { background-color: #48bdd6;  color: #fff;}
+.btn.blue:hover {
+    background: #32A3BB;
+}
 .btn.three {
 font-size: 0.9em;
 }
@@ -209,7 +212,7 @@ ul#videos li.video_obj .pasttimestamps { float: left; width: 107%; padding: 0em 
 ul#videos li.video_obj.open_card .pasttimestamps:hover {
 }
 ul#videos li.video_obj .pasttimestamps li { float: left; width: 97%; border-bottom: 1px solid #CADDE7; margin: 0em 0 0.2em 0; padding: 0.3em; }
-ul#videos li.video_obj .pasttimestamps li small { float: left; width: 100%; font-size: 0.9em; margin: 0.2em 0; }
+ul#videos li.video_obj .pasttimestamps li small { float: left; width: 93%; font-size: 0.9em; margin: 0.2em 0; }
 ul#videos li.video_obj h4 { float: left; width: 100%; margin: 0 0 0 0; text-align: center; transition: 0.3s ease all;}
 ul#videos li.video_obj .pasttimestamps time { font-size: 1em; float: left; clear: both;
  padding: 0.5em 0.7em;
@@ -222,7 +225,7 @@ background: #fff; }
 ul#videos li.video_obj .ver_number { position: absolute; top: -1em; background: #27ae60; padding: 0.5em 1em; border-radius: 0.2em; left: 45%; color: #fff; border: 1px solid #efefef; }
 ul#videos li.video_obj.open_card {
 position: absolute;
-top: -30em;
+top: -40em;
 width:90%;
 left:1em;
 z-index: 999;
@@ -240,7 +243,7 @@ float:left;
 min-height: 515px;
 }
 ul#videos li.video_obj.open_card .feedback_wrapper {
-width: 101.1%;
+width: 100%;
 }
 ul#videos li.video_obj.open_card .audio_comment {
 float:left; clear:both;
@@ -583,3 +586,25 @@ color: #1E8AA3;
 .checkbox{
 	width: auto !important;
 }
+
+.video_obj .message {
+	width: 95%;
+}
+.light_blue_box {
+  padding: 10px;
+  color: #305B71;
+  margin: 2em 0 3em 0;
+  background:#E7F1F3;
+	float: left;
+  border-radius: 0.4em;
+  padding: 1em 1em;
+  background-color: #E7F1F3;
+}
+
+#download_message hr {
+    margin: 1em 0;
+    background: transparent;
+    border: 1px solid #BCDAE0;
+    border-bottom: 0px;
+}
+
