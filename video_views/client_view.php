@@ -116,7 +116,7 @@ $Client_mail_message ='
 Dear '.$cca_row['contact_person'].'<br/><br/>
 Thank you for submitting your first set of changes. <br/>
 Just a friendly reminder that you have one set of changes remaining. <br/>
-If we have any questions regarding your changes, we will contact you. <br/>
+We will contact you if we have any questions.<br/>
 Thank you<br/>
 ';
 $update_mail_subject = "Your First Set of Changes";
@@ -131,7 +131,7 @@ Dear '.$cca_row['contact_person'].'<br/><br/>
 Thank you for submitting your second set of changes.  <br/>
 Just a friendly reminder that these are your final changes.  <br/>
 If you require more, please contact us as charges may apply.  <br/>
-If we have any questions regarding your changes, we will contact you.  <br/>
+We will contact you if we have any questions.  <br/>
 Thank you.  <br/>
 ';
 mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row['id']);
@@ -338,8 +338,11 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 				<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 				<input value="yes" name="make_video_version_to_final" type="hidden">
 			</form>
-			
+			<?php if(!$downloadfile_message){ ?>
 			<form id="charge_update" action="request_confirm.java" method="post" class="sixteen column">
+			<?php }else{ ?>
+			<form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
+			<?php } ?>
 				<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
 				<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 				<input value="1" name="charge_change" type="hidden">
@@ -373,61 +376,57 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<p><b>Below are extra options for supplying your project file.</b></p>
 							<h2>USB</h2>
 							<p>Surge Media has a few options regarding USB storage and branding.</p>
-							<ul>
-								<li>USB Logo branded – A USB branded with your logo printed on both sides.</li>
-								<li>USB Plain – A USB with no branding.</li>
-							</ul>
-							<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+							<select name="usb_option">
+								<option>USB Logo branded &#45; A USB branded with your logo printed on both sides.</option>
+								<option>USB Plain &#45; A USB with no branding.</option>
+							</select>
 							<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
-							
+							Order Value:<input name="USB_value"/>
 							<hr>
 							<h2>DVD and Data Disc</h2>
 							<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
-							<ul>
-								<li>DVD Printed Disc – A DVD disc with your logo and project name printed onto the disc. <span class="price">$1.50 per Disc</span></li>
-								<li>DVD Plain – A DVD disc with no logo. </li>
-								<li>DVD COVER – A cover designed and printed for your DVD case. You can choose between two designs.</li>
-								<li>Data Disc Printed – A Data disc with your logo and project name printed onto the disc.</li>
-								<li>Data Disc Plain - A Data disc with no logo.</li>
-							</ul>
-							<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+							<select name="dvd_option">
+								<option>DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.</option>
+								<option>DVD Plain &#45; A DVD disc with no logo.</option>
+								<option>DVD COVER &#45; A cover designed and printed for your DVD case. You can choose between two designs.</option>
+								<option>Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.</option>
+								<option>Data Disc Plain &#45;A Data disc with no logo.</option>
+							</select>
+							Order Value:<input name="dvd_value"/>
 							<hr>
 							<h2>Data And Project Storage</h2>
+							<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
 							<ul>
-								<li>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply. </li>
-								<li>Surge Media allows you to collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
-								<li>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
-								<li>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-								<li>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+								<li><input name="dps1" value="1" type="checkbox"/>Surge Media allows you to collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
+								<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
+								<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
+								<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
 							</ul>
-							<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<h2>Marketing</h2>
 							<p><u>Youtube</u></p>
 							<p>Youtubeis the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
 							</p>
 							<ul>
-							<li>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>
-							<li>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
-							<li>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+							<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>
+							<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
+							<li><input name="market3" value="1" type="checkbox"/>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
 							</ul>
-							<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<p><u>Remarketing</u></p>
 							<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
 							</p><p>
-							This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
+							<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
 							
 						</p>
-						<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 						<hr>
 						<p><u>Television</u></p>
 						<p>Television is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience.
 							
-						</p><p>Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator.
+						</p><p><input name="Television" value="1" type="checkbox"/>Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator.
 						
 					</p>
-					<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+					<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 					
 				</div>
 				<?php endif;

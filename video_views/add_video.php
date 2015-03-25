@@ -35,18 +35,17 @@
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
             if($videoversion_num==1){
-    			$mailsubject = 'YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
+    			$mailsubject = 'VIDEO DASH - 1ST DRAFT, YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
     			$mailmessage = '
                 <b>Dear '.$cca_row['contact_person'].',</b>
-                <b>This is your first draft is ready.</b>
     			<p>We are pleased to inform you that your project is ready for review.</p>
-                <p>Please click on the link below to review your project.</p>
+                <p>The video draft has been uploaded to the Video Dash. Please click on the link below to review your project. </p>
     			<p><a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project now</a></p>
     			<p>Kind Regards</p>
     			<p>The Team at Surge Media</p>
     			';
             }else if($videoversion_num==2){
-                $mailsubject = 'YOUR PROJECT IS READY FOR REVIEW - 2('.$checksamelinkrow['project_name'].')';
+                $mailsubject = 'VIDEO DASH - 2ND DRAFT, YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
                 $mailmessage = '
                 
                 <p>Dear '.$cca_row['contact_person'].',</p>
@@ -76,7 +75,7 @@
                 if($_POST['downloadlink']!=$checksamelinkrow['download_file']){
                     //echo "UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id'];
                     mysql_query("UPDATE video_project SET download_file = '".$_POST['downloadlink']."' WHERE id = ".$_POST['project_id']);
-                    $mailsubject = 'YOUR FINAL VIDEO IS READY';
+                    $mailsubject = 'VIDEO DASH - FINAL VIDEO, YOUR PROJECT IS READY';
 
                     $mailmessage = '
                     <p>Dear '.$cca_row['contact_person'].'</p>
