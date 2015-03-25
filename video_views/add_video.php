@@ -34,10 +34,6 @@
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-            $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
-            //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
-            $checksamelinkrow = mysql_fetch_array($checksamelink);
-            //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($videoversion_num==1){
     			$mailsubject = 'YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
     			$mailmessage = '
@@ -71,6 +67,10 @@
                 <p>The Team at Surge Media</p>
                 ';
             }
+            $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
+            //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
+            $checksamelinkrow = mysql_fetch_array($checksamelink);
+            //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($_POST['downloadlink']!=""){
                 //echo $_POST['downloadlink'];
                 if($_POST['downloadlink']!=$checksamelinkrow['download_file']){
@@ -239,11 +239,24 @@
 
 							$list_video_client_request_num = mysql_num_rows($list_video_client_request);
 							for($j=0; $j<$list_video_client_request_num; $j++){
-								$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
-								$list_video_feedback[$i] .="
-									<li><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time><small>".$list_video_client_request_row['feedback']."</small></li>
-								";
-							}
+                    $list_video_client_request_row = mysql_fetch_array($list_video_client_request);
+                    $show_feedback_type = $list_video_client_request_row['feedback_type'];
+                    if($list_video_client_request_row['feedback_type']==1){
+                        $show_feedback_type = 'Changes To Video';
+                        $show_feedback_type_class = 'changes-video';
+
+                    }else if($list_video_client_request_row['feedback_type']==2){
+                        $show_feedback_type = 'Changes To Audio';
+                        $show_feedback_type_class = 'changes-audio';
+                    }else if($list_video_client_request_row['feedback_type']==3){
+                        $show_feedback_type = 'Other';
+                        $show_feedback_type_class = 'changes-other';
+                    }
+                    $list_video_feedback[$i] .="
+                    <li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+                    <small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
+                    ";//list all request information display in page
+                    }
 							$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row ['id']." ORDER BY id LIMIT 0, 1");
 							$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
 
@@ -251,25 +264,8 @@
                                 if($i==0){
                                     echo '<li><h1>Current Drafts</h1></li>';
                                 }
-                                echo '
-    								<li class="video_obj five columns" '.$show_final_color.' onclick="expandCard($(this))">
-    									<span class="ver_number">'.$video_row['version_num'].'</span>
-    									<h3 class="title">'.$check_project_name_row['project_name'].'</h3>
-    									<div class="video draft">
-    										<iframe width="500" height="400" src="//www.youtube.com/embed/'.cleanYoutubeLink($video_row['video_link']).'" frameborder="0" allowfullscreen></iframe>
-    									</div>
-    									<div class="feedback_wrapper">
-    										
-    										<ul class="pasttimestamps">
-    											<li>Your Notes<small>'.$video_row['notes'].'</small></li>
-    											<li>Client feedback<small>'.$list_video_client_addition_request_row['voice_comment'].'</small></li>
-    											'.$list_video_feedback[$i].'
-    										</ul>
-    										
-    									</div>
-                                        
-    								</li>
-    							';
+                                include('../inc/video-draft-object.php');
+                                
                             }
 						}
 					?>
@@ -277,7 +273,7 @@
                 </section>
             </main>
             <? include('../footer.php');?>
-            <div id="overlay_wrapper" onClick="closeAllCards()"></div>
+            <div id="overlay_wrapper" onclick="closeAllCards()"></div>
         </body>
     </html>
 <script>
