@@ -312,7 +312,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 			<?php
 			/*=======================================*/
 			/*         Get Feedback Deadline         */
-										/*=======================================*/
+			/*=======================================*/
 				function check_deadline($function_v_project_id, $version, $mode){
 					$check_deadline = mysql_query("SELECT upload_time FROM video_under_project WHERE video_project_id = ".$function_v_project_id." AND version LIKE '".$version."' AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
 					$check_deadline_row = mysql_fetch_array($check_deadline);
@@ -424,10 +424,10 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							Order Value:							
 							<select name="USB_value_color">
 								<option value="">Please select order PCS of USB</option>
-								<option value="25">10 PCS</option>
-								<option value="50">20 PCS</option>
-								<option value="100">50 PCS</option>
-								<option value="250">100 PCS</option>
+								 <option value="25">25 PCS</option>
+								 <option value="50">50 PCS</option>
+								<option value="100">100 PCS</option>
+								<option value="250">250 PCS</option>
 							</select>
 							</div>
 							<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
@@ -437,24 +437,25 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
 							<ul>
 								<li>
-									<input name="dvd_option" type="radio" value="DVD Printed Disc">
+									<input name="dvd_option" type="checkbox" value="DVD Printed Disc">
 									DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.
 								</li>
 								<li>
-									<input name="dvd_option" type="radio" value="DVD Plain">
+									<input name="dvd_option" type="checkbox" value="DVD Plain">
 									DVD Plain &#45; A DVD disc with no logo.
 								</li>
+								
 								<li>
-									<input name="dvd_option" type="radio" value="DVD COVER">
-									DVD COVER &#45; A cover designed and printed for your DVD case. You can choose between two designs.
-								</li>
-								<li>
-									<input name="dvd_option" type="radio" value="Data Disc Printed">
+									<input name="dvd_option" type="checkbox" value="Data Disc Printed">
 									Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.
 								</li>
 								<li>
-									<input name="dvd_option" type="radio" value="Data Disc Plain">
+									<input name="dvd_option" type="checkbox" value="Data Disc Plain">
 									Data Disc Plain &#45;A Data disc with no logo.
+								</li>
+								<li>
+									<input name="dvd_option" type="checkbox" value="DVD COVER">
+									DVD Cover &#45; A cover designed and printed for your DVD case. You can choose between two designs.
 								</li>
 							</ul>
 							Order Value:
@@ -479,7 +480,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<hr>
 							<h2>Marketing</h2>
 							<p><u>Youtube</u></p>
-							<p>Youtubeis the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
+							<p>Youtube is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
 							</p>
 							<ul>
 							<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>

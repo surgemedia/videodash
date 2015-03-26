@@ -51,26 +51,26 @@ if(count($upsell_mail)!=0){
 	for($i=0; $i<count($upsell_mail); $i++){
 		$mailcont .='<li>'.$upsell_mail[$i].'</li>';
 	}
-	$mailcontent .= 'Client:'.$cca_row['company_name'].'<br/>';
-	$mailcontent .= 'Project:'.$projectname_row['project_name'].'<br/>';
-	$mailcontent .= 'Addition request for Client:';
+	$mailcontent .= '<strong>Client:</strong> '.$cca_row['company_name'].'<br/>';
+	$mailcontent .= '<strong>Project:</strong> '.$projectname_row['project_name'].'<br/>';
+	$mailcontent .= 'Additional request from client:';
 	$mailcontent .= '<ul>';
 	$mailcontent .= $mailcont;
 	$mailcontent .= '</ul>';
 	$mailcontentTOCLIENT .= '
 		Dear '.$cca_row['contact_person'].'<br/><br/>
-		Thank you for Addition order of your video.  <br/>
-		We will send the quotation of your request.<br/>
+		Thank you for submitting an order for additional storage.<br/>
+		You will be sent a quote of your request within 48 hours.<br/>
 		We will contact you if we have any questions.  <br/>
-		Thank you.  <br/>
+		Thank you <br/>
 		';
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 	$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
 	$mailTOCLIENT = 'video@surgemedia.com.au, webproduction@surgemedia.com.au';
-	$mailsubject = 'CLIENT #'.$projectname_row['project_name'].' Upsell – TO SURGE';
-	$mailsubjectTOCLIENT = $projectname_row['project_name'].' Addition Request confirm mail';
+	$mailsubject = ''.$projectname_row['project_name'].' Additional Storage';
+	$mailsubjectTOCLIENT = $projectname_row['project_name'].' Additional Request Confirm Mail';
 	$mail_data = file_get_contents('../email_template/feedback.html');
 	$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 	$mail_data = str_replace("[mail_content]",  $mailcontent, $mail_data);
