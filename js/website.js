@@ -80,3 +80,17 @@ function NewTimelineComment(){
   output = li_open+'<div class="controls"><span class="timeline_picker "><label for="start">Start</label>'+start+'</span><span class="timeline_picker end "><label for="start">End</label>'+end+'</span>'+selectoption+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
+$(document).on('change', 'input[name="usb_option"]', function(){
+    var get_usb = $(this).val();
+    if(get_usb == 1){
+      $('#brandusb').removeClass("disable_input");
+      $('#brandusb').addClass("display_input");
+      $('#plainusb').removeClass("display_input");
+      $('#plainusb').addClass("disable_input");
+    }else{
+      $('#plainusb').removeClass("disable_input");
+      $('#plainusb').addClass("display_input");
+      $('#brandusb').removeClass("display_input");
+      $('#brandusb').addClass("disable_input");
+    }
+});

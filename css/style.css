@@ -607,4 +607,9 @@ color: #1E8AA3;
     border: 1px solid #BCDAE0;
     border-bottom: 0px;
 }
-
+.disable_input{
+	display: none;
+}
+.display_input{
+	display: block;
+}

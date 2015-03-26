@@ -378,13 +378,14 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<p>Surge Media has a few options regarding USB storage and branding.</p>
 							<ul>
 								<li>
-									<input id="option_brandusb" name="usb_option" type="radio" value="SB Logo branded &#45; A USB branded with logo printed on both sides." checked="checked">USB Logo branded &#45; A USB branded with your logo printed on both sides.
+									<input id="option_brandusb" name="usb_option" type="radio" value="1">USB Logo branded &#45; A USB branded with your logo printed on both sides.
 								</li>
 								<li>
-									<input id="option_plainusb" name="usb_option" type="radio" value="USB Plain &#45; A USB with no branding.">USB Plain &#45; A USB with no branding.
+									<input id="option_plainusb" name="usb_option" type="radio" value="2">USB Plain &#45; A USB with no branding.
 								</li>
 							</ul>
-							<select name="usb_type" id="usb_branded"  style="">
+							<div id="brandusb" class="disable_input">
+							<select name="usb_type">
 								<option value="">Please Select your USB products for request:</option>
 								<option value="Alloy USB Card">Alloy USB Card</option>
 								<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
@@ -401,7 +402,17 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
 								<option value="Image USB Flash Drive">Image USB Flash Drive</option>
 							</select>
-							<select name="usb_color" id="usb_plain"  style="display:none">
+							Order Value:	
+							<select name="USB_value">
+								<option value="">Please select order PCS of USB</option>
+								<option value="25">25 PCS</option>
+								<option value="50">50 PCS</option>
+								<option value="100">100 PCS</option>
+								<option value="250">250 PCS</option>
+							</select>
+							</div>
+							<div id="plainusb" class="disable_input">
+							<select name="usb_color">
 								<option value="">Please Select your USB color:</option>
 								<option value="White">White</option>
 								<option value="Black">Black</option>
@@ -410,21 +421,15 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<option value="Blue">Blue</option>
 								<option value="Yellow">Yellow</option>
 							</select>
-							Order Value:
-							<select name="USB_value" style="">
-								<option value="">Please select order PCS of USB</option>
-								<option value="25">25 PCS</option>
-								<option value="50">50 PCS</option>
-								<option value="100">100 PCS</option>
-								<option value="250">250 PCS</option>
-							</select>
-							<select name="USB_value_color" style="display:none">
+							Order Value:							
+							<select name="USB_value_color">
 								<option value="">Please select order PCS of USB</option>
 								<option value="25">10 PCS</option>
 								<option value="50">20 PCS</option>
 								<option value="100">50 PCS</option>
 								<option value="250">100 PCS</option>
 							</select>
+							</div>
 							<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
 							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>

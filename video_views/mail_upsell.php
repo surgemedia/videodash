@@ -5,9 +5,17 @@ $cca_num = mysql_num_rows($check_client_active);
 $cca_row = mysql_fetch_array($check_client_active);
 $projectname = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']);
 $projectname_row = mysql_fetch_array($projectname);
-if($_POST['USB_value']!="" && $_POST['usb_type']!=""){
-	$upsell_mail[] = $_POST['usb_type'].'['.$_POST['usb_option'].']'.' TOTAL: '.$_POST['USB_value'].' PCS';
-}//If client put the number in this field, it will show in mail.
+if($_POST['usb_option']!=""){
+	if($_POST['usb_option']=="1"){
+		if($_POST['USB_value']!="" && $_POST['usb_type']!=""){
+			$upsell_mail[] = $_POST['usb_type'].'[Branding USB]'.' TOTAL: '.$_POST['USB_value'].' PCS';
+		}//If client put the number in this field, it will show in mail.	
+	}else{
+		if($_POST['USB_value_color']!="" && $_POST['usb_color']!=""){
+			$upsell_mail[] = $_POST['usb_color'].'[Plain USB]'.' TOTAL: '.$_POST['USB_value_color'].' PCS';
+		}//If client put the number in this field, it will show in mail.	
+	}
+}
 if($_POST['dvd_value']!="" && $_POST['dvd_option']!=""){
 	$upsell_mail[] = $_POST['dvd_option'].' TOTAL: '.$_POST['dvd_value'].' PCS';
 }//If client put the number in this field, it will show in mail.
