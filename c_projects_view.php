@@ -21,6 +21,12 @@
 			$message = "Success to insert data to database.";
 		}
 	}
+	if($_GET['msg']=='D1'){
+		$show_meg = '<label class="message " ><span>Sorry, we cannot have any request from you. </span> <i class="fa fa-exclamation-circle"></i> </label>';
+	}
+	if($_GET['msg']=='c1'){
+		$show_meg = '<label class="message " ><span>Thank you, your request already send to us.</span> <i class="fa fa-thumbs-up"></i> </label>';
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,6 +39,7 @@
                 	<h1>Video Dash</h1>
                 </div> -->
                     <h1 class="">Your Projects</h1>  
+                    <?php echo $show_meg;?>
                     <ul id="list" class="list">
                     <?
 						//enable or del client

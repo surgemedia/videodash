@@ -376,23 +376,91 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<p><b>Below are extra options for supplying your project file.</b></p>
 							<h2>USB</h2>
 							<p>Surge Media has a few options regarding USB storage and branding.</p>
-							<select name="usb_option">
-								<option>USB Logo branded &#45; A USB branded with your logo printed on both sides.</option>
-								<option>USB Plain &#45; A USB with no branding.</option>
+							<ul>
+								<li>
+									<input id="option_brandusb" name="usb_option" type="radio" value="SB Logo branded &#45; A USB branded with logo printed on both sides." checked="checked">USB Logo branded &#45; A USB branded with your logo printed on both sides.
+								</li>
+								<li>
+									<input id="option_plainusb" name="usb_option" type="radio" value="USB Plain &#45; A USB with no branding.">USB Plain &#45; A USB with no branding.
+								</li>
+							</ul>
+							<select name="usb_type" id="usb_branded"  style="">
+								<option value="">Please Select your USB products for request:</option>
+								<option value="Alloy USB Card">Alloy USB Card</option>
+								<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+								<option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
+								<option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>
+								<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+								<option value="Rotator USB Flash Drive">Rotator USB Flash Drive</option>
+								<option value="Executive USB Flash Drive">Executive USB Flash Drive</option>
+								<option value="Classic USB Flash Drive">Classic USB Flash Drive</option>
+								<option value="Trix USB Flash Drive">Trix USB Flash Drive</option>
+								<option value="Ellipse USB Flash Drive">Ellipse USB Flash Drive</option>
+								<option value="Halo USB Flash Drive">Halo USB Flash Drive</option>
+								<option value="Pod USB Flash Drive">Pod USB Flash Drive</option>
+								<option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
+								<option value="Image USB Flash Drive">Image USB Flash Drive</option>
+							</select>
+							<select name="usb_color" id="usb_plain"  style="display:none">
+								<option value="">Please Select your USB color:</option>
+								<option value="White">White</option>
+								<option value="Black">Black</option>
+								<option value="Red">Red</option>
+								<option value="Green">Green</option>
+								<option value="Blue">Blue</option>
+								<option value="Yellow">Yellow</option>
+							</select>
+							Order Value:
+							<select name="USB_value" style="">
+								<option value="">Please select order PCS of USB</option>
+								<option value="25">25 PCS</option>
+								<option value="50">50 PCS</option>
+								<option value="100">100 PCS</option>
+								<option value="250">250 PCS</option>
+							</select>
+							<select name="USB_value_color" style="display:none">
+								<option value="">Please select order PCS of USB</option>
+								<option value="25">10 PCS</option>
+								<option value="50">20 PCS</option>
+								<option value="100">50 PCS</option>
+								<option value="250">100 PCS</option>
 							</select>
 							<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
-							Order Value:<input name="USB_value"/>
+							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<h2>DVD and Data Disc</h2>
 							<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
-							<select name="dvd_option">
-								<option>DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.</option>
-								<option>DVD Plain &#45; A DVD disc with no logo.</option>
-								<option>DVD COVER &#45; A cover designed and printed for your DVD case. You can choose between two designs.</option>
-								<option>Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.</option>
-								<option>Data Disc Plain &#45;A Data disc with no logo.</option>
+							<ul>
+								<li>
+									<input name="dvd_option" type="radio" value="DVD Printed Disc">
+									DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.
+								</li>
+								<li>
+									<input name="dvd_option" type="radio" value="DVD Plain">
+									DVD Plain &#45; A DVD disc with no logo.
+								</li>
+								<li>
+									<input name="dvd_option" type="radio" value="DVD COVER">
+									DVD COVER &#45; A cover designed and printed for your DVD case. You can choose between two designs.
+								</li>
+								<li>
+									<input name="dvd_option" type="radio" value="Data Disc Printed">
+									Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.
+								</li>
+								<li>
+									<input name="dvd_option" type="radio" value="Data Disc Plain">
+									Data Disc Plain &#45;A Data disc with no logo.
+								</li>
+							</ul>
+							Order Value:
+							<select name="dvd_value">
+								<option value="">Please select order PCS of DVD</option>
+								<option value="10">10 PCS</option>
+								<option value="20">20 PCS</option>
+								<option value="50">50 PCS</option>
+								<option value="100">100 PCS</option>
 							</select>
-							Order Value:<input name="dvd_value"/>
+							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<h2>Data And Project Storage</h2>
 							<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
@@ -402,6 +470,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
 								<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
 							</ul>
+							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<h2>Marketing</h2>
 							<p><u>Youtube</u></p>
@@ -412,12 +481,13 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
 							<li><input name="market3" value="1" type="checkbox"/>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
 							</ul>
+							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 							<hr>
 							<p><u>Remarketing</u></p>
 							<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
 							</p><p>
 							<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
-							
+							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
 						</p>
 						<hr>
 						<p><u>Television</u></p>

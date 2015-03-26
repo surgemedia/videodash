@@ -5,22 +5,12 @@ $cca_num = mysql_num_rows($check_client_active);
 $cca_row = mysql_fetch_array($check_client_active);
 $projectname = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']);
 $projectname_row = mysql_fetch_array($projectname);
-if($_POST['usb_option']!=""){
-	if($_POST['USB_value']!=""){
-		$usb_value = $_POST['USB_value'];
-	}else{
-		$usb_value = 1;
-	}
-	$upsell_mail[] = $_POST['usb_option'].' TOTAL: '.$usb_value.' PCS';
-}
-if($_POST['dvd_option']!=""){
-	if($_POST['dvd_value']!=""){
-		$usb_value = $_POST['dvd_value'];
-	}else{
-		$usb_value = 1;
-	}
-	$upsell_mail[] = $_POST['dvd_option'].' TOTAL: '.$usb_value.' PCS';
-}
+if($_POST['USB_value']!="" && $_POST['usb_type']!=""){
+	$upsell_mail[] = $_POST['usb_type'].'['.$_POST['usb_option'].']'.' TOTAL: '.$_POST['USB_value'].' PCS';
+}//If client put the number in this field, it will show in mail.
+if($_POST['dvd_value']!="" && $_POST['dvd_option']!=""){
+	$upsell_mail[] = $_POST['dvd_option'].' TOTAL: '.$_POST['dvd_value'].' PCS';
+}//If client put the number in this field, it will show in mail.
 if($_POST['dps1']!=""){
 	$upsell_mail[] = 'Allows collect raw footage on a supplied hard drive';	
 }
@@ -48,6 +38,7 @@ if($_POST['Remarketing']!=""){
 if($_POST['Television']!=""){
 	$upsell_mail[] = 'Television';	
 }
+$list_msg = '&msg=D1';
 if(count($upsell_mail)!=0){
 	for($i=0; $i<count($upsell_mail); $i++){
 		$mailcont .='<li>'.$upsell_mail[$i].'</li>';
@@ -58,18 +49,34 @@ if(count($upsell_mail)!=0){
 	$mailcontent .= '<ul>';
 	$mailcontent .= $mailcont;
 	$mailcontent .= '</ul>';
+	$mailcontentTOCLIENT .= '
+		Dear '.$cca_row['contact_person'].'<br/><br/>
+		Thank you for Addition order of your video.  <br/>
+		We will send the quotation of your request.<br/>
+		We will contact you if we have any questions.  <br/>
+		Thank you.  <br/>
+		';
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 	$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+	$mailTOCLIENT = 'video@surgemedia.com.au, webproduction@surgemedia.com.au';
 	$mailsubject = 'CLIENT #'.$projectname_row['project_name'].' Upsell – TO SURGE';
+	$mailsubjectTOCLIENT = $projectname_row['project_name'].' Addition Request confirm mail';
 	$mail_data = file_get_contents('../email_template/feedback.html');
 	$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 	$mail_data = str_replace("[mail_content]",  $mailcontent, $mail_data);
 	$the_data_is = date("d M Y");
 	$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+	$mail_data_c = file_get_contents('../email_template/feedback.html');
+	$mail_data_c = str_replace("[mail_title]",  $mailsubject, $mail_data_c);
+	$mail_data_c = str_replace("[mail_content]",  $mailcontentTOCLIENT, $mail_data_c);
+	$mail_data_c = str_replace("[mail_datandtime]",  $the_data_is, $mail_data_c);
 	mail($mailto, $mailsubject, $mail_data, $headers);
+	if(mail($mailTOCLIENT, $mailsubjectTOCLIENT, $mail_data_c, $headers)){
+		$list_msg = '&msg=c1';
+	}
 }
 
-
+header('Location: http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].$list_msg);
 ?>
