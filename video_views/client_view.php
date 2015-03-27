@@ -439,7 +439,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<li>
 									<input name="dvd_option_1" type="checkbox" value="DVD Printed Disc">
 									DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
-                                    Order Value:
+                                    <div class="option"> Order Value:
                                     <select name="dvd_value1">
                                         <option value="">Please select order PCS of DVD</option>
                                         <option value="10">10 PCS</option>
@@ -447,11 +447,12 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
                                         <option value="50">50 PCS</option>
                                         <option value="100">100 PCS</option>
                                     </select>
+                                    </div>
 								</li>
 								<li>
 									<input name="dvd_option_2" type="checkbox" value="DVD Plain">
 									DVD Plain &#45; A DVD disc with no logo.<br/>
-                                    Order Value:
+                                     <div class="option">Order Value:
                                     <select name="dvd_value2">
                                         <option value="">Please select order PCS of DVD</option>
                                         <option value="10">10 PCS</option>
@@ -459,12 +460,13 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
                                         <option value="50">50 PCS</option>
                                         <option value="100">100 PCS</option>
                                     </select>
+                                    </div>
 								</li>
 								
 								<li>
 									<input name="dvd_option_3" type="checkbox" value="Data Disc Printed">
 									Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.<br/>
-                                    Order Value:
+                                     <div class="option">Order Value:
                                     <select name="dvd_value3">
                                         <option value="">Please select order PCS of DVD</option>
                                         <option value="10">10 PCS</option>
@@ -472,11 +474,12 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
                                         <option value="50">50 PCS</option>
                                         <option value="100">100 PCS</option>
                                     </select>
+                                    </div>
 								</li>
 								<li>
 									<input name="dvd_option_4" type="checkbox" value="Data Disc Plain">
 									Data Disc Plain &#45;A Data disc with no logo.<br/>
-                                    Order Value:
+                                     <div class="option">Order Value:
                                     <select name="dvd_value4">
                                         <option value="">Please select order PCS of DVD</option>
                                         <option value="10">10 PCS</option>
@@ -484,11 +487,12 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
                                         <option value="50">50 PCS</option>
                                         <option value="100">100 PCS</option>
                                     </select>
+                                    </div>
 								</li>
 								<li>
 									<input name="dvd_option_5" type="checkbox" value="DVD COVER">
 									DVD Cover &#45; A cover designed and printed for your DVD case. You can choose between two designs.<br/>
-                                    Order Value:
+                                     <div class="option">Order Value:
                                     <select name="dvd_value5">
                                         <option value="">Please select order PCS of DVD</option>
                                         <option value="10">10 PCS</option>
@@ -496,6 +500,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
                                         <option value="50">50 PCS</option>
                                         <option value="100">100 PCS</option>
                                     </select>
+                                    </div>
 								</li>
 							</ul>
 							
