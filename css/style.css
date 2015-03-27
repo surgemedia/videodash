@@ -607,9 +607,18 @@ color: #1E8AA3;
     border: 1px solid #BCDAE0;
     border-bottom: 0px;
 }
+div#download_message input {
+    margin: 0px 10px 10px 0;
+    display: inline-block;
+}
+
+
+
 .disable_input{
 	display: none;
 }
 .display_input{
 	display: block;
 }
+
+
