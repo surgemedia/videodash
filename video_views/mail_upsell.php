@@ -79,8 +79,8 @@ if(count($upsell_mail)!=0){
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .="From: ". $name . " <" . $frommail . ">\r\n";
-	$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-	$mailTOCLIENT = 'video@surgemedia.com.au, webproduction@surgemedia.com.au';
+	$mailto = 'video@surgemedia.com.au'; // $cca_row['email'];
+	$mailTOCLIENT = $cca_row['email'];
 	$mailsubject = ''.$projectname_row['project_name'].' Additional Storage';
 	$mailsubjectTOCLIENT = $projectname_row['project_name'].' Additional Request Confirm Mail';
 	$mail_data = file_get_contents('../email_template/feedback.html');

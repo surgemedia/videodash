@@ -33,7 +33,7 @@
 			$complete_msg = '<label class="message green columns omega alpha two" for="">Updated <i class="fa fa-thumbs-up"></i></label>';;
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
-			$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+			$mailto = $cca_row['email'];
             if($videoversion_num==1){
     			$mailsubject = 'VIDEO DASH - 1ST DRAFT, YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
     			$mailmessage = '
@@ -272,7 +272,7 @@
                 </section>
             </main>
             <? include('../footer.php');?>
-            <div id="overlay_wrapper" onclick="closeAllCards()"></div>
+            <div id="overlay_wrapper" onClick="closeAllCards()"></div>
         </body>
     </html>
 <script>

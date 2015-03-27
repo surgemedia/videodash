@@ -144,7 +144,7 @@ $the_data_is = date("d M Y");
 $name = "Surge Media - Video Dash";
 $frommail = "cs@videodash.surgehost.com.au";
 $mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
-$mailtoclient = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+$mailtoclient =  $cca_row['email'];
 $mailsubject = 'CLIENT #'.$last_video_under_project_row['version_num'].' CHANGES – TO SURGE';
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=utf-8\r\n";
