@@ -16,8 +16,20 @@ if($_POST['usb_option']!=""){
 		}//If client put the number in this field, it will show in mail.	
 	}
 }
-if($_POST['dvd_value']!="" && $_POST['dvd_option']!=""){
-	$upsell_mail[] = $_POST['dvd_option'].' TOTAL: '.$_POST['dvd_value'].' PCS';
+if($_POST['dvd_value1']!="" && $_POST['dvd_option_1']!=""){
+	$upsell_mail[] = $_POST['dvd_option_1'].' TOTAL: '.$_POST['dvd_value1'].' PCS';
+}//If client put the number in this field, it will show in mail.
+if($_POST['dvd_value2']!="" && $_POST['dvd_option_2']!=""){
+	$upsell_mail[] = $_POST['dvd_option_2'].' TOTAL: '.$_POST['dvd_value2'].' PCS';
+}//If client put the number in this field, it will show in mail.
+if($_POST['dvd_value3']!="" && $_POST['dvd_option_3']!=""){
+	$upsell_mail[] = $_POST['dvd_option_3'].' TOTAL: '.$_POST['dvd_value3'].' PCS';
+}//If client put the number in this field, it will show in mail.
+if($_POST['dvd_value4']!="" && $_POST['dvd_option_4']!=""){
+	$upsell_mail[] = $_POST['dvd_option_4'].' TOTAL: '.$_POST['dvd_value4'].' PCS';
+}//If client put the number in this field, it will show in mail.
+if($_POST['dvd_value5']!="" && $_POST['dvd_option_5']!=""){
+	$upsell_mail[] = $_POST['dvd_option_5'].' TOTAL: '.$_POST['dvd_value5'].' PCS';
 }//If client put the number in this field, it will show in mail.
 if($_POST['dps1']!=""){
 	$upsell_mail[] = 'Allows collect raw footage on a supplied hard drive';	
