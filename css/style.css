@@ -107,7 +107,10 @@ header .logo { float: left; width: 20%; height: auto; }
 header nav { float: right; height: 2em; display: block; overflow: hidden; margin: 20px 0px; }
 header nav ul { float: left; }
 header nav ul li { float: left; display: inline-block; }
-header nav ul li a { float: left; color: #15A9CA; padding: 5px 10px; text-transform: uppercase; font-weight: bold; }
+header nav ul li a { float: left; color: #15A9CA; padding: 5px 10px; text-transform: uppercase; font-weight: bold; cursor: pointer;}
+header nav ul li a:hover {
+    text-decoration: underline;
+}
 /* ================================
 =    Search Section            =
 ================================ */
@@ -612,12 +615,20 @@ div#download_message input {
     display: inline-block;
 }
 div#download_message .option {
-    margin: 0 0 1em 0;
+    margin: 0 0 1em 0em;
     display: inline-block;
     padding: 0 0 1em 0;
     border-bottom: 1px solid #BCDAE0;
 }
-
+div#download_message .btn.newline {
+    display: block;
+    width: 30%;
+    clear: both;
+    margin: 2em 0 0 0;
+}
+div#brandusb select {
+    margin: 0 1em 0 0;
+}
 
 .disable_input{
 	display: none;

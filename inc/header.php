@@ -1,11 +1,11 @@
-    <header>
-        <div class="center wow fadeInDown">
-            <div class="logo"><img src="" alt=""></div>
-            <nav>
-                <ul class="nav">
-                    <li><a href="http://videodash.surgehost.com.au/home_video.java">Home</a></li>
-                    <li><a href="http://videodash.surgehost.com.au/contact.java">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                <header>
+                    <div class="center wow fadeInDown">
+                        <div class="logo"><img src="" alt=""></div>
+                        <nav>
+                            <ul class="nav">
+                                <li><a onclick="window.history.back();"><i class="fa fa-reply"></i> <span>Back</span></a></li>
+                                <li><a href="<? echo "http://".strtolower($_SERVER['SERVER_NAME'])."/home_video.java";?>">Our Clients</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>

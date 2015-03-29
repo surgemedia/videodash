@@ -96,7 +96,6 @@ Comment: ".$general_comment."
 	".$list_comment."
 </table>
 ";
-
 }
 include('../inc/youtube_function.php');
 $contents_location = "http://gdata.youtube.com/feeds/api/videos?q={".cleanYoutubeLink($last_video_under_project_row['video_link'])."}&alt=json";
@@ -181,7 +180,6 @@ $overdeadline_message = 'You have '.check_deadline($_POST['project_id'], $last_v
 }else{
 $overdeadline_message = 'Sorry, We have not recieved any changes from you in last 3 weeks, If you need any changes of your video, we will charge for time involved.';
 }
-
 }else{
 $overdeadline_message = '';
 if($projectname_row['download_file']!=""){
@@ -340,308 +338,313 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 			</form>
 			<?php if(!$downloadfile_message){ ?>
 			<form id="charge_update" action="request_confirm.java" method="post" class="sixteen column">
-			<?php }else{ ?>
-			<form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
-			<?php } ?>
-				<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
-				<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
-				<input value="1" name="charge_change" type="hidden">
-				<ul>
-					<li class="video_obj featured">
-						
-						<h1 class="title"><?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
-						</h1>
-						
-						<?php if($overdeadline_message) : ?>
-						<label class="message red" for="">
-							<?php echo $overdeadline_message; ?>
-						</label>
-						<?php endif; ?>
-						<?php if($downloadfile_message) : ?>
-						<div id="download_message" class="light_blue_box">
+				<?php }else{ ?>
+				<form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
+					<?php } ?>
+					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
+					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
+					<input value="1" name="charge_change" type="hidden">
+					<ul>
+						<li class="video_obj featured">
 							
-							<h2>Your Final Videos Are Ready To Download</h2>
-							<?php if($downloadfilelink2) { ?>
-							<?php echo $downloadfilelink2; ?>
-							<?php } else { ?>
-							<?php echo $downloadfilelink; ?>
-							<?php } ?>
-							<p>There are two versions of your final video. </p>
-							<p>1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites.</p>
-							<p>1 x MP4 640x360 pixel – This is ideal for uploading to the web</p>
+							<h1 class="title"><?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
+							</h1>
 							
-							<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a new different formats? Please Contact Our Video Production Team </span><i class="fa fa-envelope"></i></a>
+							<?php if($overdeadline_message) : ?>
+							<label class="message red" for="">
+								<?php echo $overdeadline_message; ?>
+							</label>
+							<?php endif; ?>
+							<?php if($downloadfile_message) : ?>
+							<div id="download_message" class="light_blue_box">
+								
+								<h2>Your Final Videos Are Ready To Download</h2>
+								<?php if($downloadfilelink2) { ?>
+								<?php echo $downloadfilelink2; ?>
+								<?php } else { ?>
+								<?php echo $downloadfilelink; ?>
+								<?php } ?>
+								<p>There are two versions of your final video. </p>
+								<p>1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites.</p>
+								<p>1 x MP4 640x360 pixel – This is ideal for uploading to the web</p>
+								
+								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a new different formats? Please Contact Our Video Production Team </span><i class="fa fa-envelope"></i></a>
+								<hr>
+								<h3>Supplying Options</h3>
+								<p><b>Below are extra options for supplying your project file.</b></p>
+								<h2>USB</h2>
+								<p>Surge Media has a few options regarding USB storage and branding.</p>
+								<ul>
+									<li>
+										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB Logo branded &#45; A USB branded with your logo printed on both sides.
+									</li>
+									<li>
+										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB Plain &#45; A USB with no branding.
+									</li>
+								</ul>
+								<div id="brandusb" class="disable_input">
+									<select name="usb_type">
+										<option value="">Please Select your USB products for request:</option>
+										<option value="Alloy USB Card">Alloy USB Card</option>
+										<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+										<option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
+										<option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>
+										<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+										<option value="Rotator USB Flash Drive">Rotator USB Flash Drive</option>
+										<option value="Executive USB Flash Drive">Executive USB Flash Drive</option>
+										<option value="Classic USB Flash Drive">Classic USB Flash Drive</option>
+										<option value="Trix USB Flash Drive">Trix USB Flash Drive</option>
+										<option value="Ellipse USB Flash Drive">Ellipse USB Flash Drive</option>
+										<option value="Halo USB Flash Drive">Halo USB Flash Drive</option>
+										<option value="Pod USB Flash Drive">Pod USB Flash Drive</option>
+										<option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
+										<option value="Image USB Flash Drive">Image USB Flash Drive</option>
+									</select>
+									<div class="option">
+									Order Value:
+									<select name="USB_value">
+										<option value="">Please select order PCS of USB</option>
+										<option value="25">25 PCS</option>
+										<option value="50">50 PCS</option>
+										<option value="100">100 PCS</option>
+										<option value="250">250 PCS</option>
+									</select>
+									</div>
+								</div>
+								<div id="plainusb" class="disable_input">
+									<select name="usb_color">
+										<option value="">Please Select your USB color:</option>
+										<option value="White">White</option>
+										<option value="Black">Black</option>
+										<option value="Red">Red</option>
+										<option value="Green">Green</option>
+										<option value="Blue">Blue</option>
+										<option value="Yellow">Yellow</option>
+									</select>
+									<div class="option">
+									Order Value:
+									<select name="USB_value_color">
+										<option value="">Please select order PCS of USB</option>
+										<option value="25">25 PCS</option>
+										<option value="50">50 PCS</option>
+										<option value="100">100 PCS</option>
+										<option value="250">250 PCS</option>
+									</select>
+									</div>
+								</div>
+								<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+								<hr>
+								<h2>DVD and Data Disc</h2>
+								<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
+								<ul>
+									<li>
+										<input name="dvd_option_1" type="checkbox" value="DVD Printed Disc">
+										DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
+										<div class="option"> Order Value:
+											<select name="dvd_value1">
+												<option value="">Please select order PCS of DVD</option>
+												<option value="10">10 PCS</option>
+												<option value="20">20 PCS</option>
+												<option value="50">50 PCS</option>
+												<option value="100">100 PCS</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<input name="dvd_option_2" type="checkbox" value="DVD Plain">
+										DVD Plain &#45; A DVD disc with no logo.<br/>
+										<div class="option">Order Value:
+											<select name="dvd_value2">
+												<option value="">Please select order PCS of DVD</option>
+												<option value="10">10 PCS</option>
+												<option value="20">20 PCS</option>
+												<option value="50">50 PCS</option>
+												<option value="100">100 PCS</option>
+											</select>
+										</div>
+									</li>
+									
+									<li>
+										<input name="dvd_option_3" type="checkbox" value="Data Disc Printed">
+										Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.<br/>
+										<div class="option">Order Value:
+											<select name="dvd_value3">
+												<option value="">Please select order PCS of DVD</option>
+												<option value="10">10 PCS</option>
+												<option value="20">20 PCS</option>
+												<option value="50">50 PCS</option>
+												<option value="100">100 PCS</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<input name="dvd_option_4" type="checkbox" value="Data Disc Plain">
+										Data Disc Plain &#45;A Data disc with no logo.<br/>
+										<div class="option">Order Value:
+											<select name="dvd_value4">
+												<option value="">Please select order PCS of DVD</option>
+												<option value="10">10 PCS</option>
+												<option value="20">20 PCS</option>
+												<option value="50">50 PCS</option>
+												<option value="100">100 PCS</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<input name="dvd_option_5" type="checkbox" value="DVD COVER">
+										DVD Cover &#45; A cover designed and printed for your DVD case. You can choose between two designs.<br/>
+										<div class="option">Order Value:
+											<select name="dvd_value5">
+												<option value="">Please select order PCS of DVD</option>
+												<option value="10">10 PCS</option>
+												<option value="20">20 PCS</option>
+												<option value="50">50 PCS</option>
+												<option value="100">100 PCS</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+								
+								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+								<hr>
+								<h2>Data And Project Storage</h2>
+								<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
+								<ul>
+									<li><input name="dps1" value="1" type="checkbox"/>Surge Media allows you to collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
+									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
+									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
+									<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+								</ul>
+								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+								<hr>
+								<h2>Marketing</h2>
+								<p><u>Youtube</u></p>
+								<p>Youtube is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
+								</p>
+								<ul>
+									<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>
+									<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
+									<li><input name="market3" value="1" type="checkbox"/>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+								</ul>
+								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+								<hr>
+								<p><u>Remarketing</u></p>
+								<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
+								</p><p>
+								<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
+								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+							</p>
 							<hr>
-							<h3>Supplying Options</h3>
-							<p><b>Below are extra options for supplying your project file.</b></p>
-							<h2>USB</h2>
-							<p>Surge Media has a few options regarding USB storage and branding.</p>
+							<p><u>Television</u></p>
+							<p>Television is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience.
+								
+								</p><p><input name="Television" value="1" type="checkbox"/>Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator.
+								
+							</p>
+
+							<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+							
+						</div>
+						<?php endif;
+						if($last_video_under_project_row['version']!="Final"){
+						?>
+						<div class="video sixteen columns omega alpha">
+							<!-- VIMEO EMBED -->
+							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
+							<!-- VIMEO EMBED -->
+						</div>
+						<?php } ?>
+						<div id='action_box' class="actions sixteen columns">
 							<ul>
-								<li>
-									<input id="option_brandusb" name="usb_option" type="radio" value="1">USB Logo branded &#45; A USB branded with your logo printed on both sides.
-								</li>
-								<li>
-									<input id="option_plainusb" name="usb_option" type="radio" value="2">USB Plain &#45; A USB with no branding.
-								</li>
+								<?php echo $downloadfilelink; ?>
 							</ul>
-							<div id="brandusb" class="disable_input">
-							<select name="usb_type">
-								<option value="">Please Select your USB products for request:</option>
-								<option value="Alloy USB Card">Alloy USB Card</option>
-								<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
-								<option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
-								<option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>
-								<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
-								<option value="Rotator USB Flash Drive">Rotator USB Flash Drive</option>
-								<option value="Executive USB Flash Drive">Executive USB Flash Drive</option>
-								<option value="Classic USB Flash Drive">Classic USB Flash Drive</option>
-								<option value="Trix USB Flash Drive">Trix USB Flash Drive</option>
-								<option value="Ellipse USB Flash Drive">Ellipse USB Flash Drive</option>
-								<option value="Halo USB Flash Drive">Halo USB Flash Drive</option>
-								<option value="Pod USB Flash Drive">Pod USB Flash Drive</option>
-								<option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
-								<option value="Image USB Flash Drive">Image USB Flash Drive</option>
-							</select>
-							Order Value:	
-							<select name="USB_value">
-								<option value="">Please select order PCS of USB</option>
-								<option value="25">25 PCS</option>
-								<option value="50">50 PCS</option>
-								<option value="100">100 PCS</option>
-								<option value="250">250 PCS</option>
-							</select>
-							</div>
-							<div id="plainusb" class="disable_input">
-							<select name="usb_color">
-								<option value="">Please Select your USB color:</option>
-								<option value="White">White</option>
-								<option value="Black">Black</option>
-								<option value="Red">Red</option>
-								<option value="Green">Green</option>
-								<option value="Blue">Blue</option>
-								<option value="Yellow">Yellow</option>
-							</select>
-							Order Value:							
-							<select name="USB_value_color">
-								<option value="">Please select order PCS of USB</option>
-								 <option value="25">25 PCS</option>
-								 <option value="50">50 PCS</option>
-								<option value="100">100 PCS</option>
-								<option value="250">250 PCS</option>
-							</select>
-							</div>
-							<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
-							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-							<hr>
-							<h2>DVD and Data Disc</h2>
-							<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
-							<ul>
-								<li>
-									<input name="dvd_option_1" type="checkbox" value="DVD Printed Disc">
-									DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
-                                    <div class="option"> Order Value:
-                                    <select name="dvd_value1">
-                                        <option value="">Please select order PCS of DVD</option>
-                                        <option value="10">10 PCS</option>
-                                        <option value="20">20 PCS</option>
-                                        <option value="50">50 PCS</option>
-                                        <option value="100">100 PCS</option>
-                                    </select>
-                                    </div>
-								</li>
-								<li>
-									<input name="dvd_option_2" type="checkbox" value="DVD Plain">
-									DVD Plain &#45; A DVD disc with no logo.<br/>
-                                     <div class="option">Order Value:
-                                    <select name="dvd_value2">
-                                        <option value="">Please select order PCS of DVD</option>
-                                        <option value="10">10 PCS</option>
-                                        <option value="20">20 PCS</option>
-                                        <option value="50">50 PCS</option>
-                                        <option value="100">100 PCS</option>
-                                    </select>
-                                    </div>
-								</li>
+						</div>
+						<?php
+												$stop_comment = "";
+												//echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
+												if($last_video_under_project_row['version']!='Final'){
+														$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
+														$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
+														if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
+															$stop_comment_disable = 1;
+														}
+														if($last_video_under_project_row['version_num']==2 && $last_video_a_request_row['comment_time2']!=1){
+															$stop_comment_disable = 1;
+																		}
+													}
+													if($stop_comment_disable==1){
+						?>
+						<div id="changes_required">
+							<label class="title label_stop_float" for="">Your Feedback</label>
+							<ul id="comments-general" class="container">
 								
 								<li>
-									<input name="dvd_option_3" type="checkbox" value="Data Disc Printed">
-									Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.<br/>
-                                     <div class="option">Order Value:
-                                    <select name="dvd_value3">
-                                        <option value="">Please select order PCS of DVD</option>
-                                        <option value="10">10 PCS</option>
-                                        <option value="20">20 PCS</option>
-                                        <option value="50">50 PCS</option>
-                                        <option value="100">100 PCS</option>
-                                    </select>
-                                    </div>
-								</li>
-								<li>
-									<input name="dvd_option_4" type="checkbox" value="Data Disc Plain">
-									Data Disc Plain &#45;A Data disc with no logo.<br/>
-                                     <div class="option">Order Value:
-                                    <select name="dvd_value4">
-                                        <option value="">Please select order PCS of DVD</option>
-                                        <option value="10">10 PCS</option>
-                                        <option value="20">20 PCS</option>
-                                        <option value="50">50 PCS</option>
-                                        <option value="100">100 PCS</option>
-                                    </select>
-                                    </div>
-								</li>
-								<li>
-									<input name="dvd_option_5" type="checkbox" value="DVD COVER">
-									DVD Cover &#45; A cover designed and printed for your DVD case. You can choose between two designs.<br/>
-                                     <div class="option">Order Value:
-                                    <select name="dvd_value5">
-                                        <option value="">Please select order PCS of DVD</option>
-                                        <option value="10">10 PCS</option>
-                                        <option value="20">20 PCS</option>
-                                        <option value="50">50 PCS</option>
-                                        <option value="100">100 PCS</option>
-                                    </select>
-                                    </div>
+									<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 								</li>
 							</ul>
-							
-							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-							<hr>
-							<h2>Data And Project Storage</h2>
-							<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
-							<ul>
-								<li><input name="dps1" value="1" type="checkbox"/>Surge Media allows you to collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
-								<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
-								<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-								<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+							<ul id="time-comments">
+								<script>NewTimelineComment();</script>
 							</ul>
-							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-							<hr>
-							<h2>Marketing</h2>
-							<p><u>Youtube</u></p>
-							<p>Youtube is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
-							</p>
-							<ul>
-							<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>
-							<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
-							<li><input name="market3" value="1" type="checkbox"/>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
-							</ul>
-							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-							<hr>
-							<p><u>Remarketing</u></p>
-							<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
-							</p><p>
-							<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
-							<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-						</p>
-						<hr>
-						<p><u>Television</u></p>
-						<p>Television is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience.
-							
-						</p><p><input name="Television" value="1" type="checkbox"/>Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator.
-						
-					</p>
-					<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-					
-				</div>
-				<?php endif;
-				if($last_video_under_project_row['version']!="Final"){
+							<div class="submit-actions">
+								<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
+								<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>submit all comments</span> <i class="fa fa-send"></i></a>
+							</div>
+						</div>
+						<?php }?>
+					</li>
+				</ul>
+			</form>
+			
+			
+			<ul id="videos">
+				<li><h1>Previous Versions</h1></li>
+				<?
+				$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
+				$video_num = mysql_num_rows($listvideos);
+				for($i=0; $i<$video_num; $i++){
+				$video_row = mysql_fetch_array($listvideos);
+				$show_final_color = $show_final_msg = "";
+				if($video_row['version']=="Final"){
+				//$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
+				$show_final_msg = "Final Video <i class='fa-star fa'></i>";
+				}else{
+				$show_final_msg = "Draft copy <i class='fa-pencil-square-o fa'></i>";
+				}
+				$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
+				$list_video_client_request_num = mysql_num_rows($list_video_client_request);
+				for($j=0; $j<$list_video_client_request_num; $j++){
+				$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
+				$show_feedback_type = $list_video_client_request_row['feedback_type'];
+				if($list_video_client_request_row['feedback_type']==1){
+				$show_feedback_type = 'Changes To Video';
+				$show_feedback_type_class = 'changes-video';
+				}else if($list_video_client_request_row['feedback_type']==2){
+				$show_feedback_type = 'Changes To Audio';
+				$show_feedback_type_class = 'changes-audio';
+				}else if($list_video_client_request_row['feedback_type']==3){
+				$show_feedback_type = 'Other';
+				$show_feedback_type_class = 'changes-other';
+				}
+				$list_video_feedback[$i] .="
+				<li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+				<small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
+				";//list all request information display in page
+				}
+				$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
+				$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+				$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
+				if($show_final_msg) {
+				$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
+				}
+				$obj_template = include('inc/video-draft-object.php');
+				echo $obj_template;
+				}
 				?>
-				<div class="video sixteen columns omega alpha">
-					<!-- VIMEO EMBED -->
-					<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
-					<!-- VIMEO EMBED -->
-				</div>
-				<?php } ?>
-				<div id='action_box' class="actions sixteen columns">
-					<ul>
-						<?php echo $downloadfilelink; ?>
-					</ul>
-				</div>
-				<?php
-										$stop_comment = "";
-										//echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
-										if($last_video_under_project_row['version']!='Final'){
-												$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
-												$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
-												if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
-													$stop_comment_disable = 1;
-												}
-												if($last_video_under_project_row['version_num']==2 && $last_video_a_request_row['comment_time2']!=1){
-													$stop_comment_disable = 1;
-																}
-											}
-											if($stop_comment_disable==1){
-				?>
-				<div id="changes_required">
-					<label class="title label_stop_float" for="">Your Feedback</label>
-					<ul id="comments-general" class="container">
-						
-						<li>
-							<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
-						</li>
-					</ul>
-					<ul id="time-comments">
-						<script>NewTimelineComment();</script>
-					</ul>
-					<div class="submit-actions">
-						<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
-						<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>submit all comments</span> <i class="fa fa-send"></i></a>
-					</div>
-				</div>
-				<?php }?>
-			</li>
-		</ul>
-	</form>
-	
-	
-	<ul id="videos">
-		<li><h1>Previous Versions</h1></li>
-		<?
-		$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
-		$video_num = mysql_num_rows($listvideos);
-		for($i=0; $i<$video_num; $i++){
-		$video_row = mysql_fetch_array($listvideos);
-		$show_final_color = $show_final_msg = "";
-		if($video_row['version']=="Final"){
-		//$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
-		$show_final_msg = "Final Video <i class='fa-star fa'></i>";
-		}else{
-		$show_final_msg = "Draft copy <i class='fa-pencil-square-o fa'></i>";
-		}
-		$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
-		$list_video_client_request_num = mysql_num_rows($list_video_client_request);
-		for($j=0; $j<$list_video_client_request_num; $j++){
-		$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
-		$show_feedback_type = $list_video_client_request_row['feedback_type'];
-		if($list_video_client_request_row['feedback_type']==1){
-		$show_feedback_type = 'Changes To Video';
-		$show_feedback_type_class = 'changes-video';
-		}else if($list_video_client_request_row['feedback_type']==2){
-		$show_feedback_type = 'Changes To Audio';
-		$show_feedback_type_class = 'changes-audio';
-		}else if($list_video_client_request_row['feedback_type']==3){
-		$show_feedback_type = 'Other';
-		$show_feedback_type_class = 'changes-other';
-		}
-		$list_video_feedback[$i] .="
-		<li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
-		<small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
-		";//list all request information display in page
-		}
-		$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
-		$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
-		$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
-		if($show_final_msg) {
-		$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
-		}
-		$obj_template = include('inc/video-draft-object.php');
-		echo $obj_template;
-		}
-		?>
-	</ul>
-</section>
-</main>
-<? include('../footer.php');?>
-<div id="overlay_wrapper" onClick="closeAllCards()"></div>
-</body>
+			</ul>
+		</section>
+		</main>
+		<? include('../footer.php');?>
+		<div id="overlay_wrapper" onClick="closeAllCards()"></div>
+	</body>
 </html>

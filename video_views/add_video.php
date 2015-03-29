@@ -129,7 +129,7 @@
                
                 <ul  >
                     <li id="add_new_video" class="video_obj featured">
-                     <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a>
+                     <!-- <a onClick="document.getElementById('back_to_project').submit();"><h1 class="back_button"><i class="fa  fa-reply"></i> All Projects</h1></a> -->
 
                     	<form action="add_video.php" method="post" id="add_video">
                         <h1 id="client_name_editable" class="title">
@@ -170,10 +170,10 @@
                         <div id="final_version" class="draft_check"><input type="radio" name="version" value="Final"  <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Verison</span></div>
                             <? if($check_video_Lastupdate_row['version']=="Final"){ ?>
                                 <label class="title" for="">Download Video Link</label>
-                                <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link" value="<?php echo $check_project_name_row['download_file']?>">
+                                <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php echo $check_project_name_row['download_file']?>">
                             <? } ?>
                             <label class="title" for="">Director's Notes</label>
-                            <textarea name="notes" id="" cols="30" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>"></textarea>
+                            <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>"></textarea>
                             <ul>
                                 <li>
                                  <a onClick="document.getElementById('add_video').submit();" class="btn green" ><span>Send to Client</span> <i class="fa fa-send"></i></a>
