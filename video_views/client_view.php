@@ -189,7 +189,7 @@ $downloadfilelink2 = '
 <a href="'.$projectname_row['download_file'].'" class="btn green wow shake omega alpha" ><span>Download Your Videos for '.$cca_row['company_name'].' - '.$projectname_row['project_name'].'</span><i class="fa fa-download"></i></a>';
 $downloadfilelink = '';
 }else{
-$downloadfilelink = '<label class="message " ><span>Please be patiate we will notifiy you when you can download your new video </span> <i class="fa fa-thumbs-up"></i> </label>';
+$downloadfilelink = '<label class="message " ><span>Please be patient. We will notify you when you can download your final video </span> <i class="fa fa-thumbs-up"></i> </label>';
 $downloadfilelink2 = '';
 }
 /* REMOVED -
@@ -368,7 +368,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<p>1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites.</p>
 								<p>1 x MP4 640x360 pixel – This is ideal for uploading to the web</p>
 								
-								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a new different formats? Please Contact Our Video Production Team </span><i class="fa fa-envelope"></i></a>
+								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a different formats? Please contact our Video Production team </span><i class="fa fa-envelope"></i></a>
 								<hr>
 								<h3>Supplying Options</h3>
 								<p><b>Below are extra options for supplying your project file.</b></p>

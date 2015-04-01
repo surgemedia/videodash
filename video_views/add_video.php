@@ -36,34 +36,39 @@
 			$mailto = $cca_row['email'];
             if($videoversion_num==1){
     			$mailsubject = 'VIDEO DASH - 1ST DRAFT, YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
-    			$mailmessage = '
+    			$mailtitle = 'Surge Media Video Dash';
+                $mailsubtitle = 'Your Project is ready for review';
+                $mailmessage = '
                 <b>Dear '.$cca_row['contact_person'].',</b>
-    			<p>We are pleased to inform you that your project is ready for review.</p>
-                <p>The video draft has been uploaded to the Video Dash. Please click on the link below to review your project. </p>
-    			<p><a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project now</a></p>
-    			<p>Kind Regards</p>
-    			<p>The Team at Surge Media</p>
+    			<p>We are pleased to inform you that the first draft of your video project by Surge Media is ready for review. 
+                The video draft has been uploaded to our Video Dash. 
+                Video Dash is an online video management and delivery system designed by Surge Media that makes your video production experience as smooth as possible. 
+                Please click on the link below to review your project.<br/>
+    			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p>
     			';
             }else if($videoversion_num==2){
                 $mailsubject = 'VIDEO DASH - 2ND DRAFT, YOUR PROJECT IS READY FOR REVIEW ('.$checksamelinkrow['project_name'].')';
+                $mailtitle = 'Surge Media Video Dash';
+                $mailsubtitle = 'Your Project is ready for review';
                 $mailmessage = '
-                
                 <p>Dear '.$cca_row['contact_person'].',</p>
-                <b>This is your second draft is ready.</b>
-                <p>We are pleased to inform you that your changes have been amended to your video project.</p>
-                <p>The video draft has been uploaded to the Video Dash. Please click on the link below to review your project. </p>
-                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">View on the Video Dash</a> make comments.</p>
-                <p>Please be aware that you have one set of changes remaining. Charges may apply for additional changes.</p>
-                <p>Kind Regards</p>
-                <p>The Team at Surge Media</p>
-                ';
+                <p>We are pleased to inform you that the changes have been amended and the second draft of your video project is ready for review. 
+                The video draft has been uploaded to our Video Dash. 
+                Same Video Dash explanation as in the first email. 
+                Please click on the link below to review your project.<br/>
+                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project<a><br/>
+                Please be aware that you have one set of changes remaining. charges may apply for additional changes.
+                </p>
+                '
             }else{
                 $mailsubject = 'Your draft video is ready to review!('.$checksamelinkrow['project_name'].')';
+                $mailtitle = 'Surge Media Video Dash';
+                $mailsubtitle = 'Your Project is ready for review';
                 $mailmessage = '<p>Hi '.$cca_row['contact_person'].',</p>
-                <p>We uploaded a new draft video for review.</p>
-                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">View on the Video Dash</a> make comments.</p>
-                <p>Kind Regards</p>
-                <p>The Team at Surge Media</p>
+                <p>We are pleased to inform you that the changes have bee amended and the draft of your video project is ready for your review</p>
+                <p>The video draft has been uploaded to our Video Dash</p>
+                <p>Please click on the link below to reviw your project<br/>
+                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p>
                 ';
             }
             $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
@@ -76,15 +81,15 @@
                     //echo "UPDATE video_project SET download_file = ".$_POST['downloadlink']." WHERE id = ".$_POST['project_id'];
                     mysql_query("UPDATE video_project SET download_file = '".$_POST['downloadlink']."' WHERE id = ".$_POST['project_id']);
                     $mailsubject = 'VIDEO DASH - FINAL VIDEO, YOUR PROJECT IS READY';
-
+                    $mailtitle = 'Surge Media Video Dash';
+                    $mailsubtitle = 'Your Project is Ready';
                     $mailmessage = '
                     <p>Dear '.$cca_row['contact_person'].'</p>
-                    <p>We are pleased to inform you that your final video['.$checksamelinkrow['project_name'].'] is ready for download.<br/>
-                    You can download the final video by clicking on the link below.<br/>
-                    <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Download on the Video Dash</a><br/> 
-                    Let us take this opportunity to thank you for choosing Surge Media. We look forward to working with you again.</p>
-                    <p>Kind Regards</p>
-                    <p>Video Dash @ Surge Media</p>
+                    <p>We are pleased to inform you that your final video ['.$checksamelinkrow['project_name'].'] by Surge Media is ready for download.<br/>
+                    You can download the final video from our Video Dash by clicking on the link below.<br/>
+                    <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Final Video</a><br/> 
+                    Let us take this opportunity to thank you for choosing <a href="http://surgemedia.com.au">Surge Media</a>. <br/>
+                    We look forward to working with you again.</p>
                     ';
                 }
             }			
@@ -94,7 +99,7 @@
 			$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 			
             $mail_data = file_get_contents('../email_template/video_download.html');
-            $mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+            $mail_data = str_replace("[mail_title]",  $mailtitle, $mail_data);
             $mail_data = str_replace("[mail_content]",  $mailmessage, $mail_data);
             $the_data_is = date("d M Y");
             $mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
