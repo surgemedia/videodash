@@ -383,6 +383,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</li>
 								</ul>
 								<div id="brandusb" class="disable_input">
+<!-- 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
@@ -394,12 +395,10 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+									<img src="../img/usb/ay.jpg" id="ay" class="usb_images"> -->
 									<select name="usb_type">
 										<option value="">Please Select your USB products for request:</option>
-										<option value="Alloy USB Card">Alloy USB Card</option>
+										<option value="Alloy USB Card" id="ay_option">Alloy USB Card</option>
 										<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
 										<option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
 										<option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>

@@ -166,8 +166,8 @@
                         </div>
                         </div>
                         <div class="actions sixteen columns omega alpha">
-                        <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']!="Final"){ echo "checked";}?> ><span>Draft Verison</span></div>
-                        <div id="final_version" class="draft_check"><input type="radio" name="version" value="Final"  <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Verison</span></div>
+                        <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']!="Final"){ echo "checked";}?> ><span>Draft Version</span></div>
+                        <div id="final_version" class="draft_check"><input type="radio" name="version" value="Final"  <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Version</span></div>
                             <? if($check_video_Lastupdate_row['version']=="Final"){ ?>
                                 <label class="title" for="">Download Video Link</label>
                                 <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php echo $check_project_name_row['download_file']?>">

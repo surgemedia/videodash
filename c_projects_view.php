@@ -25,7 +25,7 @@
 		$show_meg = '<label class="message " ><span>Sorry, we cannot have any request from you. </span> <i class="fa fa-exclamation-circle"></i> </label>';
 	}
 	if($_GET['msg']=='c1'){
-		$show_meg = '<label class="message " ><span>Thank you, your request already send to us.</span> <i class="fa fa-thumbs-up"></i> </label>';
+		$show_meg = '<label class="message " ><span>Thank you. Your request has been sent to us. You will receive a quote within one hour.</span> <i class="fa fa-thumbs-up"></i> </label>';
 	}
 ?>
 <!DOCTYPE html>
@@ -60,6 +60,8 @@
 								$add_del_class = " bombed";
 								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Reopen Project</span><i class="fa fa-history" ></i></a></li>';
 							}
+							$last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = ".$project_row['id']." AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
+							$last_video_under_project_num = mysql_num_rows($last_video_under_project);
 							echo '
 								<li class="client'.$add_del_class.'">
 									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">  '.$project_row['project_name'].'</a></h2>
@@ -77,7 +79,17 @@
 									</form>
 									<div class="actions">
 										<ul>
-											<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Video</span> <i class="fa fa-video-camera"></i></a></li>
+											<li>';
+											if($last_video_under_project_num!=0){
+												echo '
+													<a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Video</span> <i class="fa fa-video-camera"></i></a>
+												';
+											}else{
+												echo '
+													<a class="btn yellow add_new"><span>Please be patient. Your first video draft is uploading.</span> <i class="fa fa fa-clock-o"></i></a>
+												';												
+											}
+							echo '</li>
 											'.$del_btn.'
 										</ul>
 									</div>

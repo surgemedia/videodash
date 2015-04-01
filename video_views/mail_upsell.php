@@ -63,6 +63,8 @@ if(count($upsell_mail)!=0){
 	for($i=0; $i<count($upsell_mail); $i++){
 		$mailcont .='<li>'.$upsell_mail[$i].'</li>';
 	}
+	$name = "Surge Media - Video Dash";
+	$frommail = "cs@videodash.surgehost.com.au";
 	$mailcontent .= '<strong>Client:</strong> '.$cca_row['company_name'].'<br/>';
 	$mailcontent .= '<strong>Project:</strong> '.$projectname_row['project_name'].'<br/>';
 	$mailcontent .= 'Additional request from client:';
@@ -71,10 +73,9 @@ if(count($upsell_mail)!=0){
 	$mailcontent .= '</ul>';
 	$mailcontentTOCLIENT .= '
 		Dear '.$cca_row['contact_person'].'<br/><br/>
-		Thank you for submitting an order for additional storage.<br/>
-		You will be sent a quote of your request within 48 hours.<br/>
-		We will contact you if we have any questions.  <br/>
-		Thank you <br/>
+		Thank you for choosing Surge Media\'s marketing options for your video project.<br/>
+		A quote of your request will be sent to you within 24 hours.<br/>
+		We will contact you if we have any questions.<br/><br/>
 		';
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
@@ -82,14 +83,18 @@ if(count($upsell_mail)!=0){
 	$mailto = 'video@surgemedia.com.au'; // $cca_row['email'];
 	$mailTOCLIENT = $cca_row['email'];
 	$mailsubject = ''.$projectname_row['project_name'].' Additional Storage';
+	$mailtitle = 'Surge Media Video Dash';
+	$mailsubtitle ='Company Promotional Video Marking';
 	$mailsubjectTOCLIENT = $projectname_row['project_name'].' Additional Request Confirm Mail';
-	$mail_data = file_get_contents('../email_template/feedback.html');
-	$mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
+	$mail_data = file_get_contents('../email_template/upselltosurgemedia.html');
+	$mail_data = str_replace("[mail_title]",  $mailtitle, $mail_data);
+	$mail_data = str_replace("[mail_subtitle]",  $mailsubtitle, $mail_data);
 	$mail_data = str_replace("[mail_content]",  $mailcontent, $mail_data);
 	$the_data_is = date("d M Y");
 	$mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
-	$mail_data_c = file_get_contents('../email_template/feedback.html');
-	$mail_data_c = str_replace("[mail_title]",  $mailsubject, $mail_data_c);
+	$mail_data_c = file_get_contents('../email_template/upselltoclient.html');
+	$mail_data_c = str_replace("[mail_title]",  $mailtitle, $mail_data_c);
+	$mail_data_c = str_replace("[mail_subtitle]",  $mailsubtitle, $mail_data_c);
 	$mail_data_c = str_replace("[mail_content]",  $mailcontentTOCLIENT, $mail_data_c);
 	$mail_data_c = str_replace("[mail_datandtime]",  $the_data_is, $mail_data_c);
 	mail($mailto, $mailsubject, $mail_data, $headers);
