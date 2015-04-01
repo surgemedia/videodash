@@ -636,5 +636,12 @@ div#brandusb select {
 .display_input{
 	display: block;
 }
-
+#brandusb{
+	position: relative;
+}
+.usb_images{
+	left: 280px;
+    position: absolute;
+    top: -200px;
+}
 
