@@ -433,8 +433,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</div>
 								</div>
 								<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
-								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-								<hr>
+<!-- 								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+ -->								<hr>
 								<h2>DVD and Data Disc</h2>
 								<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
 								<ul>
@@ -506,8 +506,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</li>
 								</ul>
 								
-								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-								<hr>
+<!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+ -->								<hr>
 								<h2>Data And Project Storage</h2>
 								<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
 								<ul>
@@ -516,8 +516,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
 									<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
 								</ul>
-								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-								<hr>
+<!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+ -->								<hr>
 								<h2>Marketing</h2>
 								<p><u>Youtube</u></p>
 								<p>Youtube is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
@@ -533,8 +533,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
 								</p><p>
 								<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
-								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
-							</p>
+<!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+ -->							</p>
 							<hr>
 							<p><u>Television</u></p>
 							<p>Television is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience.
