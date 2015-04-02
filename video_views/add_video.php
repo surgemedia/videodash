@@ -48,7 +48,8 @@
                 Video Dash is an online video management and delivery system designed by Surge Media that makes your video production experience as smooth as possible. <br/>
                 Please click on the link below to review your project.<br/>
     			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p>
-    			';
+    			<p>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
+                ';
             }else if($videoversion_num==2){
                 $mailsubject = 'Surge Media Video Dash - Your Project Is Ready For Review ('.$checksamelinkrow['project_name'].')';
                 $mailtitle = 'Surge Media Video Dash';
@@ -64,6 +65,7 @@
                     <a><br/>
                     Please be aware that you have one set of changes remaining. Charges may apply for additional changes.
                 </p>
+                <p>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
                 ';
             }else{
                 $mailsubject = 'Surge Media Video Dash - Your video draft is ready to review ('.$checksamelinkrow['project_name'].')';

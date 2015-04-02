@@ -30,9 +30,20 @@ $mail_message = '<b>A client has confirmed the final version of their video</b>
 Client: '.$cca_row['company_name']."<br/>
 Video Project: ".$projectname_row['project_name'];
 }
+
 $last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = ".$_POST['project_id']." AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
+//echo "SELECT * FROM video_under_project WHERE video_project_id = ".$_POST['project_id']." AND enabling = 1 ORDER BY id DESC LIMIT 0, 1";
 $last_video_under_project_row = mysql_fetch_array($last_video_under_project);
 $forloopcount = 0;
+$addition_change_to_mail = '';
+$addition_change_to_mail2 = '';
+if($last_video_under_project_row['id']!="" && $_POST['add_more_changed']=="yes"){
+	mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row['id']."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
+	//if it's addition comments. add it to databace
+	$addition_change_to_mail = 'additional change';
+	$addition_change_to_mail2 = 'Review it and send quote to client.<br/>';
+	//echo "INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row['id']."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')";
+}
 $last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
 $last_video_a_request_row = mysql_fetch_array($last_video_a_request);
 /*=======================================*/
@@ -83,11 +94,13 @@ $comment_remind_mail = 1; //if have any comment, set it 1.
 }
 if($_POST['voice_comment']!=""){
 $update_video_client_addition_request = mysql_query("UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."' WHERE id = ".$last_video_a_request_row['id']);
+//echo "UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."' WHERE id = ".$last_video_a_request_row['id'];
 $general_comment = $_POST['voice_comment'];
 $comment_remind_mail = 1; //if have any comment, set it 1.
 }
-if($forloopcount>0){
-$mail_message = 'A client has submitted their final set of changes.<br/>
+if($list_comment!="" || $general_comment!=""){
+$mail_message = 'A client has submitted their '.$addition_change_to_mail.' set of changes.<br/>
+'.$addition_change_to_mail2.'
 Client: '.$cca_row['company_name']."<br/>
 Video Project: ".$projectname_row['project_name']."
 Comment: ".$general_comment."
@@ -107,18 +120,39 @@ $end_time = gmdate("i:s", (int)$video_lenght_result);
 /*=============================================================*/
 /*      Send Email to advise any update of video Project       */
 /*=============================================================*/
+
 $update_mail_subject = ""; //unset the mail subject in begining.
+if($list_comment!="" || $general_comment!=""){
+	$Client_mail_message ='
+	Hey '.$cca_row['contact_person'].',<br/><br/>
+	<p>You need more changes to your video project? No sweat!<br/></p>
+	<p>If these changes are small, we are more than happy to amend them.  <br/></p>
+	<p>However, if these changes are large and significant, the powers that be will need to review them. </p>
+	<p>Once reviewed, you will receive the amended video to approve or a quote to approve.</p>
+	<p>In the meantime, please be patient,and we will contact you if we have any questions.<br/></p>
+	<p>Kind Regards,<br/>
+	Paris Ormerod</p>
+	';
+	$update_mail_subject = "More Change enquiry.";
+	$first_draft_title = "Your Changes Have Been Submitted";
+}
+
 if($comment_remind_mail == 1){// Update mailout to 1 and will stop to send mail while send one mailout in version 1
 if($last_video_a_request_row['comment_time']==0 && $last_video_under_project_row['version']=='Draft'){
 //IF Client first time comment to video
 $Client_mail_message ='
-Dear '.$cca_row['contact_person'].'<br/><br/>
-Thank you for submitting your first set of changes. <br/>
-Just a friendly reminder that you have one set of changes remaining. <br/>
-We will contact you if we have any questions.<br/>
-Thank you<br/>
+Nice one '.$cca_row['contact_person'].'!<br/><br/>
+<p>Baz Luhrmann would be proud!</p>
+<p>Your first set of changes have been submitted and are in the pipeline. </p>
+<p>Just a friendly reminder that you have one set of changes remaining.</p>
+<p>If you have spoken to our video department and your changes are a priority, be assured that they are being addressed.</p>
+<p>In the meantime, please be patient, make some popcorn, watch a movie, and we will contact you if we have any questions.</p>
+<p>Well, that’s a wrap from me. </p>
+<p>Your loving, devoted Post Production Editor,<br/>
+Paris Ormerod</p>
 ';
 $update_mail_subject = "Your First Set of Changes";
+$first_draft_title = "Hi-Five! Thanks for submitting your changes.";
 mysql_query("UPDATE video_client_addition_request SET comment_time = 1 WHERE id = ".$last_video_a_request_row['id']);
 //Update database to stop sendmail duplicate
 }
@@ -126,12 +160,16 @@ if($last_video_under_project_row['version_num']==2 && $last_video_under_project_
 //IF version number already upload new video to client to review
 if($last_video_a_request_row['comment_time2']==0){
 $Client_mail_message ='
-Dear '.$cca_row['contact_person'].'<br/><br/>
-Thank you for submitting your second set of changes.  <br/>
-Just a friendly reminder that these are your final changes.  <br/>
-If you require more, please contact us as charges may apply.  <br/>
-We will contact you if we have any questions.  <br/>
-Thank you.  <br/>
+Hey Hey '.$cca_row['contact_person'].'!<br/><br/>
+<p>Steven Spielberg would be proud!</p>
+<p>Your second set of changes have been submitted and are in the pipeline. </p>
+<p>Just a friendly reminder that these are your final changes.</p>
+<p>If you have spoken to our video department and your changes are a priority, be assured that they are being addressed.</p>
+<p>In the meantime, please be patient, have a choc top, watch a movie, and we will contact you if we have any questions.</p>
+<p>Well, that’s a wrap from me. <br/>
+Your caring, dedicated Post Production Editor,<br/>
+Paris Ormerod<br/>
+I will come over and help you do it.</p>
 ';
 mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row['id']);
 //Update database to stop sendmail duplicate
@@ -161,6 +199,9 @@ mail($mailto, $mailsubject, $mail_data, $headers);
 }
 if($update_mail_subject!=""){
 $client_mail_data = file_get_contents('../email_template/feedback.html');
+if($first_draft_title!=""){
+	$client_mail_data = str_replace("[mail_title]",  $first_draft_title, $client_mail_data);
+}
 $client_mail_data = str_replace("[mail_title]",  $update_mail_subject, $client_mail_data);
 $client_mail_data = str_replace("[mail_content]",  $Client_mail_message, $client_mail_data);
 $client_mail_data = str_replace("[mail_datandtime]",  $the_data_is, $client_mail_data);
@@ -295,13 +336,13 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 						
 						<p>At Surge Media we like to make your video project experience as smooth as possible by giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track changes.
 						</p>
-						<p>As part of your project you will receive 2 sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage.
+						<p>As part of your project you will receive two sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage.
 						</p>
-						<p><strong>DRAFT 1 - (3 WEEKS) </strong> Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied.
+						<p><strong>VIDEO PROJECT FIRST DRAFT - (3 WEEKS) </strong> Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied.
 						</p>
-						<p><strong>DRAFT 2 - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version.
+						<p><strong>VIDEO PROJECT SECOND DRAFT - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version.
 						</p>
-						<p><strong>FINAL</strong> The final version will be there for you to download from the dashboard. Please note that if you still want to make additional changes, charges may apply.
+						<p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.
 						</p>
 					</li>
 				</ul>
@@ -336,6 +377,11 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 				<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
 				<input value="yes" name="make_video_version_to_final" type="hidden">
 			</form>
+			<form id="more_change_require" action="request_confirm.php" method="post">
+				<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
+				<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
+				<input value="yes" name="add_more_changed" type="hidden">
+			</form>
 			<?php if(!$downloadfile_message){ ?>
 			<form id="charge_update" action="request_confirm.java" method="post" class="sixteen column">
 				<?php }else{ ?>
@@ -363,27 +409,39 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<?php echo $downloadfilelink2; ?>
 								<?php } else { ?>
 								<?php echo $downloadfilelink; ?>
-								<?php } ?>
+								<?php } 
+								?>
 								<p>There are two versions of your final video. </p>
 								<p>1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites.</p>
 								<p>1 x MP4 640x360 pixel – This is ideal for uploading to the web</p>
 								
 								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a different formats? Please contact our Video Production team </span><i class="fa fa-envelope"></i></a>
+								<a class="btn green" href="#" onClick="document.getElementById('more_change_require').submit();"><span>More Change </span><i class="fa fa-envelope"></i></a>
 								<hr>
-								<h3>Supplying Options</h3>
-								<p><b>Below are extra options for supplying your project file.</b></p>
-								<h2>USB</h2>
-								<p>Surge Media has a few options regarding USB storage and branding.</p>
+								<h3>MARKETING YOUR VIDEO PROJECT</h3>
+								<p><b>Marketing is a valuable way of connecting with your clients and raising awareness of your brand. How you market your video project is what sets you apart from the rest.</b></p>
+								<h2>Data And Project Storage</h2>
+								<p>Please select an option regarding the storage of your project and raw footage. If your project is motion graphics, this may not apply.<br/>
+								You must select at least one option.</p>
+								<ul>
+									<li><input name="dps1" value="1" type="checkbox"/>Collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
+									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
+									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
+									<li><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+								</ul>
+ 								<hr>
+								<h2>USBs</h2>
+								<p>A USB is a simple and powerful tool you can use to share your video project and market your company.</p>
 								<ul>
 									<li>
-										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB Logo branded &#45; A USB branded with your logo printed on both sides.
+										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB with your logo &#45; A USB branded with your logo on both sides.
 									</li>
 									<li>
-										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB Plain &#45; A USB with no branding.
+										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB plain &#45; A USB with no branding.
 									</li>
 								</ul>
 								<div id="brandusb" class="disable_input">
-<!-- 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+<!-- 								<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
 									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
@@ -445,10 +503,10 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</select>
 									</div>
 								</div>
-								<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download our Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+								<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
 <!-- 								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
-								<h2>DVD and Data Disc</h2>
+								<h2>DVD and Data Discs</h2>
 								<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
 								<ul>
 									<li>
@@ -456,7 +514,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 										DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
 										<div class="option"> Order Value:
 											<select name="dvd_value1">
-												<option value="">Please select order PCS of DVD</option>
+												<option value="">Please select a quantity</option>
 												<option value="10">10 PCS</option>
 												<option value="20">20 PCS</option>
 												<option value="50">50 PCS</option>
@@ -469,7 +527,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 										DVD Plain &#45; A DVD disc with no logo.<br/>
 										<div class="option">Order Value:
 											<select name="dvd_value2">
-												<option value="">Please select order PCS of DVD</option>
+												<option value="">Please select a quantity</option>
 												<option value="10">10 PCS</option>
 												<option value="20">20 PCS</option>
 												<option value="50">50 PCS</option>
@@ -483,7 +541,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 										Data Disc Printed &#45; A Data disc with your logo and project name printed onto the disc.<br/>
 										<div class="option">Order Value:
 											<select name="dvd_value3">
-												<option value="">Please select order PCS of DVD</option>
+												<option value="">Please select a quantity</option>
 												<option value="10">10 PCS</option>
 												<option value="20">20 PCS</option>
 												<option value="50">50 PCS</option>
@@ -493,10 +551,10 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</li>
 									<li>
 										<input name="dvd_option_4" type="checkbox" value="Data Disc Plain">
-										Data Disc Plain &#45;A Data disc with no logo.<br/>
+										Data Disc Plain &#45; A Data disc with no logo.<br/>
 										<div class="option">Order Value:
 											<select name="dvd_value4">
-												<option value="">Please select order PCS of DVD</option>
+												<option value="">Please select a quantity</option>
 												<option value="10">10 PCS</option>
 												<option value="20">20 PCS</option>
 												<option value="50">50 PCS</option>
@@ -509,7 +567,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 										DVD Cover &#45; A cover designed and printed for your DVD case. You can choose between two designs.<br/>
 										<div class="option">Order Value:
 											<select name="dvd_value5">
-												<option value="">Please select order PCS of DVD</option>
+												<option value="">Please select a quantity</option>
 												<option value="10">10 PCS</option>
 												<option value="20">20 PCS</option>
 												<option value="50">50 PCS</option>
@@ -520,25 +578,20 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								</ul>
 								
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
- -->								<hr>
-								<h2>Data And Project Storage</h2>
-								<p>Surge Media has a few options regarding your RAW footage. If your project is a motion graphics, this may not apply.</p>
-								<ul>
-									<li><input name="dps1" value="1" type="checkbox"/>Surge Media allows you to collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
-									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
-									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-									<li><input name="dps4" value="1" type="checkbox"/>Surge Media will keep an uncompressed 1920 x1080 final video file indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
-								</ul>
+ -->								
+
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
 								<h2>Marketing</h2>
 								<p><u>Youtube</u></p>
-								<p>Youtube is the second most used search engine in the world. A video on Youtube is capable of reaching a global audience, increasing awareness of your company.
+								<p>Youtube is the second most used search engine in the world. More than one billon people visit Youtube every month. You can decided how your company is presented and when and where an advertisement will be displayed to your target audience.
 								</p>
 								<ul>
-									<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span></li>
+									<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span><br/>
+										Surge Media will create a Youtube Channel for you and upload your project.
+									</li>
 									<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
-									<li><input name="market3" value="1" type="checkbox"/>Surge Media will advertise your video on Youtube. This option is tailored to your project so by choosing this option, a meeting will be arranged with Surge Media’s marketing coordinator. </li>
+									<li><input name="market3" value="1" type="checkbox"/>Have you thought about advertising on Youtube? Reach your target audience with carefully placed advertising. meeting will be arranged with Surge Media’s marketing coordinator. </li>
 								</ul>
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
@@ -548,15 +601,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 								<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->							</p>
-							<hr>
-							<p><u>Television</u></p>
-							<p>Television is a great way to advertise your project to a national audience while being able to organise your advertisements according to your target audience.
-								
-								</p><p><input name="Television" value="1" type="checkbox"/>Surge Media will organize for your project to be advertised on Channel 7, Channel 10 or 31 Digital. Since this option includes various choices for timeslots, pricing, length, a meeting will be arranged with Surge Media’s marketing coordinator.
-								
-							</p>
 
-							<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
+							<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
 							
 						</div>
 						<?php endif;
@@ -616,42 +662,42 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 				$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
 				$video_num = mysql_num_rows($listvideos);
 				for($i=0; $i<$video_num; $i++){
-				$video_row = mysql_fetch_array($listvideos);
-				$show_final_color = $show_final_msg = "";
-				if($video_row['version']=="Final"){
-				//$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
-				$show_final_msg = "Final Video <i class='fa-star fa'></i>";
-				}else{
-				$show_final_msg = "Draft copy <i class='fa-pencil-square-o fa'></i>";
-				}
-				$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
-				$list_video_client_request_num = mysql_num_rows($list_video_client_request);
-				for($j=0; $j<$list_video_client_request_num; $j++){
-				$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
-				$show_feedback_type = $list_video_client_request_row['feedback_type'];
-				if($list_video_client_request_row['feedback_type']==1){
-				$show_feedback_type = 'Changes To Video';
-				$show_feedback_type_class = 'changes-video';
-				}else if($list_video_client_request_row['feedback_type']==2){
-				$show_feedback_type = 'Changes To Audio';
-				$show_feedback_type_class = 'changes-audio';
-				}else if($list_video_client_request_row['feedback_type']==3){
-				$show_feedback_type = 'Other';
-				$show_feedback_type_class = 'changes-other';
-				}
-				$list_video_feedback[$i] .="
-				<li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
-				<small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
-				";//list all request information display in page
-				}
-				$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
-				$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
-				$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
-				if($show_final_msg) {
-				$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
-				}
-				$obj_template = include('inc/video-draft-object.php');
-				echo $obj_template;
+					$video_row = mysql_fetch_array($listvideos);
+					$show_final_color = $show_final_msg = "";
+					if($video_row['version']=="Final"){
+					//$show_final_color = 'style="background: none repeat scroll 0 0 rgba(200, 251, 141, 1);"';
+						$show_final_msg = "Final Video <i class='fa-star fa'></i>";
+					}else{
+						$show_final_msg = "Draft copy <i class='fa-pencil-square-o fa'></i>";
+					}
+					$list_video_client_request = mysql_query("SELECT * FROM video_client_request WHERE video_id = ".$video_row ['id']);
+					$list_video_client_request_num = mysql_num_rows($list_video_client_request);
+					for($j=0; $j<$list_video_client_request_num; $j++){
+						$list_video_client_request_row = mysql_fetch_array($list_video_client_request);
+						$show_feedback_type = $list_video_client_request_row['feedback_type'];
+						if($list_video_client_request_row['feedback_type']==1){
+							$show_feedback_type = 'Changes To Video';
+							$show_feedback_type_class = 'changes-video';
+						}else if($list_video_client_request_row['feedback_type']==2){
+							$show_feedback_type = 'Changes To Audio';
+							$show_feedback_type_class = 'changes-audio';
+						}else if($list_video_client_request_row['feedback_type']==3){
+							$show_feedback_type = 'Other';
+							$show_feedback_type_class = 'changes-other';
+						}
+						$list_video_feedback[$i] .="
+						<li class='".$show_feedback_type_class."'><time>".$list_video_client_request_row['time_start']."&#47;".$list_video_client_request_row['time_end']."</time>
+						<small><b>".$show_feedback_type."</b>".$list_video_client_request_row['feedback']."</small></li>
+						";//list all request information display in page
+					}
+					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
+					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+					$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 1 WHERE id = ".$list_video_client_addition_request_row['id']);
+					if($show_final_msg) {
+						$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
+					}
+					$obj_template = include('../inc/video-draft-object.php');
+					//echo $obj_template;
 				}
 				?>
 			</ul>

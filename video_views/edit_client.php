@@ -34,7 +34,7 @@
 		}
 		$query = mysql_query($run_query);
 		if(!$query){
-			echo "Client Record Cannot Update!";
+			echo "Client Record Cannot Update! Please check have not dedicate email record in database";
 			exit;	
 		}else{
 			$message = "Success to Update Client.";

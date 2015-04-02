@@ -148,10 +148,15 @@ $addcommenttimes .= '</ul>';
                         
 						<?php echo $cca_row['company_name'];?> - <?php echo $projectname_row['project_name']?> - <span><?php echo $last_video_under_project_row['version']; ?>  (<? echo check_deadline($_POST['project_id'], $last_video_under_project_row['version']); ?>)</span>
 						</h1>
-						<?php if($last_video_a_request_row['comment_time2']==0){  ?>
-						<label class="message blue">Please double check your changes, these are your last changes.</label>
+						<?php 
+						if($_POST['add_more_changed']=='yes'){
+							echo '
+								<label class="message blue">Additional Change will Charge, and we will send quotation to you as soon as possible.</label>
+							';
+						}else if($last_video_a_request_row['comment_time2']==0){  ?>
+						<label class="message blue">Please review your changes</label>
 						<?php } else { ?>
-						<label class="message blue">Please double check your changes for this draft, you can't make anymore until next draft</label>
+						<label class="message blue">Please double check your changes, these are your last changes.</label>
 						<?php } ?>
 						<?php echo $overdeadline_message;?>
 						<div class="video sixteen columns">
@@ -178,6 +183,11 @@ $addcommenttimes .= '</ul>';
 							</div>
 						</div>
 					</li>
+					<?php
+						if($_POST['add_more_changed']=='yes'){
+							echo '<input name="add_more_changed" value="yes" type="hidden">';
+						}
+					?>
                 </form>
            
 			</section>
