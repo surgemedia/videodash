@@ -87,10 +87,18 @@ $(document).on('change', 'input[name="usb_option"]', function(){
       $('#brandusb').addClass("display_input");
       $('#plainusb').removeClass("display_input");
       $('#plainusb').addClass("disable_input");
+      $('#brandusb_btn').removeClass("disable_input");
+      $('#brandusb_btn').addClass("display_input");
+      $('#plainusb_btn').removeClass("display_input");
+      $('#plainusb_btn').addClass("disable_input");
     }else{
       $('#plainusb').removeClass("disable_input");
       $('#plainusb').addClass("display_input");
       $('#brandusb').removeClass("display_input");
       $('#brandusb').addClass("disable_input");
+      $('#plainusb_btn').removeClass("disable_input");
+      $('#plainusb_btn').addClass("display_input");
+      $('#brandusb_btn').removeClass("display_input");
+      $('#brandusb_btn').addClass("disable_input");
     }
 });

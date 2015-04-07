@@ -514,7 +514,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 									</select>
 									</div>
 								</div>
-								<a class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+								<a id="brandusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+								<a id="plainusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
 <!-- 								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
 								<h2>DVD and Data Discs</h2>
