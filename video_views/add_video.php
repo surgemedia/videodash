@@ -1,4 +1,5 @@
-<? include("../dbconnection_3evchey.php"); //connecting Database 
+<? 
+    include("../dbconnection_3evchey.php"); //connecting Database 
 	if($_POST['client_id']=='' && $_POST['project_id']==''){
 		header("location: ../home_video.php");	
 	}
@@ -20,13 +21,14 @@
         //echo $check_total_version_num;
 		$videoversion_num = $check_total_version_num+1;
 		if($check_video_Lastupdate_row['version']=="Final"){
-            $query = mysql_query("UPDATE video_under_project SET notes = '".$_POST['notes']."' WHERE id = ".$check_video_Lastupdate_row['id']);
+            $query = mysql_query("UPDATE video_under_project SET notes = '".htmlspecialchars($_POST['notes'], ENT_QUOTES)."' WHERE id = ".$check_video_Lastupdate_row['id']);
             //echo "UPDATE video_under_project SET notes = '".$_POST['notes']."' WHERE id = ".$check_video_Lastupdate_row['id'];
         }else{
-            $query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".$_POST['notes']."', 1, ".$videoversion_num.", NULL)");
+            $query = mysql_query("INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".htmlspecialchars($_POST['notes'], ENT_QUOTES)."', 1, ".$videoversion_num.", NULL)");
         }
 		mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".mysql_insert_id()."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
         if(!$query){
+			echo "INSERT INTO video_under_project VALUE(NULL, ".$_POST['project_id'].", '".$_POST['video_input']."', '".$_POST['version']."', '".htmlspecialchars($_POST['notes'], ENT_QUOTES)."', 1, ".$videoversion_num.", NULL)";
 			echo  "Cannot Save t his Video to Project.";
 			exit;	
 		}else{
@@ -42,27 +44,29 @@
     			$mailtitle = 'Surge Media Video Dash';
                 $mailsubtitle = 'Your project is ready for review';
                 $mailmessage = '
-                <b>Dear '.$cca_row['contact_person'].',</b>
+                <b>Dear '.$cca_row['contact_person'].',</b><br/><br/>
     			<p>We are pleased to inform you that the first draft of your video project by Surge Media is ready for review. <br/>
                 The video draft has been uploaded to our Video Dash. <br/>
                 Video Dash is an online video management and delivery system designed by Surge Media that makes your video production experience as smooth as possible. <br/>
-                Please click on the link below to review your project.<br/>
-    			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p>
-    			<p>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
+                Please click on the link below to review your project.<br/><br/>
+    			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a><br/></p>
+    			<p><br/>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
                 ';
             }else if($videoversion_num==2){
                 $mailsubject = 'Surge Media Video Dash - Your Project Is Ready For Review ('.$checksamelinkrow['project_name'].')';
                 $mailtitle = 'Surge Media Video Dash';
                 $mailsubtitle = 'Your project is ready for review';
                 $mailmessage = '
-                <b>Dear '.$cca_row['contact_person'].',</b>
+                <b>Dear '.$cca_row['contact_person'].',<br/></b>
                 <p>We are pleased to inform you that the changes have been amended and the second draft of your video project is ready for review.<br/>
                     The video draft has been uploaded to our Video Dash. <br/>
                     Video Dash is an online video management and delivery system designed by Surge Media that makes your video production experience as smooth as possible. <br/>
-                    Please click on the link below to review your project.<br/>
+                    Please click on the link below to review your project.<br/><br/>
                     <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">
                         Review your project
                     <a><br/>
+                </p>
+                <p>
                     Please be aware that you have one set of changes remaining. Charges may apply for additional changes.
                 </p>
                 <p>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>

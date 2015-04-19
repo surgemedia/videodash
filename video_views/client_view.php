@@ -1,4 +1,5 @@
-<? include("../dbconnection_3evchey.php"); //connecting Database
+<? 
+include("../dbconnection_3evchey.php"); //connecting Database
 session_start();
 if($_POST['client_id']=='' && $_POST['project_id']==''){
 header("location: ../index.java");
@@ -72,7 +73,7 @@ $forloopcount = $forloopcount + 1;
 $comment_remind_mail = 0;
 for($i=0; $i<$forloopcount; $i++){
 if($last_video_a_request_row['stop_resubmit']!=1){
-$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".$feedback[$i]."', '".$feedback_type[$i]."')");
+$update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".htmlspecialchars($feedback[$i], ENT_QUOTES)."', '".$feedback_type[$i]."')");
 //echo '1 done';
 }
 $mail_commect_typs = 'Change To Video';
@@ -81,7 +82,7 @@ $mail_commect_typs = 'Change To Audio';
 }else if($feedback_type[$i]==3){
 $mail_commect_typs = 'Other';
 }
-$list_comment .= '<tr><td>'.$feedback_strat[$i].'</td><td>'.$feedback_end[$i].'</td><td>'.$mail_commect_typs.'</td><td>'.$feedback[$i].'</td></tr>';
+$list_comment .= '<tr><td>'.$feedback_strat[$i].'</td><td>'.$feedback_end[$i].'</td><td>'.$mail_commect_typs.'</td><td>'.htmlspecialchars($feedback[$i], ENT_QUOTES).'</td></tr>';
 //echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
 $comment_remind_mail = 1; //if have any comment, set it 1.
 }
@@ -95,10 +96,10 @@ $mail_commect_typs = 'Change To Audio';
 $mail_commect_typs = 'Other';
 }
 if($last_video_a_request_row['stop_resubmit']!=1){
-mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".$_POST["addfeedback".$j]."', '".$_POST["addcommentoption".$j]."')");
+mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST["addtimestart".$j]."', '".$_POST["addtimeend".$j]."', '".htmlspecialchars($_POST["addfeedback".$j], ENT_QUOTES)."', '".$_POST["addcommentoption".$j]."')");
 //echo '2 done';
 }
-$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.$_POST["addfeedback".$j].'</td></tr>';
+$list_comment .= '<tr><td>'.$_POST["addtimestart".$j].'</td><td>'.$_POST["addtimeend".$j].'</td><td>'.$mail_commect_typs.'</td><td>'.htmlspecialchars($_POST["addfeedback".$j], ENT_QUOTES).'</td></tr>';
 }
 }
 $comment_remind_mail = 1; //if have any comment, set it 1.
@@ -110,12 +111,12 @@ $general_comment = $_POST['voice_comment'];
 $comment_remind_mail = 1; //if have any comment, set it 1.
 }
 if($list_comment!="" || $general_comment!=""){
-$mail_message = 'A client has submitted their '.$addition_change_to_mail.' set of changes.<br/>
+$mail_message = 'A client has submitted their #'.$last_video_under_project_row['version_num'].' set of changes.<br/>
 '.$addition_change_to_mail2.'
 Client: '.$cca_row['company_name']."<br/>
-Video Project: ".$projectname_row['project_name']."
+Video Project: ".$projectname_row['project_name']."<br/>
 Comment: ".$general_comment."
-<table>
+<table border=\"1\">
 	<tr><th>Start</th><th>End</th><th>Type</th><th>comments</th><tr>
 	".$list_comment."
 </table>
@@ -153,12 +154,12 @@ if($last_video_a_request_row['comment_time']==0 && $last_video_under_project_row
 //IF Client first time comment to video
 $Client_mail_message ='
 Nice one '.$cca_row['contact_person'].'!<br/><br/>
-<p>Baz Luhrmann would be proud!</p>
+<p>Baz Luhrmann would be proud!<br/></p>
 <p>Your first set of changes have been submitted and are in the pipeline. </p>
 <p>Just a friendly reminder that you have one set of changes remaining.</p>
-<p>If you have spoken to our video department and your changes are a priority, be assured that they are being addressed.</p>
-<p>In the meantime, please be patient, make some popcorn, watch a movie, and we will contact you if we have any questions.</p>
-<p>Well, that’s a wrap from me. </p>
+<p>If you have spoken to our video department and your changes are a priority, be assured that they are being addressed.<br/></p>
+<p>In the meantime, please be patient, make some popcorn, watch a movie, and we will contact you if we have any questions.<br/></p>
+<p>Well, that’s a wrap from me. <br/></p>
 <p>Your loving, devoted Post Production Editor,<br/>
 Paris Ormerod</p>
 ';
@@ -191,14 +192,14 @@ $update_mail_subject = "Your Second Set of Changes";
 $the_data_is = date("d M Y");
 $name = "Surge Media - Video Dash";
 $frommail = "cs@videodash.surgehost.com.au";
-$mailto = 'video@surgemedia.com.au, webproduction@surgemedia.com.au'; // $cca_row['email'];
+$mailto = 'video@surgemedia.com.au, ben@surgemedia.com.au'; // $cca_row['email'];
 $mailtoclient =  $cca_row['email'];
-$mailsubject = 'CLIENT #'.$last_video_under_project_row['version_num'].' CHANGES – TO SURGE';
+$mailsubject = 'Client\'s #'.$last_video_under_project_row['version_num'].' Set Of Changes';
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=utf-8\r\n";
 $headers .="From: ". $name . " <" . $frommail . ">\r\n";
 if($mail_message!=""){ //Check whether have any email message need to send out
-$mail_data = file_get_contents('../email_template/feedback.html');
+$mail_data = file_get_contents('../email_template/feedback2Surge.html');
 $mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
 $mail_data = str_replace("[mail_content]",  $mail_message, $mail_data);
 $mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
@@ -222,13 +223,29 @@ mail($mailtoclient, $update_mail_subject, $client_mail_data, $headers);
 /*===========================================
 Verion Number to show changed Day counter
 ============================================*/
+$stop_comment = "";
+//echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
+if($last_video_under_project_row['version']!='Final'){
+	$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
+	$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
+	if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
+		$stop_comment_disable = 1;
+	}
+	if($last_video_under_project_row['version_num']==2 && $last_video_a_request_row['comment_time2']!=1){
+		$stop_comment_disable = 1;
+	}
+}
 if($last_video_under_project_row['version']!="Final"){
 $downloadfilelink = '<li><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confrim\').submit();"><span class="omega alpha">Approve as final</span><i class="fa fa-star"></i></a></li>';
 $downloadfilelink2 = '';
 $downloadfile_message = '';
 $list_day_counter = check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline');
 if($list_day_counter>0){
-$overdeadline_message = 'You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
+	if($stop_comment_disable==1){
+		$overdeadline_message = 'You have '.check_deadline($_POST['project_id'], $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
+	}else{
+		$overdeadline_message = 'Thank you for submitting your changes.';
+	}
 }else{
 $overdeadline_message = 'Sorry, We have not recieved any changes from you in last 3 weeks, If you need any changes of your video, we will charge for time involved.';
 }
@@ -632,18 +649,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							</ul>
 						</div>
 						<?php
-												$stop_comment = "";
-												//echo $last_video_under_project_row['version_num']. $last_video_a_request_row['comment_time'];
-												if($last_video_under_project_row['version']!='Final'){
-														$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$last_video_under_project_row['id']." ORDER BY id DESC LIMIT 0, 1");
-														$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
-														if($last_video_under_project_row['version_num']==1 && $last_video_a_request_row['comment_time']!=1){
-															$stop_comment_disable = 1;
-														}
-														if($last_video_under_project_row['version_num']==2 && $last_video_a_request_row['comment_time2']!=1){
-															$stop_comment_disable = 1;
-																		}
-													}
+
 													if($stop_comment_disable==1){
 						?>
 						<div id="changes_required">
