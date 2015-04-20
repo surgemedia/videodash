@@ -154,7 +154,7 @@ $addcommenttimes .= '</ul>';
 								<label class="message blue">Additional Change will Charge, and we will send quotation to you as soon as possible.</label>
 							';
 						}else if($last_video_a_request_row['comment_time2']==0){  ?>
-						<label class="message blue">Please review your changes</label>
+						<label class="message blue">Please confirm your changes</label>
 						<?php } else { ?>
 						<label class="message blue">Please double check your changes, these are your last changes.</label>
 						<?php } ?>
