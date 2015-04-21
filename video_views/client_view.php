@@ -674,7 +674,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 			
 			
 			<ul id="videos">
-				<li><h1>Previous Versions</h1></li>
+				<li><h1>All Video Versions</h1></li>
 				<?
 				$listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =".$_POST['project_id']." ORDER BY enabling, version_num DESC");
 				$video_num = mysql_num_rows($listvideos);
