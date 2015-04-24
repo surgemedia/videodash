@@ -401,7 +401,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
         	<a id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
             Please make sure you have entered <strong>ALL</strong> of your feedback.  Do you wish to proceed?
         	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>SUBMIT FEEDBACK</span> <i class="fa fa-send"></i></a>
-        	<a class="btn red columns five alpha cloasesubmit" ><span>CANCEL</span></a>
+        	<a class="btn red columns five alpha cloasesubmit" ><span>Cancel</span> <i class="fa fa-times"></i></a>
+        	
 
         </div>
     </div>
