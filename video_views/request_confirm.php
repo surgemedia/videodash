@@ -135,14 +135,14 @@ for($j=0; $j<$forloopcount; $j++){
 }
 $addcommenttimes .= '</ul>';
 ?>							
+    <form id="charge_update" action="client_view.java" method="post">
+        <input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
+        <input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
+        <input value="1" name="charge_change" type="hidden">
 
 		<section class="container">
 			
 			<ul id="videos" >         
-				<form id="charge_update" action="client_view.java" method="post">
-					<input value="<?=$_POST['client_id'];?>" name="client_id" type="hidden">
-					<input value="<?=$_POST['project_id'];?>" name="project_id" type="hidden">
-					<input value="1" name="charge_change" type="hidden">
 					<li class="video_obj featured">
 						<h1 class="title">
                         
@@ -188,9 +188,9 @@ $addcommenttimes .= '</ul>';
 							echo '<input name="add_more_changed" value="yes" type="hidden">';
 						}
 					?>
-                </form>
            
 			</section>
+            </form>
 			</main>
 			<? include('../footer.php');?>
 			<div id="overlay_wrapper" onClick="closeAllCards()"></div>

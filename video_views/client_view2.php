@@ -1,8 +1,3 @@
-<?
-    ini_set("include_path", '/home/videodsurg/php:' . ini_get("include_path")  ); //enable all Pear php Mail function, Pear mail and mime, please install in Cpanel client page before use it.
-    require_once "Mail.php";
-    include('Mail/mime.php');
-?>
 <? 
 include("../dbconnection_3evchey.php"); //connecting Database
 session_start();
@@ -35,7 +30,6 @@ if($_POST['make_video_version_to_final']=="yes"){
 	$l_video_under_project_row = mysql_fetch_array($l_video_under_project);
 	$version_number_editer = $l_video_under_project_row['version_num'] + 1;
 	mysql_query("INSERT INTO video_under_project VALUES(NULL, ".$project_id.", '".$l_video_under_project_row['video_link']."', 'Final', 'Final Version Confirmed', 1, ".$version_number_editer.", NULL);");
-	mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".mysql_insert_id()."', '', '', '', '', '', '', '', '', '0', '', '')");
 	$mail_message = '<b>A client has confirmed the final version of their video</b>
 	Client: '.$cca_row['company_name']."<br/>
 	Video Project: ".$projectname_row['project_name'];
@@ -59,7 +53,7 @@ $forloopcount = 0;
 $addition_change_to_mail = '';
 $addition_change_to_mail2 = '';
 if($last_video_under_project_row['id']!="" && $_POST['add_more_changed']=="yes"){
-	mysql_query("UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."', stop_resubmit = 0 WHERE video_id = ".$last_video_under_project_row['id']);
+	mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '".$last_video_under_project_row['id']."', '".$_POST['script1']."', '".$_POST['script2']."', '".$_POST['logoandimage_email']."', '".$_POST['logoandimage_dropbox']."', '".$_POST['voice_id']."', '".$_POST['voice_comment']."', '".$_POST['audio_comment']."', '".$_POST['contact_info1']."', '".$_POST['contact_info2']."', '".$_POST['contact_info3']."', '".$_POST['contact_info4']."')");
 	//if it's addition comments. add it to databace
 	$addition_change_to_mail = 'additional change';
 	$addition_change_to_mail2 = 'Review it and send quote to client.<br/>';
@@ -71,22 +65,18 @@ $last_video_a_request_row = mysql_fetch_array($last_video_a_request);
 /*          Time feedback of video       */
 /*=======================================*/
 for($i=0; $i<1000; $i++){//runing 1000 time to add feedback to array
-	if($_POST['feedback_'.$i]!=""){
-		$feedback[$forloopcount] = $_POST['feedback_'.$i];
-		//echo $_POST['feedback_'.$i];
-		$feedback_strat[$forloopcount] = $_POST['time_start_'.$i];
-		$feedback_end[$forloopcount] = $_POST['time_end_'.$i];
-		$feedback_type[$forloopcount] = $_POST['comment_option_'.$i];
-		$forloopcount = $forloopcount + 1;
-	}
+if($_POST['feedback_'.$i]!=""){
+$feedback[$forloopcount] = $_POST['feedback_'.$i];
+$feedback_strat[$forloopcount] = $_POST['time_start_'.$i];
+$feedback_end[$forloopcount] = $_POST['time_end_'.$i];
+$feedback_type[$forloopcount] = $_POST['comment_option_'.$i];
+$forloopcount = $forloopcount + 1;
 }
-//echo $last_video_a_request_row['stop_resubmit'];
+}
 $comment_remind_mail = 0;
 for($i=0; $i<$forloopcount; $i++){
-	//echo $i;
 if($last_video_a_request_row['stop_resubmit']!=1){
 $update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".htmlspecialchars($feedback[$i], ENT_QUOTES)."', '".$feedback_type[$i]."')");
-   //echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$feedback_strat[$i]."', '".$feedback_end[$i]."', '".htmlspecialchars($feedback[$i], ENT_QUOTES)."', '".$feedback_type[$i]."')<br/>";
 //echo '1 done';
 }
 $mail_commect_typs = 'Change To Video';
@@ -178,6 +168,7 @@ Paris Ormerod</p>
 ';
 $update_mail_subject = "Your First Set of Changes";
 $first_draft_title = "Hi-Five! Thanks for submitting your changes.";
+mysql_query("UPDATE video_client_addition_request SET comment_time = 0 WHERE id = ".$last_video_a_request_row['id']);
 //Update database to stop sendmail duplicate
 }
 if($last_video_under_project_row['version_num']==2 && $last_video_under_project_row['version']=='Draft'){
@@ -194,7 +185,7 @@ Hey Hey '.$cca_row['contact_person'].'!<br/><br/>
 Your caring, dedicated Post Production Editor,<br/>
 Paris Ormerod</p>
 ';
-mysql_query("UPDATE video_client_addition_request SET comment_time2 = 1 WHERE id = ".$last_video_a_request_row['id']);
+mysql_query("UPDATE video_client_addition_request SET comment_time2 = 0 WHERE id = ".$last_video_a_request_row['id']);
 //Update database to stop sendmail duplicate
 $update_mail_subject = "Your Second Set of Changes";
 }
@@ -206,7 +197,9 @@ $frommail = "cs@videodash.surgehost.com.au";
 $mailto = 'video@surgemedia.com.au'; // $cca_row['email'];
 $mailtoclient =  $cca_row['email'];
 $mailsubject = 'Client\'s #'.$last_video_under_project_row['version_num'].' Set Of Changes';
-
+$headers = "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=utf-8\r\n";
+$headers .="From: ". $name . " <" . $frommail . ">\r\n";
 if($mail_message!=""){ //Check whether have any email message need to send out
 $mail_data = file_get_contents('../email_template/feedback2Surge.html');
 $mail_data = str_replace("[mail_title]",  $mailsubject, $mail_data);
@@ -216,38 +209,7 @@ $mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
 if($_POST['make_video_version_to_final']=="yes"){
 $mailsubject = 'Client confirmed the final version.';
 }//If client confirm video as Final Version, send mail to Ben and Video Team about it.
-
-$smtp = Mail::factory('smtp', array(
-'host' => 'videodash.surgehost.com.au',
-'port' => '25',
-'auth' => true,
-'username' => $frommail,
-'password' => '$$Surge1234$$'
-));
-
-$crlf = "\n";
-$headers = array(
-	'From' => $frommail,
-	'Return-Path'   => $frommail,
-	'To' => $mailto,
-	'Subject' => $mailsubject
-);
-// Creating the Mime message
-$mime = new Mail_mime($crlf);
-
-// Setting the body of the email
-$mime->setTXTBody($mailmessage);
-$mime->setHTMLBody($mail_data);
-
-$body = $mime->get();
-$headers = $mime->headers($headers);
-
-
-$mail = $smtp->send($mailto, $headers, $body);
-if (PEAR::isError($mail)) {
-	echo('<p>' . $mail->getMessage() . '</p>');
-}
-
+mail($mailto, $mailsubject, $mail_data, $headers);
 }
 if($update_mail_subject!=""){
 $client_mail_data = file_get_contents('../email_template/feedback.html');
@@ -258,32 +220,7 @@ $client_mail_data = str_replace("[mail_title]",  $update_mail_subject, $client_m
 $client_mail_data = str_replace("[mail_content]",  $Client_mail_message, $client_mail_data);
 $client_mail_data = str_replace("[mail_datandtime]",  $the_data_is, $client_mail_data);
 //Mail Content to Client
-
-$headers2 = array(
-	'From' => $frommail,
-	'Return-Path'   => $frommail,
-	'To' => $mailtoclient,
-	'Subject' => $update_mail_subject
-);
-// Creating the Mime message
-$mime = new Mail_mime($crlf);
-
-// Setting the body of the email
-$mime->setTXTBody($Client_mail_message);
-$mime->setHTMLBody($client_mail_data);
-
-$body2 = $mime->get();
-$headers2 = $mime->headers($headers2);
-
-
-$mail2 = $smtp->send($mailtoclient, $headers2, $body2);
-if (PEAR::isError($mail2)) {
-	echo('<p>' . $mail2->getMessage() . '</p>');
-}
-
-
 mail($mailtoclient, $update_mail_subject, $client_mail_data, $headers);
-mysql_query("UPDATE video_client_addition_request SET comment_time = 1, stop_resubmit = 1 WHERE id = ".$last_video_a_request_row['id']);
 }//Stop mailout to keep system work fine if without any remind mail to client.
 /*===========================================
 Verion Number to show changed Day counter
@@ -307,7 +244,7 @@ $downloadfile_message = '';
 $list_day_counter = check_deadline($project_id, $last_video_under_project_row['version'], 'deadline');
 if($list_day_counter>0){
 	if($stop_comment_disable==1){
-		$overdeadline_message = '<a href="#Feedbackarea">You have '.check_deadline($project_id, $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback&nbsp;<i class="fa fa-keyboard-o"></i></a>';
+		$overdeadline_message = 'You have '.check_deadline($project_id, $last_video_under_project_row['version'], 'deadline').'  days left to submit your feedback';
 	}else{
 		$overdeadline_message = 'Thank you for submitting your changes.';
 	}
@@ -398,9 +335,9 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
     <div class="fullscreen disable_input" id="request_confirm_form">
     	
     	<div class="confirmbtn">
-        	<a id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
-            Please confirm your feedback for it to be submitted
-        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Feedback</span> <i class="fa fa-send"></i></a>
+        	<a href="#" id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
+            Please Confirm it's all your change request before submit.
+        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Reuquests</span> <i class="fa fa-send"></i></a>
         </div>
     </div>
 		<? include('client_header.php'); ?>
@@ -445,7 +382,6 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 						</p>
 						<p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.
 						</p>
-                        <a class="btn green omega" href="#Feedbackarea">Create change request</a><a class="btn blue omega" style="margin-left: 8px !important;" href="#youtube_video_div">Perview video</a>
 					</li>
 				</ul>
 			</div>
@@ -711,7 +647,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 						<?php endif;
 						if($last_video_under_project_row['version']!="Final"){
 						?>
-						<div class="video sixteen columns omega alpha" id="youtube_video_div">
+						<div class="video sixteen columns omega alpha">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?=cleanYoutubeLink($last_video_under_project_row['video_link']);?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
@@ -721,23 +657,17 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 							<ul>
 								<?php echo $downloadfilelink; ?>
 							</ul>
-                            <label class="title label_stop_float" for="" id="Feedbackarea">Directors Notes</label>
-                            <ul>
-                            	<li><?php echo $last_video_under_project_row['notes'];?></li>
-                            </ul>
 						</div>
 						<?php
 
 													if($stop_comment_disable==1){
 						?>
 						<div id="changes_required">
-							<label class="title label_stop_float" for="" id="Feedbackarea">Your Feedback</label>
+							<label class="title label_stop_float" for="">Your Feedback</label>
 							<ul id="comments-general" class="container">
 								
 								<li>
-									<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video" title="Overall comments go here
-                                    
-Hint: It is useful to view your video a few times from start to finish to get an overall feel for the work, before you hone in on specific elements."><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
+									<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 								</li>
 							</ul>
 							<ul id="time-comments">
@@ -745,9 +675,7 @@ Hint: It is useful to view your video a few times from start to finish to get an
 							</ul>
 							<div class="submit-actions">
 								<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
-								<a class="btn green columns five alpha" id="first_submit_step" onClick="
-    $("#request_confirm_form").removeClass("disable_input");
-    $("#request_confirm_form").addClass("display_input");"><span>submit all comments</span> <i class="fa fa-send"></i></a>
+								<a class="btn green columns five alpha" href="#" id="first_submit_step"><span>submit all comments</span> <i class="fa fa-send"></i></a>
 							</div>
 						</div>
 						<?php }?>
@@ -792,6 +720,7 @@ Hint: It is useful to view your video a few times from start to finish to get an
 					}
 					$list_video_client_addition_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = ".$video_row['id']." ORDER BY id DESC LIMIT 0, 1");
 					$list_video_client_addition_request_row = mysql_fetch_array($list_video_client_addition_request);
+					$stop_resubmit_bug = mysql_query("UPDATE video_client_addition_request SET stop_resubmit = 0 WHERE id = ".$list_video_client_addition_request_row['id']);
 					if($show_final_msg) {
 						$new_final_message = ""; //'<label class="message">'.$show_final_msg.'</label>';
 					}

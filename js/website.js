@@ -13,6 +13,14 @@ $('#required_button').click(function() {
   $('#changes_required').addClass('popup');
 });
 
+$("#cloasesubmit").click(function(){
+    $("#request_confirm_form").addClass("disable_input");
+    $("#request_confirm_form").removeClass("display_input");
+});
+$('#first_submit_step').click(function(){
+    $("#request_confirm_form").removeClass("disable_input");
+    $("#request_confirm_form").addClass("display_input");
+});
 
 function get_video(input,iframe){
   $(input).focusout(function() {
@@ -76,7 +84,7 @@ function NewTimelineComment(){
   selectoption += '<option value="2">Changes To Audio</option>';
   selectoption += '<option value="3">Other</option>';
   selectoption += '<select>';
-  var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5" class="fourteen columns"></textarea>';
+  var textarea = '<textarea name="feedback_'+i+'" cols="30" rows="5" class="fourteen columns" placeholder="Your comments"></textarea>';
   output = li_open+'<div class="controls"><span class="timeline_picker "><label for="start">Start</label>'+start+'</span><span class="timeline_picker end "><label for="start">End</label>'+end+'</span>'+selectoption+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
@@ -102,3 +110,4 @@ $(document).on('change', 'input[name="usb_option"]', function(){
       $('#brandusb_btn').addClass("disable_input");
     }
 });
+ 
