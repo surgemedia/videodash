@@ -13,7 +13,7 @@ $('#required_button').click(function() {
   $('#changes_required').addClass('popup');
 });
 
-$("#cloasesubmit").click(function(){
+$(".cloasesubmit").click(function(){
     $("#request_confirm_form").addClass("disable_input");
     $("#request_confirm_form").removeClass("display_input");
 });

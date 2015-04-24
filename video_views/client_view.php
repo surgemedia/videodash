@@ -399,8 +399,10 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
     	
     	<div class="confirmbtn">
         	<a id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
-            Please confirm your feedback for it to be submitted
-        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Feedback</span> <i class="fa fa-send"></i></a>
+            Please make sure you have entered <strong>ALL</strong> of your feedback.  Do you wish to proceed?
+        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>SUBMIT FEEDBACK</span> <i class="fa fa-send"></i></a>
+        	<a class="btn red columns five alpha cloasesubmit" ><span>CANCEL</span></a>
+
         </div>
     </div>
 		<? include('client_header.php'); ?>
@@ -445,7 +447,8 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 						</p>
 						<p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.
 						</p>
-                        <a class="btn green omega" href="#Feedbackarea">Create change request</a><a class="btn blue omega" style="margin-left: 8px !important;" href="#youtube_video_div">Perview video</a>
+                        <a class="btn green omega" href="#Feedbackarea">Create Feedback</a>
+                        <a class="btn blue omega" style="margin-left: 8px !important;" href="#youtube_video_div">Preview Video</a>
 					</li>
 				</ul>
 			</div>
@@ -740,6 +743,7 @@ $downloadfile_message = '<br/>We are editing your video now.'.$file_details_mess
 Hint: It is useful to view your video a few times from start to finish to get an overall feel for the work, before you hone in on specific elements."><?php echo $last_video_a_request_row['voice_comment']; ?></textarea>
 								</li>
 							</ul>
+							<label class="title label_stop_float" >Timeline Comment</label>
 							<ul id="time-comments">
 								<script>NewTimelineComment();</script>
 							</ul>
