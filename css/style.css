@@ -654,20 +654,26 @@ div#brandusb select {
     z-index: 10;
 }
 .confirmbtn{
-	background-color: white;
-    border-radius: 3px;
-    height: 100px;
-    left: 50%;
-    margin: -150px 0 0 -150px;
-    padding: 10px;
-    position: fixed;
-    top: 50%;
-    width: 300px;
+	  background-color: #FFF;
+  left: 40%;
+  margin: -150px 0 0 -150px;
+  padding: 1em;
+  position: fixed;
+  top: 50%;
+  width: 500px;
+  border-radius: 0.3em;
+  border: 1px solid #D1D1D1;
 }
-.cloasesubmit{
-	color:#000000;
-	font-size:30px;
-	float: right;
+.confirmbtn p {
+    padding: 1em 0 0;
+    font-size: 1.2em;
+    line-height: 1.7em;
+}
+#cloasesubmit{
+  color: #8E8E8E;
+  font-size: 30px;
+  float: right;
+  margin-top: -0.3em;
 }
 textarea[title]:hover:after {
 content: attr(title);
