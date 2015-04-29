@@ -36,3 +36,29 @@
   background-color: #f0f7fd;
   border-color: #d0e3f0;
 }
+.media .about {
+  color: #999;
+  border-bottom: 1px solid #d1d1d1;
+}
+.circle-badge {
+  background: #F0AD4E;
+  border-radius: 100%;
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  padding: 1em;
+}
+.circle-badge i {
+  width: 100%;
+  font-size: 1.9em;
+  color: #fff;
+  text-align: center;
+  line-height: 1em;
+  display: inline-block;
+}
+footer {
+  margin: 1em 0em;
+  display: block;
+  padding: 2em 0;
+  background: #282828;
+}
