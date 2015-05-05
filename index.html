@@ -1,191 +1,254 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html>
-  
-  <head>
-    <title>Jumbotron</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
-      body {
-        padding-top: 50px;
-        padding-bottom: 20px;
-      }
-    </style>
-  </head>
-  
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Gaffer</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="#">Action</a>
-                </li>
-                <li>
-                  <a href="#">Another action</a>
-                </li>
-                <li>
-                  <a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li>
-                  <a href="#">Separated link</a>
-                </li>
-                <li>
-                  <a href="#">One more separated link</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <!--/.navbar-collapse -->
-      </div>
-    </div>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="bg">
-      <div class="container">
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/kusHMcbtCXc" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div>
-      <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-lg-8">
-            <br>
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h2>DareDevil Intro</h2>
-              </div>
-              <div class="panel-body">
-                <p><b>Type:</b> Motion Graphics</p>
-                <p><b>Client:</b> Marvel</p>
-                <p><b>Duration:</b> 5:00</p>
-              </div>
-            </div>
-            <div class="media">
-              <span class="pull-left circle-badge" href="#"><i class="glyphicon glyphicon-music"></i></span>
-              <div class="media-body" style>
-                <h4 class="media-heading">alexanderddking</h4>
-                <span class="about">is talking about </span><span class="label label-warning">Music</span> 
-                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
-                <small>alexanderddking@gmail.com</small>
-              </div>
-            </div>
-            <div class="media">
-              <span class="pull-left circle-badge" href="#"><i class="glyphicon glyphicon-music"></i></span>
-              <div class="media-body" style>
-                <h4 class="media-heading">alexanderddking</h4>
-                <span class="about">is talking about </span><span class="label label-warning">Music</span> 
-                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
-                <small>alexanderddking@gmail.com</small>
-              </div>
-            </div>
-            <div class="media">
-              <span class="pull-left circle-badge" href="#"><i class="glyphicon glyphicon-music"></i></span>
-              <div class="media-body" style>
-                <h4 class="media-heading">alexanderddking</h4>
-                <span class="about">is talking about </span><span class="label label-warning">Music</span> 
-                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
-                <small>alexanderddking@gmail.com</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <h2>The Project Experience</h2>
-            <p>At Surge Media we like to make your video project experience as smooth as possible by giving you a clear overview of where we are at with your project and giving you an easy way to supply feedback and track changes.</p>
-            <p><a class="btn btn-default" href="#" data-toggle="modal" data-target="#myModal">Learn More <i class="glyphicon glyphicon-info-sign"></i></a></p>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <!-- Model -->
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+
+    <head>
+        <title>Jumbotron</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <style type="text/css">
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+              }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                    <h4 class="modal-title">Step by Step Overview</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>As part of your project you will receive two sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage.</p>
-                    <div class="bs-callout bs-callout-warning">
-                      <p><b>VIDEO PROJECT </b> <span class="label label-warning">FIRST DRAFT</span> <span class="label label-info">3 WEEKS</span> </p>
-                      <p>Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied.</p>
-                    </div>
-                    <div class="bs-callout bs-callout-info">
-                      <p><b>VIDEO PROJECT</b> <span class="label label-warning">FIRST DRAFT</span> <span class="label label-info">3 WEEKS</span> </p>
-                      <p>This stage is mostly used to finetune the video before we present you with the final version.</p>
-                    </div>
-                    <div class="bs-callout bs-callout-success">
-                      <p><b>VIDEO PROJECT </b> <span class="label label-success">Final</span> </p>
-                      <p>This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.</p>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
+                    <a class="navbar-brand" href="#">Gaffer</a>
                 </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse -->
             </div>
-            <!-- /.modal -->
-            <h2>Contact Infomation</h2>
-            <form>
-              <div class="form-group">
-                <label class="control-label">Field Name</label>
-                <div class="controls">
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label">Field Name</label>
-                <div class="controls">
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-            </form>
-            <div class="form-group">
-              <label class="control-label">Field Name</label>
-              <div class="controls">
-                <input type="text" class="form-control">
-              </div>
+        </div>
+        <!-- Main jumbotron for a primary marketing message or call to action
+        -->
+        <div class="bg">
+            <div class="container">
+                <iframe width="100%" height="480" src="https://www.youtube.com/embed/kusHMcbtCXc"
+                frameborder="0" allowfullscreen=""></iframe>
             </div>
-            <hr>
-          </div>
-          <p><a class="btn btn-success pull-right" href="#">Update Details</a></p>
         </div>
-       
-      </div>
-       <footer>
-         <div class="container">
-          <p>&copy; Company 2013</p>
-        </footer>
+        <div>
+            <div class="container">
+                <!-- Example row of columns -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <br>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h2>DareDevil Intro</h2>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    <b>Type:</b>Motion Graphics</p>
+                                <p>
+                                    <b>Client:</b>Marvel</p>
+                                <p>
+                                    <b>Duration:</b>5:00</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <span class="pull-left circle-badge" href="#">
+                                <i class="glyphicon glyphicon-music"></i>
+                            </span>
+                            <div class="media-body" style="">
+                                <h4 class="media-heading">alexanderddking</h4>
+                                <span class="about">is talking about</span>
+                                <span class="label label-warning">Music</span>
+                                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
+                                <small>alexanderddking@gmail.com</small>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <span class="pull-left circle-badge green" href="#">
+                                <i class="glyphicon glyphicon-music"></i>
+                            </span>
+                            <div class="media-body" style="">
+                                <h4 class="media-heading">alexanderddking</h4>
+                                <span class="about">is talking about</span>
+                                <span class="label label-warning">Music</span>
+                                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
+                                <small>alexanderddking@gmail.com</small>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <span class="pull-left circle-badge other" href="#">
+                                <i class="glyphicon glyphicon-music"></i>
+                            </span>
+                            <div class="media-body" style="">
+                                <h4 class="media-heading">alexanderddking</h4>
+                                <span class="about">is talking about</span>
+                                <span class="label label-warning">Music</span>
+                                <p>I love the colors and the dripping, i think the bridge is a bit random</p>
+                                <small>alexanderddking@gmail.com</small>
+                            </div>
+                        </div>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+
+                                <div class="col-sm-12 col-lg-12">
+                                  <textarea name="" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="radio">
+                                        <label><input type="radio">Video</label>
+                                        <label><input type="radio">Video</label>
+                                        <label><input type="radio">Video</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-default">Sign in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2>The Project Experience</h2>
+                        <p>At Surge Media we like to make your video project experience as smooth
+                            as possible by giving you a clear overview of where we are at with your
+                            project and giving you an easy way to supply feedback and track changes.</p>
+                        <p>
+                            <a class="btn btn-default" href="#" data-toggle="modal" data-target="#myModal">Learn More <i class="glyphicon glyphicon-info-sign"></i></a>
+                        </p>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                            <!-- Model -->
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title">Step by Step Overview</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>As part of your project you will receive two sets of changes before we
+                                            render out the final version so it is important to make sure that you use
+                                            the feedback system to your advantage.</p>
+                                        <div class="bs-callout bs-callout-warning">
+                                            <p>
+                                                <b>VIDEO PROJECT</b>
+                                                <span class="label label-warning">FIRST DRAFT</span>
+                                                <span class="label label-info">3 WEEKS</span>
+                                            </p>
+                                            <p>Provide us with a complete list of ALL requested changes. Use the video
+                                                timestamp to make sure that our editors know where the changes need to
+                                                be applied.</p>
+                                        </div>
+                                        <div class="bs-callout bs-callout-info">
+                                            <p>
+                                                <b>VIDEO PROJECT</b>
+                                                <span class="label label-warning">FIRST DRAFT</span>
+                                                <span class="label label-info">3 WEEKS</span>
+                                            </p>
+                                            <p>This stage is mostly used to finetune the video before we present you
+                                                with the final version.</p>
+                                        </div>
+                                        <div class="bs-callout bs-callout-success">
+                                            <p>
+                                                <b>VIDEO PROJECT</b>
+                                                <span class="label label-success">Final</span>
+                                            </p>
+                                            <p>This is the final version of your project which will be available for
+                                                you to download. Please note that if you still want to make additional
+                                                changes, charges may apply.</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <h2>Contact Infomation</h2>
+                        <form>
+                            <div class="form-group">
+                                <label class="control-label">Field Name</label>
+                                <div class="controls">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Field Name</label>
+                                <div class="controls">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <label class="control-label">Field Name</label>
+                            <div class="controls">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <p>
+                        <a class="btn btn-success pull-right" href="#">Update Details</a>
+                    </p>
+                </div>
+            </div>
+            <footer>
+                <div class="container">
+                    <p>© Company 2013</p>
+                </div>
+            </footer>
         </div>
-      <!-- /container -->
-    </div>
-  </body>
+        <!-- /container -->
+    </body>
 
 </html>
