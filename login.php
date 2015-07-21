@@ -9,7 +9,7 @@ $query = mysql_query($sqlog);
 if(!mysql_num_rows($query)) {
 Header("WWW-authenticate: basic realm=\"Citylink Control Login\"");
 Header("HTTP/1.0 401 Unauthorized");
-$title="登入失敗";
+$title="Login";
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <blockquote>

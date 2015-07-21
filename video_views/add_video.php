@@ -47,6 +47,15 @@
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
 			$mailto = $cca_row['email'];
+
+
+/*===============================
+=            Email 1            =
+===============================*/
+
+
+
+
             if($videoversion_num==1){
     			$mailsubject = 'Surge Media Video Dash - Your Project Is Ready For Review ('.$checksamelinkrow['project_name'].')';
     			$mailtitle = 'Surge Media Video Dash';
@@ -60,6 +69,9 @@
     			<a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a><br/></p>
     			<p><br/>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
                 ';
+/*===============================
+=            Email 2            =
+===============================*/
             }else if($videoversion_num==2){
                 $mailsubject = 'Surge Media Video Dash - Your Project Is Ready For Review ('.$checksamelinkrow['project_name'].')';
                 $mailtitle = 'Surge Media Video Dash';
@@ -80,6 +92,9 @@
                 <p>Please review your project carefully and use the timestamp on the video to note down any changes you require on our Video Dash.</p>
                 ';
             }else{
+/*===============================
+=            Email 3            =
+===============================*/
                 $mailsubject = 'Surge Media Video Dash - Your video draft is ready to review ('.$checksamelinkrow['project_name'].')';
                 $mailtitle = 'Surge Media Video Dash';
                 $mailsubtitle = 'Your project is ready for review';
@@ -87,8 +102,7 @@
                 <p>We are pleased to inform you that your changes have been amended and a draft of your video project:'.$checksamelinkrow['project_name'].' is ready for your review.</p>
                 <p>The video draft has been uploaded to our Video Dash.</p>
                 <p>Please click on the link below to review your project.<br/>
-                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p>
-                ';
+                <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p> ';
             }
 
             //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
@@ -104,7 +118,7 @@
                     <p>Dear '.$cca_row['contact_person'].'</p>
                     <p>We are pleased to inform you that your final video:['.$checksamelinkrow['project_name'].'] by Surge Media is ready for download.<br/>
                     You can download the final video from our Video Dash by clicking on the link below.<br/>
-                    <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Final Video</a><br/> 
+                    <a href="http://http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Final Video</a><br/> 
                     Let us take this opportunity to thank you for choosing <a href="http://surgemedia.com.au">Surge Media</a>. <br/>
                     We look forward to working with you again.</p>
                     ';
