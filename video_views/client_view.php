@@ -810,14 +810,24 @@ if ($stop_comment_disable == 1) {
 ?>
 						<div id="changes_required">
 							<label class="title label_stop_float" for="" id="Feedbackarea">Your Feedback</label>
+                            <p class=" label_stop_float" for="">General Comments</p>
 							<ul id="comments-general" class="container">
 								
 								<li>
-									<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="General Comments on the Video"><?php
+									<textarea name="voice_comment" id="general-comment" class="fifteen columns" cols="30" rows="10" placeholder="Please provide general feedback on the video as a whole"><?php
     echo $last_video_a_request_row['voice_comment']; ?></textarea>
 								</li>
 							</ul>
-							<ul id="time-comments">
+                            <div class="timeline-title">
+                                <p>Timeline</p>
+                                <span>Please use the timestamp on the video to indicate at what point you would like changes</span>
+                            </div>
+                            <div class="timeline-comments-title">
+                                <p>Comments</p>
+                                <span>Please use the box below to add your comments</span>
+                            </div>
+                            <div style="clear: both;"></div>
+                            <ul id="time-comments">
 								<script>NewTimelineComment();</script>
 							</ul>
 							<div class="submit-actions">

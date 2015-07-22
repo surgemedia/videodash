@@ -319,6 +319,19 @@ ul#videos li.featured #changes_required ul li {
 display: block;
 overflow: hidden;
 }
+ul li.featured #changes_required .timeline-title {
+  float: left;
+  width: 30%;
+  margin-right: 2em;
+}
+ul li.featured #changes_required .timeline-comments-title {
+  float: none;
+  width: 63%;
+  display: inline-block;
+}
+ul li.featured #changes_required .timeline-title span, ul li.featured #changes_required .timeline-comments-title span {
+	font-size: 12px;
+}
 .comment_check {
 display: inline-block;
 width: 100%;
