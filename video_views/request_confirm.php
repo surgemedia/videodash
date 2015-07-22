@@ -151,7 +151,7 @@ $addcommenttimes .= '</ul>';
 						<?php 
 						if($_POST['add_more_changed']=='yes'){
 							echo '
-								<label class="message blue">There may be charges for additional changes. Once submitted, we will send you a quote as soon as possible.</label>
+								<label class="message blue">There may be a fee for additional changes. Please submit feedback and we will send you a quote as soon as possible.</label>
 							';
 						}else if($last_video_a_request_row['comment_time2']==0){  ?>
 						<label class="message blue">Please confirm your changes</label>

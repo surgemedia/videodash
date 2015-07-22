@@ -23,7 +23,7 @@
 
 .scale-with-grid { max-width: 100%; height: auto; }
 .container { position: relative; width: 1024px; margin: 0 auto; padding: 0; }
-.container .column, .container .columns { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
+.container .column, .container .columns { float: left; display: inline; margin-left: 10px; margin-right: 10px; margin-top:10px;}
 .row { margin-bottom: 20px; }
 .column.alpha, .columns.alpha { margin-left: 0; }
 .column.omega, .columns.omega { margin-right: 0; }

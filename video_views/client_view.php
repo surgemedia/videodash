@@ -325,7 +325,7 @@ if ($last_video_under_project_row['version'] != "Final") {
             $overdeadline_message = 'The video draft will be available for ' . check_deadline($project_id, $last_video_under_project_row['version'], 'deadline') . ' amount of days';
         } 
         else {
-            $overdeadline_message = 'Thank you for submitting your changes.';
+            $overdeadline_message = 'Your final video is ready for review.';
         }
     } 
     else {
@@ -580,7 +580,7 @@ if ($downloadfile_message): ?>
 						</div>
 							<div id="download_message" class="light_blue_box">
 								
-								<h2>Your Final Videos Are Almost Ready</h2>
+								<h2>Your Final Videos Are Almost Ready To Download</h2>
 								<?php
     if ($downloadfilelink2) { ?>
 								<?php
@@ -598,7 +598,7 @@ if ($downloadfile_message): ?>
 								<p>1 x MP4 640x360 pixels – This is ideal for uploading to the web</p>
 								
 								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a different format? Please contact our Video Production team </span><i class="fa fa-envelope"></i></a>
-								<a class="btn green" href="#" onClick="document.getElementById('more_change_require').submit();"><span>More Changes </span><i class="fa fa-envelope"></i></a>
+								<a class="btn green" href="#" onClick="document.getElementById('more_change_require').submit();"><span>Additional Changes </span><i class="fa fa-envelope"></i></a>
 								<hr>
 								<h3>MARKETING YOUR VIDEO PROJECT</h3>
 								<p><b>Marketing is a valuable way of connecting with your clients and raising awareness of your brand. How you market your video project is what sets you apart from the rest.</b></p>

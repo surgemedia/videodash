@@ -23,7 +23,7 @@ h2 { font-size: 2em; }
 h3 { font-size: 3em; }
 textarea { border: 1px solid #d1d1d1; font-family: sans-serif; font-size: 1em; width: 97%; border-radius: 0px; background: #fff; padding: 1em;}
 .clearfix { float: none; }
-.btn { padding: 10px 15px; line-height: 2em; border-radius: 6px; cursor: pointer; display: inline-block;  margin: 2px 0;}
+.btn { padding: 10px 15px; line-height: 2em; border-radius: 6px; cursor: pointer; display: inline-block;  margin: 2px 2px;}
 .btn span { margin: 0px 20px 0px 0px; }
 .btn i { }
 .float-left { float: left; }
@@ -304,6 +304,7 @@ float: left;
 display: inline-block;
 }
 ul#time-comments li textarea {
+	margin-top: 0;
 }
 ul#time-comments li select, ul#time-comment_first li select {
 height: 2.1em;
@@ -530,6 +531,9 @@ clear: both;
 font-size: 1.8em;
 line-height: 2em;
 }
+div#action_box {
+	margin-left: 0;
+}
 div#action_box ul {
 float: left;
 display: block;
@@ -546,7 +550,7 @@ clear: both;
 display: inline-block;
 float: left;
 width: 97%;
-margin: 0.5em;
+margin: 0.5em 0;
 font-family: inherit;
 }
 ul#time-comments li .controls, ul#time-comment_first li .controls {
@@ -576,7 +580,11 @@ margin: 0px;
 }
 ul#comments-general {
 display: inline-block;
-}.video-js {
+}
+ul#comments-general textarea {
+	margin-left: 0;
+}
+.video-js {
 border: 0px !important;
 }
 .blank_video{
