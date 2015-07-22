@@ -488,7 +488,11 @@ echo $cca_row['email']; ?>"/>
 						</p>
 						<p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.
 						</p>
+                        <a class="btn green omega" href="#Feedbackarea">Create Feedback</a>
+                        <a class="btn blue omega" style="margin-left: 8px !important;" href="#youtube_video_div">Preview Video</a>
+
 						<?php } ?>
+                                                
 					</li>
 				</ul>
 			</div>
