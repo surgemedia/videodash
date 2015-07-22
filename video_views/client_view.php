@@ -792,7 +792,7 @@ if ($downloadfile_message): ?>
 endif;
 if ($last_video_under_project_row['version'] != "Final") {
 ?>
-						<div class="video sixteen columns omega alpha">
+						<div class="video sixteen columns omega alpha" id="youtube_video_div">
 							<!-- VIMEO EMBED -->
 							<iframe src="//www.youtube.com/embed/<?php echo cleanYoutubeLink($last_video_under_project_row['video_link']); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 							<!-- VIMEO EMBED -->
@@ -809,7 +809,7 @@ echo $downloadfilelink; ?>
 if ($stop_comment_disable == 1) {
 ?>
 						<div id="changes_required">
-							<label class="title label_stop_float" for="">Your Feedback</label>
+							<label class="title label_stop_float" for="" id="Feedbackarea">Your Feedback</label>
 							<ul id="comments-general" class="container">
 								
 								<li>
