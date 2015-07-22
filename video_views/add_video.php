@@ -235,17 +235,7 @@
                                 <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php echo $check_project_name_row['download_file']?>">
                             <? } ?>
                             <label class="title" for="">Director's Notes</label>
-                            <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>">For the video draft, a low resolution version is rendered out for your review.
-Please note that the picture and colour quality may look low quality.
-The colour has not been graded and the audio has not been mastered.
-The final version of your video project will be rendered out in high resolution.
-Please watch the video carefully and note down any changes you require.
-
-
-Please use the Video Dash to view your project and make changes as we do not accept changes via the phone or email.
-
-
-However if you are having trouble using Video Dash, please contact us directly.</textarea>
+                            <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>">The video draft is a low resolution version of your video production. Please note that the colour has been graded and the audio has not been mastered, therefore the draft may look low quality. The final version of your video project will be rendered out in high resolution. Use Video Dash to view your project and make changes as we do not accept changes via the phone or email. However if you are having trouble using Video Dash, please contact us directly.</textarea>
                             <ul>
                                 <li>
                                  <a onClick="document.getElementById('add_video').submit();" class="btn green" ><span>Send to Client</span> <i class="fa fa-send"></i></a>
