@@ -228,7 +228,7 @@ if ($comment_remind_mail == 1) {
 		Paris Ormerod</p>
 		';
         $update_mail_subject = "Your First Set of Changes";
-        $first_draft_title = "Hi-Five! Thanks for submitting your changes.";
+        $first_draft_title = "Hi-Five! Thank you for submitting your changes.";
         mysql_query("UPDATE video_client_addition_request SET comment_time = 0 WHERE id = " . $last_video_a_request_row['id']);
         
         //Update database to stop sendmail duplicate
@@ -303,7 +303,8 @@ if ($update_mail_subject != "") {
 Verion Number to show changed Day counter
 ============================================*/
 $stop_comment = "";
-echo "Version Number".$last_video_under_project_row['version_num'] . "Comment Number".$last_video_a_request_row['comment_time'];
+
+// echo "Version Number".$last_video_under_project_row['version_num'] . "Comment Number".$last_video_a_request_row['comment_time'];
 if ($last_video_under_project_row['version'] != 'Final') {
     $last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = " . $last_video_under_project_row['id'] . " ORDER BY id DESC LIMIT 0, 1");
     $last_video_a_request_row = mysql_fetch_array($last_video_a_request);
@@ -313,16 +314,27 @@ if ($last_video_under_project_row['version'] != 'Final') {
     if ($last_video_under_project_row['version_num'] == 2 && $last_video_a_request_row['comment_time2'] != 1) {
         $stop_comment_disable = 1;
     }
+    $current_draft_comments = mysql_query("SELECT feedback FROM video_client_request WHERE video_id = ". $last_video_under_project_row['id']);
+    $current_draft_comments_column = mysql_fetch_array($current_draft_comments);
 }
+// echo "--last comments are".implode(" ",$last_video_a_request_row)."--";
+// echo "--last draft comments are".implode(" ",$current_draft_comments_column)."--";
+// echo "--Comments video id is ".$last_video_a_request_row['video_id']."--";
+// echo "--comments length ".strlen(implode(" ",$current_draft_comments_column))."--general comments length--".strlen($last_video_a_request_row['voice_comment'])."--";
 
 if ($last_video_under_project_row['version'] != "Final") {
-    $downloadfilelink = '<li><a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">Changes Required</span><i class="fa fa-star"></i></a><a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confirm\').submit();"><span class="omega alpha red">Approve as final</span><i class="fa fa-star"></i></a></li>';
+    $downloadfilelink = '<li>';
+    
+    if ($stop_comment_disable != 1) {
+        $downloadfilelink .= '<a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">Changes Required</span><i class="fa fa-star"></i></a>';
+    }
+    $downloadfilelink .= '<a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confirm\').submit();"><span class="omega alpha red">Approve as final</span><i class="fa fa-star"></i></a></li>';
     $downloadfilelink2 = '';
     $downloadfile_message = '';
     $list_day_counter = check_deadline($project_id, $last_video_under_project_row['version'], 'deadline');
     if ($list_day_counter > 0) {
         if ($stop_comment_disable == 1) {
-            $overdeadline_message = 'The video draft will be available for ' . check_deadline($project_id, $last_video_under_project_row['version'], 'deadline') . ' amount of days';
+            $overdeadline_message = 'The video draft will be available for ' . check_deadline($project_id, $last_video_under_project_row['version'], 'deadline') . ' days';
         } 
         else {
             $overdeadline_message = 'Your final video is ready for review.';
@@ -424,8 +436,8 @@ include ('../inc/head.php'); ?>
     	
     	<div class="confirmbtn">
         	<a href="#" id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
-            Please Confirm it's all your change request before submit.
-        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Reuquests</span> <i class="fa fa-send"></i></a>
+            Please Confirm your changes.<br><br>
+        	<a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Changes</span> <i class="fa fa-send"></i></a>
         </div>
     </div>
 		<?php
@@ -482,11 +494,11 @@ echo $cca_row['email']; ?>"/>
 						<p>As part of your project you will receive two sets of changes before we render out the final version so it is important to make sure that you use the feedback system to your advantage.
 						</p>
 						<?php if (!$downloadfile_message) { ?>
-						<p><strong>VIDEO PROJECT FIRST DRAFT - (3 WEEKS) </strong> Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied.
+						<!-- <p><strong>VIDEO PROJECT FIRST DRAFT - (3 WEEKS) </strong> Provide us with a complete list of ALL requested changes. Use the video timestamp to make sure that our editors know where the changes need to be applied. -->
 						</p>
-						<p><strong>VIDEO PROJECT SECOND DRAFT - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version.
+						<!-- <p><strong>VIDEO PROJECT SECOND DRAFT - (3 WEEKS)</strong> This stage is mostly used to finetune the video before we present you with the final version. -->
 						</p>
-						<p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply.
+						<!-- <p><strong>VIDEO PROJECT FINAL</strong> - This is the final version of your project which will be available for you to download. Please note that if you still want to make additional changes, charges may apply. -->
 						</p>
                         <a class="btn green omega" href="#Feedbackarea">Create Feedback</a>
                         <a class="btn blue omega" style="margin-left: 8px !important;" href="#youtube_video_div">Preview Video</a>
@@ -562,13 +574,30 @@ echo $projectname_row['project_name'] ?> - <span><?php
 echo $last_video_under_project_row['version']; ?>  (<?php
 echo check_deadline($project_id, $last_video_under_project_row['version']); ?>)</span>
 							</h1>
-							
+                            <?php
+                                if ($downloadfile_message): 
+                            ?>
+							<h2 class="sub-title">Your Final Videos Are Almost Ready To Download</h2>
+                            <?php
+                                endif; 
+                            ?>
 							<?php
 if ($overdeadline_message): ?>
-							<label class="message red" for="">
-								<?php
-    echo $overdeadline_message; ?>
-							</label>
+                            <?php
+                                if(strlen(implode(" ",$current_draft_comments_column))>0 or strlen($last_video_a_request_row['voice_comment'])) {
+                            ?>
+                                    <label class="message red" for="">Thank you for submitting your comments on the current draft. We will notify you when the next draft is uploaded.</label>
+                            <?php
+                                }
+                                else {
+                            ?>
+    							<label class="message red" for="">
+    								<?php
+        echo $overdeadline_message; ?>
+    							</label>
+                            <?php
+                                }
+                            ?>
 							<?php
 endif; ?>
 							<?php
@@ -580,11 +609,11 @@ if ($downloadfile_message): ?>
 						</div>
 							<div id="download_message" class="light_blue_box">
 								
-								<h2>Your Final Videos Are Almost Ready To Download</h2>
+								<!-- <h2>Your Final Videos Are Almost Ready To Download</h2> -->
 								<?php
     if ($downloadfilelink2) { ?>
 								<?php
-        echo $downloadfilelink2; ?>
+        // echo $downloadfilelink2; ?>
 								<?php
     } 
     else { ?>
@@ -609,18 +638,25 @@ if ($downloadfile_message): ?>
 									<li><input name="dps1" value="1" type="checkbox"/>Collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
 									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
 									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-									<li><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+                                    <li><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+									<li><input name="dps5" value="1" type="checkbox"/>No Thanks. </li>
 								</ul>
  								<hr>
-								<h2>USBs</h2>
+								<h2>Market your video production with USBs</h2>
 								<p>A USB is a simple and powerful tool you can use to share your video project and market your company.</p>
 								<ul>
 									<li>
-										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB with your logo &#45; A USB branded with your logo on both sides.
+										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB with your logo &#45; A USB branded with your logo on both sides. <br>
+                                        <a id="brandusb_btn" class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+
 									</li>
-									<li>
-										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB plain &#45; A USB with no branding.
-									</li>
+									<li style="margin-top: 10px;">
+										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB plain &#45; A USB with no branding. <br>
+                                        <a id="plainusb_btn" class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+                                    </li>
+                                    <li style="margin-top: 10px;">
+                                        <input id="option_none" name="usb_option" type="radio" value="3">No Thanks. <br>
+                                    </li>
 								</ul>
 								<div id="brandusb" class="disable_input">
 <!-- 								<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
@@ -685,8 +721,8 @@ if ($downloadfile_message): ?>
 									</select>
 									</div>
 								</div>
-								<a id="brandusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
-								<a id="plainusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
+								<!-- <a id="brandusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a> -->
+								<!-- <a id="plainusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a> -->
 <!-- 								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
 								<h2>DVD and Data Discs</h2>
@@ -758,6 +794,10 @@ if ($downloadfile_message): ?>
 											</select>
 										</div>
 									</li>
+                                    <li>
+                                        <input name="dvd_option_6" type="checkbox" value="No DVD">
+                                        No Thanks.<br/>
+                                    </li>
 								</ul>
 								
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
@@ -774,20 +814,31 @@ if ($downloadfile_message): ?>
 										Surge Media will create a Youtube Channel for you and upload your project.
 									</li>
 									<li><input name="market2" value="1" type="checkbox"/>Surge Media will style your Youtube channel. This includes your display picture, banner, channel name and video upload - <span class="price">$102.00</span></li>
-									<li><input name="market3" value="1" type="checkbox"/>Have you thought about advertising on Youtube? Reach your target audience with carefully placed advertising. meeting will be arranged with Surge Media’s marketing coordinator. </li>
+                                    <li><input name="market3" value="1" type="checkbox"/>Have you thought about advertising on Youtube? Reach your target audience with carefully placed advertising. meeting will be arranged with Surge Media’s marketing coordinator. </li>
+									<li><input name="market4" value="1" type="checkbox"/>No Thanks. </li>
 								</ul>
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
 								<p><u>Remarketing</u></p>
 								<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
 								</p><p>
-								<input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.
+                                <input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.<br>
+								<input name="NoRemarketing" value="0" type="checkbox"/>No Thanks.
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->							</p>
 
 							<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
 							
 						</div>
+                        <?php
+                            if ($downloadfilelink2) { 
+                        ?>
+                        <?php
+                            echo $downloadfilelink2; 
+                        ?>
+                        <?php
+                            } 
+                        ?>
 						<?php
 endif;
 if ($last_video_under_project_row['version'] != "Final") {
@@ -830,10 +881,21 @@ if ($stop_comment_disable == 1) {
                             <ul id="time-comments">
 								<script>NewTimelineComment();</script>
 							</ul>
+                            <?php
+                                if(strlen(implode(" ",$current_draft_comments_column))>0 or strlen($last_video_a_request_row['voice_comment'])) {
+                            ?>
+                                    <p>Thank you for submitting your comments on the current draft. We will notify you when the next draft is uploaded.</p>
+                            <?php
+                                }
+                                else {
+                            ?>
 							<div class="submit-actions">
 								<a href="javascript:void(0)" onClick="NewTimelineComment()" class="btn blue columns five alpha"><span>add more timeline comments</span> <i class="fa fa-clock-o"></i></a>
 								<a class="btn green columns five alpha" href="#" id="first_submit_step"><span>submit all comments</span> <i class="fa fa-send"></i></a>
 							</div>
+                            <?php
+                                }
+                            ?>
 						</div>
 						<?php
 } ?>

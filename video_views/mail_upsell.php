@@ -103,5 +103,5 @@ if(count($upsell_mail)!=0){
 	}
 }
 
-header('Location: http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].$list_msg);
+header('Location: http://videodashtest.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].$list_msg);
 ?>

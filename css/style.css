@@ -531,6 +531,10 @@ clear: both;
 font-size: 1.8em;
 line-height: 2em;
 }
+li.video_obj.featured .sub-title {
+    color: #305B71;
+    font-size: 1.6em;
+}
 div#action_box {
 	margin-left: 0;
 }
@@ -643,9 +647,12 @@ div#download_message .option {
 }
 div#download_message .btn.newline {
     display: block;
-    width: 30%;
+    /*width: 30%;*/
     clear: both;
     margin: 2em 0 0 0;
+}
+div#download_message .btn.red {
+  width: 35%;
 }
 div#brandusb select {
     margin: 0 1em 0 0;

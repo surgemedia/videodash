@@ -17,9 +17,25 @@ $(".cloasesubmit").click(function(){
     $("#request_confirm_form").addClass("disable_input");
     $("#request_confirm_form").removeClass("display_input");
 });
+
 $('#first_submit_step').click(function(){
-    $("#request_confirm_form").removeClass("disable_input");
-    $("#request_confirm_form").addClass("display_input");
+    var commentsAvailable = "";
+    $('#changes_required').find('textarea').each(function(){
+      var comment = $(this).val();
+      if (comment.length>0) {
+        commentsAvailable = 1;
+      }
+    });
+    if(commentsAvailable==1) {
+      $("#request_confirm_form").removeClass("disable_input");
+      $("#request_confirm_form").addClass("display_input");
+    }
+    else {
+      alert('Please enter the comments to submit');
+      $('html, body').animate({
+          scrollTop: $("#Feedbackarea").offset().top
+      }, 500);
+    }
 });
 
 function get_video(input,iframe){
@@ -95,19 +111,19 @@ $(document).on('change', 'input[name="usb_option"]', function(){
       $('#brandusb').addClass("display_input");
       $('#plainusb').removeClass("display_input");
       $('#plainusb').addClass("disable_input");
-      $('#brandusb_btn').removeClass("disable_input");
-      $('#brandusb_btn').addClass("display_input");
-      $('#plainusb_btn').removeClass("display_input");
-      $('#plainusb_btn').addClass("disable_input");
+      // $('#brandusb_btn').removeClass("disable_input");
+      // $('#brandusb_btn').addClass("display_input");
+      // $('#plainusb_btn').removeClass("display_input");
+      // $('#plainusb_btn').addClass("disable_input");
     }else{
       $('#plainusb').removeClass("disable_input");
       $('#plainusb').addClass("display_input");
       $('#brandusb').removeClass("display_input");
       $('#brandusb').addClass("disable_input");
-      $('#plainusb_btn').removeClass("disable_input");
-      $('#plainusb_btn').addClass("display_input");
-      $('#brandusb_btn').removeClass("display_input");
-      $('#brandusb_btn').addClass("disable_input");
+      // $('#plainusb_btn').removeClass("disable_input");
+      // $('#plainusb_btn').addClass("display_input");
+      // $('#brandusb_btn').removeClass("display_input");
+      // $('#brandusb_btn').addClass("disable_input");
     }
 });
 
