@@ -654,6 +654,10 @@ div#download_message .btn.newline {
 div#download_message .btn.red {
   width: 35%;
 }
+#download_message ul.required li:last-child, #download_message .required input:last-child {
+    margin-top: 25px;
+    font-weight: bold;
+}
 div#brandusb select {
     margin: 0 1em 0 0;
 }
@@ -724,4 +728,16 @@ content: attr(title);
   background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
   background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
   background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+}
+.warning {
+  border-top: 1px solid #B33A3a;
+    border-bottom: 5px solid #B33a3a;
+    border-right: 1px solid #B33A3a;
+    border-left: 1px solid #B33A3a;
+    padding: 10px;
+    background-color: #EEC9C8;
+    border-radius: 5px;
+}
+.btn.green.shake {
+  display: none;
 }

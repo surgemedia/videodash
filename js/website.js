@@ -107,19 +107,19 @@ function NewTimelineComment(){
 $(document).on('change', 'input[name="usb_option"]', function(){
     var get_usb = $(this).val();
     if(get_usb == 1){
-      $('#brandusb').removeClass("disable_input");
-      $('#brandusb').addClass("display_input");
-      $('#plainusb').removeClass("display_input");
-      $('#plainusb').addClass("disable_input");
+      // $('#brandusb').removeClass("disable_input");
+      // $('#brandusb').addClass("display_input");
+      // $('#plainusb').removeClass("display_input");
+      // $('#plainusb').addClass("disable_input");
       // $('#brandusb_btn').removeClass("disable_input");
       // $('#brandusb_btn').addClass("display_input");
       // $('#plainusb_btn').removeClass("display_input");
       // $('#plainusb_btn').addClass("disable_input");
     }else{
-      $('#plainusb').removeClass("disable_input");
-      $('#plainusb').addClass("display_input");
-      $('#brandusb').removeClass("display_input");
-      $('#brandusb').addClass("disable_input");
+      // $('#plainusb').removeClass("disable_input");
+      // $('#plainusb').addClass("display_input");
+      // $('#brandusb').removeClass("display_input");
+      // $('#brandusb').addClass("disable_input");
       // $('#plainusb_btn').removeClass("disable_input");
       // $('#plainusb_btn').addClass("display_input");
       // $('#brandusb_btn').removeClass("display_input");
@@ -144,4 +144,99 @@ $(function() {
     }
   });
 });
- 
+
+/*====================================
+=  Marketing form validation         =
+====================================*/
+function validationCheck() {
+  var validationStatus = 0,
+      element = "",
+      isNoThanks = "";
+      $('.btn.blue.newline').show();
+      $('.required').each(function(){
+        $(this).removeClass('warning');
+        var checked = $(this).find('input:checked').length;
+        if(checked>0) {
+          validationStatus = 1;
+          isNoThanks = $(this).find('input:checked').closest('li').text().indexOf('No Thanks.');
+          $(this).find('input:checked').closest('li').find('select').each(function(){
+              if($(this).val() != "" ) {
+                validationStatus = 1;
+              }
+              else {
+                validationStatus = 0;
+                element = $(this);
+                return false;
+              }
+          });
+          if(validationStatus==0 && element != "") {
+            return false;
+          }
+        }
+        else {
+          validationStatus = 0;
+          element = $(this);
+          return false;
+        }
+        // console.log("validationStatus is "+checked);
+      });
+       // console.log("value f element"+element);
+       return [validationStatus,element,isNoThanks]
+}
+function MarketingFormValidation(){
+    var validateReturn = validationCheck();
+    var validationStatus = validateReturn[0],
+        element = validateReturn[1],
+        isNoThanks = validateReturn[2]
+       if (validationStatus>0 && isNoThanks<0) {
+         document.getElementById('addition_request_form').submit();
+       }
+       else {
+         if(element=="") {
+           $('.btn.green.shake').css('display','inline-block');
+           $('.btn.green.shake').css('visibility','visible');
+           $('html, body').animate({
+                scrollTop: $('.btn.green.shake').offset().top - 10
+           }, 500);
+         }
+         else {
+           element.closest('ul.required').addClass('warning');
+           $('html, body').animate({
+                scrollTop: element.offset().top - 200
+           }, 500);
+         }
+         if (isNoThanks>=0) {
+               $('.btn.blue.newline').hide();
+            }
+            else {
+               $('.btn.blue.newline').show();
+         }
+       }
+
+  // document.getElementById('addition_request_form').submit();
+
+}
+$(document).ready(function(){
+
+  $('.required input,select').each(function(){
+    $(this).change(function(){
+        var validateReturn = validationCheck();
+        var validationStatus = validateReturn[0],
+            element = validateReturn[1],
+            isNoThanks = validateReturn[2];
+
+            if (validationStatus>0) {
+               $('.btn.green.shake').css('display','inline-block');
+               $('.btn.green.shake').css('visibility','visible');
+               if (isNoThanks>=0) {
+                   $('.btn.blue.newline').hide();
+                }
+                else {
+                   $('.btn.blue.newline').show();
+                }
+            }
+            
+    });
+  });
+});
+  

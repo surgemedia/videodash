@@ -634,7 +634,7 @@ if ($downloadfile_message): ?>
 								<h2>Data And Project Storage</h2>
 								<p>Please select an option regarding the storage of your project and raw footage. If your project is motion graphics, this may not apply.<br/>
 								You must select at least one option.</p>
-								<ul>
+								<ul class="required">
 									<li><input name="dps1" value="1" type="checkbox"/>Collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
 									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
 									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
@@ -644,90 +644,92 @@ if ($downloadfile_message): ?>
  								<hr>
 								<h2>Market your video production with USBs</h2>
 								<p>A USB is a simple and powerful tool you can use to share your video project and market your company.</p>
-								<ul>
+								<ul class="required">
 									<li>
 										<input id="option_brandusb" name="usb_option" type="radio" value="1">USB with your logo &#45; A USB branded with your logo on both sides. <br>
+                                        <div id="brandusb" class="">
+        <!--                                <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
+                                            <img src="../img/usb/ay.jpg" id="ay" class="usb_images"> -->
+                                            <select name="usb_type">
+                                                <option value="">Please Select your USB products for request:</option>
+                                                <option value="Alloy USB Card" id="ay_option">Alloy USB Card</option>
+                                                <option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+                                                <option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
+                                                <option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>
+                                                <option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
+                                                <option value="Rotator USB Flash Drive">Rotator USB Flash Drive</option>
+                                                <option value="Executive USB Flash Drive">Executive USB Flash Drive</option>
+                                                <option value="Classic USB Flash Drive">Classic USB Flash Drive</option>
+                                                <option value="Trix USB Flash Drive">Trix USB Flash Drive</option>
+                                                <option value="Ellipse USB Flash Drive">Ellipse USB Flash Drive</option>
+                                                <option value="Halo USB Flash Drive">Halo USB Flash Drive</option>
+                                                <option value="Pod USB Flash Drive">Pod USB Flash Drive</option>
+                                                <option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
+                                                <option value="Image USB Flash Drive">Image USB Flash Drive</option>
+                                            </select>
+                                            <div class="option">
+                                            Order Value:
+                                            <select name="USB_value">
+                                                <option value="">Please select order PCS of USB</option>
+                                                <option value="25">25 PCS</option>
+                                                <option value="50">50 PCS</option>
+                                                <option value="100">100 PCS</option>
+                                                <option value="250">250 PCS</option>
+                                            </select>
+                                            </div>
+                                        </div>
                                         <a id="brandusb_btn" class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
 
 									</li>
 									<li style="margin-top: 10px;">
 										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB plain &#45; A USB with no branding. <br>
+                                        <div id="plainusb" class="">
+                                            <select name="usb_color">
+                                                <option value="">Please Select your USB color:</option>
+                                                <option value="White">White</option>
+                                                <option value="Black">Black</option>
+                                                <option value="Red">Red</option>
+                                                <option value="Green">Green</option>
+                                                <option value="Blue">Blue</option>
+                                                <option value="Yellow">Yellow</option>
+                                            </select>
+                                            <div class="option">
+                                            Order Value:
+                                            <select name="USB_value_color">
+                                                <option value="">Please select order PCS of USB</option>
+                                                <option value="25">25 PCS</option>
+                                                <option value="50">50 PCS</option>
+                                                <option value="100">100 PCS</option>
+                                                <option value="250">250 PCS</option>
+                                            </select>
+                                            </div>
+                                        </div>
                                         <a id="plainusb_btn" class="btn red" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a>
                                     </li>
-                                    <li style="margin-top: 10px;">
+                                    <li>
                                         <input id="option_none" name="usb_option" type="radio" value="3">No Thanks. <br>
                                     </li>
 								</ul>
-								<div id="brandusb" class="disable_input">
-<!-- 								<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images">
-									<img src="../img/usb/ay.jpg" id="ay" class="usb_images"> -->
-									<select name="usb_type">
-										<option value="">Please Select your USB products for request:</option>
-										<option value="Alloy USB Card" id="ay_option">Alloy USB Card</option>
-										<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
-										<option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
-										<option value="Kinetic USB Flash Drive">Kinetic USB Flash Drive</option>
-										<option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
-										<option value="Rotator USB Flash Drive">Rotator USB Flash Drive</option>
-										<option value="Executive USB Flash Drive">Executive USB Flash Drive</option>
-										<option value="Classic USB Flash Drive">Classic USB Flash Drive</option>
-										<option value="Trix USB Flash Drive">Trix USB Flash Drive</option>
-										<option value="Ellipse USB Flash Drive">Ellipse USB Flash Drive</option>
-										<option value="Halo USB Flash Drive">Halo USB Flash Drive</option>
-										<option value="Pod USB Flash Drive">Pod USB Flash Drive</option>
-										<option value="Flip USB Flash Drive">Flip USB Flash Drive</option>
-										<option value="Image USB Flash Drive">Image USB Flash Drive</option>
-									</select>
-									<div class="option">
-									Order Value:
-									<select name="USB_value">
-										<option value="">Please select order PCS of USB</option>
-										<option value="25">25 PCS</option>
-										<option value="50">50 PCS</option>
-										<option value="100">100 PCS</option>
-										<option value="250">250 PCS</option>
-									</select>
-									</div>
-								</div>
-								<div id="plainusb" class="disable_input">
-									<select name="usb_color">
-										<option value="">Please Select your USB color:</option>
-										<option value="White">White</option>
-										<option value="Black">Black</option>
-										<option value="Red">Red</option>
-										<option value="Green">Green</option>
-										<option value="Blue">Blue</option>
-										<option value="Yellow">Yellow</option>
-									</select>
-									<div class="option">
-									Order Value:
-									<select name="USB_value_color">
-										<option value="">Please select order PCS of USB</option>
-										<option value="25">25 PCS</option>
-										<option value="50">50 PCS</option>
-										<option value="100">100 PCS</option>
-										<option value="250">250 PCS</option>
-									</select>
-									</div>
-								</div>
+								
+								
 								<!-- <a id="brandusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a> -->
 								<!-- <a id="plainusb_btn" class="btn red disable_input" target="_blank" href="http://videodash.surgehost.com.au/img/SURGE-UNBRAND-USB-CATALOGUE.pdf"><span>Download Product and Price Guide</span> <i class="fa fa-file-pdf-o"></i></a> -->
 <!-- 								<a class="btn blue" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
  -->								<hr>
 								<h2>DVD and Data Discs</h2>
 								<p>Surge Media has a few options regarding DVDs and Data discs. Please be aware that a menu is not included on the DVD. </p>
-								<ul>
+								<ul class="required">
 									<li>
 										<input name="dvd_option_1" type="checkbox" value="DVD Printed Disc">
 										DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
@@ -809,7 +811,7 @@ if ($downloadfile_message): ?>
 								<p><u>Youtube</u></p>
 								<p>Youtube is the second most used search engine in the world. More than one billon people visit Youtube every month. You can decided how your company is presented and when and where an advertisement will be displayed to your target audience.
 								</p>
-								<ul>
+								<ul class="required">
 									<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span><br/>
 										Surge Media will create a Youtube Channel for you and upload your project.
 									</li>
@@ -821,13 +823,14 @@ if ($downloadfile_message): ?>
  -->								<hr>
 								<p><u>Remarketing</u></p>
 								<p>Remarketing can help you reach people who have previously visited your website. Your ads will appear to a visitor of your website as they browse other sites.
-								</p><p>
-                                <input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.<br>
-								<input name="NoRemarketing" value="0" type="checkbox"/>No Thanks.
+								</p>
+                                <ul class="required">
+                                    <li><input name="Remarketing" value="1" type="checkbox"/>This option is tailored to your project. To find out how you can use Remarketing, a meeting will be arranged with a Surge Media web developer.<br></li>
+    								<li><input name="NoRemarketing" value="0" type="checkbox"/>No Thanks.</li>
 <!-- 								<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! Sign me up</span> <i class="fa fa-envelope"></i></a>
- -->							</p>
+ -->							</ul>
 
-							<a class="btn blue newline" href="#" onClick="document.getElementById('addition_request_form').submit();"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
+							<a class="btn blue newline" href="#" onClick="MarketingFormValidation()"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
 							
 						</div>
                         <?php
