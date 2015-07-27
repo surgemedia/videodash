@@ -654,9 +654,12 @@ div#download_message .btn.newline {
 div#download_message .btn.red {
   width: 35%;
 }
-#download_message ul.required li:last-child, #download_message .required input:last-child {
+#download_message ul.required li:last-child {
     margin-top: 25px;
     font-weight: bold;
+}
+#download_message ul.marketing li {
+    margin-bottom: 5px;
 }
 div#brandusb select {
     margin: 0 1em 0 0;

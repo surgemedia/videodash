@@ -195,6 +195,7 @@ function MarketingFormValidation(){
          if(element=="") {
            $('.btn.green.shake').css('display','inline-block');
            $('.btn.green.shake').css('visibility','visible');
+           $('.pre-download-text').hide();
            $('html, body').animate({
                 scrollTop: $('.btn.green.shake').offset().top - 10
            }, 500);
@@ -228,6 +229,7 @@ $(document).ready(function(){
             if (validationStatus>0) {
                $('.btn.green.shake').css('display','inline-block');
                $('.btn.green.shake').css('visibility','visible');
+               $('.pre-download-text').hide();
                if (isNoThanks>=0) {
                    $('.btn.blue.newline').hide();
                 }

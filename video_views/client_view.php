@@ -662,7 +662,7 @@ if ($downloadfile_message): ?>
                                             <img src="../img/usb/ay.jpg" id="ay" class="usb_images">
                                             <img src="../img/usb/ay.jpg" id="ay" class="usb_images"> -->
                                             <select name="usb_type">
-                                                <option value="">Please Select your USB products for request:</option>
+                                                <option value="">Please select custom USB</option>
                                                 <option value="Alloy USB Card" id="ay_option">Alloy USB Card</option>
                                                 <option value="Focus USB Flash Drive">Focus USB Flash Drive</option>
                                                 <option value="Carbon USB Flash Drive">Carbon USB Flash Drive</option>
@@ -681,7 +681,7 @@ if ($downloadfile_message): ?>
                                             <div class="option">
                                             Order Value:
                                             <select name="USB_value">
-                                                <option value="">Please select order PCS of USB</option>
+                                                <option value="">Please select a quantity</option>
                                                 <option value="25">25 PCS</option>
                                                 <option value="50">50 PCS</option>
                                                 <option value="100">100 PCS</option>
@@ -696,7 +696,7 @@ if ($downloadfile_message): ?>
 										<input id="option_plainusb" name="usb_option" type="radio" value="2">USB plain &#45; A USB with no branding. <br>
                                         <div id="plainusb" class="">
                                             <select name="usb_color">
-                                                <option value="">Please Select your USB color:</option>
+                                                <option value="">Please select USB color</option>
                                                 <option value="White">White</option>
                                                 <option value="Black">Black</option>
                                                 <option value="Red">Red</option>
@@ -707,7 +707,7 @@ if ($downloadfile_message): ?>
                                             <div class="option">
                                             Order Value:
                                             <select name="USB_value_color">
-                                                <option value="">Please select order PCS of USB</option>
+                                                <option value="">Please select a quantity</option>
                                                 <option value="25">25 PCS</option>
                                                 <option value="50">50 PCS</option>
                                                 <option value="100">100 PCS</option>
@@ -732,7 +732,7 @@ if ($downloadfile_message): ?>
 								<ul class="required">
 									<li>
 										<input name="dvd_option_1" type="checkbox" value="DVD Printed Disc">
-										DVD Printed Disc  A DVD disc with your logo and project name printed onto the disc.<br/>
+										DVD Printed Disc - A DVD disc with your logo and project name printed onto the disc.<br/>
 										<div class="option"> Order Value:
 											<select name="dvd_value1">
 												<option value="">Please select a quantity</option>
@@ -811,7 +811,7 @@ if ($downloadfile_message): ?>
 								<p><u>Youtube</u></p>
 								<p>Youtube is the second most used search engine in the world. More than one billon people visit Youtube every month. You can decided how your company is presented and when and where an advertisement will be displayed to your target audience.
 								</p>
-								<ul class="required">
+								<ul class="required marketing">
 									<li><input name="market1" value="1" type="checkbox"/>Surge Media will upload your project to your Youtube channel - <span class="price">$19.95</span><br/>
 										Surge Media will create a Youtube Channel for you and upload your project.
 									</li>
@@ -833,6 +833,7 @@ if ($downloadfile_message): ?>
 							<a class="btn blue newline" href="#" onClick="MarketingFormValidation()"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
 							
 						</div>
+                        <p class="pre-download-text">The link to video will be displayed once you respond to the above form</p>
                         <?php
                             if ($downloadfilelink2) { 
                         ?>
