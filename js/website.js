@@ -152,7 +152,6 @@ function validationCheck() {
   var validationStatus = 0,
       element = "",
       isNoThanks = "";
-      $('.btn.blue.newline').show();
       $('.required').each(function(){
         $(this).removeClass('warning');
         var checked = $(this).find('input:checked').length;
@@ -206,12 +205,12 @@ function MarketingFormValidation(){
                 scrollTop: element.offset().top - 200
            }, 500);
          }
-         if (isNoThanks>=0) {
-               $('.btn.blue.newline').hide();
-            }
-            else {
-               $('.btn.blue.newline').show();
-         }
+         // if (isNoThanks>=0) {
+         //       $('.btn.blue.newline').hide();
+         //    }
+         //    else {
+         //       $('.btn.blue.newline').show();
+         // }
        }
 
   // document.getElementById('addition_request_form').submit();
@@ -230,12 +229,12 @@ $(document).ready(function(){
                $('.btn.green.shake').css('display','inline-block');
                $('.btn.green.shake').css('visibility','visible');
                $('.pre-download-text').hide();
-               if (isNoThanks>=0) {
-                   $('.btn.blue.newline').hide();
-                }
-                else {
-                   $('.btn.blue.newline').show();
-                }
+               // if (isNoThanks>=0) {
+               //     $('.btn.blue.newline').hide();
+               //  }
+               //  else {
+               //     $('.btn.blue.newline').show();
+               //  }
             }
             
     });

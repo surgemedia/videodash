@@ -638,8 +638,8 @@ if ($downloadfile_message): ?>
 									<li><input name="dps1" value="1" type="checkbox"/>Collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
 									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
 									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-                                    <li><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
-									<li><input name="dps5" value="1" type="checkbox"/>No Thanks. </li>
+                                    <li style="margin: 0;"><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+									<!-- <li><input name="dps5" value="1" type="checkbox"/>No Thanks. </li> -->
 								</ul>
  								<hr>
 								<h2>Market your video production with USBs</h2>
