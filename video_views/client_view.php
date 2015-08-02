@@ -624,7 +624,7 @@ if ($downloadfile_message): ?>
 ?>
 								<p>There are two versions of your final video. </p>
 								<p>1 x MP4 1280x720 pixels – This is ideal for Youtube and video sharing sites.</p>
-								<p>1 x MP4 640x360 pixels – This is ideal for uploading to the web</p>
+								<p>1 x MP4 640x360 pixels – This is ideal for uploading to the web.</p>
 								
 								<a class="btn blue" href="mailto:video@surgemedia.com.au"><span>Need a different format? Please contact our Video Production team </span><i class="fa fa-envelope"></i></a>
 								<a class="btn green" href="#" onClick="document.getElementById('more_change_require').submit();"><span>Additional Changes </span><i class="fa fa-envelope"></i></a>
@@ -635,12 +635,15 @@ if ($downloadfile_message): ?>
 								<p>Please select an option regarding the storage of your project and raw footage. If your project is motion graphics, this may not apply.<br/>
 								You must select at least one option.</p>
 								<ul class="required">
-									<li><input name="dps1" value="1" type="checkbox"/>Collect your raw footage on a supplied hard drive  - <span class="price">$50.00</span></li>
-									<li><input name="dps2" value="1" type="checkbox"/>Surge Media will supply a hard drive with your raw footage for your collection - <span class="price">$20.00</span></li>
-									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your raw footage and final project for a period of 5 years - <span class="price">$60.00</span></li>
-                                    <li style="margin: 0;"><input name="dps4" value="1" type="checkbox"/>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file. </li>
+									<li><input name="dps1" value="1" type="checkbox"/>Raw footage collected via a hard drive supplied by Surge Media  - <span class="price">$550.00</span></li>
+									<li><input name="dps2" value="1" type="checkbox"/>Raw footage collected via a hard drive supplied by client  - <span class="price">$220.00</span></li>
+									<li><input name="dps3" value="1" type="checkbox"/>Surge Media will store your final project for a period of 5 years - <span class="price">Free</span></li>
+                                    <li style="margin: 0;">
+                                    <!-- <input name="dps4" value="1" type="checkbox"/> </li> -->
 									<!-- <li><input name="dps5" value="1" type="checkbox"/>No Thanks. </li> -->
 								</ul>
+                                <p>An uncompressed 1920 x1080 final video project file will be stored indefinitely and it will be on hand for your requirement. Please be aware that after 3 months your project will be archived and a fee will be charged to retrieve your file.</p>
+                                <p>If you would like your raw footage saved please contact Surge Media to arrange a housing package to suit you.</p>
  								<hr>
 								<h2>Market your video production with USBs</h2>
 								<p>A USB is a simple and powerful tool you can use to share your video project and market your company.</p>
@@ -833,7 +836,7 @@ if ($downloadfile_message): ?>
 							<a class="btn blue newline" href="#" onClick="MarketingFormValidation()"><span>Sounds awesome! a detailed quote will be sent to you.</span> <i class="fa fa-envelope"></i></a>
 							
 						</div>
-                        <p class="pre-download-text">The link to video will be displayed once you respond to the above form</p>
+                        <p class="pre-download-text">The link to video will be displayed once you respond to the above form.</p>
                         <?php
                             if ($downloadfilelink2) { 
                         ?>
