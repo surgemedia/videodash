@@ -230,10 +230,14 @@
                         <div class="actions sixteen columns omega alpha">
                         <div id="draft_version" class="draft_check"><input type="radio" name="version" value="Draft"  <? if($check_video_Lastupdate_row['version']!="Final"){ echo "checked";}?> ><span>Draft Version</span></div>
                         <div id="final_version" class="draft_check"><input type="radio" name="version" value="Final"  <? if($check_video_Lastupdate_row['version']=="Final"){ echo "checked";}?> ><span>Final Version</span></div>
-                            <? if($check_video_Lastupdate_row['version']=="Final"){ ?>
+                            <?php
+                            // if($check_video_Lastupdate_row['version']=="Final"){ 
+                            ?>
                                 <label class="title" for="">Download Video Link</label>
                                 <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php echo $check_project_name_row['download_file']?>">
-                            <? } ?>
+                            <?php 
+                            // } 
+                            ?>
                             <label class="title" for="">Director's Notes</label>
                             <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?=$check_video_Lastupdate_row['notes'];?>">The video draft is a low resolution version of your video production. Please note that the colour has been graded and the audio has not been mastered, therefore the draft may look low quality. The final version of your video project will be rendered out in high resolution. Use Video Dash to view your project and make changes as we do not accept changes via the phone or email. However if you are having trouble using Video Dash, please contact us directly.</textarea>
                             <ul>
