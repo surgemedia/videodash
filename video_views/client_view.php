@@ -575,10 +575,18 @@ echo $last_video_under_project_row['version']; ?>  (<?php
 echo check_deadline($project_id, $last_video_under_project_row['version']); ?>)</span>
 							</h1>
                             <?php
+                                // echo $downloadfile_message;
                                 if ($downloadfile_message): 
+                                    if($downloadfile_message==1) {
                             ?>
-							<h2 class="sub-title">Your Final Videos Are Almost Ready To Download</h2>
+							<h2 class="sub-title">Your Final Videos Are Available To Download. Please complete the Marketing Your Video Project form below to view the download link</h2>
                             <?php
+                                    }
+                                    else {
+                            ?>
+                            <h2 class="sub-title">Your Final Videos Are Almost Ready To Download</h2>
+                            <?php            
+                                    }
                                 endif; 
                             ?>
 							<?php

@@ -181,3 +181,7 @@
       width: 0;
       height: 0;
     }
+
+.show-inline {
+  display: inline-block !important;
+}
