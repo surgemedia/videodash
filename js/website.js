@@ -222,20 +222,33 @@ $(document).ready(function(){
     $(this).change(function(){
         var validateReturn = validationCheck();
         var validationStatus = validateReturn[0],
-            element = validateReturn[1],
-            isNoThanks = validateReturn[2];
-
-            if (validationStatus>0) {
-               $('.btn.green.shake').css('display','inline-block');
-               $('.btn.green.shake').css('visibility','visible');
-               $('.pre-download-text').hide();
-               // if (isNoThanks>=0) {
-               //     $('.btn.blue.newline').hide();
-               //  }
-               //  else {
-               //     $('.btn.blue.newline').show();
-               //  }
-            }
+        element = validateReturn[1],
+        isNoThanks = validateReturn[2]
+       if (validationStatus>0 && isNoThanks<0) {
+         // document.getElementById('addition_request_form').submit();
+       }
+       else {
+         if(element=="") {
+           $('.btn.green.shake').addClass('show-inline');
+           $('.btn.green.shake').css('visibility','visible');
+           $('.pre-download-text').hide();
+           $('html, body').animate({
+                scrollTop: $('.btn.green.shake').offset().top - 10
+           }, 500);
+         }
+         else {
+           element.closest('ul.required').addClass('warning');
+           $('html, body').animate({
+                scrollTop: element.offset().top - 200
+           }, 500);
+         }
+         // if (isNoThanks>=0) {
+         //       $('.btn.blue.newline').hide();
+         //    }
+         //    else {
+         //       $('.btn.blue.newline').show();
+         // }
+       }
             
     });
   });
