@@ -93,8 +93,8 @@ main { float: left; width: 100%; }
 .grey_container { border-radius: 0.4em; padding: 1em; background-color: #efefef; }
 li.section { float: left; width: 100%; padding: 0 0.5em 0 0; }
 li.section input { float: left; width: auto; border: 1px solid #d1d1d1; }
-li.section.contact input { float: left; width: 89%; clear: both; margin: 0.5em 0; padding: 1em 0em 1em 1em;}
-li.section textarea { width: 90%; }
+li.section.contact input, li.section.contact textarea { float: left; width: 89%; clear: both; margin: 0.5em 0; padding: 1em 0em 1em 1em;}
+li.section textarea { width: 90%; font-size: 11px;}
 .contact_info
 {
 float: left;
@@ -151,7 +151,8 @@ section.center ul.list .client.bombed .title { text-decoration: line-through; }
 #client_info h2 { margin: 1em 0 0em 0em; }
 #client_info ul.contact li { float: left; width: 50%; }
 #client_info input { padding: 1em; border: 1px solid #d1d1d1; }
-#client_info ul.contact li span, #client_info ul.contact li input { float: left; width: 45%; }
+#client_info ul.contact li span, #client_info ul.contact li input , #client_info ul.contact li textarea { float: left; width: 45%; }
+#client_info ul.contact li textarea {font-size: 11px;}
 .draft_check { float: left; display: inline-block; background: #FFFFFF; padding: 0.5em 0.5em; text-align: center; text-indent: -5%; margin: 1em 0.5em 1em 0; border: 1px solid #d1d1d1; border-radius: 2px; min-width: 25%;}
 .draft_check input { float: left; }
 #final_verison{width:88% !important;}

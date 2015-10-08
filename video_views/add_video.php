@@ -46,8 +46,16 @@
             $complete_msg = '<label class="message green columns omega alpha two" for="">Updated <i class="fa fa-thumbs-up"></i></label>';;
 			$name = "Surge Media - Video Dash";
 			$frommail = "cs@videodash.surgehost.com.au";
-			$mailto = $cca_row['email'];
-
+            $mailto = $cca_row['email'];
+			$cc_mailto = $cca_row['cc_email'];
+            //remove invalid email id
+            // $cc_mailto = explode(",",$cc_mailto);
+            // for($i=0;$i<count($cc_mailto);$i++) {
+            //     if (!filter_var($cc_mailto[$i], FILTER_VALIDATE_EMAIL)) {
+            //         unset($cc_mailto[$i]);
+            //     }
+            // }
+            // $cc_mailto = implode(",",$cc_mailto);
 
 /*===============================
 =            Email 1            =
@@ -105,6 +113,17 @@
                 <a href="http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].'">Review your project</a></p> ';
             }
 
+/*========================================
+=   Email to Secondary receipients      =
+==========================================*/
+            $cc_mailsubject = 'Surge Media Video Dash - Your video draft is ready to review ('.$checksamelinkrow['project_name'].')';
+            $cc_mailtitle = 'Surge Media Video Dash';
+            $cc_mailsubtitle = 'Your project is ready for review';
+            $cc_mailmessage = '<b>Hi ,</b>
+            <p>We just wanted to let you know that a video draft for the project:'.$checksamelinkrow['project_name'].' has been sent to '.$cca_row['contact_person'].'.</p>
+            <p>Should you wish to add comments please address this to the main contact for this project. Email:'.$cca_row['email'].'.</p></br>
+            <p>Thank you.</p> ';
+
             //echo $_POST['downloadlink'].': '.$checksamelinkrow['download_file'];
             if($_POST['downloadlink']!=""){
                 //echo $_POST['downloadlink'];
@@ -159,6 +178,46 @@
     
 
             $mail = $smtp->send($mailto, $headers, $body);
+            if (PEAR::isError($mail)) {
+                echo('<p>' . $mail->getMessage() . '</p>');
+            }
+
+            //Sending email to seconfary recipients
+            $mail_data = file_get_contents('../email_template/video_download.html');
+            $mail_data = str_replace("[mail_title]",  $cc_mailtitle, $mail_data);
+            $mail_data = str_replace("[mail_subtitle]",  $cc_mailsubtitle, $mail_data);
+            $mail_data = str_replace("[mail_content]",  $cc_mailmessage, $mail_data);
+            $the_data_is = date("d M Y");
+            $mail_data = str_replace("[mail_datandtime]",  $the_data_is, $mail_data);
+
+            $crlf = "\n";
+            $headers = array(
+                'From' => $frommail,
+                'Return-Path'   => $frommail,
+                'To' => $cc_mailto,
+                'Subject' => $cc_mailsubject
+            );
+            // Creating the Mime message
+            $mime = new Mail_mime($crlf);
+
+            // Setting the body of the email
+            $mime->setTXTBody($cc_mailmessage);
+            $mime->setHTMLBody($mail_data);
+
+            $body = $mime->get();
+            $headers = $mime->headers($headers);
+
+            $smtp = Mail::factory('smtp', array(
+                'host' => 'videodash.surgehost.com.au',
+                'port' => '25',
+                'auth' => true,
+                'username' => $frommail,
+                'password' => '$$Surge1234$$'
+            ));
+
+    
+
+            $mail = $smtp->send($cc_mailto, $headers, $body);
             if (PEAR::isError($mail)) {
                 echo('<p>' . $mail->getMessage() . '</p>');
             }

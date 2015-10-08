@@ -39,7 +39,7 @@ $mail_message = "";
 
 /*=======================================*/
 if ($_POST['company_name'] != "") {
-    $update_contact = mysql_query("UPDATE Client_Information SET company_name = '" . $_POST['company_name'] . "', contact_person = '" . $_POST['contact_person'] . "', mobile_number = '" . $_POST['mobile_number'] . "', email = '" . $_POST['email'] . "' WHERE id = " . $client_id . " AND active_option = 1");
+    $update_contact = mysql_query("UPDATE Client_Information SET company_name = '" . $_POST['company_name'] . "', contact_person = '" . $_POST['contact_person'] . "', mobile_number = '" . $_POST['mobile_number'] . "', email = '" . $_POST['email'] ."', cc_email = '" . $_POST['cc_email'] . "' WHERE id = " . $client_id . " AND active_option = 1");
 }
 $check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = " . $client_id . " AND active_option = 1");
 $cca_num = mysql_num_rows($check_client_active);
@@ -481,7 +481,8 @@ echo $cca_row['contact_person']; ?>"/>
 echo $cca_row['mobile_number']; ?>"/>
 							<input placeholder="Email" name="email" value="<?php
 echo $cca_row['email']; ?>"/>
-							<input class="btn green"  type="submit" value="Change Contact Details"/>
+                            <textarea placeholder="Secondary Email (separated by comma)" name="cc_email" value=""></textarea>
+                            <input class="btn green"  type="submit" value="Change Contact Details"/>
 						</form>
 					</li>
 					<li class="section ten columns omega alpha">
