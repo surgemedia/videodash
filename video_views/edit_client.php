@@ -28,13 +28,14 @@
 //Add data to database
 	if($_POST['contact_person']!="" && $_POST['email']!=""){//test data whether empty
 		if(!$_POST['addclient']){
-			$run_query = "UPDATE Client_Information SET company_name = '".$_POST['company_name']."', contact_person = '".$_POST['contact_person']."', company_icon = '".$company_icon."', mobile_number = '".$_POST['mobile_number']."', tel_number = '".$_POST['tel_number']."', fax_number = '".$_POST['fax_number']."', address_one = '".$_POST['address_one']."', address_two = '".$_POST['address_two']."', state = '".$_POST['state']."', postcode = '".$_POST['postcode']."', email = '".$_POST['email']."', cc_email = '".$_POST['cc_email']."' WHERE id = ".$_POST['client_id'];
+			$run_query = "UPDATE Client_Information SET company_name = '".trim($_POST['company_name'])."', contact_person = '".trim($_POST['contact_person'])."', company_icon = '".trim($company_icon)."', mobile_number = '".trim($_POST['mobile_number'])."', tel_number = '".trim($_POST['tel_number'])."', fax_number = '".trim($_POST['fax_number'])."', address_one = '".trim($_POST['address_one'])."', address_two = '".trim($_POST['address_two'])."', state = '".trim($_POST['state'])."', postcode = '".trim($_POST['postcode'])."', email = '".trim($_POST['email'])."', cc_email = '".trim($_POST['cc_email'])."' WHERE id = ".$_POST['client_id'];
 		}else{
-			$run_query = "INSERT Client_Information VALUES(NULL, 1, '".$_POST['company_name']."', '".$_POST['contact_person']."', '".$company_icon."', '".$_POST['mobile_number']."', '".$_POST['tel_number']."', '".$_POST['fax_number']."','".$_POST['address_one']."', '".$_POST['address_two']."', '".$_POST['state']."', '".$_POST['pastcode']."', '".$_POST['email']."')";
+			$run_query = "INSERT Client_Information VALUES(NULL, 1, '".$_POST['company_name']."', '".$_POST['contact_person']."', '".$company_icon."', '".$_POST['mobile_number']."', '".$_POST['tel_number']."', '".$_POST['fax_number']."','".$_POST['address_one']."', '".$_POST['address_two']."', '".$_POST['state']."', '".$_POST['pastcode']."', '".$_POST['email']."', '".$_POST['cc_email']."')";
 		}
 		$query = mysql_query($run_query);
 		if(!$query){
 			echo "Client Record Cannot Update! Please check have not dedicate email record in database";
+            // echo "run_query ".$run_query ;
 			exit;	
 		}else{
 			$message = "Success to Update Client.";

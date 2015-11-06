@@ -48,6 +48,7 @@
                                     <span>Address 2</span><input name="address_two">
                                     <span>State</span><input name="state">
                                     <span>Post Code</span><input name="pastcode">
+                                    <span>Secondary Email</span><textarea name="cc_email" placeholder="(separated by commas)"><?=$clientdatarow['cc_email'];?></textarea>
                                 </li>
                             </ul>
                         </div>
