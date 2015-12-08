@@ -12,7 +12,7 @@
             $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1");
             //echo "SELECT * FROM video_project WHERE id = ".$_POST['project_id']." ORDER BY id DESC LIMIT 0,1<br/>";
             $checksamelinkrow = mysql_fetch_array($checksamelink);
-            echo $checksamelinkrow['project_name'].$cca_row['contact_person'];
+            // echo $checksamelinkrow['project_name'].$cca_row['contact_person'];
 
 	if($cca_num==0){
 		header("location: home_video.php");	
