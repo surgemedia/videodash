@@ -8,14 +8,23 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js" > </script>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css">
-<link rel="stylesheet" href="/videodash/css/layout.css">
-<link rel="stylesheet" href="/videodash/css/skeleton.css">
-<link rel="stylesheet" href="/videodash/css/style.css">
-<link rel="stylesheet" href="/videodash/fonts/stylesheet.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/skeleton.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/fonts/stylesheet.css">
+<style>
+	div#lb-banner {
+   display:none;
+}
+#big-video-wrap { background-color:rgb(215, 254, 250);}
+body {
+	padding-top:3em;
+}
+</style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="/videodash/js/wow.min.js"></script>
-<script type="text/javascript" src="/videodash/js/website.js"></script>
+<script type="text/javascript" src="/js/wow.min.js"></script>
+<script type="text/javascript" src="/js/website.js"></script>
 <script type='text/javascript'>
 (function (d, t) {
   var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
@@ -24,4 +33,14 @@
   s.parentNode.insertBefore(bh, s);
   })(document, 'script');
 </script>
+
+<?php 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+require_once 'aws/ses.class.php';
+$m = new SimpleEmailServiceMessage();
+$ses = new SimpleEmailService('AKIAIOH2AUGQJV3XLOEA', 'OoQW1hMMMeWJMb094RUyrBRKWQEQjfeMjTPkvd2+');
+?>
+
 </head>

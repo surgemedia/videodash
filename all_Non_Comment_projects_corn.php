@@ -67,7 +67,7 @@
 						}
 						if($message!=""){
 							$name = "Surge Media - Over Deadlie";
-							$frommail = "cs@videodash.surgehost.com.au";
+							$frommail =  "video@surgemedia.com.au";
 							$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
 							$mailsubject = 'Video without comments over 3 weeks';
 							$headers = "MIME-Version: 1.0\r\n";

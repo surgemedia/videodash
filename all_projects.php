@@ -60,7 +60,7 @@
 							}
 							echo '
 								<li class="client'.$add_del_class.'">
-									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">  '.$project_row['project_name'].'</a></h2>
+									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">  '.$project_row['id'].'.) '.$project_row['project_name'].'</a></h2>
 									<form action="#" id="del'.$i.'" method="post">
 										<input type="hidden" name="client_id"  value="'.$cca_row['id'].'">
 										<input type="hidden" name="delid"  value="'.$project_row['id'].'">

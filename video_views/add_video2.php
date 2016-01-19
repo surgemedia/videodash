@@ -45,7 +45,7 @@
             $checksamelinkrow = mysql_fetch_array($checksamelink);
             $complete_msg = '<label class="message green columns omega alpha two" for="">Updated <i class="fa fa-thumbs-up"></i></label>';;
 			$name = "Surge Media - Video Dash";
-			$frommail = "cs@videodash.surgehost.com.au";
+			$frommail =  "video@surgemedia.com.au";
 			$mailto = $cca_row['email'];
             if($videoversion_num==1){
     			$mailsubject = 'Surge Media Video Dash - Your Project Is Ready For Review ('.$checksamelinkrow['project_name'].')';

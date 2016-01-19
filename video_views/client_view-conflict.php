@@ -102,7 +102,7 @@ $end_time = gmdate("i:s", (int)$video_lenght_result);
 
 if($mail_message!=""){
 			$name = "Surge Media - Video Dash";
-			$frommail = "cs@videodash.surgehost.com.au";
+			$frommail =  "video@surgemedia.com.au";
 			$mailto = 'webproduction@surgemedia.com.au'; // $cca_row['email'];
 			$mailsubject = 'New Update of Client request in Video Dash';
 			$headers = "MIME-Version: 1.0\r\n";

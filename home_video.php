@@ -41,7 +41,7 @@
 							echo '
 								<li class="client'.$add_del_class.'" >
 									<img src="'.$client_row['company_icon'].'" alt="" height="50" width="50">
-									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">'.$client_row['company_name'].'</a></h2>
+									<h2 class="title"><a onclick="document.getElementById(\'videoadd'.$i.'\').submit();">'.$client_row['id'].'). '.$client_row['company_name'].'</a></h2>
 									<form action="#" id="del'.$i.'" method="post">
 										<input type="hidden" name="delid"  value="'.$client_row['id'].'">
 									</form>

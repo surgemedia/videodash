@@ -6,7 +6,6 @@
 include ("../dbconnection_3evchey.php");
  //connecting Database
 session_start();
-
     // $client_id = '15';
     $client_id = $_GET['ci'];
     // $project_id = '92';
@@ -21,7 +20,7 @@ $projectname_row = mysql_fetch_array($projectname);
 
     if ($projectname_row['download_file'] != "") {
         $downloadfilelink2 = '
-<a href="' . $projectname_row['download_file'] . '" class="btn green wow omega alpha" ><span>Download Your Videos for ' . $cca_row['company_name'] . ' - ' . $projectname_row['project_name'] . '</span><i class="fa fa-download"></i></a>';
+<a href="' . $projectname_row['download_file'] . '" class="btn green wow omega alpha" ><span>Download Your Videos Here</span><i class="fa fa-download"></i></a>';
         $downloadfilelink = '';
     } 
 

@@ -64,7 +64,7 @@ if(count($upsell_mail)!=0){
 		$mailcont .='<li>'.$upsell_mail[$i].'</li>';
 	}
 	$name = "Surge Media - Video Dash";
-	$frommail = "cs@videodash.surgehost.com.au";
+	$frommail =  "video@surgemedia.com.au";
 	$mailcontent .= '<strong>Client:</strong> '.$cca_row['company_name'].'<br/>';
 	$mailcontent .= '<strong>Project:</strong> '.$projectname_row['project_name'].'<br/>';
 	$mailcontent .= 'Additional request from client:';
@@ -97,10 +97,13 @@ if(count($upsell_mail)!=0){
 	$mail_data_c = str_replace("[mail_subtitle]",  $mailsubtitle, $mail_data_c);
 	$mail_data_c = str_replace("[mail_content]",  $mailcontentTOCLIENT, $mail_data_c);
 	$mail_data_c = str_replace("[mail_datandtime]",  $the_data_is, $mail_data_c);
-	mail($mailto, $mailsubject, $mail_data, $headers);
-	if(mail($mailTOCLIENT, $mailsubjectTOCLIENT, $mail_data_c, $headers)){
-		$list_msg = '&msg=c1';
-	}
+	// mail($mailto, $mailsubject, $mail_data, $headers);
+	 $m->setFrom('video@surgemedia.com.au');
+     $m->addTo($mailto);
+     $m->setSubject($mailsubject);
+     $m->setMessageFromString('',$mail_data);
+     $m->setMessageCharset('','UTF-8');
+     $ses->sendEmail($m);
 }
 
 header('Location: http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].$list_msg);

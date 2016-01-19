@@ -7,14 +7,13 @@ $_SESSION['adminpwd'] = $adminpassword;
 $sqlog="select * from adminlogin where username='".$_SESSION['adminuser']."' and password='".md5($_SESSION['adminpwd'])."' AND enabling = 1";
 $query = mysql_query($sqlog);
 if(!mysql_num_rows($query)) {
-Header("WWW-authenticate: basic realm=\"Citylink Control Login\"");
+Header("WWW-authenticate: basic realm=\"Surge Media Control Login\"");
 Header("HTTP/1.0 401 Unauthorized");
 $title="Login";
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<blockquote>
-Incorrect Username or Password!
-</blockquote>
+<script>
+	window.location = 'http://videodash.surgehost.com.au/'
+</script>
 <?
 exit;
 }
