@@ -1,16 +1,16 @@
 <?php 
 
 
- $Client_mail_message = '
-	Hey ' . $cca_row['contact_person'] . ',<br/><br/>
-	<p>You need more changes to your video project? No sweat!<br/></p>
-	<p>If these changes are small, we are more than happy to amend them.  <br/></p>
-	<p>However, if these changes are large and significant, the powers that be will need to review them. </p>
-	<p>Once reviewed, you will receive the amended video to approve or a quote to approve.</p>
-	<p>In the meantime, please be patient,and we will contact you if we have any questions.<br/></p>
-	<p>Kind Regards,<br/>
-	Paris Ormerod</p>
-	';
+ $Client_mail_message = "
+	Nice one " . $cca_row['contact_person'] . "! Baz Luhrmann would be proud!<br/><br/>
+	<p> Your first set of changes have been submitted and are in the pipeline. If you have spoken to our Video Department and your changes are a priority, be assured that they are being addressed. </p>
+	<p>Also, just a friendly reminder that you have one set of changes remaining. </p>
+	<p>In the meantime please be patient, make some popcorn, watch a movie and we will contact you if we have any questions. </p>
+	<br>
+	<p>That's a wrap from me. </p>
+	<p>Your loving, devoted Production Manager, </p>
+	<p>Paris Ormerod</p>
+	";
     $update_mail_subject = "More Change enquiry.";
     $first_draft_title = "Your Changes Have Been Submitted";
 

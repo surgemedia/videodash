@@ -187,8 +187,7 @@ margin: 0px;
 }
 div#preproduction .btn {
 float: left;
-margin: 1em 0;
-}
+margin: 1em 0;border: 0px;font-size: 1em;text-align: center;padding: 1em;}
 /* ==========  Normal Video Draft  ========== */
 ul#videos { position: relative;}
 ul#videos li.video_obj:hover { /* older webkit */
@@ -285,7 +284,7 @@ ul#videos li.featured #changes_required textarea { margin: 0.5em 0 0.5em 0; padd
 ul#videos li.featured #changes_required.popup { display: inline-block; width: 100%;}
 ul#videos li.featured #changes_required ul { margin: 0.5em; float: left; overflow-y: hidden; }
 ul#videos li.featured #changes_required .btn { }
-ul#videos li.featured #changes_required .submit-actions { float: left; padding-left:2em;}
+ul#videos li.featured #changes_required .submit-actions {  padding-left:2em; clear:both;}
 h4 {
 color: #305B71;
 }
@@ -305,7 +304,7 @@ float: left;
 display: inline-block;
 }
 ul#time-comments li textarea {
-	margin-top: 0;
+  margin-top: 0;
 }
 ul#time-comments li select, ul#time-comment_first li select {
 height: 2.1em;
@@ -328,11 +327,14 @@ ul li.featured #changes_required .timeline-title {
 }
 ul li.featured #changes_required .timeline-comments-title {
   float: none;
-  width: 63%;
+  width: 66%;
   display: inline-block;
 }
-ul li.featured #changes_required .timeline-title span, ul li.featured #changes_required .timeline-comments-title span {
-	font-size: 12px;
+.label_stop_float + span, ul li.featured #changes_required .timeline-title span, ul li.featured #changes_required .timeline-comments-title span {
+  font-size: 12px;
+  color:#999;
+  margin-top: 0.5em;
+  display: block;
 }
 .comment_check {
 display: inline-block;
@@ -522,6 +524,7 @@ margin: 0.5em 0;
 }
 .label_stop_float{
 display: block; clear: both;
+margin: 0px;
 }
 /*===================================
 =            Alexs Fixes            =
@@ -537,7 +540,7 @@ li.video_obj.featured .sub-title {
     font-size: 1.6em;
 }
 div#action_box {
-	margin-left: 0;
+  margin-left: 0;
 }
 div#action_box ul {
 float: left;
@@ -565,7 +568,7 @@ margin: 0em 1em 0em 0em;
 }
 ul#time-comments li textarea, ul#time-comment_first li textarea {
 float: none;
-width: 63%;
+width: 66%;
 display: inline-block;
 }
 span.timeline_picker.end {
@@ -587,7 +590,7 @@ ul#comments-general {
 display: inline-block;
 }
 ul#comments-general textarea {
-	margin-left: 0;
+  margin-left: 0;
 }
 .video-js {
 border: 0px !important;
@@ -612,19 +615,19 @@ color: #1E8AA3;
   text-align: center;
 }
 .checkbox{
-	width: auto !important;
+  width: auto !important;
 }
 
 .video_obj .message {
-	width: 95%;
-	font-size: 33px;
+  width: 95%;
+  font-size: 33px;
 }
 .light_blue_box {
   padding: 10px;
   color: #305B71;
   margin: 2em 0 3em 0;
   background:#E7F1F3;
-	float: left;
+  float: left;
   border-radius: 0.4em;
   padding: 1em 1em;
   background-color: #E7F1F3;
@@ -667,21 +670,21 @@ div#brandusb select {
 }
 
 .disable_input{
-	display: none;
+  display: none;
 }
 .display_input{
-	display: block;
+  display: block;
 }
 #brandusb{
-	position: relative;
+  position: relative;
 }
 .usb_images{
-	left: 280px;
+  left: 280px;
     position: absolute;
     top: -200px;
 }
 .fullscreen{
-	background: none repeat scroll 0 0 rgba(51, 51, 51, 0.7);
+  background: none repeat scroll 0 0 rgba(51, 51, 51, 0.7);
     height: 100%;
     left: 0;
     position: fixed;
@@ -690,7 +693,7 @@ div#brandusb select {
     z-index: 10;
 }
 .confirmbtn{
-	  background-color: #FFF;
+    background-color: #FFF;
   left: 40%;
   margin: -150px 0 0 -150px;
   padding: 1em;
@@ -744,4 +747,26 @@ content: attr(title);
 }
 .btn.green.shake {
   display: none;
+}
+
+#timeline_comments_section {
+  margin: 1em 0 0 0 ;
+}
+.submit-actions a {
+    clear: both;
+    margin: 0px;
+    float: right !important;
+}
+div#preproduction .ten .btn {
+    width: 49%;
+    display: inline-block;
+    margin: 0px;
+    text-align: center;
+    padding: 1em 0em;
+    margin-left: 0;
+    margin-top: 0em;
+}
+
+div#preproduction .ten .btn:last-child {
+    margin-left: 9px !important;
 }
