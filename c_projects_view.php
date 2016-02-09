@@ -9,7 +9,7 @@
 	$cca_num = mysql_num_rows($check_client_active);
 	$cca_row = mysql_fetch_array($check_client_active);
 	if($cca_num==0){
-		header("location: index.js");	
+		header('location: /?failed=true');	
 	}
 	$message = "Add New Video Project";
 	if($_POST['new_project_save']==1 && $_POST['project_name']!=""){//test data whether empty
@@ -22,17 +22,19 @@
 		}
 	}
 	if($_GET['msg']=='D1'){
-		$show_meg = '<label class="message " ><span>Sorry, we cannot have any request from you. </span> <i class="fa fa-exclamation-circle"></i> </label>';
+		$show_meg = '<label class="message " ><span>Sorry, We could send that email right now </span></label>';
 	}
 	if($_GET['msg']=='c1'){
-		$show_meg = '<label class="message " ><span>Thank you. Your request has been sent to us. You will receive a quote within one hour.</span> <i class="fa fa-thumbs-up"></i> </label>';
+		$show_meg = '<label class="message " ><span>Thank you. Your request has been sent to us. We will send you some information on each option within 24 hours.</span> <i class="fa fa-thumbs-up"></i> </label>';
 	}
 ?>
 <!DOCTYPE html>
 <html>
 <? include('inc/head.php');?>
-            <body class="">
-                <main>
+<? include('inc/header.php');?>
+
+            <body >
+                <main class="container">
 
                 <section id="search" class="center">
                <!--  <div id="dash_logo">
@@ -82,7 +84,7 @@
 											<li>';
 											if($last_video_under_project_num!=0){
 												echo '
-													<a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Video</span> <i class="fa fa-video-camera"></i></a>
+													<a class="btn yellow add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Video</span> <i class="fa fa-youtube-play"></i></a>
 												';
 											}else{
 												echo '
@@ -90,7 +92,7 @@
 												';												
 											}
 							echo '</li>
-											'.$del_btn.'
+											
 										</ul>
 									</div>
 								</li>
@@ -100,6 +102,6 @@
                     </ul>
                 </section>
             </main>
-            <? include('../inc/footer.php');?>
+            <? include('inc/footer.php');?>
         </body>
     </html>

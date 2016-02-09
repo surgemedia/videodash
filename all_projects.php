@@ -23,7 +23,7 @@
 			<? include('inc/head.php');?>
             <body class="">
 				<? include('inc/header.php'); ?>
-                <main>
+                <main class="container">
                 <section id="search" class="center">
                     <h1 class=""><?php echo $cca_row['company_name']; //Display company name?> Projects</h1>  
                     <form action="add_project.php" id="projectadd" method="post">
@@ -53,7 +53,7 @@
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);
 							$add_del_class = "";
-							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Delete</span><i class="fa fa-bomb" ></i></a></li>';
+							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Close </span><i class="fa fa-bomb" ></i></a></li>';
 							if($project_row['active_option']==0){
 								$add_del_class = " bombed";
 								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Reopen Project</span><i class="fa fa-history" ></i></a></li>';
@@ -80,7 +80,7 @@
 									<div class="actions">
 										<ul>';
 							if($add_del_class != " bombed"){				
-								echo '<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>Add New Video</span> <i class="fa fa-video-camera"></i></a></li>';
+								echo '<li><a class="btn blue add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>Add New Video</span> <i class="fa fa-video-camera"></i></a></li>';
 							}
 							echo $del_btn.'
 										</ul>

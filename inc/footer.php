@@ -1,21 +1,28 @@
 <footer>
-    <div class="logo"><img src="" alt=""></div>
-    <nav>
-        <ul class="nav">
-            <li>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-            </li>
-        </ul>
-    </nav>
-    <script>
+    
+ <script>
     var options = {
         valueNames: [ 'title' ]
     };
     var List = new List('search', options);
     </script>
-    <script type="text/javascript" src="js/website.js"></script>
+    <script>
+    $('body').vegas({
+    delay: 7000,
+    timer: false,
+    shuffle: true,
+    overlay: false,
+    transitionDuration: 2000,
+        slides: [
+            { src: '/img/BACKGROUND-1.jpg' },
+            { src: '/img/BACKGROUND-2.jpg' },
+            { src: '/img/BACKGROUND-3.jpg' },
+            { src: '/img/BACKGROUND-4.jpg' },
+        ]
+
+    });</script>
+
+
+
+
 </footer>

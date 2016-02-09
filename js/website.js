@@ -94,7 +94,7 @@ function NewTimelineComment(){
   var i = comments.length;
   var li_open = ' <li id="notes_comment_'+i+'" class="container">';
   var start = '<input name="time_start_'+i+'" value="0:00">';
-  var end = '<input name="time_end_'+i+'" value="'+$('#video_end_time').val()+'">';
+  var end = '<input name="time_end_'+i+'" value="'+'0:00'+'">';
   var selectoption = '<select name="comment_option_'+i+'" class="five columns">';
   selectoption += '<option value="1">Changes To Video</option>';
   selectoption += '<option value="2">Changes To Audio</option>';
@@ -104,6 +104,8 @@ function NewTimelineComment(){
   output = li_open+'<div class="controls"><span class="timeline_picker "><label for="start">Start</label>'+start+'</span><span class="timeline_picker end "><label for="start">End</label>'+end+'</span>'+selectoption+'</div>'+textarea+'</li>';
   $(output).appendTo('#time-comments');
 }
+
+
 $(document).on('change', 'input[name="usb_option"]', function(){
     var get_usb = $(this).val();
     if(get_usb == 1){

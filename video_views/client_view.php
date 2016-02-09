@@ -6,6 +6,8 @@ ini_set("include_path", '/home/videodsurg/php:' . ini_get("include_path"));
 //enable all Pear php Mail function, Pear mail and mime, please install in Cpanel client page before use it.
 require_once "Mail.php";
 include ('Mail/mime.php');
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
 ?>
 <?php
 /*===========================================
@@ -62,7 +64,7 @@ Your high resolution final video is on it’s way.</p>
 Paris Ormerod</p>
 ';
     $update_mail_subject = "More Change enquiry.";
-    $first_draft_title = "Your Changes Have Been Submitted";
+    $first_draft_title = "Your changes Have Been Submitted";
 }
 $last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = " . $project_id . " AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
 $last_video_under_project_row = mysql_fetch_array($last_video_under_project);
@@ -243,7 +245,9 @@ if ($update_mail_subject != "") {
 Verion Number to show changed Day counter
 ============================================*/
 $stop_comment = "";
-// echo "Version Number".$last_video_under_project_row['version_num'] . "Comment Number".$last_video_a_request_row['comment_time'];
+$overdeadline_message = "";
+$help_text;
+$display_draft_timer = false;
 if ($last_video_under_project_row['version'] != 'Final') {
     $last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = " . $last_video_under_project_row['id'] . " ORDER BY id DESC LIMIT 0, 1");
     $last_video_a_request_row = mysql_fetch_array($last_video_a_request);
@@ -259,25 +263,31 @@ if ($last_video_under_project_row['version'] != 'Final') {
 
 if ($last_video_under_project_row['version'] != "Final") {
     $downloadfilelink = '<li>';
-        
-        if ($stop_comment_disable != 1) {
-            $downloadfilelink .= '<a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">Changes Required</span><i class="fa fa-star"></i></a>';
-        }
-    $downloadfilelink .= '<a href="javascript:void(0)" class="btn yellow" onClick="document.getElementById(\'final_version_confirm\').submit();"><span class="omega alpha red">Approve as final</span><i class="fa fa-star"></i></a></li>';
+            if ($stop_comment_disable != 1) {
+                $downloadfilelink .= '<a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">Changes Required</span><i class="fa fa-star"></i></a>';
+            }
+    $downloadfilelink .= '<a href="javascript:void(0)" class="btn blue" onClick="document.getElementById(\'final_version_confirm\').submit();"><span class="omega alpha">Approve as final*</span></a>';
+    $help_text = "<small class='help-text'>*no changes required</small>";
     $downloadfilelink2 = '';
     $downloadfile_message = '';
     $list_day_counter = check_deadline($project_id, $last_video_under_project_row['version'], 'deadline');
+
+
+
     if ($list_day_counter > 0) {
         if ($stop_comment_disable == 1) {
             $overdeadline_message = 'The video draft will be available for ' . check_deadline($project_id, $last_video_under_project_row['version'], 'deadline') . ' days';
+            $display_draft_timer = 1;
         }
         else {
             $overdeadline_message = 'Your final video is ready for review.';
+            $display_draft_timer = 2;
+
         }
     }
     else {
         $overdeadline_message = 'Sorry, we have not recevied any changes from you in the last 3 weeks. If you would like to submit changes now,we may charge for the time involved';
-        
+        $display_draft_timer = 3;
     }
 }
 else {
@@ -291,7 +301,7 @@ else {
         $downloadfilelink = '';
     }
     else {
-        $downloadfilelink = '<label class="message " ><span>Please be patient. We will notify you when you can download your final video </span> <i class="fa fa-thumbs-up"></i> </label>';
+        $downloadfilelink = '<label class="message " ><span></span> </label>';
         $downloadfilelink2 = '';
     }
     
@@ -309,20 +319,26 @@ else {
 <html>
     <?php
     ?>
-    <body class="">
+    <body class="bg-pattern">
         <div class="fullscreen disable_input" id="request_confirm_form">
 
             <div class="confirmbtn">
                 <a href="#" id="cloasesubmit" class="cloasesubmit"><i class="fa fa-times"></i></a>
-                Please Confirm your changes.<br><br>
-                <a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Confirm Changes</span> <i class="fa fa-send"></i></a>
+               <p> If you are happy with your changes,<br>
+                Please submit your comments
+                </p>
+                
+                <a class="btn green columns five alpha" onClick="document.getElementById('charge_update').submit();"><span>Submit</span> <i class="fa fa-check"></i></a>
+            <small>*Please note that this action can't be undone.</small>
+            
             </div>
         </div>
         <?php
         include ('client_header.php'); ?>
         <main>
             <section class="container">
-                <?php  include ('../inc/client-view-project-details.php'); ?>
+            <h1></h1>
+                <?php  //include ('../inc/client-view-project-details.php'); ?>
                 <!-- <input type="text" id="searchbox" class="search wow bounceIn"> -->
                 <?php
                 /*=======================================*/
@@ -362,13 +378,14 @@ else {
                     <input value="<?php echo $project_id; ?>" name="project_id" type="hidden">
                     <input value="yes" name="add_more_changed" type="hidden">
                 </form>
-                <?php
-                if (!$downloadfile_message) { ?>
-                <form id="charge_update" action="#" method="post" class="sixteen column">
+                <?php 
+                if ($projectname_row['download_file'] != "") { ?>
+                    <form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
                     <?php
                     }
                     else { ?>
-                    <form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
+                    <?php // echo "text"; ?>
+                    <form action="#" id="charge_update" method="post" class="sixteen column">
                         <?php
                         } ?>
                         <input value="<?php echo $client_id; ?>" name="client_id" type="hidden">
@@ -377,36 +394,36 @@ else {
                         <ul>
                             <li class="video_obj featured">
 
-                                <h1 class="title"><?php
-                                echo $cca_row['company_name']; ?> - <?php
-                                echo $projectname_row['project_name'] ?> - <span><?php
-                                echo $last_video_under_project_row['version']; ?>  (<?php
-                                echo check_deadline($project_id, $last_video_under_project_row['version']); ?>)</span>
+                                <h1 class="title main">
+                                <?php // echo $cca_row['company_name']; ?>
+                               <span class="first"> <?php echo $projectname_row['project_name'] ?></span>
+                                <span class="type" ><?php
+                                echo $last_video_under_project_row['version']; ?></span>
+                                <span class="deadline" ><?php
+                                echo check_deadline($project_id, $last_video_under_project_row['version']); ?></span>
                                 </h1>
+                               
                                 <?php
-                                                                // echo $downloadfile_message;
-                                                                if ($downloadfile_message):
-                                                                    if($downloadfile_message==1) {
+                                // move under youtube
+                                $show_form = false;
+                               if ($downloadfile_message):
+                                  if($downloadfile_message==1) {
                                 ?>
-                                <h2 class="sub-title">Your final videos are ready! Please complete the survey below to download your final video files.</h2>
+                                <h2 class="sub-title">Your final video is ready!</h2>
+                                <p> Before you download your video please have a think about:</p>
+                                <?php $show_form = true; ?>
                                 <?php  } else {
                                 ?>
-                                <h2 class="sub-title">Your Final Videos Are Almost Ready To Download</h2>
+                                <h2 class="sub-title">Thank you, your video has been approved. Your final video is being processed. </h2>
+                                <p>You will be notified by email once it is ready for download from this page.</p>
+                                <?php $show_form = false; ?>
                                 <?php } endif; ?>
                                 <?php if ($overdeadline_message): ?>
                                 <?php  if(strlen(implode(" ",$current_draft_comments_column))>0 or strlen($last_video_a_request_row['voice_comment'])) {
                                 ?>
-                                <label class="message red" for="">Thank you for submitting your comments on the current draft. We will notify you when the next draft is uploaded.</label>
+                                <p>Thank you for submitting your comments on the current draft. We will notify you when the next draft is uploaded.</p>
                                 <?php
-                                                                }
-                                                                else {
-                                ?>
-                                <label class="message red" for="">
-                                    <?php
-                                    echo $overdeadline_message; ?>
-                                </label>
-                                <?php
-                                                                }
+                                         }
                                 ?>
                                 <?php
                                 endif; ?>
@@ -418,23 +435,17 @@ else {
                                     <iframe src="//www.youtube.com/embed/<?php echo cleanYoutubeLink($last_video_under_project_row['video_link']); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
                                     <!-- VIMEO EMBED -->
                                 </div>
+                               
                                 <?php } ?>
-                                <div id="download_message" class="light_blue_box">
-
-                                    <!-- <h2>Your Final Videos Are Almost Ready To Download</h2> -->
+                                <div id="download_message" class="">
                                     <?php
-                                    if ($downloadfilelink2) { ?>
-                                    <?php
-                                    // echo $downloadfilelink2; ?>
-                                    <?php
-                                    }
-                                    else { ?>
-                                    <?php
-                                    echo $downloadfilelink; ?>
-                                    <?php
-                                    }
-                                    ?>
-                                <?php  include ('../inc/client-view-marketing-form.php'); ?>
+                                    // if (!$downloadfilelink2) { 
+                                    // echo $downloadfilelink;
+                                    //  }
+                                    if($show_form == true){
+                                    include ('../inc/client-view-marketing-form.php');
+                                        }
+                                     ?>
                 
                                      <?php
                                                             if ($downloadfilelink2) {
@@ -449,19 +460,31 @@ else {
                                 endif;
                                 if ($last_video_under_project_row['version'] != "Final") {
                                 ?>
+                                
+                                <p>Please select an option below</p>
+                               
+                                <div id='action_box' class="actions sixteen columns">
+                                    <ul>
+                                    <li><a href="#Feedbackarea" class=" omega yellow btn">Create Feedback</a></li>
+                                   <li> <?php echo $downloadfilelink; //approve final?>
+                                   </li>
+                                    </ul>
+                                        <?php echo $help_text; ?>
+
+                                </div>
+                                
+
                                 <div class="video sixteen columns omega alpha" id="youtube_video_div">
-                                    <!-- VIMEO EMBED -->
+                                    
                                     <iframe src="//www.youtube.com/embed/<?php echo cleanYoutubeLink($last_video_under_project_row['video_link']); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-                                    <!-- VIMEO EMBED -->
+                                   
                                 </div>
                                 <?php
                                 } ?>
-                                <div id='action_box' class="actions sixteen columns">
-                                    <ul>
-                                        <?php
-                                        echo $downloadfilelink; ?>
-                                    </ul>
-                                </div>
+                                 <?php if($overdeadline_message) { ?>
+                                    <p class="message txt">  <?php echo $overdeadline_message; ?></p>  
+                                <?php } ?>
+                                
                                 <?php
                                 if ($stop_comment_disable == 1) {
                                 ?>
@@ -472,9 +495,10 @@ else {
                         </ul>
                     </form>
 
-
-                    <ul id="videos">
-                        <li><h1>All Video Versions</h1></li>
+                    <?php  if ($last_video_under_project_row['version'] != "Final") { ?>
+                    
+                    <!-- <ul id="videos"> -->
+                        <!-- <li><h1>All Video Versions</h1></li> -->
                         <?php
                         $listvideos = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =" . $project_id . " ORDER BY enabling, version_num DESC");
                         $video_num = mysql_num_rows($listvideos);
@@ -521,13 +545,16 @@ else {
                 //'<label class="message">'.$show_final_msg.'</label>';
 
                 }
-                $obj_template = include ('../inc/video-draft-object.php');
+                //$obj_template = include ('../inc/video-draft-object.php');
 
                 //echo $obj_template;
 
                 }
                 ?>
-            </ul>
+            <!-- </ul> -->
+
+                <?php } ?>
+   
         </section>
     </main>
     <?php

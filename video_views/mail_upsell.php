@@ -1,65 +1,54 @@
-<? include("../dbconnection_3evchey.php"); //connecting Database
+<? 
+// echo "cheese -1";
+include("../dbconnection_3evchey.php"); //connecting Database
+include ('../inc/head.php'); 
+error_reporting(-1);
+ini_set('display_errors', 'On');
+     // echo "cheese 0";
+
 session_start();
+$client_id = $_POST['client_id'];
+$project_id = $_POST['project_id'];
+
 $check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = ".$_POST['client_id']." AND active_option = 1");
 $cca_num = mysql_num_rows($check_client_active);
 $cca_row = mysql_fetch_array($check_client_active);
 $projectname = mysql_query("SELECT * FROM video_project WHERE id = ".$_POST['project_id']);
 $projectname_row = mysql_fetch_array($projectname);
-if($_POST['usb_option']!=""){
-	if($_POST['usb_option']=="1"){
-		if($_POST['USB_value']!="" && $_POST['usb_type']!=""){
-			$upsell_mail[] = $_POST['usb_type'].'[Branding USB]'.' TOTAL: '.$_POST['USB_value'].' PCS';
-		}//If client put the number in this field, it will show in mail.	
-	}else{
-		if($_POST['USB_value_color']!="" && $_POST['usb_color']!=""){
-			$upsell_mail[] = $_POST['usb_color'].'[Plain USB]'.' TOTAL: '.$_POST['USB_value_color'].' PCS';
-		}//If client put the number in this field, it will show in mail.	
-	}
-}
-if($_POST['dvd_value1']!="" && $_POST['dvd_option_1']!=""){
-	$upsell_mail[] = $_POST['dvd_option_1'].' TOTAL: '.$_POST['dvd_value1'].' PCS';
-}//If client put the number in this field, it will show in mail.
-if($_POST['dvd_value2']!="" && $_POST['dvd_option_2']!=""){
-	$upsell_mail[] = $_POST['dvd_option_2'].' TOTAL: '.$_POST['dvd_value2'].' PCS';
-}//If client put the number in this field, it will show in mail.
-if($_POST['dvd_value3']!="" && $_POST['dvd_option_3']!=""){
-	$upsell_mail[] = $_POST['dvd_option_3'].' TOTAL: '.$_POST['dvd_value3'].' PCS';
-}//If client put the number in this field, it will show in mail.
-if($_POST['dvd_value4']!="" && $_POST['dvd_option_4']!=""){
-	$upsell_mail[] = $_POST['dvd_option_4'].' TOTAL: '.$_POST['dvd_value4'].' PCS';
-}//If client put the number in this field, it will show in mail.
-if($_POST['dvd_value5']!="" && $_POST['dvd_option_5']!=""){
-	$upsell_mail[] = $_POST['dvd_option_5'].' TOTAL: '.$_POST['dvd_value5'].' PCS';
-}//If client put the number in this field, it will show in mail.
+$upsell_mail = [];
+
+     // echo "cheese 1";
+
 if($_POST['dps1']!=""){
-	$upsell_mail[] = 'Allows collect raw footage on a supplied hard drive';	
+	$upsell_mail[] = 'USB - We can supply a full range of branded and unbranded USBs.';	
 }
 if($_POST['dps2']!=""){
-	$upsell_mail[] = 'Supply a hard drive with raw footage';	
+	$upsell_mail[] = 'DVDs and DATA DISCS - We can supply branded and unbranded DVDs and Data Discs ';	
 }
 if($_POST['dps3']!=""){
-	$upsell_mail[] = 'Store raw footage and final project for a period of 5 years';	
+	$upsell_mail[] = 'Youtube - We provide a full Youtube channel style and video upload service.';	
 }
 if($_POST['dps4']!=""){
-	$upsell_mail[] = 'Keep an uncompressed 1920 x1080 final video file indefinitely and on hand for requirement.';	
+	$upsell_mail[] = 'No Thanks';	
 }
 if($_POST['market1']!=""){
-	$upsell_mail[] = 'Upload project to Client Youtube channel';	
+	$upsell_mail[] = 'Surge Media will load your footage and video onto a hard drive provided by you.';	
 }
 if($_POST['market2']!=""){
-	$upsell_mail[] = 'Style Youtube channel';	
+	$upsell_mail[] = 'Surge Media will load your footage and video onto a hard drive provied by Surge Media.';	
 }
 if($_POST['market3']!=""){
-	$upsell_mail[] = 'Advertise video on Youtube.';	
+	$upsell_mail[] = 'Surge Media will store your footage and video for an annual fee.';	
 }
-if($_POST['Remarketing']!=""){
-	$upsell_mail[] = 'Remarketing';	
+if($_POST['market4']!=""){
+	$upsell_mail[] = 'Surge Media will store your final video indefinitley; However your project and footage will be deleted.';	
 }
-if($_POST['Television']!=""){
-	$upsell_mail[] = 'Television';	
-}
-$list_msg = '&msg=D1';
-if(count($upsell_mail)!=0){
+     // echo "cheese 2";
+
+$list_msg = '&msg=c1';
+// if(count($upsell_mail)!=0){
+
+
 	for($i=0; $i<count($upsell_mail); $i++){
 		$mailcont .='<li>'.$upsell_mail[$i].'</li>';
 	}
@@ -73,10 +62,11 @@ if(count($upsell_mail)!=0){
 	$mailcontent .= '</ul>';
 	$mailcontentTOCLIENT .= '
 		Dear '.$cca_row['contact_person'].'<br/><br/>
-		Thank you for choosing Surge Media\'s marketing options for your video project.<br/>
-		A quote of your request will be sent to you within 24 hours.<br/>
-		We will contact you if we have any questions.<br/><br/>
+		Thank you for choosing to learn more about Surge Media’s marketing options for your project. <br/>
+		We will send you some information on each option within 24 hours. .<br/>
 		';
+     // echo "cheese 3";
+
 	$headers = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .="From: ". $name . " <" . $frommail . ">\r\n";
@@ -98,13 +88,22 @@ if(count($upsell_mail)!=0){
 	$mail_data_c = str_replace("[mail_content]",  $mailcontentTOCLIENT, $mail_data_c);
 	$mail_data_c = str_replace("[mail_datandtime]",  $the_data_is, $mail_data_c);
 	// mail($mailto, $mailsubject, $mail_data, $headers);
-	 $m->setFrom('video@surgemedia.com.au');
-     $m->addTo($mailto);
+	 $m->setFrom('alex@surgemedia.com.au');
+     $m->addTo('alex@surgemedia.com.au');
      $m->setSubject($mailsubject);
      $m->setMessageFromString('',$mail_data);
      $m->setMessageCharset('','UTF-8');
      $ses->sendEmail($m);
-}
+    
 
-header('Location: http://videodash.surgehost.com.au/c_projects_view.php?email='.$cca_row['email'].$list_msg);
+	 $internal_m = new SimpleEmailServiceMessage();
+     $internal_m->setFrom('video@surgemedia.com.au');
+     $internal_m->addTo('video@surgemedia.com.au');
+     $internal_m->setSubject($mailsubject);
+     $internal_m->setMessageFromString('',$mail_data);
+     $internal_m->setMessageCharset('','UTF-8');
+     $ses->sendEmail($internal_m);
+
+header('Location: video_view.php?ci='.$client_id.'&pi='.$project_id);
+     // echo "cheese end";
 ?>

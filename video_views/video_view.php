@@ -20,7 +20,7 @@ $projectname_row = mysql_fetch_array($projectname);
 
     if ($projectname_row['download_file'] != "") {
         $downloadfilelink2 = '
-<a href="' . $projectname_row['download_file'] . '" class="btn green wow omega alpha" ><span>Download Your Videos Here</span><i class="fa fa-download"></i></a>';
+<a href="' . $projectname_row['download_file'] . '"id="download_button" class="btn yellow wow" ><span>Download Your Videos Here</span><i class="fa fa-download"></i></a>';
         $downloadfilelink = '';
     } 
 
@@ -31,14 +31,18 @@ $projectname_row = mysql_fetch_array($projectname);
 include ('../inc/head.php'); ?>
 	<body class="">
     	<main>
-		    <section class="container">
-				<h1 class="title"><?php echo $cca_row['company_name']; ?> - <?php echo $projectname_row['project_name'] ?> </h1>
-                <div id="download_message" class="light_blue_box">
+		    <section id="download_center" class="container">
+				<h1 class="title main">
+                <span class="first"> <?php echo $cca_row['company_name']; ?></span>
+                <span><?php echo $projectname_row['project_name'] ?></span> 
+                 </h1>
+                <p>Your final video download</p>
+
 					<?php echo $downloadfilelink2; ?>
-                </div>
+                    <small><span>my  zip won't open? </span><a href="http://www.kekaosx.com/en/">Mac</a> | <a href="http://www.7-zip.org/download.html">Windows</a></small>
             </section>
 		</main>
-		<?php include ('../footer.php'); ?>
+		<?php include ('../inc/footer.php'); ?>
 		<div id="overlay_wrapper" onClick="closeAllCards()"></div>
 	</body>
 </html>

@@ -15,9 +15,9 @@
 <!DOCTYPE html>
 <html>
 			<? include('inc/head.php');?>
-            <body class="">
+            <body >
 				<? include('inc/header.php'); ?>
-                <main>
+                <main class="container">
                 <section id="search" class="center">
                     <h1 class="">Our Clients</h1>  
                     <div class="controls">
@@ -33,7 +33,7 @@
 						for($i=0; $i<$client_num; $i++){
 							$client_row = mysql_fetch_array($listclient);
 							$add_del_class = "";
-							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Delete</span><i class="fa fa-bomb" ></i></a></li>';
+							$del_btn = '<li><a href="#" class="btn red edit" onclick="document.getElementById(\'del'.$i.'\').submit();"><span>Close</span><i class="fa fa-bomb" ></i></a></li>';
 							if($client_row['active_option']==0){
 								$add_del_class = " bombed";
 								$del_btn = '<li><a href="#" class="btn blue edit" onclick="document.getElementById(\'enable'.$i.'\').submit();"><span>Reopen Client</span><i class="fa fa-history" ></i></a></li>';
@@ -59,7 +59,7 @@
 											';
 							if($add_del_class != " bombed"){				
 								echo '
-									<li><a class="btn green add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Projects</span> <i class="fa fa-eye"></i></a></li>
+									<li><a class="blue btn add_new" onclick="document.getElementById(\'videoadd'.$i.'\').submit();"><span>View Projects</span> <i class="fa fa-eye"></i></a></li>
 									<li><a class="btn yellow edit" onclick="document.getElementById(\'edit'.$i.'\').submit();"><span>Edit</span><i class="fa fa-edit"></i></a></li>
 								';
 							}
