@@ -6,10 +6,11 @@ ini_set("include_path", '/home/videodsurg/php:' . ini_get("include_path"));
 //enable all Pear php Mail function, Pear mail and mime, please install in Cpanel client page before use it.
 require_once "Mail.php";
 include ('Mail/mime.php');
-// error_reporting(-1);
-// ini_set('display_errors', 'On');
 ?>
 <?php
+
+
+
 /*===========================================
      =            Database Connection            =
 ===========================================*/
@@ -30,136 +31,21 @@ include ('../inc/head.php');
 ===========================================*/
 $mail_message = "";
 /*=======================================*/
-            /*       Change Content Details          */
+/*       Change Content Details          */
 /*=======================================*/
-if ($_POST['company_name'] != "") {
-    $update_contact = mysql_query("UPDATE Client_Information SET company_name = '" . trim($_POST['company_name']) . "', contact_person = '" . trim($_POST['contact_person']) . "', mobile_number = '" . trim($_POST['mobile_number']) . "', email = '" . trim($_POST['email']) ."', cc_email = '" . trim($_POST['cc_email']) . "' WHERE id = " . $client_id . " AND active_option = 1");
-}
-$check_client_active = mysql_query("SELECT * FROM Client_Information WHERE id = " . $client_id . " AND active_option = 1");
-$cca_num = mysql_num_rows($check_client_active);
-$cca_row = mysql_fetch_array($check_client_active);
-if ($cca_num == 0) {
-    header("location: ../index.java");
-}
-$projectname = mysql_query("SELECT * FROM video_project WHERE id = " . $project_id);
-$projectname_row = mysql_fetch_array($projectname);
+include('../inc/update-company.php');
 /*=================================================*/
     /*       Make video to Final Version and Email   */
 /*===============================================*/
-if ($_POST['make_video_version_to_final'] == "yes") {
-    $l_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = " . $project_id . " AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
-    $l_video_under_project_row = mysql_fetch_array($l_video_under_project);
-    $version_number_editer = $l_video_under_project_row['version_num'] + 1;
-    mysql_query("INSERT INTO video_under_project VALUES(NULL, " . $project_id . ", '" . $l_video_under_project_row['video_link'] . "', 'Final', 'Final Version Confirmed', 1, " . $version_number_editer . ", NULL);");
-    $mail_message = '<b>A client has confirmed the final version of their video</b>
-Client: ' . $cca_row['company_name'] . "<br/>
-Video Project: " . $projectname_row['project_name'];
-    $Client_mail_message = '
-Hey ' . $cca_row['contact_person'] . ',<br/><br/>
-<p>Way to go on confirming your final video.<br/></p>
-<p>Your video isn’t quite ready to download yet but hang tight!<br/>
-Your high resolution final video is on it’s way.</p>
-<p>In the meantime, please be patient, crack open a drink and we will contact you if we have any questions.</p>
-<p>Kind Regards,<br/>
-Paris Ormerod</p>
-';
-    $update_mail_subject = "More Change enquiry.";
-    $first_draft_title = "Your changes Have Been Submitted";
-}
-$last_video_under_project = mysql_query("SELECT * FROM video_under_project WHERE video_project_id = " . $project_id . " AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");
-$last_video_under_project_row = mysql_fetch_array($last_video_under_project);
-$forloopcount = 0;
-$addition_change_to_mail = '';
-$addition_change_to_mail2 = '';
-if ($last_video_under_project_row['id'] != "" && $_POST['add_more_changed'] == "yes") {
-    mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '" . $last_video_under_project_row['id'] . "', '" . $_POST['script1'] . "', '" . $_POST['script2'] . "', '" . $_POST['logoandimage_email'] . "', '" . $_POST['logoandimage_dropbox'] . "', '" . $_POST['voice_id'] . "', '" . $_POST['voice_comment'] . "', '" . $_POST['audio_comment'] . "', '" . $_POST['contact_info1'] . "', '" . $_POST['contact_info2'] . "', '" . $_POST['contact_info3'] . "', '" . $_POST['contact_info4'] . "')");
-    
-    //if it's addition comments. add it to databace
-    $addition_change_to_mail = 'Additional Change';
-    $addition_change_to_mail2 = 'Review it and send quote to client.<br/>';
-    //echo "INSERT INTO video_client_addition_request VALUES(NULL, '" . $last_video_under_project_row['id'] . "', '" . $_POST['script1'] . "', '" . $_POST['script2'] . "', '" . $_POST['logoandimage_email'] . "', '" . $_POST['logoandimage_dropbox'] . "', '" . $_POST['voice_id'] . "', '" . $_POST['voice_comment'] . "', '" . $_POST['audio_comment'] . "', '" . $_POST['contact_info1'] . "', '" . $_POST['contact_info2'] . "', '" . $_POST['contact_info3'] . "', '" . $_POST['contact_info4'] . "')";
-}
-$last_video_a_request = mysql_query("SELECT * FROM video_client_addition_request WHERE video_id = " . $last_video_under_project_row['id'] . " ORDER BY id DESC LIMIT 0, 1");
-$last_video_a_request_row = mysql_fetch_array($last_video_a_request);
+include('../inc/make-video-final.php');
 /*=======================================*/
-            /*          Time feedback of video       */
+   /*          Time feedback of video       */
 /*=======================================*/
-for ($i = 0; $i < 1000; $i++) {
-    //runing 1000 time to add feedback to array
-    if ($_POST['feedback_' . $i] != "") {
-        $feedback[$forloopcount] = $_POST['feedback_' . $i];
-        $feedback_strat[$forloopcount] = $_POST['time_start_' . $i];
-        $feedback_end[$forloopcount] = $_POST['time_end_' . $i];
-        $feedback_type[$forloopcount] = $_POST['comment_option_' . $i];
-        $forloopcount = $forloopcount + 1;
-    }
-}
-$comment_remind_mail = 0;
-for ($i = 0; $i < $forloopcount; $i++) {
-    if ($last_video_a_request_row['stop_resubmit'] != 1) {
-        $update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, " . $last_video_under_project_row["id"] . ", '" . $feedback_strat[$i] . "', '" . $feedback_end[$i] . "', '" . htmlspecialchars($feedback[$i], ENT_QUOTES) . "', '" . $feedback_type[$i] . "')");
-        
-        //echo '1 done';
-        
-    }
-    $mail_commect_typs = 'Change To Video';
-    if ($feedback_type[$i] == 2) {
-        $mail_commect_typs = 'Change To Audio';
-    }
-    else if ($feedback_type[$i] == 3) {
-        $mail_commect_typs = 'Other';
-    }
-    $list_comment.= '<tr><td>' . $feedback_strat[$i] . '</td><td>' . $feedback_end[$i] . '</td><td>' . $mail_commect_typs . '</td><td>' . htmlspecialchars($feedback[$i], ENT_QUOTES) . '</td></tr>';
-    
-    //echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
-    $comment_remind_mail = 1;
-    //if have any comment, set it 1.
-    
-}
-if ($_POST['old_loop_time'] > 0) {
-    for ($j = 0; $j < $_POST['old_loop_time']; $j++) {
-        if ($_POST["addfeedback" . $j] != "") {
-            $mail_commect_typs = 'Change To Video';
-            if ($_POST["addcommentoption" . $j] == 2) {
-                $mail_commect_typs = 'Change To Audio';
-            }
-            else if ($_POST["addcommentoption" . $j] == 3) {
-                $mail_commect_typs = 'Other';
-            }
-            if ($last_video_a_request_row['stop_resubmit'] != 1) {
-                mysql_query("INSERT INTO video_client_request VALUES(NULL, " . $last_video_under_project_row["id"] . ", '" . $_POST["addtimestart" . $j] . "', '" . $_POST["addtimeend" . $j] . "', '" . htmlspecialchars($_POST["addfeedback" . $j], ENT_QUOTES) . "', '" . $_POST["addcommentoption" . $j] . "')");
-                
-                //echo '2 done';
-                
-            }
-            $list_comment.= '<tr><td>' . $_POST["addtimestart" . $j] . '</td><td>' . $_POST["addtimeend" . $j] . '</td><td>' . $mail_commect_typs . '</td><td>' . htmlspecialchars($_POST["addfeedback" . $j], ENT_QUOTES) . '</td></tr>';
-        }
-    }
-    $comment_remind_mail = 1;
-    //if have any comment, set it 1.
-    
-}
-if ($_POST['voice_comment'] != "") {
-    $update_video_client_addition_request = mysql_query("UPDATE video_client_addition_request SET voice_comment = '" . $_POST['voice_comment'] . "' WHERE id = " . $last_video_a_request_row['id']);
-    
-    //echo "UPDATE video_client_addition_request SET voice_comment = '".$_POST['voice_comment']."' WHERE id = ".$last_video_a_request_row['id'];
-    $general_comment = $_POST['voice_comment'];
-    $comment_remind_mail = 1;
-    //if have any comment, set it 1.
-    
-}
-if ($list_comment != "" || $general_comment != "") {
-    $mail_message = 'A client has submitted their #' . $last_video_under_project_row['version_num'] . ' set of changes.<br/>
-' . $addition_change_to_mail2 . '
-Client: ' . $cca_row['company_name'] . "<br/>
-Video Project: " . $projectname_row['project_name'] . "<br/>
-Comment: " . $general_comment . "
-<table border=\"1\">
-    <tr><th>Start</th><th>End</th><th>Type</th><th>comments</th><tr>
-    " . $list_comment . "
-</table>
-";
-}
+ include('../inc/timeline-feedback.php');
+/*==========================================
+=            Post Voice Comment            =
+==========================================*/
+include('../inc/voice-comment.php');
 include ('../inc/youtube_function.php');
 $contents_location = "http://gdata.youtube.com/feeds/api/videos?q={" . cleanYoutubeLink($last_video_under_project_row['video_link']) . "}&alt=json";
 $JSON = file_get_contents($contents_location);
@@ -168,7 +54,7 @@ $video_lenght = $JSON_Data->{'feed'}->{'entry'}[0]->{'media$group'}->{'yt$durati
 $video_lenght_result = $video_lenght . ':000';
 $end_time = gmdate("i:s", (int)$video_lenght_result);
 /*=============================================================*/
-        /*                  More changes then alicated                  */
+        /*        More changes then alicated        
 /*=============================================================*/
 $update_mail_subject = "";
 //unset the mail subject in begining.
@@ -180,15 +66,18 @@ if ($list_comment != "" || $general_comment != "") {
 /*=============================================================*/
 if ($comment_remind_mail == 1) {
     // Update mailout to 1 and will stop to send mail while send one mailout in version 1
-    if ($last_video_under_project_row['version_num'] == 1 && $last_video_a_request_row['comment_time'] == 0 && $last_video_under_project_row['version'] == 'Draft') {
+    if ($last_video_under_project_row['version_num'] == 1 && 
+        $last_video_a_request_row['comment_time'] == 0 &&
+         $last_video_under_project_row['version'] == 'Draft') {
         
         //IF Client first time comment to video
                 include('../inc/messages/client-any-update.php');
         //Update database to stop sendmail duplicate
         
     }
+
 /*=============================================
-                =           2nd Set of changes           =
+  =           2nd Set of changes           =
 =============================================*/
     if ($last_video_under_project_row['version_num'] == 2 && $last_video_under_project_row['version'] == 'Draft') {
         //IF version number already upload new video to client to review
@@ -241,6 +130,7 @@ if ($update_mail_subject != "") {
            $ses->sendEmail($m);
 }
 //Stop mailout to keep system work fine if without any remind mail to client.
+
 /*===========================================
 Verion Number to show changed Day counter
 ============================================*/
@@ -315,10 +205,19 @@ else {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
-    <?php
-    ?>
+<pre>
+    <?php print_r($cca_row); ?>
+</pre>
+
+
+
+
+
+
+
     <body class="bg-pattern">
         <div class="fullscreen disable_input" id="request_confirm_form">
 
@@ -380,11 +279,11 @@ else {
                 </form>
                 <?php 
                 if ($projectname_row['download_file'] != "") { ?>
+                    <!-- upsell form for final video -->
                     <form action="mail_upsell.php" id="addition_request_form" method="post" class="sixteen column">
                     <?php
                     }
                     else { ?>
-                    <?php // echo "text"; ?>
                     <form action="#" id="charge_update" method="post" class="sixteen column">
                         <?php
                         } ?>
@@ -396,7 +295,7 @@ else {
 
                                 <h1 class="title main">
                                 <?php // echo $cca_row['company_name']; ?>
-                               <span class="first"> <?php echo $projectname_row['project_name'] ?></span>
+                                <span class="first"> <?php echo $projectname_row['project_name'] ?></span>
                                 <span class="type" ><?php
                                 echo $last_video_under_project_row['version']; ?></span>
                                 <span class="deadline" ><?php
@@ -404,59 +303,24 @@ else {
                                 </h1>
                                
                                 <?php
-                                // move under youtube
-                                $show_form = false;
-                               if ($downloadfile_message):
-                                  if($downloadfile_message==1) {
+                                     /*===============================================
+                                     =            The Final Download Page            =
+                                     ===============================================*/ 
+                                     include('../inc/final-page-form-trigger.php');
                                 ?>
-                                <h2 class="sub-title">Your final video is ready!</h2>
-                                <p> Before you download your video please have a think about:</p>
-                                <?php $show_form = true; ?>
-                                <?php  } else {
-                                ?>
-                                <h2 class="sub-title">Thank you, your video has been approved. Your final video is being processed. </h2>
-                                <p>You will be notified by email once it is ready for download from this page.</p>
-                                <?php $show_form = false; ?>
-                                <?php } endif; ?>
-                                <?php if ($overdeadline_message): ?>
-                                <?php  if(strlen(implode(" ",$current_draft_comments_column))>0 or strlen($last_video_a_request_row['voice_comment'])) {
-                                ?>
-                                <p>Thank you for submitting your comments on the current draft. We will notify you when the next draft is uploaded.</p>
-                                <?php
-                                         }
-                                ?>
-                                <?php
-                                endif; ?>
                                 <?php
                                 if ($downloadfile_message): ?>
                                 <?php if ($last_video_under_project_row['version'] != "Final") { ?>
-                                <div class="video sixteen columns omega alpha">
-                                    <!-- VIMEO EMBED -->
+                                <div class="video sixteen columns omega alpha">   
                                     <iframe src="//www.youtube.com/embed/<?php echo cleanYoutubeLink($last_video_under_project_row['video_link']); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-                                    <!-- VIMEO EMBED -->
                                 </div>
                                
                                 <?php } ?>
                                 <div id="download_message" class="">
                                     <?php
-                                    // if (!$downloadfilelink2) { 
-                                    // echo $downloadfilelink;
-                                    //  }
-                                    if($show_form == true){
-                                    include ('../inc/client-view-marketing-form.php');
-                                        }
-                                     ?>
-                
-                                     <?php
-                                                            if ($downloadfilelink2) {
-                                ?>
-                                <?php
-                                                            echo $downloadfilelink2;
-                                ?>
-                                <?php
-                                                            }
-                                ?>
-                                <?php
+                                       if($show_form == true){ include ('../inc/client-view-marketing-form.php'); }
+                                       if ($downloadfilelink2) { echo $downloadfilelink2; }
+                                
                                 endif;
                                 if ($last_video_under_project_row['version'] != "Final") {
                                 ?>

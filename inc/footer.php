@@ -17,7 +17,7 @@
             { src: '/img/BACKGROUND-1.jpg' },
             { src: '/img/BACKGROUND-2.jpg' },
             { src: '/img/BACKGROUND-3.jpg' },
-            { src: '/img/BACKGROUND-4.jpg' },
+            { src: '/img/BACKGROUND-5.jpg' },
         ]
 
     });</script>

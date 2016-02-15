@@ -88,10 +88,10 @@ $list_msg = '&msg=c1';
 	$mail_data_c = str_replace("[mail_content]",  $mailcontentTOCLIENT, $mail_data_c);
 	$mail_data_c = str_replace("[mail_datandtime]",  $the_data_is, $mail_data_c);
 	// mail($mailto, $mailsubject, $mail_data, $headers);
-	 $m->setFrom('alex@surgemedia.com.au');
-     $m->addTo('alex@surgemedia.com.au');
+	 $m->setFrom('video@surgemedia.com.au');
+     $m->addTo($cca_row['email']);
      $m->setSubject($mailsubject);
-     $m->setMessageFromString('',$mail_data);
+     $m->setMessageFromString('',$mail_data_c);
      $m->setMessageCharset('','UTF-8');
      $ses->sendEmail($m);
     

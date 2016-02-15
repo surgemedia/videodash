@@ -121,6 +121,11 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
         //Get Data
         include ('../inc/cc_emails/send-cc-add-video.php');
         
+
+     
+
+
+
         //Sending email to seconfary recipients
         $mail_data = file_get_contents('../email_template/video_download.html');
         
@@ -137,22 +142,13 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
         //replace dataandtime with current data and time.
         $mail_data = str_replace("[mail_datandtime]", $the_data_is, $mail_data);
         
-        $m->setFrom('video@surgemedia.com.au');
-        
-        //Send to CC
-        $m->addTo($cc_mailto);
-        
-        //Set Subject
-        $m->setSubject($cc_mailsubject);
-        
-        //Set HTML
-        $m->setMessageFromString('', $mail_data);
-        
-        //Set Charsset
-        $m->setMessageCharset('', 'UTF-8');
-        
-        //Send Email
-        $ses->sendEmail($m);
+         $cc_m = new SimpleEmailServiceMessage();
+         $cc_m->setFrom('video@surgemedia.com.au');
+         $cc_m->addTo($cc_mailto);
+         $cc_m->setSubject('Change have been made.');
+         $cc_m->setMessageFromString('',$mail_data );
+         $cc_m->setMessageCharset('','UTF-8');
+         $ses->sendEmail($cc_m);
     }
 }
 $check_video_Lastupdate = mysql_query("SELECT * FROM video_under_project WHERE  video_project_id =" . $_POST['project_id'] . " AND enabling = 1 ORDER BY id DESC LIMIT 0, 1");

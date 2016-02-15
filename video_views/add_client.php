@@ -28,7 +28,7 @@
                 <main>
                 <form id="NewClient" enctype="multipart/form-data" action="edit_client.php" method="post">
                 <input type="hidden" value="1" name="addclient">
-                 <section  class="center ">
+                 <section  class="container ">
                     <h1 id="client_name_editable"><input type="text" name="company_name" placeholder="Company Name"></h1>
                     <a href="/home_video.php"><h1 class="back_button"><i class="fa  fa-reply"></i> Clients</h1></a>
                     <div id="client_info" class="container card_backing">

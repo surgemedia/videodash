@@ -55,7 +55,7 @@
             <body class="">
 				<? include('../inc/header.php'); ?>
                 <main>
-                <section class="center">
+                <section class="container">
                 <form id="changeClient" enctype="multipart/form-data" action="edit_client.php" method="post">
                     <h1 id="client_name_editable"><input name="company_name" value="<?=$clientdatarow['company_name'];?>" placeholder="Company Name"/></h1>
                     <a href="/home_video.php"><h1 class="back_button"><i class="fa  fa-reply"></i> Clients</h1></a>
@@ -81,6 +81,7 @@
                                     <span>State</span><input name="state" value="<?=$clientdatarow['state'];?>"/>
                                     <span>Post Code</span><input name="postcode" value="<?=$clientdatarow['postcode'];?>"/>
                                     <span>Secondary Email</span><textarea name="cc_email" placeholder="(separated by commas)"><?=$clientdatarow['cc_email'];?></textarea>
+                                    <!-- <span>Delivery Page</span><input name="delivery_page" value="<?=$clientdatarow['delivery_page'];?>" /> -->
                                 </li>
                             </ul>
                         </div>

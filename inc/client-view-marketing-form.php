@@ -25,7 +25,7 @@
     </li>
     <li>
     <input name="market3" value="1" type="radio"/><strong>Annual storage </strong> - <span class="price">$59.00 + GST per Year</span>
-    <p>Surge Media will store your footage and video for an annual fee </p>
+    <p>Surge Media will store your footage and video for an annual fee.</p>
     <!-- <span class="price"></span> -->
     </li>
     <li>
