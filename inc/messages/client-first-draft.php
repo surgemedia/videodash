@@ -11,7 +11,7 @@
 	<p>Your loving, devoted Production Manager, </p>
 	<p>Paris Ormerod</p>
 	";
-    $update_mail_subject = "More Change enquiry.";
+    $update_mail_subject = "Additional changes enquiry.";
     $first_draft_title = "Your Changes Have Been Submitted";
 
      ?>

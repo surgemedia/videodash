@@ -83,13 +83,31 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
             ===============================*/
             include ('../inc/messages/third-draft-email.php');
         }
+        if ($check_video_Lastupdate_row['version'] == "Final" && $_POST['downloadlink'] != "") {
+            $notifcation_m = new SimpleEmailServiceMessage();
+                include ('../inc/messages/final-oops.php');
+                $mail_data = file_get_contents('../email_template/video_download.html');
+                $mail_data = str_replace("[mail_title]", $mailtitle, $mail_data);
+                $mail_data = str_replace("[mail_subtitle]", $mailsubtitle, $mail_data);
+                $mail_data = str_replace("[mail_content]", $mailmessage, $mail_data);
+                $the_data_is = date("d M Y");
+                $mail_data = str_replace("[mail_datandtime]", $the_data_is, $mail_data);
+                
+                $notifcation_m->setFrom('video@surgemedia.com.au');
+                $notifcation_m->addTo('video@surgemedia.com.au');
+                $notifcation_m->setSubject($mailsubject);
+                $notifcation_m->setMessageFromString('', $mail_data);
+                $notifcation_m->setMessageCharset('', 'UTF-8');
+                $ses->sendEmail($notifcation_m);
+        }
         
+        ?>
+    
+    <?php 
         /*==========================================================================================================
             =    If Download Link Exsists  send it to main contact        =
         =============================================================================================================*/
         if ($_POST['downloadlink'] != "") {
-            
-            //echo $_POST['downloadlink'];
             if ($_POST['downloadlink'] != $checksamelinkrow['download_file']) {
                 include ('../inc/messages/final-download.php');
             }
@@ -113,7 +131,7 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
         $m->setMessageFromString('', $mail_data);
         $m->setMessageCharset('', 'UTF-8');
         $ses->sendEmail($m);
-        
+      
         /*========================================
         =   Email to Secondary receipients      =
         ==========================================*/
@@ -173,7 +191,9 @@ endif; ?>
                 <form action="http://videodash.surgehost.com.au/all_projects.php" method="post" id="back_to_project">
                     <input name="client_id" value="<?php echo $cca_row['id']; ?>" type="hidden"/>
                 </form>
-
+ <div class="controls">
+                        <a class="blue btn" onclick="window.history.back();"><span>Back</span><i class="fa fa-reply"></i></a>
+                    </div>
 
                 <ul  >
                     <li id="add_new_video" class="video_obj featured">

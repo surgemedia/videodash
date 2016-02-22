@@ -1,5 +1,5 @@
 
-<h4>How you want to market you video project?</h4>
+<h4>How do you want to market your video project?</h4>
 <!-- <p>Now that your video is ready, it's important to think of how you will market your video project. Click on an option below and we will email you some information.</p> -->
 <ul class="required">
     <li><input name="dps1" value="1" type="checkbox"/> <strong>USB</strong> - We can supply a full range of branded and unbranded USBs.</li>
@@ -8,7 +8,7 @@
     <li><input name="dps4" value="1" type="checkbox"/> <strong>No thanks</strong></li>
 
 </ul>
-<h4>We have some important options regarding your footage and project.</h4>
+<h4>We also have some important options regarding your footage and project.</h4>
 <!-- <p>During the creation of your video there was footage that didn't make the cut. We think that your footage is gold
  so that's why we have some important options regarding the storage of your footage and video.</p> -->
  <!--<p>Please select <strong>one</strong> option.</p> -->
@@ -20,7 +20,7 @@
         <!-- <span class="price"></span></li> -->
     <li>
         <input name="market2" value="1" type="radio"/><strong>Surge Media hard drive </strong> - <span class="price">$400.00 + GST</span>
-        <p>Surge Media will load your footage and video onto a hard drive provied by Surge Media</p> 
+        <p>Surge Media will load your footage and video onto a hard drive provided by Surge Media</p> 
         <!-- <span class="price"></span> -->
     </li>
     <li>

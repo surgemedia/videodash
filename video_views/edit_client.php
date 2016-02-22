@@ -12,7 +12,6 @@
 	$time = time();
 
 	$target_path = "../Client_Logo/";
-	
 	if($_FILES['company_icon']["size"]!=""){
 		$target_path = $target_path . basename($time.$_FILES['company_icon']['name']); 
 			if(move_uploaded_file($_FILES['company_icon']['tmp_name'], $target_path)){

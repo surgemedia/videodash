@@ -90,6 +90,7 @@ $the_data_is = date("d M Y");
 $name = "Surge Media - Video Dash";
 $frommail = "video@surgemedia.com.au";
 $mailto = 'video@surgemedia.com.au';
+// $cc_contact = 
 // $cca_row['email'];
 $mailtoclient = $cca_row['email'];
 $mailsubject = 'Client\'s #' . $last_video_under_project_row['version_num'] . ' Set Of Changes';
@@ -154,7 +155,7 @@ if ($last_video_under_project_row['version'] != 'Final') {
 if ($last_video_under_project_row['version'] != "Final") {
     $downloadfilelink = '<li>';
             if ($stop_comment_disable != 1) {
-                $downloadfilelink .= '<a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">Changes Required</span><i class="fa fa-star"></i></a>';
+                $downloadfilelink .= '<a href="javascript:void(0)" class="btn red" onClick="document.getElementById(\'more_change_require\').submit();"><span class="omega alpha">cheese Changes Required</span><i class="fa fa-star"></i></a>';
             }
     $downloadfilelink .= '<a href="javascript:void(0)" class="btn blue" onClick="document.getElementById(\'final_version_confirm\').submit();"><span class="omega alpha">Approve as final*</span></a>';
     $help_text = "<small class='help-text'>*no changes required</small>";
@@ -310,7 +311,9 @@ else {
                                 ?>
                                 <?php
                                 if ($downloadfile_message): ?>
-                                <?php if ($last_video_under_project_row['version'] != "Final") { ?>
+                                <?php 
+                                    //if video isn't final show the video to review
+                                if ($last_video_under_project_row['version'] != "Final") { ?>
                                 <div class="video sixteen columns omega alpha">   
                                     <iframe src="//www.youtube.com/embed/<?php echo cleanYoutubeLink($last_video_under_project_row['video_link']); ?>?rel=0" frameborder="0" allowfullscreen></iframe>
                                 </div>
@@ -329,7 +332,10 @@ else {
                                
                                 <div id='action_box' class="actions sixteen columns">
                                     <ul>
-                                    <li><a href="#Feedbackarea" class=" omega yellow btn">Create Feedback</a></li>
+                                    <?php if($stop_comment_disable == 1){ ?>
+                                    <li><a href="#Feedbackarea" class=" omega yellow btn">Create Feedback</a>
+                                    </li>
+                                    <?php } ?>
                                    <li> <?php echo $downloadfilelink; //approve final?>
                                    </li>
                                     </ul>
