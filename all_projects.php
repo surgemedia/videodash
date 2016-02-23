@@ -30,7 +30,7 @@
                         <input type="hidden" name="client_id"  value="<?=$_POST['client_id'];?>">
                     </form>
                     <div class="controls">
-                    	<a class="blue btn" onclick="window.history.back();"><span>Back</span><i class="fa fa-reply"></i></a>
+                    	<a class="blue btn" href="/home_video.java"><span>All Clients</span><i class="fa fa-reply"></i></a>
 
                     	<a class="blue btn" onclick="document.getElementById('projectadd').submit();"><span>Add New Project</span><i class="fa fa-archive"></i></a>
 

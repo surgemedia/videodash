@@ -1,12 +1,13 @@
 <? 
 // echo "cheese -1";
 include("../dbconnection_3evchey.php"); //connecting Database
+session_start();
 include ('../inc/head.php'); 
 error_reporting(-1);
 ini_set('display_errors', 'On');
      // echo "cheese 0";
 
-session_start();
+
 $client_id = $_POST['client_id'];
 $project_id = $_POST['project_id'];
 
@@ -98,7 +99,7 @@ $list_msg = '&msg=c1';
 
 	 $internal_m = new SimpleEmailServiceMessage();
      $internal_m->setFrom('video@surgemedia.com.au');
-     $internal_m->addTo('video@surgemedia.com.au');
+     $internal_m->addTo('alex@surgemedia.com.au');
      $internal_m->setSubject($mailsubject);
      $internal_m->setMessageFromString('',$mail_data);
      $internal_m->setMessageCharset('','UTF-8');

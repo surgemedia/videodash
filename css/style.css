@@ -858,6 +858,7 @@ section#download_center {
 
 section#download_center a {
     margin-top: 1em;
+    font-size: 2em;
 }
 #download_center small {
     clear: both;
@@ -890,4 +891,7 @@ ul li.featured #changes_required .timeline-comments-title p {
 
 ul li.featured #changes_required .timeline-title p {
     color: #17A3C4;
+}
+section#download_center small a {
+    font-size: 1em;
 }

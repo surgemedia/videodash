@@ -6,10 +6,10 @@ include ('../inc/head.php');
     <body class="">
         <?php
 echo '<pre class="code"><code>';
-ini_set("include_path", '/home/videodsurg/php:' . ini_get("include_path"));
-require_once "Mail.php";
-include ('Mail/mime.php');
-include ("../dbconnection_3evchey.php");
+//ini_set("include_path", '/home/videodsurg/php:' . ini_get("include_path"));
+//require_once "Mail.php";
+//include ('Mail/mime.php');
+include ("/dbconnection_3evchey.php");
  //connecting Database
 if ($_POST['client_id'] == '' && $_POST['project_id'] == '') {
     header("location: ../home_video.php");
@@ -49,9 +49,10 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
     }
     mysql_query("INSERT INTO video_client_addition_request VALUES(NULL, '" . mysql_insert_id() . "', '" . $_POST['script1'] . "', '" . $_POST['script2'] . "', '" . $_POST['logoandimage_email'] . "', '" . $_POST['logoandimage_dropbox'] . "', '" . $_POST['voice_id'] . "', '" . $_POST['voice_comment'] . "', '" . $_POST['audio_comment'] . "', '" . $_POST['contact_info1'] . "', '0', '" . $_POST['contact_info3'] . "', '" . $_POST['contact_info4'] . "')");
     if (!$query) {
-        echo "INSERT INTO video_under_project VALUE(NULL, " . $_POST['project_id'] . ", '" . $_POST['video_input'] . "', '" . $_POST['version'] . "', '" . htmlspecialchars($_POST['notes'], ENT_QUOTES) . "', 1, " . $videoversion_num . ", NULL)";
-        echo "Cannot Save this Video to Project.";
-        exit;
+        echo '<pre>'.$query.'</pre>';
+        // echo "INSERT INTO video_under_project VALUE(NULL, " . $_POST['project_id'] . ", '" . $_POST['video_input'] . "', '" . $_POST['version'] . "', '" . htmlspecialchars($_POST['notes'], ENT_QUOTES) . "', 1, " . $videoversion_num . ", NULL)";
+        // echo " Cannot Save this Video to Project.";
+        
     } 
     else {
         $checksamelink = mysql_query("SELECT * FROM video_project WHERE id = " . $_POST['project_id'] . " ORDER BY id DESC LIMIT 0,1");
@@ -163,7 +164,7 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
          $cc_m = new SimpleEmailServiceMessage();
          $cc_m->setFrom('video@surgemedia.com.au');
          $cc_m->addTo($cc_mailto);
-         $cc_m->setSubject('Change have been made.');
+         $cc_m->setSubject('An update to your video project ');
          $cc_m->setMessageFromString('',$mail_data );
          $cc_m->setMessageCharset('','UTF-8');
          $ses->sendEmail($cc_m);

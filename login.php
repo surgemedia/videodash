@@ -1,4 +1,5 @@
 <?
+$url = "http://videodash.local/";
 $adminuser_id=strtolower($_SERVER['PHP_AUTH_USER']);
 $adminpassword=$_SERVER['PHP_AUTH_PW'];			
 $_SESSION['adminuser'] = $adminuser_id;
@@ -12,7 +13,7 @@ Header("HTTP/1.0 401 Unauthorized");
 $title="Login";
 ?>
 <script>
-	window.location = 'http://videodash.surgehost.com.au/'
+	window.location = <?php echo $url; ?>
 </script>
 <?
 exit;

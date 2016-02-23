@@ -1,36 +1,23 @@
-
 <? include("../dbconnection_3evchey.php"); //connecting Database ?>
 <? include("../inc/login_logic.php"); // Admin Login?>
 <?
 //Upload Logo
-	$time = time();
-
-	$target_path = "../Client_Logo/";
-	
-	if($_FILES['company_icon']["size"]!=""){
-		$target_path = $target_path . basename($time.$_FILES['company_icon']['name']); 
-			if(move_uploaded_file($_FILES['company_icon']['tmp_name'], $target_path)){
-				echo "";
-			} else{
-				echo "There was an error uploading the file, please try again!<br />";
-			}
-		$company_icon = "http://videodash.surgehost.com.au/Client_Logo/".($time.$_FILES['company_icon']['name']);
-	}else{
-		$company_icon = "";
-	}
-
+    $time = time();
+    $target_path = "../Client_Logo/";
+    
+    
 ?>
 <!DOCTYPE html>
 <html>
-			<? include('../inc/head.php');?>
+            <? include('../inc/head.php');?>
             <body class="">
-				<? include('../inc/header.php'); ?>
+                <? include('../inc/header.php'); ?>
                 <main>
                 <form id="NewClient" enctype="multipart/form-data" action="edit_client.php" method="post">
                 <input type="hidden" value="1" name="addclient">
                  <section  class="container ">
                     <h1 id="client_name_editable"><input type="text" name="company_name" placeholder="Company Name"></h1>
-                    <a href="/home_video.php"><h1 class="back_button"><i class="fa  fa-reply"></i> Clients</h1></a>
+                    <a class="blue btn pull-right" href="/home_video.php"><i class="fa fa-reply"></i> Clients</a>
                     <div id="client_info" class="container card_backing">
                         <div>
                             <ul class="contact">
@@ -47,8 +34,16 @@
                                     <span>Address</span><input name="address_one">
                                     <span>Address 2</span><input name="address_two">
                                     <span>State</span><input name="state">
-                                    <span>Post Code</span><input name="pastcode">
+                                    <span>Post Code</span><input name="postcode">
                                     <span>Secondary Email</span><textarea name="cc_email" placeholder="(separated by commas)"><?=$clientdatarow['cc_email'];?></textarea>
+                                    <span>Delivery Page</span> <select  name="delivery_page" >
+                                                                  <option value="1">Default Page (Marketing &amp; Storage Options)</option>
+                                                                  <option value="2">Just Download (No Options)</option>
+                                                                  <option value="3">Just Marketing Options</option>
+                                                                </select>
+
+                                    <!-- <input name="delivery_page" type="number" value="1" max="3" min="1"/> -->
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -64,6 +59,6 @@
                 </section>
                 </form>
                 </main>
-				<? include('../inc/footer.php');?>
+                <? include('../inc/footer.php');?>
             </body>
         </html>
