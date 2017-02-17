@@ -119,6 +119,7 @@ if ($update_mail_subject != "") {
         $client_mail_data = str_replace("[mail_title]", $first_draft_title, $client_mail_data);
     }
     $client_mail_data = str_replace("[mail_title]", $update_mail_subject, $client_mail_data);
+    $client_mail_data = str_replace("[mail_subtitle]", $update_mail_subtitle, $client_mail_data);
     $client_mail_data = str_replace("[mail_content]", $Client_mail_message, $client_mail_data);
     $client_mail_data = str_replace("[mail_datandtime]", $the_data_is, $client_mail_data);
     

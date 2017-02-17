@@ -525,6 +525,14 @@ margin: 0.5em 0;
 display: block; clear: both;
 margin: 0px;
 }
+
+.history{ 
+color: black;
+    float: left;
+    clear: both;
+    font-size: 12px;
+    line-height: 1.7;
+  }
 /*===================================
 =            Alexs Fixes            =
 ===================================*/

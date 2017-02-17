@@ -52,7 +52,7 @@
 							mysql_query("");
 							mysql_query("UPDATE video_project SET active_option = 1 WHERE id = ".$_POST['enableid']);
 						}
-						$listproject = mysql_query("SELECT * FROM video_project WHERE active_option != 0 AND Client_id = ".$cca_row['id']." ORDER BY active_option");
+						$listproject = mysql_query("SELECT * FROM video_project WHERE active_option != 0 AND Client_id = ".$cca_row['id']." ORDER BY active_option ,id DESC");
 						$project_num = mysql_num_rows($listproject);
 						for($i=0; $i<$project_num; $i++){
 							$project_row = mysql_fetch_array($listproject);
