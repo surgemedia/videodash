@@ -64,15 +64,21 @@ if ($_POST['voice_comment'] != "") {
     
 }
 if ($list_comment != "" || $general_comment != "") {
-    $mail_message = 'A client has submitted their #' . $last_video_under_project_row['version_num'] . ' set of changes.<br/>
-' . $addition_change_to_mail2 . '
-Client: ' . $cca_row['company_name'] . "<br/>
-Video Project: " . $projectname_row['project_name'] . "<br/>
-Comment: " . $general_comment . "
-<table border=\"1\">
-    <tr><th>Start</th><th>End</th><th>Type</th><th>comments</th><tr>
-    " . $list_comment . "
-</table>
+    $mail_message = '
+    <h1>'.$cca_row['company_name'].' - '.$projectname_row['project_name'].' - Change Request</h1></br>
+    <p>Change request - #'.$last_video_under_project_row['version_num'].'</p><br/>
+    <p>Client: ' . $cca_row['company_name'] . '</p><br/>
+    <p>Video Project: ' . $projectname_row['project_name'] . '</p><br/>
+    <p>General comment: ' . $general_comment . '</p>
+    <table border=\"1\">
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Type</th>
+            <th>comments</th>
+        <tr>
+        ' . $list_comment . '
+    </table>
 ";
 }
  ?>

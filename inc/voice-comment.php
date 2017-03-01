@@ -19,4 +19,11 @@ Comment: " . $general_comment . "
     " . $list_comment . "
 </table>
 ";
-} ?>
+		
+		$mail_message_asana = "<p><b>Video Project: </b>" . $projectname_row['project_name'] . "</p><br/>".
+													"<p><b>Comment: </b> " . $general_comment . "</p><br/><br/>".$list_comment_asana."<br/><br/>";
+} 
+
+
+
+?>

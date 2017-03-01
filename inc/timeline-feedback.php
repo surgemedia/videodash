@@ -10,6 +10,7 @@ for ($i = 0; $i < 1000; $i++) {
     }
 }
 $comment_remind_mail = 0;
+$list_comment_asana='------Specific Comments------<br/>';
 for ($i = 0; $i < $forloopcount; $i++) {
     if ($last_video_a_request_row['stop_resubmit'] != 1) {
         $update_video_client_request = mysql_query("INSERT INTO video_client_request VALUES(NULL, " . $last_video_under_project_row["id"] . ", '" . $feedback_strat[$i] . "', '" . $feedback_end[$i] . "', '" . htmlspecialchars($feedback[$i], ENT_QUOTES) . "', '" . $feedback_type[$i] . "')");
@@ -25,7 +26,10 @@ for ($i = 0; $i < $forloopcount; $i++) {
         $mail_commect_typs = 'Other';
     }
     $list_comment.= '<tr><td>' . $feedback_strat[$i] . '</td><td>' . $feedback_end[$i] . '</td><td>' . $mail_commect_typs . '</td><td>' . htmlspecialchars($feedback[$i], ENT_QUOTES) . '</td></tr>';
-    
+    $list_comment_asana.= "<p><b>Start: </b>".$feedback_strat[$i]."   <b>End: </b>".$feedback_end[$i]."</p><br/>".
+                          "<p><b>Type: </b>".$mail_commect_typs."</p><br/>".
+                          "<p><b>Comment: </b>".htmlspecialchars($feedback[$i], ENT_QUOTES)."</p><br/><br/>";
+
     //echo "INSERT INTO video_client_request VALUES(NULL, ".$last_video_under_project_row["id"].", '".$_POST['time_start'.$i]."', '".$_POST['time_end'.$i]."', '".$_POST['feedback'.$i]."')";
     $comment_remind_mail = 1;
     //if have any comment, set it 1.

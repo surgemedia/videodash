@@ -90,10 +90,11 @@ $the_data_is = date("d M Y");
 $name = "Surge Media - Video Dash";
 $frommail = "video@surgemedia.com.au";
 $mailto = 'video@surgemedia.com.au';
+$mailto_asana='x+282844173496794@mail.asana.com';
 // $cc_contact = 
-// $cca_row['email'];
+// $cca_row['company_name'];
 $mailtoclient = $cca_row['email'];
-$mailsubject = 'Client\'s #' . $last_video_under_project_row['version_num'] . ' Set Of Changes';
+$mailsubject = $cca_row['company_name'].' - ' .$projectname_row['project_name'].' - Change request #'. $last_video_under_project_row['version_num'];
 if ($mail_message != "") {
     //Check whether have any email message need to send out
     $mail_data = file_get_contents('../email_template/feedback2Surge.html');
@@ -103,11 +104,31 @@ if ($mail_message != "") {
     
     //Mail content to Surge Media
     if ($_POST['make_video_version_to_final'] == "yes") {
-        $mailsubject = 'Client confirmed the final version.';
+        $mailsubject = $cca_row['company_name'].' - ' .$projectname_row['project_name'].' confirmed the final version.';
     }
     //If client confirm video as Final Version, send mail to Ben and Video Team about it.
+    $m = new SimpleEmailServiceMessage();
     $m->setFrom('video@surgemedia.com.au');
     $m->addTo($mailto);
+    $m->setSubject($mailsubject);
+    $m->setMessageFromString('',$mail_data);
+    $m->setMessageCharset('','UTF-8');
+    $ses->sendEmail($m);
+
+    /*=================================================
+    =            Building Message to Asana            =
+    =================================================*/
+    
+    $mail_data = file_get_contents('../email_template/Asana_feedback2Surge.html');
+    $mail_data = str_replace("[mail_title]", $mailsubject, $mail_data);
+    $mail_data = str_replace("[mail_content]", $mail_message_asana, $mail_data);
+    $mail_data = str_replace("[mail_datandtime]", $the_data_is, $mail_data);
+
+
+
+    $m = new SimpleEmailServiceMessage();
+    $m->setFrom('video@surgemedia.com.au');
+    $m->addTo($mailto_asana);
     $m->setSubject($mailsubject);
     $m->setMessageFromString('',$mail_data);
     $m->setMessageCharset('','UTF-8');
@@ -124,6 +145,7 @@ if ($update_mail_subject != "") {
     $client_mail_data = str_replace("[mail_datandtime]", $the_data_is, $client_mail_data);
     
     //Mail Content to Client
+    $m = new SimpleEmailServiceMessage();
     $m->setFrom('video@surgemedia.com.au');
             $m->addTo($mailtoclient);
             $m->setSubject($update_mail_subject);
