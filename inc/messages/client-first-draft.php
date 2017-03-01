@@ -1,17 +1,17 @@
 <?php 
 
-
- $Client_mail_message = "
-	Nice one " . $cca_row['contact_person'] . "! Baz Luhrmann would be proud!<br/><br/>
-	<p> Your first set of changes have been submitted and are in the pipeline. If you have spoken to our Video Department and your changes are a priority, be assured that they are being addressed. </p>
-	<p>Also, just a friendly reminder that you have one set of changes remaining. </p>
-	<p>In the meantime please be patient, make some popcorn, watch a movie and we will contact you if we have any questions. </p>
-	<br>
-	<p>That's a wrap from me. </p>
-	<p>Your loving, devoted Production Manager, </p>
-	<p>Paris Ormerod</p>
-	";
-    $update_mail_subject = "Additional changes enquiry.";
-    $first_draft_title = "Your Changes Have Been Submitted";
-
-     ?>
+     $Client_mail_message = '
+			<p>Hi ' . $cca_row['contact_person'] . '!</p><br/>
+		
+		<p>Your changes have been submitted and are in the pipeline.</p>
+		<p>Please contact your creative director if you need to discuss your changes in more detail.</p>
+		<p>We will contact you if we have any queries regarding your changes.</p>
+		';
+			
+     mysql_query("UPDATE video_client_addition_request SET comment_time2 = 0 WHERE id = " . $last_video_a_request_row['id']);
+            
+            //Update database to stop sendmail duplicate
+            $update_mail_subject = "Surge Media Video Dash - Change request confirmation";
+            $first_draft_title = "Surge Media Video Dash";
+        $update_mail_subtitle = "Change request confirmation";
+             ?>

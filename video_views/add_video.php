@@ -28,7 +28,7 @@ if ($cca_num == 0) {
 }
 $message = "Add New Video";
 if ($_POST['Add_videos'] == 1 && $_POST['video_input'] == "") {
-    $error_msg = '<label class="message red" for="">Without upload any Youtube Link!</label>';
+    $error_msg = '<label class="message red" style="color:red !important" for="">Error.. Please upload Draft Video Youtube link!</label>';
 }
 if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_input'] != "") {
     $check_total_version = mysql_query("SELECT * FROM video_under_project WHERE video_project_id =" . $_POST['project_id']);
@@ -69,23 +69,19 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
         if ($videoversion_num == 1) {
             include ('../inc/messages/first-draft-email.php');
             
-            /*===============================
-            =            Email 2            =
-            ===============================*/
-        } 
-        else if ($videoversion_num == 2) {
-            include ('../inc/messages/second-draft-email.php');
-        } 
-        else {
+           
+        }else {
             
             /*===============================
-            =            Email 3            =
+            =            Update            =
             ===============================*/
-            include ('../inc/messages/third-draft-email.php');
+            include ('../inc/messages/update-draft-email.php');
+            // include ('../inc/messages/third-draft-email.php');
         }
         if ($check_video_Lastupdate_row['version'] == "Final" && $_POST['downloadlink'] != "") {
-            $notifcation_m = new SimpleEmailServiceMessage();
-                include ('../inc/messages/final-oops.php');
+
+                  $notifcation_m = new SimpleEmailServiceMessage();
+                include ('../inc/messages/final-download.php');
                 $mail_data = file_get_contents('../email_template/video_download.html');
                 $mail_data = str_replace("[mail_title]", $mailtitle, $mail_data);
                 $mail_data = str_replace("[mail_subtitle]", $mailsubtitle, $mail_data);
@@ -104,9 +100,9 @@ if ($_POST['Add_videos'] == 1 && $_POST['project_id'] != "" && $_POST['video_inp
         ?>
     
     <?php 
-        /*==========================================================================================================
-            =    If Download Link Exsists  send it to main contact        =
-        =============================================================================================================*/
+        /*=====================================================          
+        =  If Download Link Exsists  send it to main contact  =
+        =====================================================*/
         if ($_POST['downloadlink'] != "") {
             if ($_POST['downloadlink'] != $checksamelinkrow['download_file']) {
                 include ('../inc/messages/final-download.php');
@@ -210,13 +206,13 @@ endif; ?>
 echo $error_msg; ?>
                             <div class="section sixteen columns omega alpha">
                                 <?php
-$video_display_code = '//www.youtube.com/embed/KAYfuAROKV8';
+$video_display_code = '';
 if ($check_video_Lastupdate_row['video_link'] != "") {
     $video_display_code = '//www.youtube.com/embed/' . cleanYoutubeLink($check_video_Lastupdate_row['video_link']);
     $showvideovalue = 'value="http://www.youtube.com/?v=' . cleanYoutubeLink($check_video_Lastupdate_row['video_link']) . '"';
 }
 ?>
-                                <input id="realtime_link" name="video_input" type="text" placeholder="Youtube link: http://www.youtube.com/?v=<?php echo $video_display_code; ?>" class="video_link columns sixteen" <?php
+                                <input id="realtime_link" name="video_input" type="text" placeholder="Youtube link: <?php echo $video_display_code; ?>" class="video_link columns sixteen" <?php
 echo $showvideovalue; ?> >
                                 <div id="put_new_youtube"></div>
                                 <div class="video sixteen columns omega alpha">
@@ -248,16 +244,30 @@ if ($check_video_Lastupdate_row['version'] == "Final") {
 // if($check_video_Lastupdate_row['version']=="Final"){
 
 ?>
-                                <label class="title" for="">Download Video Link</label>
-                                <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php
-echo $check_project_name_row['download_file'] ?>">
+       <div class="downloadVideoLink">
+          <label class="title" for="">Download Video Link</label>
+          <input name="downloadlink" type="text" placeholder="Dropbox File Link" class="video_link sixteen columns omega alpha" value="<?php
+                                   echo $check_project_name_row['download_file'] ?>">
+       </div>
+                                
+<script>
+/* if(jQuery("#draft_version input").prop('checked')){
+    jQuery(".downloadVideoLink").hide("slow");
+ }else{
+    jQuery(".downloadVideoLink").show("slow");
+ }*/
+
+
+
+</script>
+
                                 <?php
 
 // }
 
 ?>
-                                <label class="title" for="">Director's Notes</label>
-                                <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?php echo $check_video_Lastupdate_row['notes']; ?>">The video draft is a low resolution version of your video production. Please note that the colour has been graded and the audio has not been mastered, therefore the draft may look low quality. The final version of your video project will be rendered out in high resolution. Use Video Dash to view your project and make changes as we do not accept changes via the phone or email. However if you are having trouble using Video Dash, please contact us directly.</textarea>
+                                <!-- <label class="title" for="">Director's Notes</label>
+                                <textarea name="notes" id="" cols="30" class="sixteen columns omega alpha" rows="10" placeholder="<?php echo $check_video_Lastupdate_row['notes']; ?>">The video draft is a low resolution version of your video production. Please note that the colour has been graded and the audio has not been mastered, therefore the draft may look low quality. The final version of your video project will be rendered out in high resolution. Use Video Dash to view your project and make changes as we do not accept changes via the phone or email. However if you are having trouble using Video Dash, please contact us directly.</textarea> -->
                                 <ul>
                                     <li>
                                         <a onClick="document.getElementById('add_video').submit();" class="btn green" ><span>Send to Client</span> <i class="fa fa-send"></i></a>
