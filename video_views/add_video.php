@@ -72,7 +72,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
 
     $name = "Surge Media - Video Dash";
     $mailto = $cca_row['email'];
-    $cc_mailto = $cca_row['cc_email'];
+    $cc_mailto = explode(",",$cca_row['cc_email']);
 
 
     switch ($_POST['version']) {
@@ -120,7 +120,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
                 exit;  /******* Error Message *******/
                 }
             }
-
+            include ('../inc/cc_emails/send-cc-add-video-draft.php');
             break;
         
         case "Final":
@@ -162,6 +162,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
                 exit;  /******* Error Message *******/
                 }
             }
+            include ('../inc/cc_emails/send-cc-add-video-final.php');
             break;
         default:
             # code...
@@ -175,7 +176,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
     $mail_data = str_replace("[mail_content]", $mailmessage, $mail_data);
     $the_data_is = date("d M Y");
     $mail_data = str_replace("[mail_datandtime]", $the_data_is, $mail_data);
-    
+    $m = new SimpleEmailServiceMessage();
     $m->setFrom('video@surgemedia.com.au');
     
     //Send to Mail
@@ -194,7 +195,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
     ==========================================*/
     
     //Get Data
-    include ('../inc/cc_emails/send-cc-add-video.php');
+    
 
     //Sending email to seconfary recipients
     $mail_data = file_get_contents('../email_template/video_download.html');
@@ -215,7 +216,7 @@ if($_POST['Add_videos'] == 1){  /******* Post Submited *******/
     $cc_m = new SimpleEmailServiceMessage();
     $cc_m->setFrom('video@surgemedia.com.au');
     $cc_m->addTo($cc_mailto);
-    $cc_m->setSubject('An update to your video project ');
+    $cc_m->setSubject($cc_mailsubject);
     $cc_m->setMessageFromString('',$mail_data );
     $cc_m->setMessageCharset('','UTF-8');
     $ses->sendEmail($cc_m);

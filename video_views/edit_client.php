@@ -95,7 +95,7 @@
                                     <span>Address 2</span><input name="address_two" value="<?=$clientdatarow['address_two'];?>"/>
                                     <span>State</span><input name="state" value="<?=$clientdatarow['state'];?>"/>
                                     <span>Post Code</span><input name="postcode" value="<?=$clientdatarow['postcode'];?>"/>
-                                    <span>Secondary Email</span><textarea name="cc_email" placeholder="(separated by commas)"><?=$cc_email;?></textarea>
+                                    <span>Secondary Email</span><textarea name="cc_email" placeholder="(separated by commas)"><?=$clientdatarow['cc_email'];?></textarea>
                                      <span>Delivery Page</span>
                                                      <select  name="delivery_page" >
                                                      <?php 

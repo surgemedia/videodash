@@ -104,7 +104,7 @@ if ($mail_message != "") {
     
     //Mail content to Surge Media
     if ($_POST['make_video_version_to_final'] == "yes") {
-        $mailsubject = $cca_row['company_name'].' - ' .$projectname_row['project_name'].' confirmed the final version.';
+        $mailsubject = $cca_row['company_name'].' - ' .$projectname_row['project_name'].' - Final Version.';
     }
     //If client confirm video as Final Version, send mail to Ben and Video Team about it.
     $m = new SimpleEmailServiceMessage();
